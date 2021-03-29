@@ -1,0 +1,769 @@
+<!DOCTYPE html>
+<html  lang="zh-CN" >
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport"
+    content="width=device-width, initial-scale=1.0, minimum-scale=1.0">
+  <meta http-equiv="X-UA-Compatible" content="ie=edge">
+  <meta name="theme-color" content="#fff" id="theme-color">
+  <meta name="description" content="学习永不止步">
+  <link rel="icon" href="https://s3.ax1x.com/2021/03/04/6VEJaQ.jpg">
+  <title>webpack</title>
+  
+  
+  <meta property="og:title" content="webpack">
+  
+  
+  <meta property="og:url" content="https://xiaobai123-4.github.io/2020/08/13/webpack/index.html">
+  
+  
+  <meta property="og:img" content="https://s3.ax1x.com/2021/03/04/6VEJaQ.jpg">
+  
+  
+  <meta property="og:img" content="&lt;h1 id=&#34;webpack&#34;&gt;&lt;a href=&#34;#webpack&#34; class=&#34;headerlink&#34; title=&#34;webpack&#34;&gt;&lt;/a&gt;webpack&lt;/h1&gt;&lt;blockquote&gt;
+&lt;p&gt;&lt;a href=&#34;https://www.webpackjs.com/concepts/&#34; target=&#34;_blank&#34; rel=&#34;noopener&#34;&gt;webpack手册&lt;/a&gt;&lt;/p&gt;
+&lt;/blockquote&gt;
+&lt;h2 id=&#34;引入&#34;&gt;&lt;a href=&#34;#引入&#34; class=&#34;headerlink&#34; title=&#34;引入&#34;&gt;&lt;/a&gt;引入&lt;/h2&gt;&lt;h3 id=&#34;前端模块化&#34;&gt;&lt;a href=&#34;#前端模块化&#34; class=&#34;headerlink&#34; title=&#34;前端模块化&#34;&gt;&lt;/a&gt;前端模块化&lt;/h3&gt;&lt;ol&gt;
+&lt;li&gt;作用域&lt;br&gt;①全局作用域（window）&lt;br&gt;②局部作用域（函数内部定义的变量）&lt;/li&gt;
+&lt;li&gt;命名空间&lt;br&gt;引入外部js时，防止命名冲突，变量覆盖，用对象包裹变量，但是引用对象方法时，对象中的方法中的值可以用”对象.属性名”随意修改&lt;br&gt;&lt;strong&gt;解决办法：&lt;/strong&gt;闭包，变量不可被外部随意修改&lt;/li&gt;
+&lt;li&gt;模块化&lt;br&gt; 代码如下： &lt;figure class=&#34;highlight javascript&#34;&gt;&lt;table&gt;&lt;tr&gt;&lt;td class=&#34;gutter&#34;&gt;&lt;pre&gt;&lt;span class=&#34;line&#34;&gt;1&lt;/span&gt;&lt;br&gt;&lt;span class=&#34;line&#34;&gt;2&lt;/span&gt;&lt;br&gt;&lt;span class=&#34;line&#34;&gt;3&lt;/span&gt;&lt;br&gt;&lt;span class=&#34;line&#34;&gt;4&lt;/span&gt;&lt;br&gt;&lt;span class=&#34;line&#34;&gt;5&lt;/span&gt;&lt;br&gt;&lt;span class=&#34;line&#34;&gt;6&lt;/span&gt;&lt;br&gt;&lt;span class=&#34;line&#34;&gt;7&lt;/span&gt;&lt;br&gt;&lt;span class=&#34;line&#34;&gt;8&lt;/span&gt;&lt;br&gt;&lt;span class=&#34;line&#34;&gt;9&lt;/span&gt;&lt;br&gt;&lt;span class=&#34;line&#34;&gt;10&lt;/span&gt;&lt;br&gt;&lt;/pre&gt;&lt;/td&gt;&lt;td class=&#34;code&#34;&gt;&lt;pre&gt;&lt;span class=&#34;line&#34;&gt;(&lt;span class=&#34;function&#34;&gt;&lt;span class=&#34;keyword&#34;&gt;function&lt;/span&gt;(&lt;span class=&#34;params&#34;&gt;window&lt;/span&gt;)&lt;/span&gt;&amp;#123;&lt;/span&gt;&lt;br&gt;&lt;span class=&#34;line&#34;&gt;       &lt;span class=&#34;keyword&#34;&gt;var&lt;/span&gt; name=&lt;span class=&#34;string&#34;&gt;&#34;jack&#34;&lt;/span&gt;;&lt;/span&gt;&lt;br&gt;&lt;span class=&#34;line&#34;&gt;       &lt;span class=&#34;keyword&#34;&gt;var&lt;/span&gt; age=&lt;span class=&#34;string&#34;&gt;&#34;23&#34;&lt;/span&gt;;&lt;/span&gt;&lt;br&gt;&lt;span class=&#34;line&#34;&gt;       &lt;span class=&#34;function&#34;&gt;&lt;span class=&#34;keyword&#34;&gt;function&lt;/span&gt; &lt;span class=&#34;title&#34;&gt;tell&lt;/span&gt;(&lt;span class=&#34;params&#34;&gt;&lt;/span&gt;)&lt;/span&gt;&amp;#123;&lt;/span&gt;&lt;br&gt;&lt;span class=&#34;line&#34;&gt;           &lt;span class=&#34;built_in&#34;&gt;console&lt;/span&gt;.log(&lt;span class=&#34;string&#34;&gt;&#34;我的名字是&#34;&lt;/span&gt;+name);&lt;/span&gt;&lt;br&gt;&lt;span class=&#34;line&#34;&gt;           &lt;span class=&#34;built_in&#34;&gt;console&lt;/span&gt;.log(&lt;span class=&#34;string&#34;&gt;&#34;我的年龄是&#34;&lt;/span&gt;+age);&lt;/span&gt;&lt;br&gt;&lt;span class=&#34;line&#34;&gt;       &amp;#125;&lt;/span&gt;&lt;br&gt;&lt;span class=&#34;line&#34;&gt;       &lt;span class=&#34;built_in&#34;&gt;window&lt;/span&gt;.susanModule=&amp;#123;tell&amp;#125;;&lt;/span&gt;&lt;br&gt;&lt;span class=&#34;line&#34;&gt;   &amp;#125;)(&lt;span class=&#34;built_in&#34;&gt;window&lt;/span&gt;)&lt;/span&gt;&lt;br&gt;&lt;span class=&#34;line&#34;&gt;   &lt;span class=&#34;comment&#34;&gt;//调用方法：suanModule.tell&lt;/span&gt;&lt;/span&gt;&lt;br&gt;&lt;/pre&gt;&lt;/td&gt;&lt;/tr&gt;&lt;/table&gt;&lt;/figure&gt;&lt;/li&gt;
+&lt;li&gt;模块化的优点&lt;br&gt;①作用域封装&lt;br&gt;②重用性&lt;br&gt;③解除耦合（关系紧密度）&lt;/li&gt;
+&lt;/ol&gt;">
+  
+  
+  <meta property="og:type" content="article">
+  <meta property="og:article:published_time" content="2020-08-13">
+  <meta property="og:article:modified_time" content="2020-09-03">
+  <meta property="og:article:author" content="MaQisong">
+  
+  
+  <meta property="og:article:tag" content="webpack">
+  
+  <meta property="og:article:tag" content="前端模块化">
+  
+  
+  
+  
+  <script>
+    // control reverse button
+    var reverseDarkList = {
+      dark: 'light',
+      light: 'dark'
+    };
+    var themeColor = {
+      dark: '#1c1c1e',
+      light: '#fff'
+    }
+    // get the data of css prefers-color-scheme
+    var getCssMediaQuery = function() {
+      return window.matchMedia('(prefers-color-scheme: dark)').matches ? 'dark' : 'light';
+    };
+    // reverse current darkmode setting function
+    var reverseDarkModeSetting = function() {
+      var setting = localStorage.getItem('user-color-scheme');
+      if(reverseDarkList[setting]) {
+        setting = reverseDarkList[setting];
+      } else if(setting === null) {
+        setting = reverseDarkList[getCssMediaQuery()];
+      } else {
+        return;
+      }
+      localStorage.setItem('user-color-scheme', setting);
+      return setting;
+    };
+    // apply current darkmode setting
+    var setDarkmode = function(mode) {
+      var setting = mode || localStorage.getItem('user-color-scheme');
+      if(setting === getCssMediaQuery()) {
+        document.documentElement.removeAttribute('data-user-color-scheme');
+        localStorage.removeItem('user-color-scheme');
+        document.getElementById('theme-color').content = themeColor[setting];
+      } else if(reverseDarkList[setting]) {
+        document.documentElement.setAttribute('data-user-color-scheme', setting);
+        document.getElementById('theme-color').content = themeColor[setting];
+      } else {
+        document.documentElement.removeAttribute('data-user-color-scheme');
+        localStorage.removeItem('user-color-scheme');
+        document.getElementById('theme-color').content = themeColor[getCssMediaQuery()];
+      }
+    };
+    setDarkmode();
+  </script>
+  <script>
+    function loadScript(url, cb) {
+      var script = document.createElement('script');
+      script.src = url;
+      if (cb) script.onload = cb;
+      script.async = true;
+      document.body.appendChild(script);
+    }
+  </script>
+  
+  <link rel="preload" href="//at.alicdn.com/t/font_1946621_i1kgafibvw.css" as="style" >
+  <link rel="preload" href="//at.alicdn.com/t/font_1952792_89b4ac4k4up.css" as="style" >
+  
+  <link rel="preload" href="/js/lib/lightbox/baguetteBox.min.js" as="script">
+  <link rel="preload" href="/js/lib/lightbox/baguetteBox.min.css" as="style" >
+  
+  
+  <link rel="preload" href="/js/lib/lozad.min.js" as="script">
+  
+  
+  
+  
+  
+  
+  
+  
+<link rel="stylesheet" href="/css/main.css">
+
+  
+  
+<link rel="stylesheet" href="//at.alicdn.com/t/font_1946621_i1kgafibvw.css">
+
+  
+  
+<link rel="stylesheet" href="//at.alicdn.com/t/font_1952792_89b4ac4k4up.css">
+
+  
+  
+<link rel="stylesheet" href="/js/lib/lightbox/baguetteBox.min.css">
+
+  
+  
+<meta name="generator" content="Hexo 4.2.1"></head>
+
+
+<body>
+  <div class="wrapper">
+    
+    <nav class="navbar">
+  <div class="navbar-logo">
+    <span class="navbar-logo-main">
+      
+      <img class="navbar-logo-img" src="https://s3.ax1x.com/2021/03/04/6VEJaQ.jpg" alt="logo">
+      
+      <span class="navbar-logo-dsc">小白的博客</span>
+    </span>
+  </div>
+  <div class="navbar-menu">
+    
+    <a href="/" class="navbar-menu-item">
+    
+    首页
+    
+    </a>
+    
+    <a href="/archives" class="navbar-menu-item">
+    
+    归档
+    
+    </a>
+    
+    <a href="/tags" class="navbar-menu-item">
+    
+    标签
+    
+    </a>
+    
+    <a href="/categories" class="navbar-menu-item">
+    
+    分类
+    
+    </a>
+    
+    <a href="/about" class="navbar-menu-item">
+    
+    关于
+    
+    </a>
+    
+    <a class="navbar-menu-item darknavbar" id="dark"><i class="iconfont icon-weather"></i></a>
+    <a class="navbar-menu-item searchnavbar" id="search"><i class="iconfont icon-search" style="font-size: 1.2rem; font-weight: 400;"></i></a>
+  </div>
+</nav>
+    
+    <div id="local-search" style="display: none;">
+      <input class="navbar-menu-item" id="search-input" placeholder="请输入搜索内容...">
+      <div id="search-content"></div>
+    </div>
+    
+    <div class="section-wrap">
+      <div class="container">
+        <div class="columns">
+          <main class="main-column">
+<article class="card card-content">
+  <header>
+    <h1 class="post-title">
+      webpack
+    </h1>
+  </header>
+  <div class="post-meta post-show-meta">
+    <time datetime="2020-08-13T00:24:55.000Z">
+      <i class="iconfont icon-calendar" style="margin-right: 2px;"></i>
+      <span>2020-08-13</span>
+    </time>
+    
+    <span class="dot"></span>
+    
+    <a href="/categories/webpack/" class="post-meta-link">webpack</a>
+    
+    
+    
+    <span class="dot"></span>
+    <span>1.3k 字</span>
+    
+  </div>
+  
+  <div class="post-meta post-show-meta" style="margin-top: -10px;">
+    <div style="display: flex; align-items: center;">
+      <i class="iconfont icon-biaoqian" style="margin-right: 2px; font-size: 1.15rem;"></i>
+      
+      
+        <a href="/tags/webpack/" class="post-meta-link">webpack</a>
+      
+      
+      <span class="dot"></span>
+      
+        <a href="/tags/前端模块化/" class="post-meta-link">前端模块化</a>
+      
+    </div>
+  </div>
+  
+  </header>
+  <div id="section" class="post-content">
+    <h1 id="webpack"><a href="#webpack" class="headerlink" title="webpack"></a>webpack</h1><blockquote>
+<p><a href="https://www.webpackjs.com/concepts/" target="_blank" rel="noopener">webpack手册</a></p>
+</blockquote>
+<h2 id="引入"><a href="#引入" class="headerlink" title="引入"></a>引入</h2><h3 id="前端模块化"><a href="#前端模块化" class="headerlink" title="前端模块化"></a>前端模块化</h3><ol>
+<li>作用域<br>①全局作用域（window）<br>②局部作用域（函数内部定义的变量）</li>
+<li>命名空间<br>引入外部js时，防止命名冲突，变量覆盖，用对象包裹变量，但是引用对象方法时，对象中的方法中的值可以用”对象.属性名”随意修改<br><strong>解决办法：</strong>闭包，变量不可被外部随意修改</li>
+<li>模块化<br> 代码如下： <pre class="highlight"><span class="line">(<span class="function"><span class="keyword">function</span>(<span class="params">window</span>)</span>&#123;</span><br><span class="line">       <span class="keyword">var</span> name=<span class="string">"jack"</span>;</span><br><span class="line">       <span class="keyword">var</span> age=<span class="string">"23"</span>;</span><br><span class="line">       <span class="function"><span class="keyword">function</span> <span class="title">tell</span>(<span class="params"></span>)</span>&#123;</span><br><span class="line">           <span class="built_in">console</span>.log(<span class="string">"我的名字是"</span>+name);</span><br><span class="line">           <span class="built_in">console</span>.log(<span class="string">"我的年龄是"</span>+age);</span><br><span class="line">       &#125;</span><br><span class="line">       <span class="built_in">window</span>.susanModule=&#123;tell&#125;;</span><br><span class="line">   &#125;)(<span class="built_in">window</span>)</span><br><span class="line">   <span class="comment">//调用方法：suanModule.tell</span></span><br></pre></li>
+<li>模块化的优点<br>①作用域封装<br>②重用性<br>③解除耦合（关系紧密度）</li>
+</ol>
+<a id="more"></a>
+
+
+<h3 id="演化"><a href="#演化" class="headerlink" title="演化"></a>演化</h3><ol>
+<li><p>COMMONJS<br>模块标准：<code>module.exports+require()</code>，支持该标准的有Node.js</p>
+<pre class="highlight"><span class="line"><span class="comment">//通过require函数来引入</span></span><br><span class="line"><span class="keyword">const</span> math=<span class="built_in">require</span>(<span class="string">'/math'</span>);</span><br><span class="line"><span class="comment">//通过exports将其导出</span></span><br><span class="line"><span class="built_in">module</span>.exports.getSum=<span class="function"><span class="keyword">function</span>(<span class="params">a,b</span>)</span>&#123;</span><br><span class="line">    <span class="keyword">return</span> a+b;</span><br><span class="line">&#125;</span><br></pre>
+</li>
+<li><p>ES6 MODULE<br>模块标准：export+import</p>
+<pre class="highlight"><span class="line"><span class="comment">//import导入</span></span><br><span class="line"><span class="keyword">import</span> math <span class="keyword">from</span> <span class="string">'./math'</span>;</span><br><span class="line"><span class="comment">//export导出</span></span><br><span class="line"><span class="keyword">export</span> <span class="function"><span class="keyword">function</span> <span class="title">sum</span>(<span class="params">a,b</span>)</span>&#123;</span><br><span class="line">    <span class="keyword">return</span> a+b;</span><br><span class="line">&#125;</span><br></pre></li>
+<li><p>AMD和CMD（用的较少）<br>①AMD<br>异步加载模块定义：define()</p>
+<pre class="highlight"><span class="line"><span class="comment">//求和模块</span></span><br><span class="line"><span class="comment">//define(名字,依赖,函数/对象)</span></span><br><span class="line">define(<span class="string">'getSum'</span>,[<span class="string">'math'</span>],<span class="function"><span class="keyword">function</span>(<span class="params">math</span>)</span>&#123;</span><br><span class="line">	<span class="keyword">return</span> <span class="function"><span class="keyword">function</span>(<span class="params">a,b</span>)</span>&#123;</span><br><span class="line">		<span class="built_in">console</span>.log(<span class="string">'sum:'</span>+math.sum(a,b));</span><br><span class="line">	&#125;</span><br><span class="line">&#125;);</span><br></pre>
+<p>②CMD<br>同步加载模块标准：define()+require()<br>a.AMD推崇依赖前置，在定义模块的时候就要声明其依赖的模块<br>b.CMD推崇就近依赖，只有在用到某个模块的时候再去require</p>
+</li>
+</ol>
+<table>
+<thead>
+<tr>
+<th align="center"></th>
+<th align="center">CommonJS规范</th>
+<th align="center">ES6</th>
+</tr>
+</thead>
+<tbody><tr>
+<td align="center">导出内容</td>
+<td align="center">//x.js<br />module.exports={<br />   age:10,<br />   print:function(){}<br />   }<br />}<br /></td>
+<td align="center">//①x.js普通导出<br />export var age=10;<br />export function print(){};<br />//②x.js默认导出<br />export default{<br />   var  age=10;<br />   print:function(){}<br />}</td>
+</tr>
+<tr>
+<td align="center">导入内容</td>
+<td align="center">//y.js<br />const obj=require(‘./x’)</td>
+<td align="center">//①import {age,print} from (“./x”)<br /><br />//②y.js<br />import obj from ‘./x’<br />obj.age<br />obj.print()</td>
+</tr>
+<tr>
+<td align="center">导出数量</td>
+<td align="center">只能导出一个</td>
+<td align="center">①可以导出多个变量和方法<br />②只能导出一次</td>
+</tr>
+<tr>
+<td align="center">使用限制</td>
+<td align="center">可以使最顶层或内部代码</td>
+<td align="center">只能最顶层</td>
+</tr>
+<tr>
+<td align="center">支持情况</td>
+<td align="center">服务器端技术：可以被Node.js解释器直接理解</td>
+<td align="center">客户端技术：目前还不能被各大浏览器支持，只能使用编译器进行预处理转换为标准JS代码</td>
+</tr>
+</tbody></table>
+<blockquote>
+<p>ES6中的模块必须使用一个编译器(webpack)转换成ES5中代码，才能间接在浏览器中运行使用</p>
+</blockquote>
+<h3 id="webpack-1"><a href="#webpack-1" class="headerlink" title="webpack"></a>webpack</h3><p><strong>概念</strong><br>webpack的核心是用于现代JavaScript应用程序的静态模块捆绑器。当webpack处理您的应用程序时，它会在内部递归构建一个依赖关系图，其中包含应用程序需要的每个模块(可能是JS/Css/图片等)然后把这些所有模块打包成一个或多个捆绑包(资源包/bundle文件)。<br><strong>用途</strong><br>资源打包后，再供客户端一次性加载，减少请求次数和请求数据总大小，从而提高访问效率<br><strong>注意</strong><br>webpack本身用于打包静态资源，通常的使用场景是：项目初步开发完成后，运行Webpack(npm扩展包),把需要处理的静态资源打包，把得到的打包文件和HTML文件一起发不到WEB服务器(node/php/java)上供客户端访问<br><strong>核心概念</strong><br>1.entry：入口<br>2.output：输出，指定最终输出的资源包文件<br>3.loader：加载器，让webpack可以处理非js文件，如CSS/图片<br>4.mode：运行模式，可以指定production(产品模式下，输出文件最小化)或者development(开发模式，输出文件不会最小化)<br>5.plugins:定义扩展功能性插件</p>
+<p><strong>使用过程</strong></p>
+<ol>
+<li>创建客户端项目，编写HTML/CSS/JS/图片等文件</li>
+<li>创建项目的描述文件：package.json  <code>npm init</code></li>
+<li>下载webpack及其依赖的模块，并添加为当前项目的“开发阶段依赖模块”  <code>npm i webpack --save-dev</code></li>
+<li>需要用到的插件可查阅官网<a href="https://www.webpackjs.com" target="_blank" rel="noopener">webpack</a></li>
+<li>创建webpack主配置文件：webpack.config.js<pre class="highlight"><span class="line"><span class="built_in">module</span>.exports=&#123;</span><br><span class="line">    <span class="comment">// 定义打包模式</span></span><br><span class="line">	mode:<span class="string">'production'</span>,</span><br><span class="line">    <span class="comment">// 定义打包的入口文件--通常选取依赖于很多其他文件的JS做入口</span></span><br><span class="line">	entry:<span class="string">'./src/index.js'</span>,</span><br><span class="line">    <span class="comment">// 定义打包得到的输出文件及其所在目录</span></span><br><span class="line">	output:&#123;</span><br><span class="line">		path:__dirname+<span class="string">'/dist'</span>,</span><br><span class="line">		filename:<span class="string">'bundle.js'</span></span><br><span class="line">	&#125;,</span><br><span class="line">    <span class="comment">// 定义打包非js文件所用到的加载器(loader)</span></span><br><span class="line">	<span class="built_in">module</span>:&#123;&#125;,</span><br><span class="line">	<span class="comment">// 定义扩展功能性插件</span></span><br><span class="line">	plugins:[]</span><br><span class="line">&#125;</span><br></pre></li>
+<li>运行webpack,根据主配置文件对静态资源进行打包 <code>node ./node_modules/webpack/bin/webpack/bin/webpack.js</code>或者在<code>package.json</code>中配置<code>script:&quot;build&quot;:&quot;webpack&quot;</code>,用<code>npm run build</code>方式运行</li>
+</ol>
+<blockquote>
+<p>gulp和grunt的定位是自动化的构建工具，帮程序员实现自动化去完成反复重复的工作而webpack是专业的的模块化打包工具</p>
+</blockquote>
+<p>实例：</p>
+<pre class="highlight"><span class="line"><span class="comment">// 默认配置文件</span></span><br><span class="line"><span class="built_in">module</span>.exports = &#123;</span><br><span class="line">  <span class="comment">// 定义打包模式</span></span><br><span class="line">  mode: <span class="string">'production'</span>, <span class="comment">//默认值，产品模式下，输出文件最小化</span></span><br><span class="line">  <span class="comment">// mode:'development', //开发模式，输出文件不会最小化</span></span><br><span class="line">  <span class="comment">// 定义打包的入口文件--通常选取依赖于很多其他文件的JS做入口</span></span><br><span class="line">  entry: <span class="string">'./src/js/index.js'</span>,</span><br><span class="line">  <span class="comment">// 定义打包得到的输出文件及其所在目录</span></span><br><span class="line">  output: &#123;</span><br><span class="line">    filename: <span class="string">'app.js'</span>,</span><br><span class="line">    path: __dirname + <span class="string">'/dist'</span>,</span><br><span class="line">    publicPath: <span class="string">''</span></span><br><span class="line">  &#125;,</span><br><span class="line">  <span class="comment">// 定义打包非js文件所用到的加载器(loader)</span></span><br><span class="line">  <span class="built_in">module</span>: &#123;</span><br><span class="line">    rules: [</span><br><span class="line">      &#123;</span><br><span class="line">        test: <span class="regexp">/\.css$/</span>,</span><br><span class="line">        use: [<span class="string">'style-loader'</span>, <span class="string">'css-loader'</span>]</span><br><span class="line">      &#125;,</span><br><span class="line">      &#123;</span><br><span class="line">        test: <span class="regexp">/\.(jpg|png|gif|svg|ttf)$/i</span>,</span><br><span class="line">        use:[</span><br><span class="line">          &#123;</span><br><span class="line">            loader:<span class="string">'file-loader'</span>,</span><br><span class="line">            options:&#123;</span><br><span class="line">              name:<span class="string">'img/[name].[ext]?[hash]'</span>,</span><br><span class="line">              publicPath: <span class="string">'dist/'</span></span><br><span class="line">            &#125;</span><br><span class="line">          &#125;</span><br><span class="line">        ]</span><br><span class="line">      &#125;</span><br><span class="line">    ]</span><br><span class="line">  &#125;</span><br><span class="line">  <span class="comment">// 定义扩展功能性插件</span></span><br><span class="line">  plugins:[]</span><br><span class="line">&#125;</span><br></pre>
+
+<p>对比<br><img src="http://qel69p8xd.bkt.clouddn.com/demo.png" alt="demo" srcset="data:image/svg+xml,%3Csvg%20xmlns='http://www.w3.org/2000/svg'%20viewBox='0%200%20300%20300'%3E%3C/svg%3E" data-src="http://qel69p8xd.bkt.clouddn.com/demo.png" class="lozad post-image"><br>打包后<br><img src="http://qel69p8xd.bkt.clouddn.com/demo_webpack.png" alt="demo_webpack" srcset="data:image/svg+xml,%3Csvg%20xmlns='http://www.w3.org/2000/svg'%20viewBox='0%200%20300%20300'%3E%3C/svg%3E" data-src="http://qel69p8xd.bkt.clouddn.com/demo_webpack.png" class="lozad post-image"></p>
+
+  </div>
+  <div>
+  
+  <div class="post-note note-warning copyright" style="margin-top: 42px">
+    <p><span style="font-weight: bold;">作者：</span><a target="_blank" rel="nofollow noopener noreferrer" href="https://xiaobai123-4.github.io/about">MaQisong</a></p>
+    <p><span style="font-weight: bold;">文章链接：</span><a target="_blank" rel="nofollow noopener noreferrer" href="https://xiaobai123-4.github.io/2020/08/13/webpack/">https://xiaobai123-4.github.io/2020/08/13/webpack/</a></p>
+    <p><span style="font-weight: bold;">版权声明：</span>本博客所有文章除特别声明外，均采用<a target="_blank" rel="noopener" href="https://creativecommons.org/licenses/by-nc-sa/4.0/deed.zh">CC BY-NC-SA 4.0 协议</a>。转载请注明出处！</p>
+  </div>
+  
+  </div>
+</article>
+<div class="nav">
+  
+  <div class="nav-item-prev">
+    <a href="/2020/08/13/0宽断言/" class="nav-link">
+      <i class="iconfont icon-left nav-prev-icon"></i>
+      <div>
+        <div class="nav-label">上一篇</div>
+        
+        <div class="nav-title">0宽断言 </div>
+        
+      </div>
+    </a>
+  </div>
+  
+  
+  <div class="nav-item-next">
+    <a href="/2020/08/12/节流防抖/" class="nav-link">
+      <div>
+        <div class="nav-label">下一篇</div>
+        
+        <div class="nav-title">节流防抖 </div>
+        
+      </div>
+      <i class="iconfont icon-right nav-next-icon"></i>
+    </a>
+  </div>
+  
+</div>
+
+<div class="card card-content toc-card" id="mobiletoc">
+  <div class="toc-header"><i class="iconfont icon-menu" style="padding-right: 2px;"></i>目录</div>
+<ol class="toc"><li class="toc-item toc-level-1"><a class="toc-link" href="#webpack"><span class="toc-text">webpack</span></a><ol class="toc-child"><li class="toc-item toc-level-2"><a class="toc-link" href="#引入"><span class="toc-text">引入</span></a><ol class="toc-child"><li class="toc-item toc-level-3"><a class="toc-link" href="#前端模块化"><span class="toc-text">前端模块化</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#演化"><span class="toc-text">演化</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#webpack-1"><span class="toc-text">webpack</span></a></li></ol></li></ol></li></ol>
+</div></main>
+          <aside class="left-column">
+            
+            <div class="card card-author">
+              
+<img src="https://s3.ax1x.com/2021/03/04/6VEJaQ.jpg" class="author-img">
+
+<p class="author-name">MaQisong</p>
+<p class="author-description">学习永不止步</p>
+<div class="author-message">
+  <a class="author-posts-count" href="/archives">
+    <span>65</span>
+    <span>文章</span>
+  </a>
+  <a class="author-categories-count" href="/categories">
+    <span>25</span>
+    <span>分类</span>
+  </a>
+  <a class="author-tags-count" href="/tags">
+    <span>38</span>
+    <span>标签</span>
+  </a>
+</div>
+
+            </div>
+            
+            <div class="sticky-tablet">
+  
+  
+  <article class="display-when-two-columns spacer">
+    <div class="card card-content toc-card">
+      <div class="toc-header"><i class="iconfont icon-menu" style="padding-right: 2px;"></i>目录</div>
+<ol class="toc"><li class="toc-item toc-level-1"><a class="toc-link" href="#webpack"><span class="toc-text">webpack</span></a><ol class="toc-child"><li class="toc-item toc-level-2"><a class="toc-link" href="#引入"><span class="toc-text">引入</span></a><ol class="toc-child"><li class="toc-item toc-level-3"><a class="toc-link" href="#前端模块化"><span class="toc-text">前端模块化</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#演化"><span class="toc-text">演化</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#webpack-1"><span class="toc-text">webpack</span></a></li></ol></li></ol></li></ol>
+    </div>
+  </article>
+  
+  
+  <article class="card card-content categories-widget">
+    <div class="categories-card">
+  <div class="categories-header"><i class="iconfont icon-fenlei" style="padding-right: 2px;"></i>分类</div>
+  <div class="categories-list">
+    
+      <a href="/categories/正则表达式/">
+        <div class="categories-list-item">
+          正则表达式
+          <span class="categories-list-item-badge">1</span>
+        </div>
+      </a>
+    
+      <a href="/categories/ajax/">
+        <div class="categories-list-item">
+          ajax
+          <span class="categories-list-item-badge">1</span>
+        </div>
+      </a>
+    
+      <a href="/categories/CSS/">
+        <div class="categories-list-item">
+          CSS
+          <span class="categories-list-item-badge">3</span>
+        </div>
+      </a>
+    
+      <a href="/categories/ES6/">
+        <div class="categories-list-item">
+          ES6
+          <span class="categories-list-item-badge">1</span>
+        </div>
+      </a>
+    
+      <a href="/categories/css/">
+        <div class="categories-list-item">
+          css
+          <span class="categories-list-item-badge">1</span>
+        </div>
+      </a>
+    
+      <a href="/categories/HTML5/">
+        <div class="categories-list-item">
+          HTML5
+          <span class="categories-list-item-badge">4</span>
+        </div>
+      </a>
+    
+      <a href="/categories/git/">
+        <div class="categories-list-item">
+          git
+          <span class="categories-list-item-badge">1</span>
+        </div>
+      </a>
+    
+      <a href="/categories/Markdown/">
+        <div class="categories-list-item">
+          Markdown
+          <span class="categories-list-item-badge">1</span>
+        </div>
+      </a>
+    
+      <a href="/categories/javascript/">
+        <div class="categories-list-item">
+          javascript
+          <span class="categories-list-item-badge">17</span>
+        </div>
+      </a>
+    
+      <a href="/categories/SqlServer/">
+        <div class="categories-list-item">
+          SqlServer
+          <span class="categories-list-item-badge">1</span>
+        </div>
+      </a>
+    
+      <a href="/categories/bootstrap/">
+        <div class="categories-list-item">
+          bootstrap
+          <span class="categories-list-item-badge">1</span>
+        </div>
+      </a>
+    
+      <a href="/categories/分类/">
+        <div class="categories-list-item">
+          分类
+          <span class="categories-list-item-badge">1</span>
+        </div>
+      </a>
+    
+      <a href="/categories/其他/">
+        <div class="categories-list-item">
+          其他
+          <span class="categories-list-item-badge">1</span>
+        </div>
+      </a>
+    
+      <a href="/categories/Vue/">
+        <div class="categories-list-item">
+          Vue
+          <span class="categories-list-item-badge">10</span>
+        </div>
+      </a>
+    
+      <a href="/categories/HTML/">
+        <div class="categories-list-item">
+          HTML
+          <span class="categories-list-item-badge">2</span>
+        </div>
+      </a>
+    
+      <a href="/categories/ionic/">
+        <div class="categories-list-item">
+          ionic
+          <span class="categories-list-item-badge">2</span>
+        </div>
+      </a>
+    
+      <a href="/categories/javascript/Vue/">
+        <div class="categories-list-item">
+          javascript/Vue
+          <span class="categories-list-item-badge">2</span>
+        </div>
+      </a>
+    
+      <a href="/categories/webpack/">
+        <div class="categories-list-item">
+          webpack
+          <span class="categories-list-item-badge">1</span>
+        </div>
+      </a>
+    
+      <a href="/categories/前端/">
+        <div class="categories-list-item">
+          前端
+          <span class="categories-list-item-badge">1</span>
+        </div>
+      </a>
+    
+      <a href="/categories/NodeJS/">
+        <div class="categories-list-item">
+          NodeJS
+          <span class="categories-list-item-badge">1</span>
+        </div>
+      </a>
+    
+      <a href="/categories/镜寰-工作/">
+        <div class="categories-list-item">
+          镜寰-工作
+          <span class="categories-list-item-badge">10</span>
+        </div>
+      </a>
+    
+      <a href="/categories/html/">
+        <div class="categories-list-item">
+          html
+          <span class="categories-list-item-badge">1</span>
+        </div>
+      </a>
+    
+      <a href="/categories/移动端/">
+        <div class="categories-list-item">
+          移动端
+          <span class="categories-list-item-badge">2</span>
+        </div>
+      </a>
+    
+      <a href="/categories/Vue/前端/">
+        <div class="categories-list-item">
+          Vue/前端
+          <span class="categories-list-item-badge">3</span>
+        </div>
+      </a>
+    
+      <a href="/categories/镜寰-工作/数据库/">
+        <div class="categories-list-item">
+          镜寰-工作/数据库
+          <span class="categories-list-item-badge">1</span>
+        </div>
+      </a>
+    
+  </div>
+</div>
+  </article>
+  
+  <article class="card card-content tags-widget">
+    <div class="tags-card">
+  <div class="tags-header"><i class="iconfont icon-biaoqian" style="padding-right: 2px;"></i>热门标签</div>
+  <div class="tags-list">
+    
+    <a href="/tags/前端/" title="前端"><div class="tags-list-item">前端</div></a>
+    
+    <a href="/tags/html/" title="html"><div class="tags-list-item">html</div></a>
+    
+    <a href="/tags/javascript/" title="javascript"><div class="tags-list-item">javascript</div></a>
+    
+    <a href="/tags/Vue/" title="Vue"><div class="tags-list-item">Vue</div></a>
+    
+    <a href="/tags/工作总结/" title="工作总结"><div class="tags-list-item">工作总结</div></a>
+    
+    <a href="/tags/框架/" title="框架"><div class="tags-list-item">框架</div></a>
+    
+    <a href="/tags/算法/" title="算法"><div class="tags-list-item">算法</div></a>
+    
+    <a href="/tags/笔记/" title="笔记"><div class="tags-list-item">笔记</div></a>
+    
+    <a href="/tags/常见问题/" title="常见问题"><div class="tags-list-item">常见问题</div></a>
+    
+    <a href="/tags/css/" title="css"><div class="tags-list-item">css</div></a>
+    
+    <a href="/tags/移动端/" title="移动端"><div class="tags-list-item">移动端</div></a>
+    
+    <a href="/tags/跨域/" title="跨域"><div class="tags-list-item">跨域</div></a>
+    
+    <a href="/tags/基础/" title="基础"><div class="tags-list-item">基础</div></a>
+    
+    <a href="/tags/规范/" title="规范"><div class="tags-list-item">规范</div></a>
+    
+    <a href="/tags/webpack/" title="webpack"><div class="tags-list-item">webpack</div></a>
+    
+    <a href="/tags/博客/" title="博客"><div class="tags-list-item">博客</div></a>
+    
+  </div>
+</div>
+  </article>
+  
+  
+</div>
+          </aside>
+          <aside class="right-column">
+            <div class="sticky-widescreen">
+  
+  
+  <article class="card card-content toc-card">
+    <div class="toc-header"><i class="iconfont icon-menu" style="padding-right: 2px;"></i>目录</div>
+<ol class="toc"><li class="toc-item toc-level-1"><a class="toc-link" href="#webpack"><span class="toc-text">webpack</span></a><ol class="toc-child"><li class="toc-item toc-level-2"><a class="toc-link" href="#引入"><span class="toc-text">引入</span></a><ol class="toc-child"><li class="toc-item toc-level-3"><a class="toc-link" href="#前端模块化"><span class="toc-text">前端模块化</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#演化"><span class="toc-text">演化</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#webpack-1"><span class="toc-text">webpack</span></a></li></ol></li></ol></li></ol>
+  </article>
+  
+  
+  <article class="card card-content">
+    <div class="recent-posts-card">
+  <div class="recent-posts-header"><i class="iconfont icon-wenzhang_huaban" style="padding-right: 2px;"></i>最近文章</div>
+  <div class="recent-posts-list">
+    
+      <div class="recent-posts-item">
+        <div class="recent-posts-item-title">2021-03-28</div>
+        <a href="/2021/03/28/vue学习记录4/"><div class="recent-posts-item-content">vue学习记录4</div></a>
+      </div>
+    
+      <div class="recent-posts-item">
+        <div class="recent-posts-item-title">2021-03-27</div>
+        <a href="/2021/03/27/vue学习记录3/"><div class="recent-posts-item-content">vue学习记录3</div></a>
+      </div>
+    
+      <div class="recent-posts-item">
+        <div class="recent-posts-item-title">2021-03-26</div>
+        <a href="/2021/03/26/vue学习记录2/"><div class="recent-posts-item-content">vue学习记录2</div></a>
+      </div>
+    
+      <div class="recent-posts-item">
+        <div class="recent-posts-item-title">2021-03-04</div>
+        <a href="/2021/03/04/vue学习记录1/"><div class="recent-posts-item-content">学习记录1</div></a>
+      </div>
+    
+  </div>
+</div>
+  </article>
+  
+  
+</div>
+          </aside>
+        </div>
+      </div>
+    </div>
+  </div>
+  
+  <footer class="footer">
+  <div class="footer-container">
+    <div>
+      <div class="footer-dsc">
+        <span>Copyright ©
+          
+          2020 -
+          
+          2021
+        </span>
+        &nbsp;
+        <a href="/" class="footer-link">小白的博客 </a>
+      </div>
+    </div>
+
+    
+    <div class="footer-dsc">
+      
+      Powered by
+      <a href="https://hexo.io/" class="footer-link" target="_blank" rel="nofollow noopener noreferrer">&nbsp;Hexo </a>
+      
+      
+      <span>&nbsp;|&nbsp;</span>
+      
+      
+      Theme -
+      <a href="https://github.com/theme-kaze" class="footer-link" target="_blank"
+        rel="nofollow noopener noreferrer">&nbsp;Kaze</a>
+      
+    </div>
+    
+    
+    
+    
+</footer>
+  <a role="button" id="scrollbutton" class="basebutton"  aria-label="回到顶部">
+  <i class="iconfont icon-arrowleft button-icon"></i>
+</a>
+<a role="button" id="menubutton" class="basebutton">
+  <i class="iconfont icon-menu button-icon"></i>
+</a>
+<a role="button" id="popbutton" class="basebutton" aria-label="控制中心">
+  <i class="iconfont icon-expand button-icon"></i>
+</a>
+<a role="button" id="darkbutton" class="basebutton darkwidget" aria-label="夜色模式">
+  <i class="iconfont icon-weather button-icon"></i>
+</a>
+<a role="button" id="searchbutton" class="basebutton searchwidget" aria-label="搜索">
+  <i class="iconfont icon-search button-icon"></i>
+</a>
+
+  
+  
+  
+  <script>
+  var addImgLayout = function () {
+    var img = document.querySelectorAll('.post-content img');
+    var i;
+    for (i = 0; i < img.length; i++) {
+      var wrapper = document.createElement('a');
+      wrapper.setAttribute('href', img[i].getAttribute('data-src'));
+      wrapper.setAttribute('aria-label', 'illustration');
+      wrapper.style.cssText = 'width: 100%; display: flex; justify-content: center;';
+      if (img[i].alt) wrapper.dataset.caption = img[i].alt;
+      wrapper.dataset.nolink = true;
+      img[i].before(wrapper);
+      wrapper.append(img[i]);
+      var divWrap = document.createElement('div');
+      divWrap.classList.add('gallery');
+      wrapper.before(divWrap);
+      divWrap.append(wrapper);
+    }
+    baguetteBox.run('.gallery');
+  }
+</script>
+<script>loadScript("/js/lib/lightbox/baguetteBox.min.js", addImgLayout)</script>
+  
+  
+  
+<script src="/js/main.js"></script>
+
+  
+  
+  <script>
+    var addLazyload = function () {
+      var observer = lozad('.lozad', {
+        load: function (el) {
+          el.srcset = el.getAttribute('data-src');
+        },
+        loaded: function (el) {
+          el.classList.add('loaded');
+        }
+      });
+      observer.observe();
+    }
+  </script>
+  <script>loadScript("/js/lib/lozad.min.js", addLazyload)</script>
+  
+  
+</body>
+
+</html>

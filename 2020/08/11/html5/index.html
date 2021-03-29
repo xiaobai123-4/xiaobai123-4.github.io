@@ -1,0 +1,742 @@
+<!DOCTYPE html>
+<html  lang="zh-CN" >
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport"
+    content="width=device-width, initial-scale=1.0, minimum-scale=1.0">
+  <meta http-equiv="X-UA-Compatible" content="ie=edge">
+  <meta name="theme-color" content="#fff" id="theme-color">
+  <meta name="description" content="学习永不止步">
+  <link rel="icon" href="https://s3.ax1x.com/2021/03/04/6VEJaQ.jpg">
+  <title>HTML5</title>
+  
+  
+  <meta property="og:title" content="HTML5">
+  
+  
+  <meta property="og:url" content="https://xiaobai123-4.github.io/2020/08/11/html5/index.html">
+  
+  
+  <meta property="og:img" content="https://s3.ax1x.com/2021/03/04/6VEJaQ.jpg">
+  
+  
+  <meta property="og:img" content="学习永不止步">
+  
+  
+  <meta property="og:type" content="article">
+  <meta property="og:article:published_time" content="2020-08-11">
+  <meta property="og:article:modified_time" content="2020-09-03">
+  <meta property="og:article:author" content="MaQisong">
+  
+  
+  <meta property="og:article:tag" content="前端">
+  
+  <meta property="og:article:tag" content="html">
+  
+  <meta property="og:article:tag" content="笔记">
+  
+  <meta property="og:article:tag" content="基础">
+  
+  
+  
+  
+  <script>
+    // control reverse button
+    var reverseDarkList = {
+      dark: 'light',
+      light: 'dark'
+    };
+    var themeColor = {
+      dark: '#1c1c1e',
+      light: '#fff'
+    }
+    // get the data of css prefers-color-scheme
+    var getCssMediaQuery = function() {
+      return window.matchMedia('(prefers-color-scheme: dark)').matches ? 'dark' : 'light';
+    };
+    // reverse current darkmode setting function
+    var reverseDarkModeSetting = function() {
+      var setting = localStorage.getItem('user-color-scheme');
+      if(reverseDarkList[setting]) {
+        setting = reverseDarkList[setting];
+      } else if(setting === null) {
+        setting = reverseDarkList[getCssMediaQuery()];
+      } else {
+        return;
+      }
+      localStorage.setItem('user-color-scheme', setting);
+      return setting;
+    };
+    // apply current darkmode setting
+    var setDarkmode = function(mode) {
+      var setting = mode || localStorage.getItem('user-color-scheme');
+      if(setting === getCssMediaQuery()) {
+        document.documentElement.removeAttribute('data-user-color-scheme');
+        localStorage.removeItem('user-color-scheme');
+        document.getElementById('theme-color').content = themeColor[setting];
+      } else if(reverseDarkList[setting]) {
+        document.documentElement.setAttribute('data-user-color-scheme', setting);
+        document.getElementById('theme-color').content = themeColor[setting];
+      } else {
+        document.documentElement.removeAttribute('data-user-color-scheme');
+        localStorage.removeItem('user-color-scheme');
+        document.getElementById('theme-color').content = themeColor[getCssMediaQuery()];
+      }
+    };
+    setDarkmode();
+  </script>
+  <script>
+    function loadScript(url, cb) {
+      var script = document.createElement('script');
+      script.src = url;
+      if (cb) script.onload = cb;
+      script.async = true;
+      document.body.appendChild(script);
+    }
+  </script>
+  
+  <link rel="preload" href="//at.alicdn.com/t/font_1946621_i1kgafibvw.css" as="style" >
+  <link rel="preload" href="//at.alicdn.com/t/font_1952792_89b4ac4k4up.css" as="style" >
+  
+  <link rel="preload" href="/js/lib/lightbox/baguetteBox.min.js" as="script">
+  <link rel="preload" href="/js/lib/lightbox/baguetteBox.min.css" as="style" >
+  
+  
+  <link rel="preload" href="/js/lib/lozad.min.js" as="script">
+  
+  
+  
+  
+  
+  
+  
+  
+<link rel="stylesheet" href="/css/main.css">
+
+  
+  
+<link rel="stylesheet" href="//at.alicdn.com/t/font_1946621_i1kgafibvw.css">
+
+  
+  
+<link rel="stylesheet" href="//at.alicdn.com/t/font_1952792_89b4ac4k4up.css">
+
+  
+  
+<link rel="stylesheet" href="/js/lib/lightbox/baguetteBox.min.css">
+
+  
+  
+<meta name="generator" content="Hexo 4.2.1"></head>
+
+
+<body>
+  <div class="wrapper">
+    
+    <nav class="navbar">
+  <div class="navbar-logo">
+    <span class="navbar-logo-main">
+      
+      <img class="navbar-logo-img" src="https://s3.ax1x.com/2021/03/04/6VEJaQ.jpg" alt="logo">
+      
+      <span class="navbar-logo-dsc">小白的博客</span>
+    </span>
+  </div>
+  <div class="navbar-menu">
+    
+    <a href="/" class="navbar-menu-item">
+    
+    首页
+    
+    </a>
+    
+    <a href="/archives" class="navbar-menu-item">
+    
+    归档
+    
+    </a>
+    
+    <a href="/tags" class="navbar-menu-item">
+    
+    标签
+    
+    </a>
+    
+    <a href="/categories" class="navbar-menu-item">
+    
+    分类
+    
+    </a>
+    
+    <a href="/about" class="navbar-menu-item">
+    
+    关于
+    
+    </a>
+    
+    <a class="navbar-menu-item darknavbar" id="dark"><i class="iconfont icon-weather"></i></a>
+    <a class="navbar-menu-item searchnavbar" id="search"><i class="iconfont icon-search" style="font-size: 1.2rem; font-weight: 400;"></i></a>
+  </div>
+</nav>
+    
+    <div id="local-search" style="display: none;">
+      <input class="navbar-menu-item" id="search-input" placeholder="请输入搜索内容...">
+      <div id="search-content"></div>
+    </div>
+    
+    <div class="section-wrap">
+      <div class="container">
+        <div class="columns">
+          <main class="main-column">
+<article class="card card-content">
+  <header>
+    <h1 class="post-title">
+      HTML5
+    </h1>
+  </header>
+  <div class="post-meta post-show-meta">
+    <time datetime="2020-08-11T06:32:34.000Z">
+      <i class="iconfont icon-calendar" style="margin-right: 2px;"></i>
+      <span>2020-08-11</span>
+    </time>
+    
+    <span class="dot"></span>
+    
+    <a href="/categories/HTML5/" class="post-meta-link">HTML5</a>
+    
+    
+    
+    <span class="dot"></span>
+    <span>2k 字</span>
+    
+  </div>
+  
+  <div class="post-meta post-show-meta" style="margin-top: -10px;">
+    <div style="display: flex; align-items: center;">
+      <i class="iconfont icon-biaoqian" style="margin-right: 2px; font-size: 1.15rem;"></i>
+      
+      
+        <a href="/tags/前端/" class="post-meta-link">前端</a>
+      
+      
+      <span class="dot"></span>
+      
+        <a href="/tags/html/" class="post-meta-link">html</a>
+      
+      
+      <span class="dot"></span>
+      
+        <a href="/tags/笔记/" class="post-meta-link">笔记</a>
+      
+      
+      <span class="dot"></span>
+      
+        <a href="/tags/基础/" class="post-meta-link">基础</a>
+      
+    </div>
+  </div>
+  
+  </header>
+  <div id="section" class="post-content">
+    <p><a href="https://developer.mozilla.org/zh-CN/docs/Web/Guide/HTML/HTML5" target="_blank" rel="noopener">HTML5开发文档</a></p>
+<h2 id="语义化"><a href="#语义化" class="headerlink" title="语义化"></a>语义化</h2><p><img src="http://qel69p8xd.bkt.clouddn.com/h5%E8%AF%AD%E4%B9%89%E5%8C%96.png" alt="h5语义化" srcset="data:image/svg+xml,%3Csvg%20xmlns='http://www.w3.org/2000/svg'%20viewBox='0%200%20300%20300'%3E%3C/svg%3E" data-src="http://qel69p8xd.bkt.clouddn.com/h5%E8%AF%AD%E4%B9%89%E5%8C%96.png" class="lozad post-image"><br>例如：</p>
+<pre class="highlight"><span class="line"><span class="tag">&lt;<span class="name">section</span>&gt;</span></span><br><span class="line">  <span class="tag">&lt;<span class="name">h1</span>&gt;</span>Forest elephants<span class="tag">&lt;/<span class="name">h1</span>&gt;</span></span><br><span class="line"> </span><br><span class="line">  <span class="tag">&lt;<span class="name">section</span>&gt;</span>     </span><br><span class="line">    <span class="tag">&lt;<span class="name">h1</span>&gt;</span>Introduction<span class="tag">&lt;/<span class="name">h1</span>&gt;</span>     </span><br><span class="line">    <span class="tag">&lt;<span class="name">p</span>&gt;</span>In this section, we discuss the lesser known forest elephants.<span class="tag">&lt;/<span class="name">p</span>&gt;</span></span><br><span class="line">  <span class="tag">&lt;/<span class="name">section</span>&gt;</span></span><br><span class="line"></span><br><span class="line">  <span class="tag">&lt;<span class="name">section</span>&gt;</span>     </span><br><span class="line">    <span class="tag">&lt;<span class="name">h1</span>&gt;</span>Habitat<span class="tag">&lt;/<span class="name">h1</span>&gt;</span></span><br><span class="line">    <span class="tag">&lt;<span class="name">p</span>&gt;</span>Forest elephants do not live in trees but among them.<span class="tag">&lt;/<span class="name">p</span>&gt;</span></span><br><span class="line">  <span class="tag">&lt;/<span class="name">section</span>&gt;</span></span><br><span class="line"></span><br><span class="line">  <span class="tag">&lt;<span class="name">aside</span>&gt;</span></span><br><span class="line">    <span class="tag">&lt;<span class="name">p</span>&gt;</span>advertising block<span class="tag">&lt;/<span class="name">p</span>&gt;</span></span><br><span class="line">  <span class="tag">&lt;/<span class="name">aside</span>&gt;</span></span><br><span class="line"><span class="tag">&lt;/<span class="name">section</span>&gt;</span></span><br><span class="line"></span><br><span class="line"><span class="tag">&lt;<span class="name">footer</span>&gt;</span></span><br><span class="line">  <span class="tag">&lt;<span class="name">p</span>&gt;</span>(c) 2010 The Example company<span class="tag">&lt;/<span class="name">p</span>&gt;</span></span><br><span class="line"><span class="tag">&lt;/<span class="name">footer</span>&gt;</span></span><br></pre>
+<h3 id="节段"><a href="#节段" class="headerlink" title="节段"></a>节段</h3><p>显式定义的节段是通过<body>,  <section>,  <article>,  <aside>和 <nav> 这些标记中的内容</p>
+<h3 id="标题：h1-h5"><a href="#标题：h1-h5" class="headerlink" title="标题：h1-h5"></a>标题：h1-h5</h3><h3 id="导航："><a href="#导航：" class="headerlink" title="导航："></a>导航：</h3><ol>
+<li>HTML 侧边分节元素 (<a href="https://developer.mozilla.org/zh-CN/docs/Web/HTML/Element/aside" target="_blank" rel="noopener">``</a>) 定义了这样的节段, 虽然是主要的分节元素, 但并不属于主要的文档流, 就像解释栏或广告栏. aside元素内部有自己的大纲，但并不计入文档大纲中</li>
+<li>HTML 导航分节元素 (<a href="https://developer.mozilla.org/zh-CN/docs/Web/HTML/Element/nav" target="_blank" rel="noopener">``</a>) 定义的节段包含了很多导航links。文档中可以有好几个这样的元素，比如文档内部的链接，就像目录，和链接到其他站点的导航links。这些链接并不是主文档流和文档大纲中的一部分 ，并且能够特别让屏幕浏览器和类似的辅助技术从一开始就不渲染该标记里的内容。</li>
+</ol>
+<h3 id="页眉和页脚："><a href="#页眉和页脚：" class="headerlink" title="页眉和页脚："></a>页眉和页脚：</h3><p>HTML5引入了两个可以用于标记节段的页眉和页脚的新元素。</p>
+<ol>
+<li><p>HTML 头部分节元素 (<header>) 定义了页面的页眉,通常会包含logo和站点名称以及水平菜单（如果有的话）。或是一个节段的头部，可能包含了节段的标题和作者名字等。<article>, <section>, <aside>, and <nav>可以拥有它们自己的<header>。虽然名字是header，但是不一定是在页面的开始。</p>
+</li>
+<li><p>HTML 页脚元素 (<footer>) 定义了页脚, 通常会包含版权信息和法律声明以及一些其他链接。或是节段的页脚，可能包含了节段的发布数据、许可声明等。<article>, <section>, <aside>, and <nav> 可以拥有它们自己的 <footer>。同样，其不一定是在页面的底部出现。</p>
+<h2 id="新的语义元素"><a href="#新的语义元素" class="headerlink" title="新的语义元素"></a>新的语义元素</h2><p>除了节段，媒体和表单元素之外，还有众多的新元素，例如 <mark>， <figure>， <figcaption>， <data>， <time>， <output>， <progress>， 或者 <meter>和<main>，这增加了有效的 HTML5 元素的数量。</p>
+</li>
+</ol>
+<h2 id="多媒体"><a href="#多媒体" class="headerlink" title="多媒体"></a>多媒体</h2><p>播放器</p>
+<pre class="highlight"><span class="line"><span class="tag">&lt;<span class="name">audio</span> <span class="attr">id</span>=<span class="string">"demo"</span> <span class="attr">src</span>=<span class="string">"audio.mp3"</span>&gt;</span><span class="tag">&lt;/<span class="name">audio</span>&gt;</span></span><br><span class="line"><span class="tag">&lt;<span class="name">div</span>&gt;</span></span><br><span class="line">  <span class="tag">&lt;<span class="name">button</span> <span class="attr">onclick</span>=<span class="string">"document.getElementById('demo').play()"</span>&gt;</span>播放声音<span class="tag">&lt;/<span class="name">button</span>&gt;</span></span><br><span class="line">  <span class="tag">&lt;<span class="name">button</span> <span class="attr">onclick</span>=<span class="string">"document.getElementById('demo').pause()"</span>&gt;</span>暂停声音<span class="tag">&lt;/<span class="name">button</span>&gt;</span></span><br><span class="line">  <span class="tag">&lt;<span class="name">button</span> <span class="attr">onclick</span>=<span class="string">"document.getElementById('demo').volume+=0.1"</span>&gt;</span>提高音量<span class="tag">&lt;/<span class="name">button</span>&gt;</span></span><br><span class="line">  <span class="tag">&lt;<span class="name">button</span> <span class="attr">onclick</span>=<span class="string">"document.getElementById('demo').volume-=0.1"</span>&gt;</span>降低音量<span class="tag">&lt;/<span class="name">button</span>&gt;</span></span><br><span class="line"><span class="tag">&lt;/<span class="name">div</span>&gt;</span></span><br><span class="line"><span class="tag">&lt;<span class="name">!-使用flash-</span>&gt;</span></span><br><span class="line"><span class="tag">&lt;<span class="name">video</span> <span class="attr">src</span>=<span class="string">"video.ogv"</span> <span class="attr">controls</span>&gt;</span></span><br><span class="line">    <span class="tag">&lt;<span class="name">object</span> <span class="attr">data</span>=<span class="string">"flvplayer.swf"</span> <span class="attr">type</span>=<span class="string">"application/x-shockwave-flash"</span>&gt;</span></span><br><span class="line">      <span class="tag">&lt;<span class="name">param</span> <span class="attr">value</span>=<span class="string">"flvplayer.swf"</span> <span class="attr">name</span>=<span class="string">"movie"</span>/&gt;</span></span><br><span class="line">    <span class="tag">&lt;/<span class="name">object</span>&gt;</span></span><br><span class="line"><span class="tag">&lt;/<span class="name">video</span>&gt;</span></span><br></pre>
+
+<h2 id="存储"><a href="#存储" class="headerlink" title="存储"></a>存储</h2><p><strong>WebStorage</strong><br>是在客户端浏览器中存储数据</p>
+<p><strong>解决问题</strong><br>可以在客户端存储用户专用数据<br>专用数据:用户登录昵称;购物车列表;<br>数据一定是安全级别要求比低: 用户密码不能存储WebStorage</p>
+<p><strong>存储数据</strong></p>
+<ul>
+<li>sessionStorage  存储数据只会在当前会话中不同网页中使用</li>
+<li>localStorage    永久保存</li>
+</ul>
+<p><strong>WebSocket–网络协议</strong><br>WebSocket网络协议:由于它的工作方式特殊(广播与收听),所以在移动项目中大量使用<br>HTTP 网络协议(超文本传输协议)–(协议程序)<br>  工作方式:请求头;响应头;响应状态码<br>  HTTP作用:传输网页中资源(html;css;js;img;avi;mp3…)<br>  HTTP:网页搬运工(从服务器将资源运输浏览器)<br>  HTTP工作方式:请求和响应<br>  请求消息:客户端浏览器发送服务器数据称:请求消息<br>  响应消息:服务器发送数据给浏览器称:响应消息<br>一次请求对应一次响应,如果没有请求就没有响应</p>
+<blockquote>
+<p>注意:有一些应用中使用HTTP协议不适应</p>
+</blockquote>
+<h2 id="2D3D绘图"><a href="#2D3D绘图" class="headerlink" title="2D3D绘图"></a>2D3D绘图</h2><p>具体查文档，不做过多解释😀</p>
+<p>实例：</p>
+<pre class="highlight"><span class="line"><span class="meta">&lt;!DOCTYPE <span class="meta-keyword">html</span>&gt;</span></span><br><span class="line"><span class="tag">&lt;<span class="name">html</span> <span class="attr">lang</span>=<span class="string">"en"</span>&gt;</span></span><br><span class="line"></span><br><span class="line"><span class="tag">&lt;<span class="name">head</span>&gt;</span></span><br><span class="line">  <span class="tag">&lt;<span class="name">meta</span> <span class="attr">charset</span>=<span class="string">"UTF-8"</span>&gt;</span></span><br><span class="line">  <span class="tag">&lt;<span class="name">meta</span> <span class="attr">name</span>=<span class="string">"viewport"</span> <span class="attr">content</span>=<span class="string">"width=device-width, initial-scale=1.0"</span>&gt;</span></span><br><span class="line">  <span class="tag">&lt;<span class="name">title</span>&gt;</span>Document<span class="tag">&lt;/<span class="name">title</span>&gt;</span></span><br><span class="line">  <span class="tag">&lt;<span class="name">style</span>&gt;</span></span><br><span class="line">    canvas &#123;</span><br><span class="line">      background-color: aquamarine;</span><br><span class="line">    &#125;</span><br><span class="line">  <span class="tag">&lt;/<span class="name">style</span>&gt;</span></span><br><span class="line"><span class="tag">&lt;/<span class="name">head</span>&gt;</span></span><br><span class="line"></span><br><span class="line"><span class="tag">&lt;<span class="name">body</span>&gt;</span></span><br><span class="line">  <span class="tag">&lt;<span class="name">h2</span>&gt;</span>canvas绘图<span class="tag">&lt;/<span class="name">h2</span>&gt;</span></span><br><span class="line">  <span class="comment">&lt;!-- 矩形 --&gt;</span></span><br><span class="line">  <span class="tag">&lt;<span class="name">canvas</span> <span class="attr">id</span>=<span class="string">"jx"</span> <span class="attr">width</span>=<span class="string">"400"</span> <span class="attr">height</span>=<span class="string">"400"</span>&gt;</span><span class="tag">&lt;/<span class="name">canvas</span>&gt;</span></span><br><span class="line">  <span class="comment">&lt;!-- 圆形 --&gt;</span></span><br><span class="line">  <span class="tag">&lt;<span class="name">canvas</span> <span class="attr">id</span>=<span class="string">"yx"</span> <span class="attr">width</span>=<span class="string">"400"</span> <span class="attr">height</span>=<span class="string">"400"</span>&gt;</span><span class="tag">&lt;/<span class="name">canvas</span>&gt;</span></span><br><span class="line">  <span class="comment">&lt;!-- 三角形 --&gt;</span></span><br><span class="line">  <span class="tag">&lt;<span class="name">canvas</span> <span class="attr">id</span>=<span class="string">"sjx"</span> <span class="attr">width</span>=<span class="string">"400"</span> <span class="attr">height</span>=<span class="string">"400"</span>&gt;</span><span class="tag">&lt;/<span class="name">canvas</span>&gt;</span></span><br><span class="line">  <span class="tag">&lt;<span class="name">h2</span>&gt;</span>canvas渐变<span class="tag">&lt;/<span class="name">h2</span>&gt;</span></span><br><span class="line">  <span class="comment">&lt;!-- 渐变 --&gt;</span></span><br><span class="line">  <span class="tag">&lt;<span class="name">canvas</span> <span class="attr">id</span>=<span class="string">"jb"</span> <span class="attr">width</span>=<span class="string">"400"</span> <span class="attr">height</span>=<span class="string">"400"</span>&gt;</span><span class="tag">&lt;/<span class="name">canvas</span>&gt;</span></span><br><span class="line">  <span class="comment">&lt;!-- 放射性渐变 --&gt;</span></span><br><span class="line">  <span class="tag">&lt;<span class="name">canvas</span> <span class="attr">id</span>=<span class="string">"fsxjb"</span> <span class="attr">width</span>=<span class="string">"400"</span> <span class="attr">height</span>=<span class="string">"400"</span>&gt;</span><span class="tag">&lt;/<span class="name">canvas</span>&gt;</span></span><br><span class="line"><span class="tag">&lt;/<span class="name">body</span>&gt;</span></span><br><span class="line"><span class="tag">&lt;<span class="name">script</span>&gt;</span></span><br><span class="line"><span class="actionscript">  <span class="comment">// 矩形</span></span></span><br><span class="line"><span class="actionscript">  <span class="comment">// 获取canvas区域</span></span></span><br><span class="line"><span class="javascript">  <span class="keyword">var</span> canvas1 = <span class="built_in">document</span>.getElementById(<span class="string">"jx"</span>);</span></span><br><span class="line"><span class="actionscript">  <span class="comment">// 获取绘图canvas的上下文</span></span></span><br><span class="line"><span class="actionscript">  <span class="keyword">var</span> ctx1 = canvas1.getContext(<span class="string">"2d"</span>);</span></span><br><span class="line"><span class="actionscript">  <span class="comment">// 指定线条颜色</span></span></span><br><span class="line"><span class="actionscript">  ctx1.strokeStyle = <span class="string">"#f34851"</span>;</span></span><br><span class="line"><span class="actionscript">  <span class="comment">// 指定内部区域颜色</span></span></span><br><span class="line"><span class="actionscript">  ctx1.fillStyle = <span class="string">"#f34851"</span>;</span></span><br><span class="line"><span class="actionscript">  <span class="comment">// 绘制一个带描边的矩形(x,y,width,height)</span></span></span><br><span class="line">  ctx1.strokeRect(10, 10, 260, 260);</span><br><span class="line"><span class="actionscript">  <span class="comment">// 绘制一个实心的矩形</span></span></span><br><span class="line">  ctx1.fillRect(20, 20, 240, 240);</span><br><span class="line"><span class="actionscript">  <span class="comment">// 清除一个矩形形状的区域</span></span></span><br><span class="line">  ctx1.clearRect(30, 30, 220, 220);</span><br><span class="line"></span><br><span class="line"><span class="actionscript">  <span class="comment">// 圆形</span></span></span><br><span class="line"><span class="actionscript">  <span class="comment">// 获取canvas区域</span></span></span><br><span class="line"><span class="javascript">  <span class="keyword">var</span> canvas2 = <span class="built_in">document</span>.getElementById(<span class="string">"yx"</span>);</span></span><br><span class="line"><span class="actionscript">  <span class="comment">// 获取绘图canvas的上下文</span></span></span><br><span class="line"><span class="actionscript">  <span class="keyword">var</span> ctx2 = canvas2.getContext(<span class="string">"2d"</span>);</span></span><br><span class="line"><span class="actionscript">  <span class="comment">// 开始圆形绘制</span></span></span><br><span class="line">  ctx2.beginPath();</span><br><span class="line"><span class="actionscript">  <span class="comment">// 圆形参数</span></span></span><br><span class="line"><span class="javascript">  ctx2.arc(<span class="number">200</span>, <span class="number">200</span>, <span class="number">100</span>, <span class="number">0</span>, <span class="built_in">Math</span>.PI * <span class="number">2</span>, <span class="literal">false</span>);</span></span><br><span class="line"><span class="actionscript">  <span class="comment">// 指定内部区域颜色</span></span></span><br><span class="line"><span class="actionscript">  ctx2.fillStyle = <span class="string">"red"</span>;</span></span><br><span class="line">  ctx2.fill();</span><br><span class="line">  ctx2.closePath();</span><br><span class="line"></span><br><span class="line">  </span><br><span class="line">  </span><br><span class="line"><span class="actionscript">  <span class="comment">// 三角形</span></span></span><br><span class="line"><span class="actionscript">  <span class="comment">// 获取canvas区域</span></span></span><br><span class="line"><span class="javascript">  <span class="keyword">var</span> canvas = <span class="built_in">document</span>.getElementById(<span class="string">"sjx"</span>);</span></span><br><span class="line"><span class="actionscript">  <span class="comment">// 获取绘图canvas的上下文</span></span></span><br><span class="line"><span class="actionscript">  <span class="keyword">var</span> ctx3 = canvas.getContext(<span class="string">"2d"</span>);</span></span><br><span class="line"><span class="actionscript">  <span class="comment">// 指定线条颜色</span></span></span><br><span class="line"><span class="actionscript">  ctx3.strokeStyle = <span class="string">"#f34851"</span>;</span></span><br><span class="line"><span class="actionscript">  <span class="comment">// 开始绘制记录的原点位置</span></span></span><br><span class="line">  ctx3.beginPath();</span><br><span class="line"><span class="actionscript">  <span class="comment">// 移动原点位置到(100,100)</span></span></span><br><span class="line">  ctx3.moveTo(100, 200);</span><br><span class="line"><span class="actionscript">  <span class="comment">// 在当前位置开始绘制一条直线到(200,100)</span></span></span><br><span class="line">  ctx3.lineTo(200, 200);</span><br><span class="line"><span class="actionscript">  <span class="comment">// 在绘制一条直线到(200,0)</span></span></span><br><span class="line">  ctx3.lineTo(100, 10);</span><br><span class="line"><span class="actionscript">  <span class="comment">// 关闭</span></span></span><br><span class="line">  ctx3.closePath();</span><br><span class="line">  ctx3.stroke();</span><br><span class="line"></span><br><span class="line"></span><br><span class="line"><span class="actionscript">  <span class="comment">// 渐变</span></span></span><br><span class="line"><span class="actionscript">  <span class="comment">// 获取canvas区域</span></span></span><br><span class="line"><span class="javascript">  <span class="keyword">var</span> canvas = <span class="built_in">document</span>.getElementById(<span class="string">"jb"</span>);</span></span><br><span class="line"><span class="actionscript">  <span class="comment">// 获取绘图canvas的上下文</span></span></span><br><span class="line"><span class="actionscript">  <span class="keyword">var</span> ctx4 = canvas.getContext(<span class="string">"2d"</span>);</span></span><br><span class="line"><span class="actionscript">  <span class="keyword">var</span> grad = ctx4.createLinearGradient(<span class="number">0</span>, <span class="number">0</span>, <span class="number">400</span>, <span class="number">400</span>);</span></span><br><span class="line"><span class="actionscript">  <span class="comment">// 绘制一个带描边的矩形(x,y,width,height)</span></span></span><br><span class="line"><span class="actionscript">  grad.addColorStop(<span class="number">0</span>, <span class="string">"red"</span>);</span></span><br><span class="line"><span class="actionscript">  grad.addColorStop(<span class="number">0.5</span>, <span class="string">"yellow"</span>);</span></span><br><span class="line"><span class="actionscript">  grad.addColorStop(<span class="number">1</span>, <span class="string">"blue"</span>);</span></span><br><span class="line"><span class="actionscript">  <span class="comment">// 设置区域颜色值</span></span></span><br><span class="line">  ctx4.fillStyle = grad;</span><br><span class="line">  ctx4.fillRect(20, 20, 240, 240);</span><br><span class="line"><span class="tag">&lt;/<span class="name">script</span>&gt;</span></span><br><span class="line"></span><br><span class="line"><span class="tag">&lt;/<span class="name">html</span>&gt;</span></span><br></pre>
+
+
+
+<h2 id="通信"><a href="#通信" class="headerlink" title="通信"></a>通信</h2><p>Web Sockets：允许在页面和服务器之间建立持久连接并通过这种方法来交换非 HTML 数据。</p>
+<pre class="highlight"><span class="line"><span class="meta">&lt;!DOCTYPE <span class="meta-keyword">HTML</span>&gt;</span></span><br><span class="line"><span class="tag">&lt;<span class="name">html</span>&gt;</span></span><br><span class="line"><span class="tag">&lt;<span class="name">head</span>&gt;</span></span><br><span class="line"><span class="tag">&lt;<span class="name">script</span> <span class="attr">type</span>=<span class="string">"text/javascript"</span>&gt;</span></span><br><span class="line"><span class="actionscript">  <span class="function"><span class="keyword">function</span> <span class="title">WebSocketTest</span><span class="params">()</span> </span>&#123;</span></span><br><span class="line"><span class="javascript">    <span class="keyword">if</span> (<span class="string">"WebSocket"</span> <span class="keyword">in</span> <span class="built_in">window</span>) &#123;</span></span><br><span class="line"><span class="actionscript">      alert(<span class="string">"您的浏览器支持 WebSocket!"</span>);</span></span><br><span class="line"><span class="actionscript">      <span class="comment">// 打开一个 web socket</span></span></span><br><span class="line"><span class="actionscript">      <span class="keyword">var</span> ws = <span class="keyword">new</span> WebSocket(<span class="string">"ws://localhost:5500"</span>);</span></span><br><span class="line"><span class="actionscript">      ws.onopen = <span class="function"><span class="keyword">function</span> <span class="params">()</span> </span>&#123;</span></span><br><span class="line"><span class="actionscript">        <span class="comment">// Web Socket 已连接上，使用 send() 方法发送数据</span></span></span><br><span class="line"><span class="actionscript">        ws.send(<span class="string">"发送数据"</span>);</span></span><br><span class="line"><span class="actionscript">        alert(<span class="string">"数据发送中..."</span>);</span></span><br><span class="line">      &#125;;</span><br><span class="line"><span class="actionscript">      ws.onmessage = <span class="function"><span class="keyword">function</span> <span class="params">(evt)</span> </span>&#123;</span></span><br><span class="line"><span class="actionscript">        <span class="keyword">var</span> received_msg = evt.data;</span></span><br><span class="line"><span class="actionscript">        alert(<span class="string">"数据已接收..."</span>);</span></span><br><span class="line">      &#125;;</span><br><span class="line"><span class="actionscript">      ws.onclose = <span class="function"><span class="keyword">function</span> <span class="params">()</span> </span>&#123;</span></span><br><span class="line"><span class="actionscript">        <span class="comment">// 关闭 websocket</span></span></span><br><span class="line"><span class="actionscript">        alert(<span class="string">"连接已关闭..."</span>);</span></span><br><span class="line">      &#125;;</span><br><span class="line"><span class="actionscript">    &#125; <span class="keyword">else</span> &#123;</span></span><br><span class="line"><span class="actionscript">      <span class="comment">// 浏览器不支持 WebSocket</span></span></span><br><span class="line"><span class="actionscript">      alert(<span class="string">"您的浏览器不支持 WebSocket!"</span>);</span></span><br><span class="line">    &#125;</span><br><span class="line">  &#125;</span><br><span class="line"><span class="tag">&lt;/<span class="name">script</span>&gt;</span></span><br><span class="line"><span class="tag">&lt;/<span class="name">head</span>&gt;</span></span><br><span class="line"></span><br><span class="line"><span class="tag">&lt;<span class="name">body</span>&gt;</span></span><br><span class="line">  <span class="tag">&lt;<span class="name">div</span> <span class="attr">id</span>=<span class="string">"sse"</span>&gt;</span></span><br><span class="line">    <span class="tag">&lt;<span class="name">a</span> <span class="attr">href</span>=<span class="string">"javascript:WebSocketTest()"</span>&gt;</span>运行 WebSocket<span class="tag">&lt;/<span class="name">a</span>&gt;</span></span><br><span class="line">  <span class="tag">&lt;/<span class="name">div</span>&gt;</span></span><br><span class="line"><span class="tag">&lt;/<span class="name">body</span>&gt;</span></span><br><span class="line"><span class="tag">&lt;/<span class="name">html</span>&gt;</span></span><br></pre>
+<h2 id="性能"><a href="#性能" class="headerlink" title="性能"></a>性能</h2><p><a href="http://www.ruanyifeng.com/blog/2018/07/web-worker.html" target="_blank" rel="noopener">webworker</a><br>Web Workers API：一个worker是使用一个构造函数创建的一个对象(e.g. Worker()) 运行一个命名的JavaScript文件 - 这个文件包含将在工作线程中运行的代码; workers 运行在另一个全局上下文中,不同于当前的window. 因此，使用 window快捷方式获取当前全局的范围 (而不是self) 在一个 Worker 内将返回错误。<br><strong>作用:</strong>新线程用于执行js中比较耗时任务<br><strong>程序:</strong>在磁盘中保存代码称为程序 01.html 01.js<br><strong>进程:</strong>将磁盘中代码调用内存中进行，在内存中代码为”进程”<br><strong>线程:</strong>进程内部由于多个线程组成<br>#报错<br>#浏览器强型规定:DOM/BOM 只能UI执行其它线程不可以<br>(1)创建Worker线程  var w = new Worker(“01.js”)<br>(2)接收数据         w.onmessage=function(e){e.data}<br>(3)发送数据         w.postMessage(str)<br><strong>小结</strong><br>-WebWorker：是一个新线程用于执行耗时js任务<br>-要求:不能执行任务DOM/BOM代码，jquery不行<br>-三条语句</p>
+<ul>
+<li>var w = new Worker(“js程序路径名”)      #创建新线程</li>
+<li>w.postMessage(str)                     #发送数据</li>
+<li>w.onmessage = function(e){e.data}        #接收数据</li>
+</ul>
+
+  </div>
+  <div>
+  
+  <div class="post-note note-warning copyright" style="margin-top: 42px">
+    <p><span style="font-weight: bold;">作者：</span><a target="_blank" rel="nofollow noopener noreferrer" href="https://xiaobai123-4.github.io/about">MaQisong</a></p>
+    <p><span style="font-weight: bold;">文章链接：</span><a target="_blank" rel="nofollow noopener noreferrer" href="https://xiaobai123-4.github.io/2020/08/11/html5/">https://xiaobai123-4.github.io/2020/08/11/html5/</a></p>
+    <p><span style="font-weight: bold;">版权声明：</span>本博客所有文章除特别声明外，均采用<a target="_blank" rel="noopener" href="https://creativecommons.org/licenses/by-nc-sa/4.0/deed.zh">CC BY-NC-SA 4.0 协议</a>。转载请注明出处！</p>
+  </div>
+  
+  </div>
+</article>
+<div class="nav">
+  
+  <div class="nav-item-prev">
+    <a href="/2020/08/12/节流防抖/" class="nav-link">
+      <i class="iconfont icon-left nav-prev-icon"></i>
+      <div>
+        <div class="nav-label">上一篇</div>
+        
+        <div class="nav-title">节流防抖 </div>
+        
+      </div>
+    </a>
+  </div>
+  
+  
+  <div class="nav-item-next">
+    <a href="/2020/08/11/innerHTML/" class="nav-link">
+      <div>
+        <div class="nav-label">下一篇</div>
+        
+        <div class="nav-title">innerHTML </div>
+        
+      </div>
+      <i class="iconfont icon-right nav-next-icon"></i>
+    </a>
+  </div>
+  
+</div>
+
+<div class="card card-content toc-card" id="mobiletoc">
+  <div class="toc-header"><i class="iconfont icon-menu" style="padding-right: 2px;"></i>目录</div>
+<ol class="toc"><li class="toc-item toc-level-2"><a class="toc-link" href="#语义化"><span class="toc-text">语义化</span></a><ol class="toc-child"><li class="toc-item toc-level-3"><a class="toc-link" href="#节段"><span class="toc-text">节段</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#标题：h1-h5"><span class="toc-text">标题：h1-h5</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#导航："><span class="toc-text">导航：</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#页眉和页脚："><span class="toc-text">页眉和页脚：</span></a></li></ol></li><li class="toc-item toc-level-2"><a class="toc-link" href="#新的语义元素"><span class="toc-text">新的语义元素</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#多媒体"><span class="toc-text">多媒体</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#存储"><span class="toc-text">存储</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#2D3D绘图"><span class="toc-text">2D3D绘图</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#通信"><span class="toc-text">通信</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#性能"><span class="toc-text">性能</span></a></li></ol>
+</div></main>
+          <aside class="left-column">
+            
+            <div class="card card-author">
+              
+<img src="https://s3.ax1x.com/2021/03/04/6VEJaQ.jpg" class="author-img">
+
+<p class="author-name">MaQisong</p>
+<p class="author-description">学习永不止步</p>
+<div class="author-message">
+  <a class="author-posts-count" href="/archives">
+    <span>65</span>
+    <span>文章</span>
+  </a>
+  <a class="author-categories-count" href="/categories">
+    <span>25</span>
+    <span>分类</span>
+  </a>
+  <a class="author-tags-count" href="/tags">
+    <span>38</span>
+    <span>标签</span>
+  </a>
+</div>
+
+            </div>
+            
+            <div class="sticky-tablet">
+  
+  
+  <article class="display-when-two-columns spacer">
+    <div class="card card-content toc-card">
+      <div class="toc-header"><i class="iconfont icon-menu" style="padding-right: 2px;"></i>目录</div>
+<ol class="toc"><li class="toc-item toc-level-2"><a class="toc-link" href="#语义化"><span class="toc-text">语义化</span></a><ol class="toc-child"><li class="toc-item toc-level-3"><a class="toc-link" href="#节段"><span class="toc-text">节段</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#标题：h1-h5"><span class="toc-text">标题：h1-h5</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#导航："><span class="toc-text">导航：</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#页眉和页脚："><span class="toc-text">页眉和页脚：</span></a></li></ol></li><li class="toc-item toc-level-2"><a class="toc-link" href="#新的语义元素"><span class="toc-text">新的语义元素</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#多媒体"><span class="toc-text">多媒体</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#存储"><span class="toc-text">存储</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#2D3D绘图"><span class="toc-text">2D3D绘图</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#通信"><span class="toc-text">通信</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#性能"><span class="toc-text">性能</span></a></li></ol>
+    </div>
+  </article>
+  
+  
+  <article class="card card-content categories-widget">
+    <div class="categories-card">
+  <div class="categories-header"><i class="iconfont icon-fenlei" style="padding-right: 2px;"></i>分类</div>
+  <div class="categories-list">
+    
+      <a href="/categories/正则表达式/">
+        <div class="categories-list-item">
+          正则表达式
+          <span class="categories-list-item-badge">1</span>
+        </div>
+      </a>
+    
+      <a href="/categories/ajax/">
+        <div class="categories-list-item">
+          ajax
+          <span class="categories-list-item-badge">1</span>
+        </div>
+      </a>
+    
+      <a href="/categories/CSS/">
+        <div class="categories-list-item">
+          CSS
+          <span class="categories-list-item-badge">3</span>
+        </div>
+      </a>
+    
+      <a href="/categories/ES6/">
+        <div class="categories-list-item">
+          ES6
+          <span class="categories-list-item-badge">1</span>
+        </div>
+      </a>
+    
+      <a href="/categories/css/">
+        <div class="categories-list-item">
+          css
+          <span class="categories-list-item-badge">1</span>
+        </div>
+      </a>
+    
+      <a href="/categories/HTML5/">
+        <div class="categories-list-item">
+          HTML5
+          <span class="categories-list-item-badge">4</span>
+        </div>
+      </a>
+    
+      <a href="/categories/git/">
+        <div class="categories-list-item">
+          git
+          <span class="categories-list-item-badge">1</span>
+        </div>
+      </a>
+    
+      <a href="/categories/Markdown/">
+        <div class="categories-list-item">
+          Markdown
+          <span class="categories-list-item-badge">1</span>
+        </div>
+      </a>
+    
+      <a href="/categories/javascript/">
+        <div class="categories-list-item">
+          javascript
+          <span class="categories-list-item-badge">17</span>
+        </div>
+      </a>
+    
+      <a href="/categories/SqlServer/">
+        <div class="categories-list-item">
+          SqlServer
+          <span class="categories-list-item-badge">1</span>
+        </div>
+      </a>
+    
+      <a href="/categories/bootstrap/">
+        <div class="categories-list-item">
+          bootstrap
+          <span class="categories-list-item-badge">1</span>
+        </div>
+      </a>
+    
+      <a href="/categories/分类/">
+        <div class="categories-list-item">
+          分类
+          <span class="categories-list-item-badge">1</span>
+        </div>
+      </a>
+    
+      <a href="/categories/其他/">
+        <div class="categories-list-item">
+          其他
+          <span class="categories-list-item-badge">1</span>
+        </div>
+      </a>
+    
+      <a href="/categories/Vue/">
+        <div class="categories-list-item">
+          Vue
+          <span class="categories-list-item-badge">10</span>
+        </div>
+      </a>
+    
+      <a href="/categories/HTML/">
+        <div class="categories-list-item">
+          HTML
+          <span class="categories-list-item-badge">2</span>
+        </div>
+      </a>
+    
+      <a href="/categories/ionic/">
+        <div class="categories-list-item">
+          ionic
+          <span class="categories-list-item-badge">2</span>
+        </div>
+      </a>
+    
+      <a href="/categories/javascript/Vue/">
+        <div class="categories-list-item">
+          javascript/Vue
+          <span class="categories-list-item-badge">2</span>
+        </div>
+      </a>
+    
+      <a href="/categories/webpack/">
+        <div class="categories-list-item">
+          webpack
+          <span class="categories-list-item-badge">1</span>
+        </div>
+      </a>
+    
+      <a href="/categories/前端/">
+        <div class="categories-list-item">
+          前端
+          <span class="categories-list-item-badge">1</span>
+        </div>
+      </a>
+    
+      <a href="/categories/NodeJS/">
+        <div class="categories-list-item">
+          NodeJS
+          <span class="categories-list-item-badge">1</span>
+        </div>
+      </a>
+    
+      <a href="/categories/镜寰-工作/">
+        <div class="categories-list-item">
+          镜寰-工作
+          <span class="categories-list-item-badge">10</span>
+        </div>
+      </a>
+    
+      <a href="/categories/html/">
+        <div class="categories-list-item">
+          html
+          <span class="categories-list-item-badge">1</span>
+        </div>
+      </a>
+    
+      <a href="/categories/移动端/">
+        <div class="categories-list-item">
+          移动端
+          <span class="categories-list-item-badge">2</span>
+        </div>
+      </a>
+    
+      <a href="/categories/Vue/前端/">
+        <div class="categories-list-item">
+          Vue/前端
+          <span class="categories-list-item-badge">3</span>
+        </div>
+      </a>
+    
+      <a href="/categories/镜寰-工作/数据库/">
+        <div class="categories-list-item">
+          镜寰-工作/数据库
+          <span class="categories-list-item-badge">1</span>
+        </div>
+      </a>
+    
+  </div>
+</div>
+  </article>
+  
+  <article class="card card-content tags-widget">
+    <div class="tags-card">
+  <div class="tags-header"><i class="iconfont icon-biaoqian" style="padding-right: 2px;"></i>热门标签</div>
+  <div class="tags-list">
+    
+    <a href="/tags/前端/" title="前端"><div class="tags-list-item">前端</div></a>
+    
+    <a href="/tags/html/" title="html"><div class="tags-list-item">html</div></a>
+    
+    <a href="/tags/javascript/" title="javascript"><div class="tags-list-item">javascript</div></a>
+    
+    <a href="/tags/Vue/" title="Vue"><div class="tags-list-item">Vue</div></a>
+    
+    <a href="/tags/工作总结/" title="工作总结"><div class="tags-list-item">工作总结</div></a>
+    
+    <a href="/tags/框架/" title="框架"><div class="tags-list-item">框架</div></a>
+    
+    <a href="/tags/算法/" title="算法"><div class="tags-list-item">算法</div></a>
+    
+    <a href="/tags/笔记/" title="笔记"><div class="tags-list-item">笔记</div></a>
+    
+    <a href="/tags/常见问题/" title="常见问题"><div class="tags-list-item">常见问题</div></a>
+    
+    <a href="/tags/css/" title="css"><div class="tags-list-item">css</div></a>
+    
+    <a href="/tags/移动端/" title="移动端"><div class="tags-list-item">移动端</div></a>
+    
+    <a href="/tags/跨域/" title="跨域"><div class="tags-list-item">跨域</div></a>
+    
+    <a href="/tags/基础/" title="基础"><div class="tags-list-item">基础</div></a>
+    
+    <a href="/tags/规范/" title="规范"><div class="tags-list-item">规范</div></a>
+    
+    <a href="/tags/webpack/" title="webpack"><div class="tags-list-item">webpack</div></a>
+    
+    <a href="/tags/博客/" title="博客"><div class="tags-list-item">博客</div></a>
+    
+  </div>
+</div>
+  </article>
+  
+  
+</div>
+          </aside>
+          <aside class="right-column">
+            <div class="sticky-widescreen">
+  
+  
+  <article class="card card-content toc-card">
+    <div class="toc-header"><i class="iconfont icon-menu" style="padding-right: 2px;"></i>目录</div>
+<ol class="toc"><li class="toc-item toc-level-2"><a class="toc-link" href="#语义化"><span class="toc-text">语义化</span></a><ol class="toc-child"><li class="toc-item toc-level-3"><a class="toc-link" href="#节段"><span class="toc-text">节段</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#标题：h1-h5"><span class="toc-text">标题：h1-h5</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#导航："><span class="toc-text">导航：</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#页眉和页脚："><span class="toc-text">页眉和页脚：</span></a></li></ol></li><li class="toc-item toc-level-2"><a class="toc-link" href="#新的语义元素"><span class="toc-text">新的语义元素</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#多媒体"><span class="toc-text">多媒体</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#存储"><span class="toc-text">存储</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#2D3D绘图"><span class="toc-text">2D3D绘图</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#通信"><span class="toc-text">通信</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#性能"><span class="toc-text">性能</span></a></li></ol>
+  </article>
+  
+  
+  <article class="card card-content">
+    <div class="recent-posts-card">
+  <div class="recent-posts-header"><i class="iconfont icon-wenzhang_huaban" style="padding-right: 2px;"></i>最近文章</div>
+  <div class="recent-posts-list">
+    
+      <div class="recent-posts-item">
+        <div class="recent-posts-item-title">2021-03-28</div>
+        <a href="/2021/03/28/vue学习记录4/"><div class="recent-posts-item-content">vue学习记录4</div></a>
+      </div>
+    
+      <div class="recent-posts-item">
+        <div class="recent-posts-item-title">2021-03-27</div>
+        <a href="/2021/03/27/vue学习记录3/"><div class="recent-posts-item-content">vue学习记录3</div></a>
+      </div>
+    
+      <div class="recent-posts-item">
+        <div class="recent-posts-item-title">2021-03-26</div>
+        <a href="/2021/03/26/vue学习记录2/"><div class="recent-posts-item-content">vue学习记录2</div></a>
+      </div>
+    
+      <div class="recent-posts-item">
+        <div class="recent-posts-item-title">2021-03-04</div>
+        <a href="/2021/03/04/vue学习记录1/"><div class="recent-posts-item-content">学习记录1</div></a>
+      </div>
+    
+  </div>
+</div>
+  </article>
+  
+  
+</div>
+          </aside>
+        </div>
+      </div>
+    </div>
+  </div>
+  
+  <footer class="footer">
+  <div class="footer-container">
+    <div>
+      <div class="footer-dsc">
+        <span>Copyright ©
+          
+          2020 -
+          
+          2021
+        </span>
+        &nbsp;
+        <a href="/" class="footer-link">小白的博客 </a>
+      </div>
+    </div>
+
+    
+    <div class="footer-dsc">
+      
+      Powered by
+      <a href="https://hexo.io/" class="footer-link" target="_blank" rel="nofollow noopener noreferrer">&nbsp;Hexo </a>
+      
+      
+      <span>&nbsp;|&nbsp;</span>
+      
+      
+      Theme -
+      <a href="https://github.com/theme-kaze" class="footer-link" target="_blank"
+        rel="nofollow noopener noreferrer">&nbsp;Kaze</a>
+      
+    </div>
+    
+    
+    
+    
+</footer>
+  <a role="button" id="scrollbutton" class="basebutton"  aria-label="回到顶部">
+  <i class="iconfont icon-arrowleft button-icon"></i>
+</a>
+<a role="button" id="menubutton" class="basebutton">
+  <i class="iconfont icon-menu button-icon"></i>
+</a>
+<a role="button" id="popbutton" class="basebutton" aria-label="控制中心">
+  <i class="iconfont icon-expand button-icon"></i>
+</a>
+<a role="button" id="darkbutton" class="basebutton darkwidget" aria-label="夜色模式">
+  <i class="iconfont icon-weather button-icon"></i>
+</a>
+<a role="button" id="searchbutton" class="basebutton searchwidget" aria-label="搜索">
+  <i class="iconfont icon-search button-icon"></i>
+</a>
+
+  
+  
+  
+  <script>
+  var addImgLayout = function () {
+    var img = document.querySelectorAll('.post-content img');
+    var i;
+    for (i = 0; i < img.length; i++) {
+      var wrapper = document.createElement('a');
+      wrapper.setAttribute('href', img[i].getAttribute('data-src'));
+      wrapper.setAttribute('aria-label', 'illustration');
+      wrapper.style.cssText = 'width: 100%; display: flex; justify-content: center;';
+      if (img[i].alt) wrapper.dataset.caption = img[i].alt;
+      wrapper.dataset.nolink = true;
+      img[i].before(wrapper);
+      wrapper.append(img[i]);
+      var divWrap = document.createElement('div');
+      divWrap.classList.add('gallery');
+      wrapper.before(divWrap);
+      divWrap.append(wrapper);
+    }
+    baguetteBox.run('.gallery');
+  }
+</script>
+<script>loadScript("/js/lib/lightbox/baguetteBox.min.js", addImgLayout)</script>
+  
+  
+  
+<script src="/js/main.js"></script>
+
+  
+  
+  <script>
+    var addLazyload = function () {
+      var observer = lozad('.lozad', {
+        load: function (el) {
+          el.srcset = el.getAttribute('data-src');
+        },
+        loaded: function (el) {
+          el.classList.add('loaded');
+        }
+      });
+      observer.observe();
+    }
+  </script>
+  <script>loadScript("/js/lib/lozad.min.js", addLazyload)</script>
+  
+  
+</body>
+
+</html>

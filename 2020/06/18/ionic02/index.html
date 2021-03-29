@@ -1,0 +1,743 @@
+<!DOCTYPE html>
+<html  lang="zh-CN" >
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport"
+    content="width=device-width, initial-scale=1.0, minimum-scale=1.0">
+  <meta http-equiv="X-UA-Compatible" content="ie=edge">
+  <meta name="theme-color" content="#fff" id="theme-color">
+  <meta name="description" content="学习永不止步">
+  <link rel="icon" href="https://s3.ax1x.com/2021/03/04/6VEJaQ.jpg">
+  <title>ionic02</title>
+  
+  
+  <meta property="og:title" content="ionic02">
+  
+  
+  <meta property="og:url" content="https://xiaobai123-4.github.io/2020/06/18/ionic02/index.html">
+  
+  
+  <meta property="og:img" content="https://s3.ax1x.com/2021/03/04/6VEJaQ.jpg">
+  
+  
+  <meta property="og:img" content="&lt;h1 id=&#34;ionic&#34;&gt;&lt;a href=&#34;#ionic&#34; class=&#34;headerlink&#34; title=&#34;ionic&#34;&gt;&lt;/a&gt;ionic&lt;/h1&gt;&lt;p&gt;ionic 是 第三方的组件库, 主要用于开发手机端的UI.&lt;/p&gt;
+&lt;p&gt;可以结合&lt;code&gt;vue&lt;/code&gt;, &lt;code&gt;react&lt;/code&gt;,&lt;code&gt;angular&lt;/code&gt; 三大框架进行使用&lt;/p&gt;
+&lt;p&gt;官网: &lt;a href=&#34;https://ionicframework.com/&#34; target=&#34;_blank&#34; rel=&#34;noopener&#34;&gt;https://ionicframework.com/&lt;/a&gt;&lt;/p&gt;
+&lt;p&gt;组件: &lt;a href=&#34;https://ionicframework.com/docs/components&#34; target=&#34;_blank&#34; rel=&#34;noopener&#34;&gt;https://ionicframework.com/docs/components&lt;/a&gt;&lt;/p&gt;">
+  
+  
+  <meta property="og:type" content="article">
+  <meta property="og:article:published_time" content="2020-06-18">
+  <meta property="og:article:modified_time" content="2020-08-24">
+  <meta property="og:article:author" content="MaQisong">
+  
+  
+  <meta property="og:article:tag" content="前端">
+  
+  <meta property="og:article:tag" content="框架">
+  
+  
+  
+  
+  <script>
+    // control reverse button
+    var reverseDarkList = {
+      dark: 'light',
+      light: 'dark'
+    };
+    var themeColor = {
+      dark: '#1c1c1e',
+      light: '#fff'
+    }
+    // get the data of css prefers-color-scheme
+    var getCssMediaQuery = function() {
+      return window.matchMedia('(prefers-color-scheme: dark)').matches ? 'dark' : 'light';
+    };
+    // reverse current darkmode setting function
+    var reverseDarkModeSetting = function() {
+      var setting = localStorage.getItem('user-color-scheme');
+      if(reverseDarkList[setting]) {
+        setting = reverseDarkList[setting];
+      } else if(setting === null) {
+        setting = reverseDarkList[getCssMediaQuery()];
+      } else {
+        return;
+      }
+      localStorage.setItem('user-color-scheme', setting);
+      return setting;
+    };
+    // apply current darkmode setting
+    var setDarkmode = function(mode) {
+      var setting = mode || localStorage.getItem('user-color-scheme');
+      if(setting === getCssMediaQuery()) {
+        document.documentElement.removeAttribute('data-user-color-scheme');
+        localStorage.removeItem('user-color-scheme');
+        document.getElementById('theme-color').content = themeColor[setting];
+      } else if(reverseDarkList[setting]) {
+        document.documentElement.setAttribute('data-user-color-scheme', setting);
+        document.getElementById('theme-color').content = themeColor[setting];
+      } else {
+        document.documentElement.removeAttribute('data-user-color-scheme');
+        localStorage.removeItem('user-color-scheme');
+        document.getElementById('theme-color').content = themeColor[getCssMediaQuery()];
+      }
+    };
+    setDarkmode();
+  </script>
+  <script>
+    function loadScript(url, cb) {
+      var script = document.createElement('script');
+      script.src = url;
+      if (cb) script.onload = cb;
+      script.async = true;
+      document.body.appendChild(script);
+    }
+  </script>
+  
+  <link rel="preload" href="//at.alicdn.com/t/font_1946621_i1kgafibvw.css" as="style" >
+  <link rel="preload" href="//at.alicdn.com/t/font_1952792_89b4ac4k4up.css" as="style" >
+  
+  <link rel="preload" href="/js/lib/lightbox/baguetteBox.min.js" as="script">
+  <link rel="preload" href="/js/lib/lightbox/baguetteBox.min.css" as="style" >
+  
+  
+  <link rel="preload" href="/js/lib/lozad.min.js" as="script">
+  
+  
+  
+  
+  
+  
+  
+  
+<link rel="stylesheet" href="/css/main.css">
+
+  
+  
+<link rel="stylesheet" href="//at.alicdn.com/t/font_1946621_i1kgafibvw.css">
+
+  
+  
+<link rel="stylesheet" href="//at.alicdn.com/t/font_1952792_89b4ac4k4up.css">
+
+  
+  
+<link rel="stylesheet" href="/js/lib/lightbox/baguetteBox.min.css">
+
+  
+  
+<meta name="generator" content="Hexo 4.2.1"></head>
+
+
+<body>
+  <div class="wrapper">
+    
+    <nav class="navbar">
+  <div class="navbar-logo">
+    <span class="navbar-logo-main">
+      
+      <img class="navbar-logo-img" src="https://s3.ax1x.com/2021/03/04/6VEJaQ.jpg" alt="logo">
+      
+      <span class="navbar-logo-dsc">小白的博客</span>
+    </span>
+  </div>
+  <div class="navbar-menu">
+    
+    <a href="/" class="navbar-menu-item">
+    
+    首页
+    
+    </a>
+    
+    <a href="/archives" class="navbar-menu-item">
+    
+    归档
+    
+    </a>
+    
+    <a href="/tags" class="navbar-menu-item">
+    
+    标签
+    
+    </a>
+    
+    <a href="/categories" class="navbar-menu-item">
+    
+    分类
+    
+    </a>
+    
+    <a href="/about" class="navbar-menu-item">
+    
+    关于
+    
+    </a>
+    
+    <a class="navbar-menu-item darknavbar" id="dark"><i class="iconfont icon-weather"></i></a>
+    <a class="navbar-menu-item searchnavbar" id="search"><i class="iconfont icon-search" style="font-size: 1.2rem; font-weight: 400;"></i></a>
+  </div>
+</nav>
+    
+    <div id="local-search" style="display: none;">
+      <input class="navbar-menu-item" id="search-input" placeholder="请输入搜索内容...">
+      <div id="search-content"></div>
+    </div>
+    
+    <div class="section-wrap">
+      <div class="container">
+        <div class="columns">
+          <main class="main-column">
+<article class="card card-content">
+  <header>
+    <h1 class="post-title">
+      ionic02
+    </h1>
+  </header>
+  <div class="post-meta post-show-meta">
+    <time datetime="2020-06-18T07:10:45.000Z">
+      <i class="iconfont icon-calendar" style="margin-right: 2px;"></i>
+      <span>2020-06-18</span>
+    </time>
+    
+    <span class="dot"></span>
+    
+    <a href="/categories/ionic/" class="post-meta-link">ionic</a>
+    
+    
+    
+    <span class="dot"></span>
+    <span>4.2k 字</span>
+    
+  </div>
+  
+  <div class="post-meta post-show-meta" style="margin-top: -10px;">
+    <div style="display: flex; align-items: center;">
+      <i class="iconfont icon-biaoqian" style="margin-right: 2px; font-size: 1.15rem;"></i>
+      
+      
+        <a href="/tags/前端/" class="post-meta-link">前端</a>
+      
+      
+      <span class="dot"></span>
+      
+        <a href="/tags/框架/" class="post-meta-link">框架</a>
+      
+    </div>
+  </div>
+  
+  </header>
+  <div id="section" class="post-content">
+    <h1 id="ionic"><a href="#ionic" class="headerlink" title="ionic"></a>ionic</h1><p>ionic 是 第三方的组件库, 主要用于开发手机端的UI.</p>
+<p>可以结合<code>vue</code>, <code>react</code>,<code>angular</code> 三大框架进行使用</p>
+<p>官网: <a href="https://ionicframework.com/" target="_blank" rel="noopener">https://ionicframework.com/</a></p>
+<p>组件: <a href="https://ionicframework.com/docs/components" target="_blank" rel="noopener">https://ionicframework.com/docs/components</a></p>
+<a id="more"></a>
+
+<p>新建项目包, 到希望项目生成的目录下打开命令行</p>
+<pre class="highlight"><span class="line">ionic start ionic-app blank</span><br></pre>
+
+<p>启动命令: 在项目目录下打开命令行</p>
+<pre class="highlight"><span class="line">ionic s</span><br></pre>
+
+<h2 id="组件"><a href="#组件" class="headerlink" title="组件"></a>组件</h2><h3 id="item组件"><a href="#item组件" class="headerlink" title="item组件"></a>item组件</h3><p><a href="https://ionicframework.com/docs/api/item" target="_blank" rel="noopener">https://ionicframework.com/docs/api/item</a></p>
+<pre class="highlight"><span class="line">&lt;!-- item --&gt;</span><br><span class="line">&lt;!-- https:&#x2F;&#x2F;ionicframework.com&#x2F;docs&#x2F;api&#x2F;item --&gt;</span><br><span class="line"></span><br><span class="line">&lt;ion-app&gt;</span><br><span class="line">  &lt;ion-header&gt;</span><br><span class="line">    &lt;ion-toolbar&gt;</span><br><span class="line">      &lt;ion-title&gt;item&lt;&#x2F;ion-title&gt;</span><br><span class="line">    &lt;&#x2F;ion-toolbar&gt;</span><br><span class="line">  &lt;&#x2F;ion-header&gt;</span><br><span class="line"></span><br><span class="line">  &lt;ion-content&gt;</span><br><span class="line">    &lt;!-- item 就是div, 一条一条的 --&gt;</span><br><span class="line">    &lt;!-- item 自带下分割线 --&gt;</span><br><span class="line">    &lt;ion-item&gt;</span><br><span class="line">      &lt;!-- ion-label 就是 label&#x2F;span 用于书写文本的 --&gt;</span><br><span class="line">      &lt;ion-label&gt;猪猪侠&lt;&#x2F;ion-label&gt;</span><br><span class="line">      &lt;ion-label&gt;猪猪侠&lt;&#x2F;ion-label&gt;</span><br><span class="line">      &lt;!-- 超长会自动截断, 补充..., 默认是一行 --&gt;</span><br><span class="line">      &lt;ion-label&gt;猪猪侠猪猪侠猪猪侠猪猪侠&lt;&#x2F;ion-label&gt;</span><br><span class="line">    &lt;&#x2F;ion-item&gt;</span><br><span class="line"></span><br><span class="line">    &lt;!-- 分割线有多种风格 --&gt;</span><br><span class="line">    &lt;ion-item lines&#x3D;&quot;full&quot;&gt;</span><br><span class="line">      &lt;ion-label&gt;分割线:full&lt;&#x2F;ion-label&gt;</span><br><span class="line">    &lt;&#x2F;ion-item&gt;</span><br><span class="line">    &lt;ion-item lines&#x3D;&quot;inset&quot;&gt;</span><br><span class="line">      &lt;ion-label&gt;分割线:inset&lt;&#x2F;ion-label&gt;</span><br><span class="line">    &lt;&#x2F;ion-item&gt;</span><br><span class="line">    &lt;ion-item lines&#x3D;&quot;none&quot;&gt;</span><br><span class="line">      &lt;ion-label&gt;分割线:none&lt;&#x2F;ion-label&gt;</span><br><span class="line">    &lt;&#x2F;ion-item&gt;</span><br><span class="line"></span><br><span class="line">    &lt;!-- 带有头像的item  i-item-avatar--&gt;</span><br><span class="line">    &lt;ion-item&gt;</span><br><span class="line">      &lt;!-- ion-avatar: 自动把内部图片变圆形 --&gt;</span><br><span class="line">      &lt;ion-avatar slot&#x3D;&quot;start&quot;&gt;</span><br><span class="line">        &lt;img</span><br><span class="line">          src&#x3D;&quot;https:&#x2F;&#x2F;timgsa.baidu.com&#x2F;timg?image&amp;quality&#x3D;80&amp;size&#x3D;b9999_10000&amp;sec&#x3D;1584419134766&amp;di&#x3D;a6e63b3818208a984a6489021f208049&amp;imgtype&#x3D;0&amp;src&#x3D;http%3A%2F%2F8.pic.pc6.com%2Fup%2F2016-4%2F201647174459320.jpg&quot;</span><br><span class="line">        &#x2F;&gt;</span><br><span class="line">      &lt;&#x2F;ion-avatar&gt;</span><br><span class="line">      &lt;ion-label&gt;猪猪侠&lt;&#x2F;ion-label&gt;</span><br><span class="line">    &lt;&#x2F;ion-item&gt;</span><br><span class="line"></span><br><span class="line">    &lt;ion-item&gt;</span><br><span class="line">      &lt;!-- ion-avatar: 自动把内部图片变圆形 --&gt;</span><br><span class="line">      &lt;!-- slot代表出现的位置, start代表左边,  end代表右边 --&gt;</span><br><span class="line">      &lt;ion-avatar slot&#x3D;&quot;end&quot;&gt;</span><br><span class="line">        &lt;img</span><br><span class="line">          src&#x3D;&quot;https:&#x2F;&#x2F;timgsa.baidu.com&#x2F;timg?image&amp;quality&#x3D;80&amp;size&#x3D;b9999_10000&amp;sec&#x3D;1584419134766&amp;di&#x3D;a6e63b3818208a984a6489021f208049&amp;imgtype&#x3D;0&amp;src&#x3D;http%3A%2F%2F8.pic.pc6.com%2Fup%2F2016-4%2F201647174459320.jpg&quot;</span><br><span class="line">        &#x2F;&gt;</span><br><span class="line">      &lt;&#x2F;ion-avatar&gt;</span><br><span class="line">      &lt;ion-label&gt;猪猪侠&lt;&#x2F;ion-label&gt;</span><br><span class="line">    &lt;&#x2F;ion-item&gt;</span><br><span class="line"></span><br><span class="line">    &lt;!-- 带有缩略图的item, 图片是正方形 --&gt;</span><br><span class="line">    &lt;ion-item&gt;</span><br><span class="line">      &lt;!-- i-thumbnail  缩略图 --&gt;</span><br><span class="line">      &lt;ion-thumbnail slot&#x3D;&quot;start&quot;&gt;</span><br><span class="line">        &lt;img</span><br><span class="line">          src&#x3D;&quot;https:&#x2F;&#x2F;ss0.bdstatic.com&#x2F;70cFuHSh_Q1YnxGkpoWK1HF6hhy&#x2F;it&#x2F;u&#x3D;783904563,3548868383&amp;fm&#x3D;26&amp;gp&#x3D;0.jpg&quot;</span><br><span class="line">        &#x2F;&gt;</span><br><span class="line">      &lt;&#x2F;ion-thumbnail&gt;</span><br><span class="line">      &lt;ion-label&gt;独立团-李云龙&lt;&#x2F;ion-label&gt;</span><br><span class="line">    &lt;&#x2F;ion-item&gt;</span><br><span class="line"></span><br><span class="line">    &lt;!-- 可以点击的: href属性 --&gt;</span><br><span class="line">    &lt;ion-item href&#x3D;&quot;http:&#x2F;&#x2F;www.baidu.com&quot;&gt;</span><br><span class="line">      &lt;ion-label&gt;Click me&lt;&#x2F;ion-label&gt;</span><br><span class="line">    &lt;&#x2F;ion-item&gt;</span><br><span class="line"></span><br><span class="line">    &lt;!-- 放 icon : i-item-icon --&gt;</span><br><span class="line">    &lt;ion-item&gt;</span><br><span class="line">      &lt;ion-icon name&#x3D;&quot;pizza&quot; slot&#x3D;&quot;start&quot;&gt;&lt;&#x2F;ion-icon&gt;</span><br><span class="line">      &lt;ion-label&gt;Pizza&lt;&#x2F;ion-label&gt;</span><br><span class="line">    &lt;&#x2F;ion-item&gt;</span><br><span class="line"></span><br><span class="line">    &lt;!-- 放输入框 : i-item-input --&gt;</span><br><span class="line">    &lt;ion-item&gt;</span><br><span class="line">      &lt;ion-label&gt;姓名:&lt;&#x2F;ion-label&gt;</span><br><span class="line">      &lt;ion-input&gt;&lt;&#x2F;ion-input&gt;</span><br><span class="line">    &lt;&#x2F;ion-item&gt;</span><br><span class="line">  &lt;&#x2F;ion-content&gt;</span><br><span class="line">&lt;&#x2F;ion-app&gt;</span><br></pre>
+
+<h3 id="按钮组件"><a href="#按钮组件" class="headerlink" title="按钮组件"></a>按钮组件</h3><p><a href="https://ionicframework.com/docs/api/button" target="_blank" rel="noopener">https://ionicframework.com/docs/api/button</a> </p>
+<pre class="highlight"><span class="line">&lt;!-- 按钮组件 button --&gt;</span><br><span class="line">&lt;!-- https:&#x2F;&#x2F;ionicframework.com&#x2F;docs&#x2F;api&#x2F;button --&gt;</span><br><span class="line">&lt;ion-app&gt;</span><br><span class="line">  &lt;ion-header&gt;</span><br><span class="line">    &lt;ion-toolbar&gt;</span><br><span class="line">      &lt;ion-title&gt;按钮组件&lt;&#x2F;ion-title&gt;</span><br><span class="line">    &lt;&#x2F;ion-toolbar&gt;</span><br><span class="line">  &lt;&#x2F;ion-header&gt;</span><br><span class="line"></span><br><span class="line">  &lt;ion-content&gt;</span><br><span class="line">    &lt;!-- html中的标签可以在 ionic中使用, 但是样式上会有很大变化, 不推荐使用 --&gt;</span><br><span class="line">    &lt;button&gt;html中的按钮标签&lt;&#x2F;button&gt;</span><br><span class="line">    &lt;hr &#x2F;&gt;</span><br><span class="line"></span><br><span class="line">    &lt;!-- ionic提供的按钮 --&gt;</span><br><span class="line">    &lt;ion-button&gt;默认样式的按钮&lt;&#x2F;ion-button&gt;</span><br><span class="line"></span><br><span class="line">    &lt;!-- 大小 size 属性 --&gt;</span><br><span class="line">    &lt;h3&gt;size属性&lt;&#x2F;h3&gt;</span><br><span class="line">    &lt;ion-button size&#x3D;&quot;large&quot;&gt;大按钮&lt;&#x2F;ion-button&gt;</span><br><span class="line">    &lt;ion-button size&#x3D;&quot;default&quot;&gt;中按钮&lt;&#x2F;ion-button&gt;</span><br><span class="line">    &lt;ion-button size&#x3D;&quot;small&quot;&gt;小按钮&lt;&#x2F;ion-button&gt;</span><br><span class="line"></span><br><span class="line">    &lt;!-- 按钮的两种风格 --&gt;</span><br><span class="line">    &lt;h3&gt;expand&lt;&#x2F;h3&gt;</span><br><span class="line">    &lt;ion-button expand&#x3D;&quot;block&quot;&gt;block&lt;&#x2F;ion-button&gt;</span><br><span class="line">    &lt;ion-button expand&#x3D;&quot;full&quot;&gt;full&lt;&#x2F;ion-button&gt;</span><br><span class="line"></span><br><span class="line">    &lt;!-- 填充 --&gt;</span><br><span class="line">    &lt;h3&gt;fill&lt;&#x2F;h3&gt;</span><br><span class="line">    &lt;ion-button fill&#x3D;&quot;clear&quot;&gt;clear&lt;&#x2F;ion-button&gt;</span><br><span class="line">    &lt;ion-button fill&#x3D;&quot;solid&quot;&gt;solid&lt;&#x2F;ion-button&gt;</span><br><span class="line">    &lt;ion-button fill&#x3D;&quot;outline&quot;&gt;outline&lt;&#x2F;ion-button&gt;</span><br><span class="line"></span><br><span class="line">    &lt;!-- 按钮的颜色, 支持主题色9种 --&gt;</span><br><span class="line">    &lt;h3&gt;颜色: color&lt;&#x2F;h3&gt;</span><br><span class="line">    &lt;ion-button color&#x3D;&quot;primary&quot;&gt;primary&lt;&#x2F;ion-button&gt;</span><br><span class="line">    &lt;ion-button color&#x3D;&quot;secondary&quot;&gt;secondary&lt;&#x2F;ion-button&gt;</span><br><span class="line">    &lt;ion-button color&#x3D;&quot;tertiary&quot;&gt;tertiary&lt;&#x2F;ion-button&gt;</span><br><span class="line">    &lt;ion-button color&#x3D;&quot;success&quot;&gt;success&lt;&#x2F;ion-button&gt;</span><br><span class="line">    &lt;ion-button color&#x3D;&quot;warning&quot;&gt;warning&lt;&#x2F;ion-button&gt;</span><br><span class="line">    &lt;ion-button color&#x3D;&quot;danger&quot;&gt;danger&lt;&#x2F;ion-button&gt;</span><br><span class="line">    &lt;ion-button color&#x3D;&quot;light&quot;&gt;light&lt;&#x2F;ion-button&gt;</span><br><span class="line">    &lt;ion-button color&#x3D;&quot;medium&quot;&gt;medium&lt;&#x2F;ion-button&gt;</span><br><span class="line">    &lt;ion-button color&#x3D;&quot;dark&quot;&gt;dark&lt;&#x2F;ion-button&gt;</span><br><span class="line"></span><br><span class="line">    &lt;!-- 按钮有效性 --&gt;</span><br><span class="line">    &lt;h3&gt;disabled&lt;&#x2F;h3&gt;</span><br><span class="line">    &lt;ion-button&gt;可用&lt;&#x2F;ion-button&gt;</span><br><span class="line">    &lt;ion-button disabled&gt;不可用&lt;&#x2F;ion-button&gt;</span><br><span class="line"></span><br><span class="line">    &lt;!-- 带有图标的按钮 --&gt;</span><br><span class="line">    &lt;h3&gt;带有图标的按钮icon&lt;&#x2F;h3&gt;</span><br><span class="line">    &lt;ion-button&gt;</span><br><span class="line">      &lt;ion-icon slot&#x3D;&quot;icon-only&quot; name&#x3D;&quot;add&quot;&gt;&lt;&#x2F;ion-icon&gt;</span><br><span class="line">    &lt;&#x2F;ion-button&gt;</span><br><span class="line"></span><br><span class="line">    &lt;!-- 图标靠左显示 --&gt;</span><br><span class="line">    &lt;ion-button&gt;</span><br><span class="line">      &lt;ion-icon slot&#x3D;&quot;start&quot; name&#x3D;&quot;add&quot;&gt;&lt;&#x2F;ion-icon&gt;</span><br><span class="line">      &lt;ion-label&gt;添加&lt;&#x2F;ion-label&gt;</span><br><span class="line">    &lt;&#x2F;ion-button&gt;</span><br><span class="line">  &lt;&#x2F;ion-content&gt;</span><br><span class="line">&lt;&#x2F;ion-app&gt;</span><br></pre>
+
+<h3 id="弹出框组件"><a href="#弹出框组件" class="headerlink" title="弹出框组件"></a>弹出框组件</h3><p><a href="https://ionicframework.com/docs/api/alert" target="_blank" rel="noopener">https://ionicframework.com/docs/api/alert</a></p>
+<pre class="highlight"><span class="line">import &#123; Component &#125; from &quot;@angular&#x2F;core&quot;;</span><br><span class="line"></span><br><span class="line">&#x2F;&#x2F; 引入弹出框组件 AlertController</span><br><span class="line">import &#123; Platform, AlertController &#125; from &quot;@ionic&#x2F;angular&quot;;</span><br><span class="line">import &#123; SplashScreen &#125; from &quot;@ionic-native&#x2F;splash-screen&#x2F;ngx&quot;;</span><br><span class="line">import &#123; StatusBar &#125; from &quot;@ionic-native&#x2F;status-bar&#x2F;ngx&quot;;</span><br><span class="line"></span><br><span class="line">@Component(&#123;</span><br><span class="line">  selector: &quot;app-root&quot;,</span><br><span class="line">  templateUrl: &quot;app.component.html&quot;,</span><br><span class="line">  styleUrls: [&quot;app.component.scss&quot;]</span><br><span class="line">&#125;)</span><br><span class="line">export class AppComponent &#123;</span><br><span class="line">  &#x2F;&#x2F; 依赖注入: 在构造中声明需要什么类型的服务, 系统就会传入对应类型的服务</span><br><span class="line">  constructor(</span><br><span class="line">    private platform: Platform,</span><br><span class="line">    private splashScreen: SplashScreen,</span><br><span class="line">    private statusBar: StatusBar,</span><br><span class="line">    private alertC: AlertController</span><br><span class="line">  ) &#123;</span><br><span class="line">    this.initializeApp();</span><br><span class="line">  &#125;</span><br><span class="line"></span><br><span class="line">  show() &#123;</span><br><span class="line">    &#x2F;&#x2F; this.alertC.create(&#123;弹出框的配置&#125;).then(弹出框&#x3D;&gt;&#123;弹出框.弹出()&#125;)</span><br><span class="line"></span><br><span class="line">    let options &#x3D; &#123;</span><br><span class="line">      header: &quot;东哥讲过Promiss吗?&quot;,</span><br><span class="line">      message: &quot;promiss是一个承诺, 承诺做完某件事之后, 继续做xxx, 小黄人例子&quot;,</span><br><span class="line">      buttons: [</span><br><span class="line">        &#123;</span><br><span class="line">          text: &quot;讲过&quot;, &#x2F;&#x2F;hanlder属性, 点击按钮后触发</span><br><span class="line">          handler: () &#x3D;&gt; &#123;</span><br><span class="line">            console.log(&quot;讲过&quot;);</span><br><span class="line">          &#125;</span><br><span class="line">        &#125;,</span><br><span class="line">        &#123;</span><br><span class="line">          text: &quot;没讲过&quot;,</span><br><span class="line">          handler: () &#x3D;&gt; &#123;</span><br><span class="line">            console.log(&quot;没讲过&quot;);</span><br><span class="line">          &#125;</span><br><span class="line">        &#125;</span><br><span class="line">      ]</span><br><span class="line">    &#125;;</span><br><span class="line"></span><br><span class="line">    &#x2F;&#x2F; create: 创建</span><br><span class="line">    &#x2F;&#x2F; then: 创建之后, 执行xxx</span><br><span class="line">    &#x2F;&#x2F; create() 方法接收一个对象类型的配置项, 要配置弹出框中的所有内容</span><br><span class="line">    &#x2F;&#x2F; then(): 中需要手动让创建好的对话框进行显示</span><br><span class="line">    &#x2F;&#x2F; dialog: 就是创建出来的对话框, 这是人为定义的参数</span><br><span class="line">    this.alertC.create(options).then(dialog &#x3D;&gt; &#123;</span><br><span class="line">      &#x2F;&#x2F; present(): 让弹出框出现</span><br><span class="line">      dialog.present();</span><br><span class="line">    &#125;);</span><br><span class="line">  &#125;</span><br><span class="line"></span><br><span class="line">  initializeApp() &#123;</span><br><span class="line">    this.platform.ready().then(() &#x3D;&gt; &#123;</span><br><span class="line">      this.statusBar.styleDefault();</span><br><span class="line">      this.splashScreen.hide();</span><br><span class="line">    &#125;);</span><br><span class="line">  &#125;</span><br><span class="line">&#125;</span><br></pre>
+
+<h3 id="滑动组件"><a href="#滑动组件" class="headerlink" title="滑动组件"></a>滑动组件</h3><p><a href="https://ionicframework.com/docs/api/slides" target="_blank" rel="noopener">https://ionicframework.com/docs/api/slides</a></p>
+<pre class="highlight"><span class="line">import &#123; Component, ViewChild &#125; from &quot;@angular&#x2F;core&quot;;</span><br><span class="line"></span><br><span class="line">&#x2F;&#x2F; 引入弹出框组件 AlertController</span><br><span class="line">import &#123; Platform, AlertController, IonSlides &#125; from &quot;@ionic&#x2F;angular&quot;;</span><br><span class="line">import &#123; SplashScreen &#125; from &quot;@ionic-native&#x2F;splash-screen&#x2F;ngx&quot;;</span><br><span class="line">import &#123; StatusBar &#125; from &quot;@ionic-native&#x2F;status-bar&#x2F;ngx&quot;;</span><br><span class="line"></span><br><span class="line">@Component(&#123;</span><br><span class="line">  selector: &quot;app-root&quot;,</span><br><span class="line">  templateUrl: &quot;app.component.html&quot;,</span><br><span class="line">  styleUrls: [&quot;app.component.scss&quot;]</span><br><span class="line">&#125;)</span><br><span class="line">export class AppComponent &#123;</span><br><span class="line">  &#x2F;&#x2F; &lt;tag #s1&gt;&lt;&#x2F;tag&gt;</span><br><span class="line">  &#x2F;&#x2F; ionic默认脚手架中的 angular是8版本的, 目前最新的angular是9版本</span><br><span class="line">  &#x2F;&#x2F; 兼容问题: 9版本中: @ViewChild() 只要填写一个参数即可, 参数2有默认值</span><br><span class="line">  &#x2F;&#x2F; 8版本中, @ViewChild 必须要填写参数2</span><br><span class="line">  @ViewChild(&quot;s1&quot;, &#123; static: true &#125;) slides: IonSlides;</span><br><span class="line"></span><br><span class="line">  images &#x3D; [&quot;01.jpg&quot;, &quot;02.jpg&quot;, &quot;03.jpg&quot;, &quot;04.jpg&quot;];</span><br><span class="line"></span><br><span class="line">  &#x2F;&#x2F; 依赖注入: 在构造中声明需要什么类型的服务, 系统就会传入对应类型的服务</span><br><span class="line">  constructor(</span><br><span class="line">    private platform: Platform,</span><br><span class="line">    private splashScreen: SplashScreen,</span><br><span class="line">    private statusBar: StatusBar,</span><br><span class="line">    private alertC: AlertController</span><br><span class="line">  ) &#123;</span><br><span class="line">    this.initializeApp();</span><br><span class="line">  &#125;</span><br><span class="line"></span><br><span class="line">  ngDoCheck(): void &#123;</span><br><span class="line">    &#x2F;&#x2F; 默认的滚动操作会带有默认配置: 如果人为滚动了, 则自动滚动失效</span><br><span class="line">    &#x2F;&#x2F; this.slides.startAutoplay();</span><br><span class="line"></span><br><span class="line">    &#x2F;&#x2F;通过修改配置项, 让触碰失效 配置为假 即可解决</span><br><span class="line">    this.slides.options &#x3D; &#123;</span><br><span class="line">      autoplay: &#123;</span><br><span class="line">        loop: true, &#x2F;&#x2F;自动滚动: true</span><br><span class="line">        disableOnInteraction: false &#x2F;&#x2F;触碰时自动滚动失效: false</span><br><span class="line">      &#125;</span><br><span class="line">    &#125;;</span><br><span class="line">  &#125;</span><br><span class="line"></span><br><span class="line">  show() &#123;</span><br><span class="line">    &#x2F;&#x2F; this.alertC.create(&#123;弹出框的配置&#125;).then(弹出框&#x3D;&gt;&#123;弹出框.弹出()&#125;)</span><br><span class="line"></span><br><span class="line">    let options &#x3D; &#123;</span><br><span class="line">      header: &quot;东哥讲过Promiss吗?&quot;,</span><br><span class="line">      message: &quot;promiss是一个承诺, 承诺做完某件事之后, 继续做xxx, 小黄人例子&quot;,</span><br><span class="line">      buttons: [</span><br><span class="line">        &#123;</span><br><span class="line">          text: &quot;讲过&quot;, &#x2F;&#x2F;hanlder属性, 点击按钮后触发</span><br><span class="line">          handler: () &#x3D;&gt; &#123;</span><br><span class="line">            console.log(&quot;讲过&quot;);</span><br><span class="line">          &#125;</span><br><span class="line">        &#125;,</span><br><span class="line">        &#123;</span><br><span class="line">          text: &quot;没讲过&quot;,</span><br><span class="line">          handler: () &#x3D;&gt; &#123;</span><br><span class="line">            console.log(&quot;没讲过&quot;);</span><br><span class="line">          &#125;</span><br><span class="line">        &#125;</span><br><span class="line">      ]</span><br><span class="line">    &#125;;</span><br><span class="line"></span><br><span class="line">    &#x2F;&#x2F; create: 创建</span><br><span class="line">    &#x2F;&#x2F; then: 创建之后, 执行xxx</span><br><span class="line">    &#x2F;&#x2F; create() 方法接收一个对象类型的配置项, 要配置弹出框中的所有内容</span><br><span class="line">    &#x2F;&#x2F; then(): 中需要手动让创建好的对话框进行显示</span><br><span class="line">    &#x2F;&#x2F; dialog: 就是创建出来的对话框, 这是人为定义的参数</span><br><span class="line">    this.alertC.create(options).then(dialog &#x3D;&gt; &#123;</span><br><span class="line">      &#x2F;&#x2F; present(): 让弹出框出现</span><br><span class="line">      dialog.present();</span><br><span class="line">    &#125;);</span><br><span class="line">  &#125;</span><br><span class="line"></span><br><span class="line">  initializeApp() &#123;</span><br><span class="line">    this.platform.ready().then(() &#x3D;&gt; &#123;</span><br><span class="line">      this.statusBar.styleDefault();</span><br><span class="line">      this.splashScreen.hide();</span><br><span class="line">    &#125;);</span><br><span class="line">  &#125;</span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line">&lt;!-- 滑动组件: slider --&gt;</span><br><span class="line">&lt;ion-app&gt;</span><br><span class="line">  &lt;ion-header&gt;</span><br><span class="line">    &lt;ion-toolbar&gt;</span><br><span class="line">      &lt;ion-title&gt;Slider&lt;&#x2F;ion-title&gt;</span><br><span class="line">    &lt;&#x2F;ion-toolbar&gt;</span><br><span class="line">  &lt;&#x2F;ion-header&gt;</span><br><span class="line"></span><br><span class="line">  &lt;ion-content&gt;</span><br><span class="line">    &lt;!-- 掌控子元素: 为子元素添加唯一标识 --&gt;</span><br><span class="line">    &lt;ion-slides #s1&gt;</span><br><span class="line">      &lt;!-- slides 中 含有很多子项目 slide --&gt;</span><br><span class="line">      &lt;ion-slide *ngFor&#x3D;&quot;let item of images&quot;&gt;</span><br><span class="line">        &lt;!-- 远程图片 --&gt;</span><br><span class="line">        &lt;!-- &lt;ion-img [src]&#x3D;&quot;item&quot;&gt;&lt;&#x2F;ion-img&gt; --&gt;</span><br><span class="line">        &lt;!-- 本地图片 --&gt;</span><br><span class="line">        &lt;ion-img</span><br><span class="line">          style&#x3D;&quot;height:200px;width: 100%;&quot;</span><br><span class="line">          [src]&#x3D;&quot;&#39;..&#x2F;assets&#x2F;images&#x2F;&#39; + item&quot;</span><br><span class="line">        &gt;&lt;&#x2F;ion-img&gt;</span><br><span class="line">      &lt;&#x2F;ion-slide&gt;</span><br><span class="line">    &lt;&#x2F;ion-slides&gt;</span><br><span class="line">  &lt;&#x2F;ion-content&gt;</span><br><span class="line">&lt;&#x2F;ion-app&gt;</span><br></pre>
+
+<h3 id="布局组件Grid"><a href="#布局组件Grid" class="headerlink" title="布局组件Grid"></a>布局组件Grid</h3><p>grid 与 bootstrap 中的栅格系统是相同的</p>
+<p><a href="https://ionicframework.com/docs/api/grid" target="_blank" rel="noopener">https://ionicframework.com/docs/api/grid</a></p>
+<pre class="highlight"><span class="line">&lt;!-- grid 栅格系统 --&gt;</span><br><span class="line">&lt;!-- 每行分12列 --&gt;</span><br><span class="line"></span><br><span class="line">&lt;ion-app&gt;</span><br><span class="line">  &lt;ion-header&gt;</span><br><span class="line">    &lt;ion-toolbar&gt;</span><br><span class="line">      &lt;ion-title&gt;Grid&lt;&#x2F;ion-title&gt;</span><br><span class="line">    &lt;&#x2F;ion-toolbar&gt;</span><br><span class="line">  &lt;&#x2F;ion-header&gt;</span><br><span class="line"></span><br><span class="line">  &lt;ion-content&gt;</span><br><span class="line">    &lt;ion-grid fixed&gt;</span><br><span class="line">      &lt;!-- row行, col列, 每行12列 --&gt;</span><br><span class="line">      &lt;ion-row&gt;</span><br><span class="line">        &lt;ion-col size&#x3D;&quot;6&quot;&gt;</span><br><span class="line">          &lt;ion-button expand&#x3D;&quot;full&quot;&gt;按钮1&lt;&#x2F;ion-button&gt;</span><br><span class="line">        &lt;&#x2F;ion-col&gt;</span><br><span class="line">        &lt;ion-col size&#x3D;&quot;6&quot;&gt;</span><br><span class="line">          &lt;ion-button expand&#x3D;&quot;full&quot;&gt;按钮2&lt;&#x2F;ion-button&gt;</span><br><span class="line">        &lt;&#x2F;ion-col&gt;</span><br><span class="line">      &lt;&#x2F;ion-row&gt;</span><br><span class="line"></span><br><span class="line">      &lt;ion-row&gt;</span><br><span class="line">        &lt;!-- 如果不写size, 则默认会充满整个宽度 --&gt;</span><br><span class="line">        &lt;ion-col&gt;</span><br><span class="line">          &lt;ion-button expand&#x3D;&quot;full&quot;&gt;按钮2&lt;&#x2F;ion-button&gt;</span><br><span class="line">        &lt;&#x2F;ion-col&gt;</span><br><span class="line">      &lt;&#x2F;ion-row&gt;</span><br><span class="line"></span><br><span class="line">      &lt;ion-row&gt;</span><br><span class="line">        &lt;ion-col&gt;&lt;ion-button expand&#x3D;&quot;full&quot;&gt;按钮2&lt;&#x2F;ion-button&gt;&lt;&#x2F;ion-col&gt;</span><br><span class="line">        &lt;ion-col&gt;&lt;ion-button expand&#x3D;&quot;full&quot;&gt;按钮2&lt;&#x2F;ion-button&gt;&lt;&#x2F;ion-col&gt;</span><br><span class="line">        &lt;ion-col&gt;&lt;ion-button expand&#x3D;&quot;full&quot;&gt;按钮2&lt;&#x2F;ion-button&gt;&lt;&#x2F;ion-col&gt;</span><br><span class="line">      &lt;&#x2F;ion-row&gt;</span><br><span class="line"></span><br><span class="line">      &lt;ion-row&gt;</span><br><span class="line">        &lt;ion-col size&#x3D;&quot;3&quot;&gt;&lt;ion-button expand&#x3D;&quot;full&quot;&gt;按钮2&lt;&#x2F;ion-button&gt;&lt;&#x2F;ion-col&gt;</span><br><span class="line">        &lt;ion-col size&#x3D;&quot;3&quot;&gt;&lt;ion-button expand&#x3D;&quot;full&quot;&gt;按钮2&lt;&#x2F;ion-button&gt;&lt;&#x2F;ion-col&gt;</span><br><span class="line">        &lt;ion-col&gt;&lt;ion-button expand&#x3D;&quot;full&quot;&gt;按钮2&lt;&#x2F;ion-button&gt;&lt;&#x2F;ion-col&gt;</span><br><span class="line">      &lt;&#x2F;ion-row&gt;</span><br><span class="line">    &lt;&#x2F;ion-grid&gt;</span><br><span class="line">  &lt;&#x2F;ion-content&gt;</span><br><span class="line">&lt;&#x2F;ion-app&gt;</span><br></pre>
+
+<h3 id="无限滚动提示"><a href="#无限滚动提示" class="headerlink" title="无限滚动提示"></a>无限滚动提示</h3><p><a href="https://ionicframework.com/docs/api/infinite-scroll" target="_blank" rel="noopener">https://ionicframework.com/docs/api/infinite-scroll</a></p>
+<pre class="highlight"><span class="line">import &#123; Component, ViewChild &#125; from &quot;@angular&#x2F;core&quot;;</span><br><span class="line"></span><br><span class="line">&#x2F;&#x2F; 引入弹出框组件 AlertController</span><br><span class="line">import &#123;</span><br><span class="line">  Platform,</span><br><span class="line">  AlertController,</span><br><span class="line">  IonSlides,</span><br><span class="line">  IonInfiniteScroll</span><br><span class="line">&#125; from &quot;@ionic&#x2F;angular&quot;;</span><br><span class="line">import &#123; SplashScreen &#125; from &quot;@ionic-native&#x2F;splash-screen&#x2F;ngx&quot;;</span><br><span class="line">import &#123; StatusBar &#125; from &quot;@ionic-native&#x2F;status-bar&#x2F;ngx&quot;;</span><br><span class="line"></span><br><span class="line">@Component(&#123;</span><br><span class="line">  selector: &quot;app-root&quot;,</span><br><span class="line">  templateUrl: &quot;app.component.html&quot;,</span><br><span class="line">  styleUrls: [&quot;app.component.scss&quot;]</span><br><span class="line">&#125;)</span><br><span class="line">export class AppComponent &#123;</span><br><span class="line">  names &#x3D; [</span><br><span class="line">    &quot;宝马&quot;,</span><br><span class="line">    &quot;奥迪&quot;,</span><br><span class="line">    &quot;奔驰&quot;,</span><br><span class="line">    &quot;福特&quot;,</span><br><span class="line">    &quot;现代&quot;,</span><br><span class="line">    &quot;丰田&quot;,</span><br><span class="line">    &quot;本田&quot;,</span><br><span class="line">    &quot;吉利&quot;,</span><br><span class="line">    &quot;比亚迪&quot;,</span><br><span class="line">    &quot;特斯拉&quot;,</span><br><span class="line">    &quot;长城&quot;,</span><br><span class="line">    &quot;红旗&quot;,</span><br><span class="line">    &quot;DIOR&quot;,</span><br><span class="line">    &quot;Gucci&quot;,</span><br><span class="line">    &quot;CHANEL&quot;,</span><br><span class="line">    &quot;张嘿嘿&quot;,</span><br><span class="line">    &quot;嗯嗯嗯&quot;,</span><br><span class="line">    &quot;嘟嘟嘟&quot;,</span><br><span class="line">    &quot;路虎&quot;,</span><br><span class="line">    &quot;捷豹&quot;,</span><br><span class="line">    &quot;Object&quot;,</span><br><span class="line">    &quot;舒肤佳&quot;,</span><br><span class="line">    &quot;小黑瓶&quot;,</span><br><span class="line">    &quot;小棕瓶&quot;,</span><br><span class="line">    &quot;SKII&quot;</span><br><span class="line">  ];</span><br><span class="line"></span><br><span class="line">  &#x2F;&#x2F; 上拉触底时, 触发此方法</span><br><span class="line">  loadData(obj) &#123;</span><br><span class="line">    console.log(obj);</span><br><span class="line">    setTimeout(() &#x3D;&gt; &#123;</span><br><span class="line">      this.names &#x3D; this.names.concat(this.names);</span><br><span class="line">      &#x2F;&#x2F; 加载完毕后, 必须调用一个方法, 来告诉组件 可以监听下一次加载更多操作</span><br><span class="line">      obj.target.complete();</span><br><span class="line"></span><br><span class="line">      &#x2F;&#x2F; 数据条数 &gt; 100,  则组件无效</span><br><span class="line">      if (this.names.length &gt; 100) &#123;</span><br><span class="line">        obj.target.disabled &#x3D; true;</span><br><span class="line">      &#125;</span><br><span class="line">    &#125;, 1000);</span><br><span class="line">  &#125;</span><br><span class="line"></span><br><span class="line">  &#x2F;&#x2F; 依赖注入: 在构造中声明需要什么类型的服务, 系统就会传入对应类型的服务</span><br><span class="line">  constructor(</span><br><span class="line">    private platform: Platform,</span><br><span class="line">    private splashScreen: SplashScreen,</span><br><span class="line">    private statusBar: StatusBar,</span><br><span class="line">    private alertC: AlertController</span><br><span class="line">  ) &#123;</span><br><span class="line">    this.initializeApp();</span><br><span class="line">  &#125;</span><br><span class="line"></span><br><span class="line">  initializeApp() &#123;</span><br><span class="line">    this.platform.ready().then(() &#x3D;&gt; &#123;</span><br><span class="line">      this.statusBar.styleDefault();</span><br><span class="line">      this.splashScreen.hide();</span><br><span class="line">    &#125;);</span><br><span class="line">  &#125;</span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line">&lt;!-- 无限加载更多 --&gt;</span><br><span class="line">&lt;!-- https:&#x2F;&#x2F;ionicframework.com&#x2F;docs&#x2F;api&#x2F;infinite-scroll --&gt;</span><br><span class="line">&lt;ion-app&gt;</span><br><span class="line">  &lt;ion-header&gt;</span><br><span class="line">    &lt;ion-toolbar&gt;</span><br><span class="line">      &lt;ion-title&gt;加载更多&lt;&#x2F;ion-title&gt;</span><br><span class="line">    &lt;&#x2F;ion-toolbar&gt;</span><br><span class="line">  &lt;&#x2F;ion-header&gt;</span><br><span class="line">  &lt;ion-content&gt;</span><br><span class="line">    &lt;!-- 列表 ion-list --&gt;</span><br><span class="line">    &lt;ion-list&gt;</span><br><span class="line">      &lt;ion-item *ngFor&#x3D;&quot;let item of names&quot;&gt;</span><br><span class="line">        &lt;ion-avatar slot&#x3D;&quot;start&quot;&gt;</span><br><span class="line">          &lt;img</span><br><span class="line">            src&#x3D;&quot;https:&#x2F;&#x2F;ss0.bdstatic.com&#x2F;70cFvHSh_Q1YnxGkpoWK1HF6hhy&#x2F;it&#x2F;u&#x3D;4150802370,1902002068&amp;fm&#x3D;11&amp;gp&#x3D;0.jpg&quot;</span><br><span class="line">          &#x2F;&gt;</span><br><span class="line">        &lt;&#x2F;ion-avatar&gt;</span><br><span class="line">        &lt;ion-label&gt;</span><br><span class="line">          &lt;h1&gt;&#123;&#123; item &#125;&#125;&lt;&#x2F;h1&gt;</span><br><span class="line">          &lt;h2&gt;描述信息&lt;&#x2F;h2&gt;</span><br><span class="line">        &lt;&#x2F;ion-label&gt;</span><br><span class="line">      &lt;&#x2F;ion-item&gt;</span><br><span class="line">    &lt;&#x2F;ion-list&gt;</span><br><span class="line"></span><br><span class="line">    &lt;!-- 补充结尾的 加载更多 --&gt;</span><br><span class="line">    &lt;!-- ion-infinite-scroll --&gt;</span><br><span class="line">    &lt;!-- threshold: 25%   代表:剩余未显示区域 占据屏幕高度的25%时触发 加载更多方法 --&gt;</span><br><span class="line">    &lt;!-- ionInfinite --&gt;</span><br><span class="line">    &lt;ion-infinite-scroll</span><br><span class="line">      threshold&#x3D;&quot;25%&quot;</span><br><span class="line">      position&#x3D;&quot;bottom&quot;</span><br><span class="line">      (ionInfinite)&#x3D;&quot;loadData($event)&quot;</span><br><span class="line">    &gt;</span><br><span class="line">      &lt;!-- &quot;bubbles&quot; | &quot;circles&quot; | &quot;circular&quot; | &quot;crescent&quot; | &quot;dots&quot; | &quot;lines&quot; | &quot;lines-small&quot; | null | undefined --&gt;</span><br><span class="line">      &lt;ion-infinite-scroll-content</span><br><span class="line">        loadingSpinner&#x3D;&quot;dots&quot;</span><br><span class="line">        loadingText&#x3D;&quot;猪猪侠正在加载中...&quot;</span><br><span class="line">      &gt;</span><br><span class="line">      &lt;&#x2F;ion-infinite-scroll-content&gt;</span><br><span class="line">    &lt;&#x2F;ion-infinite-scroll&gt;</span><br><span class="line">  &lt;&#x2F;ion-content&gt;</span><br><span class="line">&lt;&#x2F;ion-app&gt;</span><br></pre>
+
+
+
+<h2 id="生成带有Tabs栏的项目包"><a href="#生成带有Tabs栏的项目包" class="headerlink" title="生成带有Tabs栏的项目包"></a>生成带有Tabs栏的项目包</h2><pre class="highlight"><span class="line">ionic start tabs-app tabs</span><br></pre>
+
+<p>新的命令行:</p>
+<p>ionic中, 把组件通过功能的不同划分成了两个名字</p>
+<ul>
+<li><code>component</code>: 组件, 代表页面上的一个组成零件</li>
+<li><code>page</code>: 页, 代表整个页面</li>
+</ul>
+<pre class="highlight"><span class="line">ng g c 组件名</span><br><span class="line"></span><br><span class="line">ng g page 页面名</span><br><span class="line"></span><br><span class="line">ng g p 管道</span><br><span class="line">ng g pipe 管道</span><br></pre>
+
+<p>生成新的页面 tab4</p>
+<pre class="highlight"><span class="line">ng g page tab4</span><br></pre>
+
+<p>路由制作<code>src/app/tabs/tabs-routing.module.ts</code></p>
+<pre class="highlight"><span class="line">import &#123; NgModule &#125; from &quot;@angular&#x2F;core&quot;;</span><br><span class="line">import &#123; RouterModule, Routes &#125; from &quot;@angular&#x2F;router&quot;;</span><br><span class="line">import &#123; TabsPage &#125; from &quot;.&#x2F;tabs.page&quot;;</span><br><span class="line"></span><br><span class="line">const routes: Routes &#x3D; [</span><br><span class="line">  &#123;</span><br><span class="line">    path: &quot;tabs&quot;,</span><br><span class="line">    component: TabsPage,</span><br><span class="line">    children: [</span><br><span class="line">      &#123;</span><br><span class="line">        path: &quot;tab1&quot;,</span><br><span class="line">        children: [</span><br><span class="line">          &#123;</span><br><span class="line">            path: &quot;&quot;,</span><br><span class="line">            loadChildren: () &#x3D;&gt;</span><br><span class="line">              import(&quot;..&#x2F;tab1&#x2F;tab1.module&quot;).then(m &#x3D;&gt; m.Tab1PageModule)</span><br><span class="line">          &#125;</span><br><span class="line">        ]</span><br><span class="line">      &#125;,</span><br><span class="line">      &#123;</span><br><span class="line">        path: &quot;tab2&quot;,</span><br><span class="line">        children: [</span><br><span class="line">          &#123;</span><br><span class="line">            path: &quot;&quot;,</span><br><span class="line">            loadChildren: () &#x3D;&gt;</span><br><span class="line">              import(&quot;..&#x2F;tab2&#x2F;tab2.module&quot;).then(m &#x3D;&gt; m.Tab2PageModule)</span><br><span class="line">          &#125;</span><br><span class="line">        ]</span><br><span class="line">      &#125;,</span><br><span class="line">      &#123;</span><br><span class="line">        path: &quot;tab3&quot;,</span><br><span class="line">        children: [</span><br><span class="line">          &#123;</span><br><span class="line">            path: &quot;&quot;,</span><br><span class="line">            loadChildren: () &#x3D;&gt;</span><br><span class="line">              import(&quot;..&#x2F;tab3&#x2F;tab3.module&quot;).then(m &#x3D;&gt; m.Tab3PageModule)</span><br><span class="line">          &#125;</span><br><span class="line">        ]</span><br><span class="line">      &#125;,</span><br><span class="line">      &#123;</span><br><span class="line">        path: &quot;tab4&quot;,</span><br><span class="line">        children: [</span><br><span class="line">          &#123;</span><br><span class="line">            path: &quot;&quot;,</span><br><span class="line">            loadChildren: () &#x3D;&gt;</span><br><span class="line">              import(&quot;..&#x2F;tab4&#x2F;tab4.module&quot;).then(m &#x3D;&gt; m.Tab4PageModule)</span><br><span class="line">          &#125;</span><br><span class="line">        ]</span><br><span class="line">      &#125;,</span><br><span class="line">      &#123;</span><br><span class="line">        path: &quot;&quot;,</span><br><span class="line">        redirectTo: &quot;&#x2F;tabs&#x2F;tab1&quot;,</span><br><span class="line">        pathMatch: &quot;full&quot;</span><br><span class="line">      &#125;</span><br><span class="line">    ]</span><br><span class="line">  &#125;,</span><br><span class="line">  &#123;</span><br><span class="line">    path: &quot;&quot;,</span><br><span class="line">    redirectTo: &quot;&#x2F;tabs&#x2F;tab1&quot;,</span><br><span class="line">    pathMatch: &quot;full&quot;</span><br><span class="line">  &#125;</span><br><span class="line">];</span><br><span class="line"></span><br><span class="line">@NgModule(&#123;</span><br><span class="line">  imports: [RouterModule.forChild(routes)],</span><br><span class="line">  exports: [RouterModule]</span><br><span class="line">&#125;)</span><br><span class="line">export class TabsPageRoutingModule &#123;&#125;</span><br></pre>
+
+<p>tab栏目的定制代码:<code>src/app/tabs/tabs.page.html</code></p>
+<pre class="highlight"><span class="line">&lt;ion-tabs&gt;</span><br><span class="line">  &lt;ion-tab-bar slot&#x3D;&quot;bottom&quot;&gt;</span><br><span class="line">    &lt;ion-tab-button tab&#x3D;&quot;tab1&quot;&gt;</span><br><span class="line">      &lt;ion-icon name&#x3D;&quot;home&quot;&gt;&lt;&#x2F;ion-icon&gt;</span><br><span class="line">      &lt;ion-label&gt;首页&lt;&#x2F;ion-label&gt;</span><br><span class="line">    &lt;&#x2F;ion-tab-button&gt;</span><br><span class="line"></span><br><span class="line">    &lt;ion-tab-button tab&#x3D;&quot;tab2&quot;&gt;</span><br><span class="line">      &lt;ion-icon name&#x3D;&quot;ellipse&quot;&gt;&lt;&#x2F;ion-icon&gt;</span><br><span class="line">      &lt;ion-label&gt;分类&lt;&#x2F;ion-label&gt;</span><br><span class="line">    &lt;&#x2F;ion-tab-button&gt;</span><br><span class="line"></span><br><span class="line">    &lt;ion-tab-button tab&#x3D;&quot;tab3&quot;&gt;</span><br><span class="line">      &lt;ion-icon name&#x3D;&quot;square&quot;&gt;&lt;&#x2F;ion-icon&gt;</span><br><span class="line">      &lt;ion-label&gt;朋友圈&lt;&#x2F;ion-label&gt;</span><br><span class="line">    &lt;&#x2F;ion-tab-button&gt;</span><br><span class="line"></span><br><span class="line">    &lt;ion-tab-button tab&#x3D;&quot;tab4&quot;&gt;</span><br><span class="line">      &lt;ion-icon name&#x3D;&quot;square&quot;&gt;&lt;&#x2F;ion-icon&gt;</span><br><span class="line">      &lt;ion-label&gt;tab4&lt;&#x2F;ion-label&gt;</span><br><span class="line">    &lt;&#x2F;ion-tab-button&gt;</span><br><span class="line">  &lt;&#x2F;ion-tab-bar&gt;</span><br><span class="line">&lt;&#x2F;ion-tabs&gt;</span><br></pre>
+
+
+
+
+
+
+  </div>
+  <div>
+  
+  <div class="post-note note-warning copyright" style="margin-top: 42px">
+    <p><span style="font-weight: bold;">作者：</span><a target="_blank" rel="nofollow noopener noreferrer" href="https://xiaobai123-4.github.io/about">MaQisong</a></p>
+    <p><span style="font-weight: bold;">文章链接：</span><a target="_blank" rel="nofollow noopener noreferrer" href="https://xiaobai123-4.github.io/2020/06/18/ionic02/">https://xiaobai123-4.github.io/2020/06/18/ionic02/</a></p>
+    <p><span style="font-weight: bold;">版权声明：</span>本博客所有文章除特别声明外，均采用<a target="_blank" rel="noopener" href="https://creativecommons.org/licenses/by-nc-sa/4.0/deed.zh">CC BY-NC-SA 4.0 协议</a>。转载请注明出处！</p>
+  </div>
+  
+  </div>
+</article>
+<div class="nav">
+  
+  <div class="nav-item-prev">
+    <a href="/2020/06/22/vue_2/" class="nav-link">
+      <i class="iconfont icon-left nav-prev-icon"></i>
+      <div>
+        <div class="nav-label">上一篇</div>
+        
+        <div class="nav-title">vue-2 </div>
+        
+      </div>
+    </a>
+  </div>
+  
+  
+  <div class="nav-item-next">
+    <a href="/2020/06/18/ionic01/" class="nav-link">
+      <div>
+        <div class="nav-label">下一篇</div>
+        
+        <div class="nav-title">ionic01 </div>
+        
+      </div>
+      <i class="iconfont icon-right nav-next-icon"></i>
+    </a>
+  </div>
+  
+</div>
+
+<div class="card card-content toc-card" id="mobiletoc">
+  <div class="toc-header"><i class="iconfont icon-menu" style="padding-right: 2px;"></i>目录</div>
+<ol class="toc"><li class="toc-item toc-level-1"><a class="toc-link" href="#ionic"><span class="toc-text">ionic</span></a><ol class="toc-child"><li class="toc-item toc-level-2"><a class="toc-link" href="#组件"><span class="toc-text">组件</span></a><ol class="toc-child"><li class="toc-item toc-level-3"><a class="toc-link" href="#item组件"><span class="toc-text">item组件</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#按钮组件"><span class="toc-text">按钮组件</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#弹出框组件"><span class="toc-text">弹出框组件</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#滑动组件"><span class="toc-text">滑动组件</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#布局组件Grid"><span class="toc-text">布局组件Grid</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#无限滚动提示"><span class="toc-text">无限滚动提示</span></a></li></ol></li><li class="toc-item toc-level-2"><a class="toc-link" href="#生成带有Tabs栏的项目包"><span class="toc-text">生成带有Tabs栏的项目包</span></a></li></ol></li></ol>
+</div></main>
+          <aside class="left-column">
+            
+            <div class="card card-author">
+              
+<img src="https://s3.ax1x.com/2021/03/04/6VEJaQ.jpg" class="author-img">
+
+<p class="author-name">MaQisong</p>
+<p class="author-description">学习永不止步</p>
+<div class="author-message">
+  <a class="author-posts-count" href="/archives">
+    <span>65</span>
+    <span>文章</span>
+  </a>
+  <a class="author-categories-count" href="/categories">
+    <span>25</span>
+    <span>分类</span>
+  </a>
+  <a class="author-tags-count" href="/tags">
+    <span>38</span>
+    <span>标签</span>
+  </a>
+</div>
+
+            </div>
+            
+            <div class="sticky-tablet">
+  
+  
+  <article class="display-when-two-columns spacer">
+    <div class="card card-content toc-card">
+      <div class="toc-header"><i class="iconfont icon-menu" style="padding-right: 2px;"></i>目录</div>
+<ol class="toc"><li class="toc-item toc-level-1"><a class="toc-link" href="#ionic"><span class="toc-text">ionic</span></a><ol class="toc-child"><li class="toc-item toc-level-2"><a class="toc-link" href="#组件"><span class="toc-text">组件</span></a><ol class="toc-child"><li class="toc-item toc-level-3"><a class="toc-link" href="#item组件"><span class="toc-text">item组件</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#按钮组件"><span class="toc-text">按钮组件</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#弹出框组件"><span class="toc-text">弹出框组件</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#滑动组件"><span class="toc-text">滑动组件</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#布局组件Grid"><span class="toc-text">布局组件Grid</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#无限滚动提示"><span class="toc-text">无限滚动提示</span></a></li></ol></li><li class="toc-item toc-level-2"><a class="toc-link" href="#生成带有Tabs栏的项目包"><span class="toc-text">生成带有Tabs栏的项目包</span></a></li></ol></li></ol>
+    </div>
+  </article>
+  
+  
+  <article class="card card-content categories-widget">
+    <div class="categories-card">
+  <div class="categories-header"><i class="iconfont icon-fenlei" style="padding-right: 2px;"></i>分类</div>
+  <div class="categories-list">
+    
+      <a href="/categories/正则表达式/">
+        <div class="categories-list-item">
+          正则表达式
+          <span class="categories-list-item-badge">1</span>
+        </div>
+      </a>
+    
+      <a href="/categories/ajax/">
+        <div class="categories-list-item">
+          ajax
+          <span class="categories-list-item-badge">1</span>
+        </div>
+      </a>
+    
+      <a href="/categories/CSS/">
+        <div class="categories-list-item">
+          CSS
+          <span class="categories-list-item-badge">3</span>
+        </div>
+      </a>
+    
+      <a href="/categories/ES6/">
+        <div class="categories-list-item">
+          ES6
+          <span class="categories-list-item-badge">1</span>
+        </div>
+      </a>
+    
+      <a href="/categories/css/">
+        <div class="categories-list-item">
+          css
+          <span class="categories-list-item-badge">1</span>
+        </div>
+      </a>
+    
+      <a href="/categories/HTML5/">
+        <div class="categories-list-item">
+          HTML5
+          <span class="categories-list-item-badge">4</span>
+        </div>
+      </a>
+    
+      <a href="/categories/git/">
+        <div class="categories-list-item">
+          git
+          <span class="categories-list-item-badge">1</span>
+        </div>
+      </a>
+    
+      <a href="/categories/Markdown/">
+        <div class="categories-list-item">
+          Markdown
+          <span class="categories-list-item-badge">1</span>
+        </div>
+      </a>
+    
+      <a href="/categories/javascript/">
+        <div class="categories-list-item">
+          javascript
+          <span class="categories-list-item-badge">17</span>
+        </div>
+      </a>
+    
+      <a href="/categories/SqlServer/">
+        <div class="categories-list-item">
+          SqlServer
+          <span class="categories-list-item-badge">1</span>
+        </div>
+      </a>
+    
+      <a href="/categories/bootstrap/">
+        <div class="categories-list-item">
+          bootstrap
+          <span class="categories-list-item-badge">1</span>
+        </div>
+      </a>
+    
+      <a href="/categories/分类/">
+        <div class="categories-list-item">
+          分类
+          <span class="categories-list-item-badge">1</span>
+        </div>
+      </a>
+    
+      <a href="/categories/其他/">
+        <div class="categories-list-item">
+          其他
+          <span class="categories-list-item-badge">1</span>
+        </div>
+      </a>
+    
+      <a href="/categories/Vue/">
+        <div class="categories-list-item">
+          Vue
+          <span class="categories-list-item-badge">10</span>
+        </div>
+      </a>
+    
+      <a href="/categories/HTML/">
+        <div class="categories-list-item">
+          HTML
+          <span class="categories-list-item-badge">2</span>
+        </div>
+      </a>
+    
+      <a href="/categories/ionic/">
+        <div class="categories-list-item">
+          ionic
+          <span class="categories-list-item-badge">2</span>
+        </div>
+      </a>
+    
+      <a href="/categories/javascript/Vue/">
+        <div class="categories-list-item">
+          javascript/Vue
+          <span class="categories-list-item-badge">2</span>
+        </div>
+      </a>
+    
+      <a href="/categories/webpack/">
+        <div class="categories-list-item">
+          webpack
+          <span class="categories-list-item-badge">1</span>
+        </div>
+      </a>
+    
+      <a href="/categories/前端/">
+        <div class="categories-list-item">
+          前端
+          <span class="categories-list-item-badge">1</span>
+        </div>
+      </a>
+    
+      <a href="/categories/NodeJS/">
+        <div class="categories-list-item">
+          NodeJS
+          <span class="categories-list-item-badge">1</span>
+        </div>
+      </a>
+    
+      <a href="/categories/镜寰-工作/">
+        <div class="categories-list-item">
+          镜寰-工作
+          <span class="categories-list-item-badge">10</span>
+        </div>
+      </a>
+    
+      <a href="/categories/html/">
+        <div class="categories-list-item">
+          html
+          <span class="categories-list-item-badge">1</span>
+        </div>
+      </a>
+    
+      <a href="/categories/移动端/">
+        <div class="categories-list-item">
+          移动端
+          <span class="categories-list-item-badge">2</span>
+        </div>
+      </a>
+    
+      <a href="/categories/Vue/前端/">
+        <div class="categories-list-item">
+          Vue/前端
+          <span class="categories-list-item-badge">3</span>
+        </div>
+      </a>
+    
+      <a href="/categories/镜寰-工作/数据库/">
+        <div class="categories-list-item">
+          镜寰-工作/数据库
+          <span class="categories-list-item-badge">1</span>
+        </div>
+      </a>
+    
+  </div>
+</div>
+  </article>
+  
+  <article class="card card-content tags-widget">
+    <div class="tags-card">
+  <div class="tags-header"><i class="iconfont icon-biaoqian" style="padding-right: 2px;"></i>热门标签</div>
+  <div class="tags-list">
+    
+    <a href="/tags/前端/" title="前端"><div class="tags-list-item">前端</div></a>
+    
+    <a href="/tags/html/" title="html"><div class="tags-list-item">html</div></a>
+    
+    <a href="/tags/javascript/" title="javascript"><div class="tags-list-item">javascript</div></a>
+    
+    <a href="/tags/Vue/" title="Vue"><div class="tags-list-item">Vue</div></a>
+    
+    <a href="/tags/工作总结/" title="工作总结"><div class="tags-list-item">工作总结</div></a>
+    
+    <a href="/tags/框架/" title="框架"><div class="tags-list-item">框架</div></a>
+    
+    <a href="/tags/算法/" title="算法"><div class="tags-list-item">算法</div></a>
+    
+    <a href="/tags/笔记/" title="笔记"><div class="tags-list-item">笔记</div></a>
+    
+    <a href="/tags/常见问题/" title="常见问题"><div class="tags-list-item">常见问题</div></a>
+    
+    <a href="/tags/css/" title="css"><div class="tags-list-item">css</div></a>
+    
+    <a href="/tags/移动端/" title="移动端"><div class="tags-list-item">移动端</div></a>
+    
+    <a href="/tags/跨域/" title="跨域"><div class="tags-list-item">跨域</div></a>
+    
+    <a href="/tags/基础/" title="基础"><div class="tags-list-item">基础</div></a>
+    
+    <a href="/tags/规范/" title="规范"><div class="tags-list-item">规范</div></a>
+    
+    <a href="/tags/webpack/" title="webpack"><div class="tags-list-item">webpack</div></a>
+    
+    <a href="/tags/博客/" title="博客"><div class="tags-list-item">博客</div></a>
+    
+  </div>
+</div>
+  </article>
+  
+  
+</div>
+          </aside>
+          <aside class="right-column">
+            <div class="sticky-widescreen">
+  
+  
+  <article class="card card-content toc-card">
+    <div class="toc-header"><i class="iconfont icon-menu" style="padding-right: 2px;"></i>目录</div>
+<ol class="toc"><li class="toc-item toc-level-1"><a class="toc-link" href="#ionic"><span class="toc-text">ionic</span></a><ol class="toc-child"><li class="toc-item toc-level-2"><a class="toc-link" href="#组件"><span class="toc-text">组件</span></a><ol class="toc-child"><li class="toc-item toc-level-3"><a class="toc-link" href="#item组件"><span class="toc-text">item组件</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#按钮组件"><span class="toc-text">按钮组件</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#弹出框组件"><span class="toc-text">弹出框组件</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#滑动组件"><span class="toc-text">滑动组件</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#布局组件Grid"><span class="toc-text">布局组件Grid</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#无限滚动提示"><span class="toc-text">无限滚动提示</span></a></li></ol></li><li class="toc-item toc-level-2"><a class="toc-link" href="#生成带有Tabs栏的项目包"><span class="toc-text">生成带有Tabs栏的项目包</span></a></li></ol></li></ol>
+  </article>
+  
+  
+  <article class="card card-content">
+    <div class="recent-posts-card">
+  <div class="recent-posts-header"><i class="iconfont icon-wenzhang_huaban" style="padding-right: 2px;"></i>最近文章</div>
+  <div class="recent-posts-list">
+    
+      <div class="recent-posts-item">
+        <div class="recent-posts-item-title">2021-03-28</div>
+        <a href="/2021/03/28/vue学习记录4/"><div class="recent-posts-item-content">vue学习记录4</div></a>
+      </div>
+    
+      <div class="recent-posts-item">
+        <div class="recent-posts-item-title">2021-03-27</div>
+        <a href="/2021/03/27/vue学习记录3/"><div class="recent-posts-item-content">vue学习记录3</div></a>
+      </div>
+    
+      <div class="recent-posts-item">
+        <div class="recent-posts-item-title">2021-03-26</div>
+        <a href="/2021/03/26/vue学习记录2/"><div class="recent-posts-item-content">vue学习记录2</div></a>
+      </div>
+    
+      <div class="recent-posts-item">
+        <div class="recent-posts-item-title">2021-03-04</div>
+        <a href="/2021/03/04/vue学习记录1/"><div class="recent-posts-item-content">学习记录1</div></a>
+      </div>
+    
+  </div>
+</div>
+  </article>
+  
+  
+</div>
+          </aside>
+        </div>
+      </div>
+    </div>
+  </div>
+  
+  <footer class="footer">
+  <div class="footer-container">
+    <div>
+      <div class="footer-dsc">
+        <span>Copyright ©
+          
+          2020 -
+          
+          2021
+        </span>
+        &nbsp;
+        <a href="/" class="footer-link">小白的博客 </a>
+      </div>
+    </div>
+
+    
+    <div class="footer-dsc">
+      
+      Powered by
+      <a href="https://hexo.io/" class="footer-link" target="_blank" rel="nofollow noopener noreferrer">&nbsp;Hexo </a>
+      
+      
+      <span>&nbsp;|&nbsp;</span>
+      
+      
+      Theme -
+      <a href="https://github.com/theme-kaze" class="footer-link" target="_blank"
+        rel="nofollow noopener noreferrer">&nbsp;Kaze</a>
+      
+    </div>
+    
+    
+    
+    
+</footer>
+  <a role="button" id="scrollbutton" class="basebutton"  aria-label="回到顶部">
+  <i class="iconfont icon-arrowleft button-icon"></i>
+</a>
+<a role="button" id="menubutton" class="basebutton">
+  <i class="iconfont icon-menu button-icon"></i>
+</a>
+<a role="button" id="popbutton" class="basebutton" aria-label="控制中心">
+  <i class="iconfont icon-expand button-icon"></i>
+</a>
+<a role="button" id="darkbutton" class="basebutton darkwidget" aria-label="夜色模式">
+  <i class="iconfont icon-weather button-icon"></i>
+</a>
+<a role="button" id="searchbutton" class="basebutton searchwidget" aria-label="搜索">
+  <i class="iconfont icon-search button-icon"></i>
+</a>
+
+  
+  
+  
+  <script>
+  var addImgLayout = function () {
+    var img = document.querySelectorAll('.post-content img');
+    var i;
+    for (i = 0; i < img.length; i++) {
+      var wrapper = document.createElement('a');
+      wrapper.setAttribute('href', img[i].getAttribute('data-src'));
+      wrapper.setAttribute('aria-label', 'illustration');
+      wrapper.style.cssText = 'width: 100%; display: flex; justify-content: center;';
+      if (img[i].alt) wrapper.dataset.caption = img[i].alt;
+      wrapper.dataset.nolink = true;
+      img[i].before(wrapper);
+      wrapper.append(img[i]);
+      var divWrap = document.createElement('div');
+      divWrap.classList.add('gallery');
+      wrapper.before(divWrap);
+      divWrap.append(wrapper);
+    }
+    baguetteBox.run('.gallery');
+  }
+</script>
+<script>loadScript("/js/lib/lightbox/baguetteBox.min.js", addImgLayout)</script>
+  
+  
+  
+<script src="/js/main.js"></script>
+
+  
+  
+  <script>
+    var addLazyload = function () {
+      var observer = lozad('.lozad', {
+        load: function (el) {
+          el.srcset = el.getAttribute('data-src');
+        },
+        loaded: function (el) {
+          el.classList.add('loaded');
+        }
+      });
+      observer.observe();
+    }
+  </script>
+  <script>loadScript("/js/lib/lozad.min.js", addLazyload)</script>
+  
+  
+</body>
+
+</html>

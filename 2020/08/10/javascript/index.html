@@ -1,0 +1,819 @@
+<!DOCTYPE html>
+<html  lang="zh-CN" >
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport"
+    content="width=device-width, initial-scale=1.0, minimum-scale=1.0">
+  <meta http-equiv="X-UA-Compatible" content="ie=edge">
+  <meta name="theme-color" content="#fff" id="theme-color">
+  <meta name="description" content="学习永不止步">
+  <link rel="icon" href="https://s3.ax1x.com/2021/03/04/6VEJaQ.jpg">
+  <title>javascript</title>
+  
+  
+  <meta property="og:title" content="javascript">
+  
+  
+  <meta property="og:url" content="https://xiaobai123-4.github.io/2020/08/10/javascript/index.html">
+  
+  
+  <meta property="og:img" content="https://s3.ax1x.com/2021/03/04/6VEJaQ.jpg">
+  
+  
+  <meta property="og:img" content="学习永不止步">
+  
+  
+  <meta property="og:type" content="article">
+  <meta property="og:article:published_time" content="2020-08-10">
+  <meta property="og:article:modified_time" content="2020-09-03">
+  <meta property="og:article:author" content="MaQisong">
+  
+  
+  <meta property="og:article:tag" content="前端">
+  
+  <meta property="og:article:tag" content="javascript">
+  
+  
+  
+  
+  <script>
+    // control reverse button
+    var reverseDarkList = {
+      dark: 'light',
+      light: 'dark'
+    };
+    var themeColor = {
+      dark: '#1c1c1e',
+      light: '#fff'
+    }
+    // get the data of css prefers-color-scheme
+    var getCssMediaQuery = function() {
+      return window.matchMedia('(prefers-color-scheme: dark)').matches ? 'dark' : 'light';
+    };
+    // reverse current darkmode setting function
+    var reverseDarkModeSetting = function() {
+      var setting = localStorage.getItem('user-color-scheme');
+      if(reverseDarkList[setting]) {
+        setting = reverseDarkList[setting];
+      } else if(setting === null) {
+        setting = reverseDarkList[getCssMediaQuery()];
+      } else {
+        return;
+      }
+      localStorage.setItem('user-color-scheme', setting);
+      return setting;
+    };
+    // apply current darkmode setting
+    var setDarkmode = function(mode) {
+      var setting = mode || localStorage.getItem('user-color-scheme');
+      if(setting === getCssMediaQuery()) {
+        document.documentElement.removeAttribute('data-user-color-scheme');
+        localStorage.removeItem('user-color-scheme');
+        document.getElementById('theme-color').content = themeColor[setting];
+      } else if(reverseDarkList[setting]) {
+        document.documentElement.setAttribute('data-user-color-scheme', setting);
+        document.getElementById('theme-color').content = themeColor[setting];
+      } else {
+        document.documentElement.removeAttribute('data-user-color-scheme');
+        localStorage.removeItem('user-color-scheme');
+        document.getElementById('theme-color').content = themeColor[getCssMediaQuery()];
+      }
+    };
+    setDarkmode();
+  </script>
+  <script>
+    function loadScript(url, cb) {
+      var script = document.createElement('script');
+      script.src = url;
+      if (cb) script.onload = cb;
+      script.async = true;
+      document.body.appendChild(script);
+    }
+  </script>
+  
+  <link rel="preload" href="//at.alicdn.com/t/font_1946621_i1kgafibvw.css" as="style" >
+  <link rel="preload" href="//at.alicdn.com/t/font_1952792_89b4ac4k4up.css" as="style" >
+  
+  <link rel="preload" href="/js/lib/lightbox/baguetteBox.min.js" as="script">
+  <link rel="preload" href="/js/lib/lightbox/baguetteBox.min.css" as="style" >
+  
+  
+  <link rel="preload" href="/js/lib/lozad.min.js" as="script">
+  
+  
+  
+  
+  
+  
+  
+  
+<link rel="stylesheet" href="/css/main.css">
+
+  
+  
+<link rel="stylesheet" href="//at.alicdn.com/t/font_1946621_i1kgafibvw.css">
+
+  
+  
+<link rel="stylesheet" href="//at.alicdn.com/t/font_1952792_89b4ac4k4up.css">
+
+  
+  
+<link rel="stylesheet" href="/js/lib/lightbox/baguetteBox.min.css">
+
+  
+  
+<meta name="generator" content="Hexo 4.2.1"></head>
+
+
+<body>
+  <div class="wrapper">
+    
+    <nav class="navbar">
+  <div class="navbar-logo">
+    <span class="navbar-logo-main">
+      
+      <img class="navbar-logo-img" src="https://s3.ax1x.com/2021/03/04/6VEJaQ.jpg" alt="logo">
+      
+      <span class="navbar-logo-dsc">小白的博客</span>
+    </span>
+  </div>
+  <div class="navbar-menu">
+    
+    <a href="/" class="navbar-menu-item">
+    
+    首页
+    
+    </a>
+    
+    <a href="/archives" class="navbar-menu-item">
+    
+    归档
+    
+    </a>
+    
+    <a href="/tags" class="navbar-menu-item">
+    
+    标签
+    
+    </a>
+    
+    <a href="/categories" class="navbar-menu-item">
+    
+    分类
+    
+    </a>
+    
+    <a href="/about" class="navbar-menu-item">
+    
+    关于
+    
+    </a>
+    
+    <a class="navbar-menu-item darknavbar" id="dark"><i class="iconfont icon-weather"></i></a>
+    <a class="navbar-menu-item searchnavbar" id="search"><i class="iconfont icon-search" style="font-size: 1.2rem; font-weight: 400;"></i></a>
+  </div>
+</nav>
+    
+    <div id="local-search" style="display: none;">
+      <input class="navbar-menu-item" id="search-input" placeholder="请输入搜索内容...">
+      <div id="search-content"></div>
+    </div>
+    
+    <div class="section-wrap">
+      <div class="container">
+        <div class="columns">
+          <main class="main-column">
+<article class="card card-content">
+  <header>
+    <h1 class="post-title">
+      javascript
+    </h1>
+  </header>
+  <div class="post-meta post-show-meta">
+    <time datetime="2020-08-10T00:32:34.000Z">
+      <i class="iconfont icon-calendar" style="margin-right: 2px;"></i>
+      <span>2020-08-10</span>
+    </time>
+    
+    <span class="dot"></span>
+    
+    <a href="/categories/javascript/" class="post-meta-link">javascript</a>
+    
+    
+    
+    <span class="dot"></span>
+    <span>6.8k 字</span>
+    
+  </div>
+  
+  <div class="post-meta post-show-meta" style="margin-top: -10px;">
+    <div style="display: flex; align-items: center;">
+      <i class="iconfont icon-biaoqian" style="margin-right: 2px; font-size: 1.15rem;"></i>
+      
+      
+        <a href="/tags/前端/" class="post-meta-link">前端</a>
+      
+      
+      <span class="dot"></span>
+      
+        <a href="/tags/javascript/" class="post-meta-link">javascript</a>
+      
+    </div>
+  </div>
+  
+  </header>
+  <div id="section" class="post-content">
+    <h3 id="作用域和作用域链"><a href="#作用域和作用域链" class="headerlink" title="作用域和作用域链"></a>作用域和作用域链</h3><ol>
+<li>什么是作用域:<br> (1). 作用: 一个变量的可用范围<br> (2). 本质: 一个保存变量的对象</li>
+<li>为什么: 为了避免不同范围内的数据之间互相干扰！</li>
+<li>包括: 2级:<br> (1). 全局作用域: window对象<br> a. 专门保存所有全局变量的作用域<br> b. 优点: 随处可用，可反复使用！<br> c. 缺点: 极易被污染<br> (2). 函数作用域: 对象<br> a. 专门保存仅函数内可用的局部变量的作用域<br> b. 优点: 因为仅函数内可用，所以不会被污染<br> c. 缺点: 不可重用！</li>
+<li>函数的生命周期: 一个函数从创建，到调用，最后到调用完所经历的阶段<br> (1). 定义函数时:<br> a. 创建函数对象<br> b. 创建函数名变量，保存函数对象的地址<br> c. 每个函数其实都有一个”好友列表”。一般函数的好友列表中只包含两个格: <pre><code>1). 离函数近的这个格: 暂时空着
+2). 离函数稍远的格: 存window的引用</code></pre> 为什么: 因为每个函数都害怕将来执行时，自己少东西，不知道该找谁帮忙！好友列表中保存window，是为了，万一将程序执行时，自己缺少变量，还可找window要！<br> (2). 调用函数时:<br> a. 临时创建本次函数调用的函数作用域对象<br> b. 在函数作用域对象中创建本次函数所需的所有局部变量<pre><code>包含两种情况:
+1). 在函数内var出的变量
+2). 形参变量虽然没有var，但是也属于局部变量！</code></pre> c. 函数要有列表中离函数近的一个格，会立刻引用函数作用域对象<br> d. 函数执行过程中，变量的使用顺序: <pre><code>1). 先局部
+2). 局部没有，才全局</code></pre> (3). 函数调用后:<br> a. 释放函数作用域对象<br> b. 导致函数作用域对象中的局部变量也跟着释放！<br> c. 所以，所有局部变量都不可重用！</li>
+<li>作用域链:<br> (1). 什么是: 由多级作用域串联形成的链式结构<br> (2). 每个函数在创建时，就有了自己的作用域链。普通函数作用域链里包含2个格:<pre><code>离自己近的格，暂时为空，调用函数时，用来临时引用函数作用域对象
+离自己远的格，始终保存着全局作用域对象window</code></pre> (3). 保存着一个函数可用的所有变量<br> (4). 控制着变量的使用顺序: 先局部，局部没有，才全局！</li>
+</ol>
+<p><strong>答：</strong> JS作用域也就是JS识别变量的范围，作用域链也就是JS查找变量的顺序<br>先说作用域，JS作用域主要包括全局作用域、局部作用域和ES6的块级作用域<br>全局作用域：也就是定义在window下的变量范围，在任何地方都可以访问，<br>局部作用域：是只在函数内部定义的变量范围<br>块级作用域：简单来说用let和const在任意的代码块中定义的变量都认为是块级作用域中的变量，例如在for循环中用let定义的变量，在if语句中用let定义的变量等等<br>注：尽量不要使用全局变量，因为容易导致全局的污染，命名冲突，对bug查找不利。而所谓的作用域链就是由最内部的作用域往最外部,查找变量的过程.形成的链条就是作用域链</p>
+<h3 id="null-和undefined-的区别"><a href="#null-和undefined-的区别" class="headerlink" title="null 和undefined 的区别"></a>null 和undefined 的区别</h3><p><strong>1、undefined</strong><br>　表示”缺少值”，就是此处应该有一个值，但是还没有定义<br>　典型用法是：<br>　　（1）变量被声明了，但没有赋值时，就等于undefined。<br>　　（2) 调用函数时，应该提供的参数没有提供，该参数等于undefined。<br>　　（3）对象没有赋值的属性，该属性的值为undefined。<br>　　（4）函数没有返回值时，默认返回undefined。</p>
+<p><strong>2、null</strong><br>　表示”没有对象”，即该处不应该有值。<br>　典型用法是：<br>　　（1） 作为函数的参数，表示该函数的参数不是对象。<br>　　（2） 作为对象原型链的终点</p>
+<blockquote>
+<p>null用<code>typeof</code>检测的时候为什么是object?</p>
+<p>null经常用于释放对象创建的引用，特殊的空地址，更像是没意义的空对象</p>
+</blockquote>
+<h3 id="cookies，sessionStorage和localStorage的区别"><a href="#cookies，sessionStorage和localStorage的区别" class="headerlink" title="cookies，sessionStorage和localStorage的区别"></a>cookies，<code>sessionStorage</code>和<code>localStorage</code>的区别</h3><p><code>sessionStorage</code>用于本地存储一个会话（session）中的数据，这些数据只有在同一个会话中的页面才能访问并且当会话结束后数据也随之销毁。因此<code>sessionStorage</code>不是一种持久化的本地存储，仅仅是会话级别的存储。而<code>localStorage</code>用于持久化的本地存储，除非主动删除数据，否则数据是永远不会过期的。<br>web storage和cookie的区别<br>Web Storage的概念和cookie相似，区别是它是为了更大容量存储设计的。Cookie的大小是受限的，并且每次你请求一个新的页面的时候Cookie都会被发送过去，这样无形中浪费了带宽，另外cookie还需要指定作用域，不可以跨域调用。<br>除此之外，Web Storage拥有<code>setItem,getItem,removeItem,clear</code>等方法，不像cookie需要前端开发者自己封装<code>setCookie，getCookie</code>。但是Cookie也是不可以或缺的：Cookie的作用是与服务器进行交互，作为HTTP规范的一部分而存在 ，而Web Storage仅仅是为了在本地“存储”数据而生。</p>
+<h3 id="闭包"><a href="#闭包" class="headerlink" title="闭包"></a>闭包</h3><p><strong>答：</strong> 闭包说的通俗一点就是打通了一条在函数外部访问函数内部作用域的通道。正常情况下函数外部是访问不到函数内部作用域变量的，</p>
+<p><strong>成因：</strong> 外层函数调用后，外层函数的作用域对象无法释放，形成了闭包！（因为被内层函数对象的作用域链引用着）</p>
+<p><strong>表象判断是不是闭包:</strong> 函数嵌套函数,内部函数被return  内部函数调用外层函数的局部变量</p>
+<p><strong>优点：</strong> 可以隔离作用域，不造成全局污染</p>
+<p><strong>缺点：</strong> 由于闭包长期驻留内存，则长期这样会导致内存泄露</p>
+<p><strong>如何解决内存泄露：</strong> 将暴露全外部的闭包变量置为null</p>
+<p><strong>适用场景：</strong> 封装组件，for循环和定时器结合使用,for循环和dom事件结合.可以在性能优化的过程中,节流防抖函数的使用,导航栏获取下标的使用</p>
+<h3 id="构造函数"><a href="#构造函数" class="headerlink" title="构造函数"></a>构造函数</h3><pre class="highlight"><span class="line"><span class="function"><span class="keyword">function</span> 类型名(<span class="params">形参列表</span>)</span>&#123;</span><br><span class="line">	<span class="keyword">this</span>.属性名=形参;</span><br><span class="line">	<span class="keyword">this</span>.属性名=形参;</span><br><span class="line">	<span class="keyword">this</span>.方法名=<span class="function"><span class="keyword">function</span>(<span class="params"></span>)</span>&#123;</span><br><span class="line">		... this.属性名 ...</span><br><span class="line">	&#125;;</span><br><span class="line">&#125;</span><br></pre>
+
+<p>当我们new一个对象时，首先会创建一个新的空对象，然后设置当前新创建的子对象继承构造函数的原型对象，并将构造函数内部的所有this指向新对象，并通过强行赋值的方式给新对象添加属性和新方法</p>
+<p><img src="http://qel69p8xd.bkt.clouddn.com/constructor_1.jpg" alt="prototype" srcset="data:image/svg+xml,%3Csvg%20xmlns='http://www.w3.org/2000/svg'%20viewBox='0%200%20300%20300'%3E%3C/svg%3E" data-src="http://qel69p8xd.bkt.clouddn.com/constructor_1.jpg" class="lozad post-image"></p>
+<h3 id="原型链的理解"><a href="#原型链的理解" class="headerlink" title="原型链的理解"></a>原型链的理解</h3><p><strong>答：</strong> ①原型 js中万物皆对象，每一个对象都拥有自己的属性，js中原型的出现解决了让多个对象共享一个或多个方法。js中每个对象都有一个与他关联的对象，叫做原型对象，每次获取对象属性都是一次查询过程，在对象的自有属性中找不到就会去查找他的原型对象。<br>②原型链 原型连成一条链，js在查找属性过程中，如果在自有属性找不到就会去原型对象中查找没如果原型对象中还找不到就去原型对象的原型中查找，也就是按照原型链查找。那么Object.prototype对象有没有它的原型呢？回答是Object.prototype的原型是null。null没有任何属性和方法，也没有自己的原型。因此，原型链的尽头就是null。<br>图解1<br><img src="http://qel69p8xd.bkt.clouddn.com/prototype_1.png" alt="prototype" srcset="data:image/svg+xml,%3Csvg%20xmlns='http://www.w3.org/2000/svg'%20viewBox='0%200%20300%20300'%3E%3C/svg%3E" data-src="http://qel69p8xd.bkt.clouddn.com/prototype_1.png" class="lozad post-image"><br>图解2<br><img src="http://qel69p8xd.bkt.clouddn.com/prototype_2.jpg" alt="prototype" srcset="data:image/svg+xml,%3Csvg%20xmlns='http://www.w3.org/2000/svg'%20viewBox='0%200%20300%20300'%3E%3C/svg%3E" data-src="http://qel69p8xd.bkt.clouddn.com/prototype_2.jpg" class="lozad post-image"><br>图解3<br><img src="http://qel69p8xd.bkt.clouddn.com/prototype.png" alt="prototype" srcset="data:image/svg+xml,%3Csvg%20xmlns='http://www.w3.org/2000/svg'%20viewBox='0%200%20300%20300'%3E%3C/svg%3E" data-src="http://qel69p8xd.bkt.clouddn.com/prototype.png" class="lozad post-image"></p>
+<p><strong>优缺点：</strong></p>
+<p>优点：<br>①只继承了父类构造函数的属性，没有继承父类原型的属性<br>②可以继承多个构造函数属性（call多个）<br>③在子实例中可向父实例传参<br>缺点：<br>①只能继承父类构造函数的属性<br>②无法实现构造函数的复用<br>③每个新实例都有构造函数的副本</p>
+<p><strong>补充：</strong> prototype vs <code>_ _proto_ _</code><br>    (1). 为所有子对象保存共有方法的父对象，成为原型对象<br>    (2). 一个类型中，prototype 和 <code>_ _proto_ _</code>其实指向的是同一个原型对象<br>    (3). 只不过:<br>    a. prototype属于构造函数对象，是站在和原型对象平级的位置，查找构造函数: 构造函数.prototype<br>    b. <code>_ _proto_ _</code>属于每个子对象中，是站在子级角度，称呼父对象。<br>    (4). 所以，想访问一个类型中的原型对象，都用:<br>        构造函数.prototype<br>        想访问某一个子对象的父对象，都用<code>子对象._ _proto_ _</code><br><strong>constructor 属性</strong><br>prototype对象有一个constructor属性，默认指向prototype对象所在的构造函数。</p>
+<pre class="highlight"><span class="line"><span class="function"><span class="keyword">function</span> <span class="title">P</span>(<span class="params"></span>) </span>&#123;&#125;</span><br><span class="line">P.prototype.constructor === P <span class="comment">// true</span></span><br><span class="line">由于<span class="keyword">constructor</span>属性定义在prototype对象上面，意味着可以被所有实例对象继承。</span><br><span class="line"></span><br><span class="line">function P() &#123;&#125;</span><br><span class="line"><span class="keyword">var</span> p = <span class="keyword">new</span> P();</span><br><span class="line"></span><br><span class="line">p.constructor === P <span class="comment">// true</span></span><br><span class="line">p.constructor === P.prototype.constructor <span class="comment">// true</span></span><br><span class="line">p.hasOwnProperty(<span class="string">'constructor'</span>) <span class="comment">// false</span></span><br></pre>
+<p>上面代码中，p是构造函数P的实例对象，但是p自身没有constructor属性，该属性其实是读取原型链上面的P.prototype.constructor属性。</p>
+<h3 id="js继承"><a href="#js继承" class="headerlink" title="js继承"></a>js继承</h3><p><strong>概念：</strong> 通过某种方式让一个对象可以访问到另一个对象中的属性和方法</p>
+<p><strong>方式：</strong> 构造函数继承，原型继承，原型链继承，拷贝继承（混入继承）</p>
+<pre class="highlight"><span class="line"><span class="function"><span class="keyword">function</span> <span class="title">Person</span>(<span class="params">name</span>)</span>&#123;</span><br><span class="line">  <span class="keyword">this</span>.name=name;</span><br><span class="line">  <span class="keyword">this</span>.sum=<span class="function"><span class="keyword">function</span>(<span class="params"></span>)</span>&#123;</span><br><span class="line">    alert(<span class="keyword">this</span>.name)</span><br><span class="line">  &#125;</span><br><span class="line">&#125;</span><br><span class="line">Person.prototype.age=<span class="number">10</span>;</span><br><span class="line"></span><br><span class="line"><span class="comment">// ①原型链继承</span></span><br><span class="line"><span class="function"><span class="keyword">function</span> <span class="title">Per</span>(<span class="params"></span>)</span>&#123;</span><br><span class="line">  <span class="keyword">this</span>.name=<span class="string">"pet"</span></span><br><span class="line">&#125;</span><br><span class="line">Per.prototype=<span class="keyword">new</span> Person();</span><br><span class="line"><span class="keyword">var</span> per1=<span class="keyword">new</span> Per();</span><br><span class="line"><span class="built_in">console</span>.log(per1.age);</span><br><span class="line"><span class="comment">// 判断per是否继承了Person的属性</span></span><br><span class="line"><span class="built_in">console</span>.log(per1 <span class="keyword">instanceof</span> Person) <span class="comment">//true</span></span><br><span class="line"></span><br><span class="line"><span class="comment">// ②借用构造函数继承</span></span><br><span class="line"><span class="function"><span class="keyword">function</span> <span class="title">Con</span>(<span class="params"></span>)</span>&#123;</span><br><span class="line">  Person.call(<span class="keyword">this</span>,<span class="string">"jer"</span>);</span><br><span class="line">  <span class="keyword">this</span>.age=<span class="number">12</span>;</span><br><span class="line">&#125;</span><br><span class="line"><span class="keyword">var</span> con1=<span class="keyword">new</span> Con();</span><br><span class="line"><span class="built_in">console</span>.log(con1.name);</span><br><span class="line"><span class="built_in">console</span>.log(con1.age);</span><br><span class="line"><span class="built_in">console</span>.log(con1 <span class="keyword">instanceof</span> Person); <span class="comment">//false</span></span><br><span class="line"></span><br><span class="line"><span class="comment">// ES6</span></span><br><span class="line"><span class="class"><span class="keyword">class</span> <span class="title">Father</span></span>&#123;</span><br><span class="line">  <span class="keyword">constructor</span>(name)&#123;</span><br><span class="line">    <span class="keyword">this</span>.name=name;</span><br><span class="line">    <span class="keyword">this</span>.className=<span class="string">"软件①班"</span></span><br><span class="line">  &#125;</span><br><span class="line">  tell()&#123;</span><br><span class="line">    <span class="built_in">console</span>.log(<span class="string">`我是来自<span class="subst">$&#123;<span class="keyword">this</span>.className&#125;</span>的<span class="subst">$&#123;<span class="keyword">this</span>.name&#125;</span>`</span>)</span><br><span class="line">  &#125;</span><br><span class="line">&#125;</span><br><span class="line"><span class="class"><span class="keyword">class</span> <span class="title">Son</span> <span class="keyword">extends</span> <span class="title">Father</span></span>&#123;</span><br><span class="line">  <span class="keyword">constructor</span>(name)&#123;</span><br><span class="line">    <span class="keyword">super</span>(name);</span><br><span class="line">    <span class="keyword">this</span>.like=<span class="string">"篮球"</span></span><br><span class="line">  &#125;</span><br><span class="line">&#125;</span><br><span class="line"><span class="keyword">const</span> son1=<span class="keyword">new</span> Father(<span class="string">"Tom"</span>)</span><br><span class="line"><span class="keyword">const</span> son2=<span class="keyword">new</span> Son(<span class="string">"King"</span>)</span><br><span class="line">son2.tell()</span><br></pre>
+<p><strong>补充：</strong> <code>instanceof</code>用来比较一个对象是否为某一个构造函数的实例。注意，instanceof运算符只能用于对象，不适用原始类型的值。他可以判断某个实例是否属于某种类型也可以判断一个实例是否是其父类型或者祖先类型的实例。</p>
+<p><strong>特点：</strong> 实例可继承的属性有：实例的构造函数的属性，父类构造函数的属性（新实例不会继承父类实例的属性）</p>
+<p><strong>缺点：</strong> 新实例无法向父类构造函数传参；继承单一；所有实例都会共享父类实例的属性（原型的属性是共享的，一个实例修改了原型属性，另一个原型属性也会被修改）<br>用<code>.call()</code>和<code>.apply()</code>将父类构造函数引入子类函数</p>
+<p><strong>特点：</strong> 只继承了父类构造函数的属性，没有继承父类原型的属性；解决了原型链继承缺点；可以继承多个构造函数属性（call多个）；在子实例中可向父实例传参</p>
+<p><strong>缺点：</strong> 只能继承父类构造函数的属性；无法实现构造函数的复用；每个新实例都有父类构造函数的副本，臃肿</p>
+<h3 id="js原生事件的绑定"><a href="#js原生事件的绑定" class="headerlink" title="js原生事件的绑定"></a>js原生事件的绑定</h3><p><strong>答：</strong> JS原生绑定事件主要为三种：<br>    一是html事件处理程序<br>    二是DOM0级事件处理程序<br>    三是DOM2级事件处理程序</p>
+<ol>
+<li>html事件现在早已不用了，就是在html各种标签上直接添加事件，类似于css的行内样式，缺点是不好维护，因为散落在标签中,也就是耦合度太高<br>例如：<code>&lt;button onclick=”事件处理函数”&gt;点我&lt;/button&gt;</code></li>
+<li>第二类是DOM0级事件，目前在PC端用的还是比较多的绑定事件方式，兼容性也好，主要是先获取dom元素，然后直接给dom元素添加事件<br>例如：<pre class="highlight"><span class="line"><span class="keyword">var</span> btn=<span class="built_in">document</span>.getElementById(‘id元素’)</span><br><span class="line">     btn.onclick=<span class="function"><span class="keyword">function</span>(<span class="params"></span>) </span>&#123;</span><br><span class="line">        <span class="comment">//要处理的事件逻辑</span></span><br><span class="line">     &#125;</span><br></pre>
+ DOM0事件如何移除呢？很简单：btn.onclick=null;置为空就行</li>
+</ol>
+<p><strong>优点：</strong> 兼容性好</p>
+<p><strong>缺点：</strong> 只支持冒泡，不支持捕获</p>
+<ol start="3">
+<li>第三类是DOM2级事件，移动端用的比较多，也有很多优点，提供了专门的绑定和移除方法<br>例如：<pre class="highlight"><span class="line"><span class="keyword">var</span> btn=<span class="built_in">document</span>.getElementById(‘id元素’)</span><br><span class="line">   <span class="comment">//绑定事件</span></span><br><span class="line">btn.addEventListener(‘click’,绑定的事件处理函数名,<span class="literal">false</span>)</span><br><span class="line">   <span class="comment">//移除事件</span></span><br><span class="line">btn.removeEventListener(‘click’,要移除的事件处理函数名，<span class="literal">false</span>)</span><br></pre></li>
+</ol>
+<p><strong>优点：</strong> 支持给个元素绑定多个相同事件，支持冒泡和捕获事件机制</p>
+<h3 id="JS原生常用dom操作方法？"><a href="#JS原生常用dom操作方法？" class="headerlink" title="JS原生常用dom操作方法？"></a>JS原生常用dom操作方法？</h3><p><strong>答：</strong> js原生dom操作方法有<br>创建：<br>①<code>createDocumentFragment()</code> 创建一个DOM片段<br>②<code>createElement()</code> 创建一个具体的元素<br>③<code>createTextNode()</code>创建一个文本节点<br>查找：<br>①<code>getElementByid()</code> 唯一性<br>②<code>getElementsByTagName()</code> 获得一个集合<br>③<code>querySelector()</code><br>④<code>querySelectorAll()</code><br>添加：<code>appendChild()</code><br>插入：<code>insertBefore()</code><br>删除：<code>removeChild()</code><br>替换：<code>replaceChild()</code><br>克隆：<code>cloneNode()</code><br>设置和获取属性：<code>setAttribute(&#39;属性名&#39;,&#39;值&#39;)</code>,<code>getAttibute(&#39;属性名&#39;)</code></p>
+<h3 id="说一下ES6新增特性"><a href="#说一下ES6新增特性" class="headerlink" title="说一下ES6新增特性"></a>说一下ES6新增特性</h3><p><strong>答：</strong> ES6新增特性常用的主要有：let/const,箭头函数，模板字符串，解构赋值，模块的导入(import)和导出(export default/export),Promise,还有一些数组字符串的新方法,其实有很多，我平时常用的就这些<br><a href="https://wangdoc.com/es6/" target="_blank" rel="noopener">阮一峰–ES6</a>—-by网道</p>
+<h3 id="了解-JS设计模式有哪些-单例模式观察者模式等"><a href="#了解-JS设计模式有哪些-单例模式观察者模式等" class="headerlink" title="(了解)JS设计模式有哪些(单例模式观察者模式等)"></a>(了解)JS设计模式有哪些(单例模式观察者模式等)</h3><p>单例模式：就是保证一个类只有一个实例，实现的方法一般是先判断实例存在与否，如果存在直接返回，如果不存在就创建了再返回，这就确保了一个类只有一个实例对象。在JavaScript里，单例作为一个命名空间提供者，从全局命名空间里提供一个唯一的访问点来访问该对象。</p>
+<p>观察者模式: 观察者的使用场合就是：当一个对象的改变需要同时改变其它对象，并且它不知道具体有多少对象需要改变的时候，就应该考虑使用观察者模式。<br>总的来说，观察者模式所做的工作就是在解耦，让耦合的双方都依赖于抽象，而不是依赖于具体。从而使得各自的变化都不会影响到另一边的变化</p>
+<h3 id="说一下你对JS面向对象的理解"><a href="#说一下你对JS面向对象的理解" class="headerlink" title="说一下你对JS面向对象的理解"></a>说一下你对JS面向对象的理解</h3><p>什么是面向对象：将所需要做的功能抽象成一个“对象”，然后反复调用这个对象来完成你想要的功能<br>面向对象的用法</p>
+<ol>
+<li>创建对象<pre class="highlight"><span class="line"><span class="keyword">var</span> box=<span class="keyword">new</span> <span class="built_in">Object</span>();<span class="comment">//创建object对象</span></span><br><span class="line">box.name=<span class="string">'Lee'</span>;<span class="comment">//创建属性并赋值</span></span><br><span class="line">box.age=<span class="number">100</span>;</span><br><span class="line">box.run=<span class="function"><span class="keyword">function</span>(<span class="params"></span>)</span>&#123;<span class="comment">//创建一个run()方法并返回值</span></span><br><span class="line">	<span class="keyword">return</span> <span class="keyword">this</span>.name+<span class="keyword">this</span>.age;</span><br><span class="line">&#125;</span><br><span class="line">alert(box.run());<span class="comment">//输出属性和方法的值</span></span><br></pre></li>
+</ol>
+<p><strong>缺点</strong> 想要创建多个类似的对象，就会产生大量的代码</p>
+<ol start="2">
+<li>工厂模式创建对象：<pre class="highlight"><span class="line"><span class="function"><span class="keyword">function</span> <span class="title">createObject</span>(<span class="params">name,age</span>)</span>&#123;<span class="comment">//集中实例化的函数</span></span><br><span class="line">	<span class="keyword">var</span> obj=<span class="keyword">new</span> <span class="built_in">Object</span>();</span><br><span class="line">	obj.name=name;</span><br><span class="line">	obj.age=age;</span><br><span class="line">	obj.run=<span class="function"><span class="keyword">function</span>(<span class="params"></span>)</span>&#123;</span><br><span class="line">		<span class="keyword">return</span> <span class="keyword">this</span>.name+<span class="keyword">this</span>.age;</span><br><span class="line">	&#125;</span><br><span class="line">	<span class="keyword">return</span> obj;</span><br><span class="line">&#125;</span><br><span class="line"><span class="keyword">var</span> box1=createObject(<span class="string">'Lee'</span>,<span class="number">100</span>)<span class="comment">//实例</span></span><br><span class="line"><span class="keyword">var</span> box1=createObject(<span class="string">'Jack'</span>,<span class="number">200</span>)</span><br><span class="line">alert(box1.run())<span class="comment">//保持独立</span></span><br><span class="line">alert(box2.run())</span><br></pre>
+
+</li>
+</ol>
+<p>工厂模式解决了重复实例化的问题，缺点，创建不同对象其中属性和方法都会重复建立，消耗内存；还有函数识别问题等等。<br>3. 字面量创建对象<br>Var obj={}<br>④构造函数的方法创建对象</p>
+<pre class="highlight"><span class="line"><span class="function"><span class="keyword">function</span> <span class="title">Box</span>(<span class="params">name,age</span>)</span>&#123;</span><br><span class="line">	<span class="keyword">this</span>.name=name;</span><br><span class="line">	<span class="keyword">this</span>.age=age;</span><br><span class="line">	<span class="keyword">this</span>.run=<span class="function"><span class="keyword">function</span>(<span class="params"></span>)</span>&#123;</span><br><span class="line">		<span class="keyword">return</span> <span class="keyword">this</span>.name+<span class="keyword">this</span>.age;</span><br><span class="line">	&#125;</span><br><span class="line">&#125;</span><br><span class="line"><span class="keyword">var</span> box1=<span class="keyword">new</span> Box(<span class="string">'Lee'</span>,<span class="number">100</span>);</span><br><span class="line"><span class="keyword">var</span> box2=<span class="keyword">new</span> Box(<span class="string">'Jack'</span>,<span class="number">200</span>);</span><br><span class="line">alert(box1.run());</span><br><span class="line">alert(box1 <span class="keyword">instanceof</span> Box);</span><br></pre>
+<p>当使用了构造函数，并且new构造函数(),那么后台执行了new Object();<br>将构造函数的作用域给新对象，即(new Object()创建的对象)，而函数体内的this就代表new Object()出来的对象。<br>执行构造函数内的代码<br>返回新对象(后台直接返回)<br>4. ES6的面向对象<br>关键字Class定义类</p>
+<pre class="highlight"><span class="line"><span class="class"><span class="keyword">class</span> <span class="title">User</span></span>&#123;</span><br><span class="line">	constuctor(name,age)&#123;</span><br><span class="line">		<span class="keyword">this</span>.name=name;</span><br><span class="line">		<span class="keyword">this</span>.age=age;</span><br><span class="line">	&#125;</span><br><span class="line">	showName()&#123;</span><br><span class="line">		<span class="built_in">console</span>.log(<span class="keyword">this</span>.name);</span><br><span class="line">	&#125;</span><br><span class="line">&#125;</span><br><span class="line"><span class="keyword">let</span> user = <span class="keyword">new</span> User(<span class="string">'Lee'</span>,<span class="number">21</span>)</span><br><span class="line">user.showName()</span><br></pre>
+<p>ES6的class 有了专门的构造器 constructor，构造器和类分开了，定义方法：不需要原型来定义了，直接再类里面定义方法<br>ES6声明类方法</p>
+<pre class="highlight"><span class="line"><span class="comment">// 匿名类</span></span><br><span class="line"><span class="keyword">let</span> Example1=<span class="class"><span class="keyword">class</span></span>&#123;</span><br><span class="line">  <span class="keyword">constructor</span>(a)&#123;</span><br><span class="line">    <span class="keyword">this</span>.a=a;</span><br><span class="line">    <span class="built_in">console</span>.log(a);</span><br><span class="line">  &#125;</span><br><span class="line">&#125;</span><br><span class="line"><span class="keyword">let</span> ex1=<span class="keyword">new</span> Example1(<span class="number">1</span>);</span><br><span class="line"><span class="comment">// 命名类</span></span><br><span class="line"><span class="keyword">let</span> Example2=<span class="class"><span class="keyword">class</span> <span class="title">Example2</span></span>&#123;</span><br><span class="line">  <span class="keyword">constructor</span>(a)&#123;</span><br><span class="line">    <span class="keyword">this</span>.a=a;</span><br><span class="line">    <span class="built_in">console</span>.log(a);</span><br><span class="line">  &#125;</span><br><span class="line">&#125;</span><br><span class="line"><span class="keyword">let</span> ex2=<span class="keyword">new</span> Example2(<span class="number">2</span>);</span><br><span class="line"><span class="comment">// 类声明</span></span><br><span class="line"><span class="class"><span class="keyword">class</span> <span class="title">Example</span></span>&#123;</span><br><span class="line">  <span class="keyword">constructor</span>(a,b)&#123;</span><br><span class="line">    <span class="keyword">this</span>.a=a;</span><br><span class="line">    <span class="keyword">this</span>.b=b;</span><br><span class="line">  &#125;</span><br><span class="line">&#125;</span><br></pre>
+<h3 id="js数组常用方法"><a href="#js数组常用方法" class="headerlink" title="js数组常用方法"></a>js数组常用方法</h3><p><strong>答：</strong> 在开发中，数组使用频率很频繁，JS数组常用方法<br>有:push,pop,unshift,shift,splice,join,concat,forEach,filter,map,sort,some,every好多，不过都是平时开发中很常用的方法</p>
+<h3 id="JS数组内置遍历方法有哪些和区别"><a href="#JS数组内置遍历方法有哪些和区别" class="headerlink" title="JS数组内置遍历方法有哪些和区别"></a>JS数组内置遍历方法有哪些和区别</h3><p><strong>答：</strong> JS数组内置遍历（遍历就是循环的意思）方法主要有：<br><code>forEach</code>:这个方法是为了取代for循环遍历数组的，返回值为undefined例如：</p>
+<pre class="highlight"><span class="line"><span class="keyword">let</span> arrInfo=[<span class="number">4</span>,<span class="number">6</span>,<span class="number">6</span>,<span class="number">8</span>,<span class="number">5</span>,<span class="number">7</span>,<span class="number">87</span>]</span><br><span class="line">arrInfo.forEach(<span class="function">(<span class="params">item,index,arr</span>)=&gt;</span>&#123;</span><br><span class="line">    <span class="comment">//遍历逻辑</span></span><br><span class="line">&#125;)</span><br></pre>
+<p>其中：<br>  item代码遍历的每一项,<br>  index:代表遍历的每项的索引，<br>  arr代表数组本身<br><code>filter</code>:是一个过滤遍历的方法，如果返回条件为true，则返回满足条件为true的新数组</p>
+<pre class="highlight"><span class="line"><span class="keyword">let</span> arrInfo=[<span class="number">4</span>,<span class="number">16</span>,<span class="number">6</span>,<span class="number">8</span>,<span class="number">45</span>,<span class="number">7</span>,<span class="number">87</span>]</span><br><span class="line">et  resultArr=arrInfo.filter(<span class="function">(<span class="params">item,index,arr</span>)=&gt;</span>&#123;</span><br><span class="line">    <span class="comment">//例如返回数组每项值大于9的数组</span></span><br><span class="line">    <span class="keyword">return</span> item&gt;<span class="number">9</span></span><br><span class="line">&#125;)</span><br></pre>
+<p><strong>map:</strong> 这个map方法主要对数组的复杂逻辑处理时用的多，特别是react中遍历数据，也经常用到，写法和forEach类似</p>
+<p><strong>some:</strong> 这个some方法用于只要数组中至少存在一个满足条件的结果，返回值就为true,否则返回fasel, 写法和forEach类似</p>
+<p><strong>every:</strong> 这个every方法用于数组中每一项都得满足条件时，才返回true，否则返回false, 写法和forEach类似</p>
+<h3 id="说一下从输入URL到页面加载完中间发生了什么？"><a href="#说一下从输入URL到页面加载完中间发生了什么？" class="headerlink" title="说一下从输入URL到页面加载完中间发生了什么？"></a>说一下从输入URL到页面加载完中间发生了什么？</h3><p><strong>答：</strong> 大致过程是这样的：</p>
+<ol>
+<li>DNS解析</li>
+<li>TCP连接</li>
+<li>发送HTTP请求</li>
+<li>服务器处理请求并返回需要的数据</li>
+<li>浏览器解析渲染页面</li>
+<li>连接结束<br> 输入了一个域名,域名要通过DNS解析找到这个域名对应的服务器地址(ip),通过TCP请求链接服务,通过WEB服务器(apache)返回数据,浏览器根据返回数据构建DOM树,通过css渲染引擎及js解析引擎将页面渲染出来,关闭tcp连接</li>
+</ol>
+<h3 id="js事件代理（事件委托）以及实现原理？"><a href="#js事件代理（事件委托）以及实现原理？" class="headerlink" title="js事件代理（事件委托）以及实现原理？"></a>js事件代理（事件委托）以及实现原理？</h3><p><strong>答：</strong> 事件委托，通俗地来讲，就是把一个元素响应事件（<code>click、keydown......</code>）的函数委托到另一个元素。JS事件代理就是通过给父级元素（例如：ul）绑定事件，不给子级元素(例如：li)绑定事件，然后当点击子级元素时，通过事件冒泡机制在其绑定的父元素上触发事件处理函数，主要目的是为了提升性能，因为我不用给每个子级元素绑定事件，只给父级元素绑定一次就好了,在原生js里面是通过event对象的targe属性实现. 事件委托可以减少大量的内存消耗，节约效率 </p>
+<pre class="highlight"><span class="line"><span class="built_in">document</span>.querySelector(<span class="string">"ul"</span>).addEventListener(<span class="string">'click'</span>,<span class="function"><span class="keyword">function</span>(<span class="params">e</span>)</span>&#123;<span class="comment">//e指event,事件对象</span></span><br><span class="line">	<span class="comment">//兼容性处理</span></span><br><span class="line">    <span class="keyword">var</span> event=e||<span class="built_in">window</span>.event;</span><br><span class="line">    <span class="keyword">var</span> target=event.target||event.srcElement <span class="comment">//target获取触发事件的目标(li)</span></span><br><span class="line">	<span class="keyword">if</span>(target.nodeName.toLowerCase() == <span class="string">'li'</span>)&#123;<span class="comment">//目标(li)节点名转小写字母，不转的话是大写字母</span></span><br><span class="line">		alert(target.innerHTML)</span><br><span class="line">	&#125;</span><br><span class="line">&#125;)</span><br></pre>
+<p>jq方式实现相对而言简单 $(“ul”).on(“click”,“li”,function(){//事件逻辑})  其中第二个参数指的是触发事件的具体目标，特别是给动态添加的元素绑定事件，这个特别起作用</p>
+<h3 id="js数据类型"><a href="#js数据类型" class="headerlink" title="js数据类型"></a>js数据类型</h3><p><strong>答：</strong> JS数据类型有：<br>基本数据类型：number,string,Boolean,null,undefined,symbol（ES6新增）<br>复合类型：Object,function</p>
+<h3 id="说一下call-apply-bind区别"><a href="#说一下call-apply-bind区别" class="headerlink" title="说一下call,apply,bind区别"></a>说一下call,apply,bind区别</h3><p><strong>答：</strong> call,apply,bind主要作用都是改变this指向的，但使用上略有区别，说一下区别:</p>
+<ol>
+<li>call和apply的主要区别是在传递参数上不同，call后面传递的参数是以逗号的形式分开的，apply传递的参数是数组形式   [Apply是以A开头的,所以应该是跟Array(数组)形式的参数]</li>
+<li>bind返回的是一个函数形式，如果要执行，则后面要再加一个小括号 例如：bind(obj,参数1,参数2,)(),bind只能以逗号分隔形式，不能是数组形式</li>
+</ol>
+<pre class="highlight"><span class="line"><span class="keyword">var</span> sum=&#123;</span><br><span class="line">  title:<span class="string">"求和"</span>,</span><br><span class="line">  fun:<span class="function"><span class="keyword">function</span>(<span class="params">a,b</span>)</span>&#123;</span><br><span class="line">    <span class="built_in">console</span>.log(a+b)</span><br><span class="line">  &#125;</span><br><span class="line">&#125;</span><br><span class="line"><span class="keyword">var</span> say=sum.fun;</span><br><span class="line"><span class="comment">// apply传参是数组形式</span></span><br><span class="line">say.apply(sum,[<span class="number">2</span>,<span class="number">3</span>])</span><br><span class="line"><span class="comment">// call传参是以逗号隔开的形式</span></span><br><span class="line">say.call(sum,<span class="number">2</span>,<span class="number">3</span>)</span><br><span class="line"><span class="comment">// bind函数形式</span></span><br><span class="line">say.bind(sum,<span class="number">2</span>,<span class="number">3</span>)()</span><br></pre>
+
+<h3 id="判断是否是数组"><a href="#判断是否是数组" class="headerlink" title="判断是否是数组"></a>判断是否是数组</h3><p>判断是否是同一个爹<br><code>child.__proto__===Father.prototype</code><br><code>Object.getPrototypeOf(child)===Father.prototype</code><br><code>Father.prototype.isPrototypeOf(child)</code><br>判断是否是同一个妈<br><code>child.constructor===Mother</code><br><code>child instanceof Mother</code><br><code>Array.isArray(child)</code>的原理<code>toString.call()</code><br><code>Object.prototype.toString.call(child)===&quot;[object Array]&quot;</code></p>
+<h3 id="http状态码"><a href="#http状态码" class="headerlink" title="http状态码"></a>http状态码</h3><p>1xx（临时响应）表示临时响应并需要请求者继续执行操作的状态代码<br>2xx （成功）表示成功处理了请求的状态码。<br>    常见的2开头的状态码有：200 – 服务器成功返回网页<br>3xx （重定向）表示要完成请求，需要进一步操作。 通常，这些状态代码用来重定向<br>常见的3字开头的状态码有：<br>    301   （永久移动）  请求的网页已永久移动到新位置。 服务器返回此响应时，会自动将请求者转到新位置。<br>    302   （临时移动）  服务器目前从不同位置的网页响应请求，但请求者应继续使用原有位置来进行以后的请求。<br>    304   （未修改） 自从上次请求后，请求的网页未修改过。 服务器返回此响应时，不会返回网页内容。<br>4xx（请求错误） 这些状态代码表示请求可能出错，妨碍了服务器的处理。<br>常见的4字开头的状态有：<br>    404 – 请求的网页不存在<br>5xx（服务器错误）这些状态代码表示服务器在尝试处理请求时发生内部错误。 这些错误可能是服务器本身的错误，而不是请求出错。<br>常见的以5开头的状态码有：<br>    500   （服务器内部错误）  服务器遇到错误，无法完成请求。<br>    503   （服务不可用） 服务器目前无法使用（由于超载或停机维护）。 通常，这只是暂时状态。</p>
+<h3 id="你上家公司项目是前后端分离的吗"><a href="#你上家公司项目是前后端分离的吗" class="headerlink" title="你上家公司项目是前后端分离的吗"></a>你上家公司项目是前后端分离的吗</h3><p><strong>答：</strong> 对，是前后端分离的项目，但开始不是，开始前后端代码混在一起写的，后来重构成前后端分离的项目，方便前端和后端自己维护的代码</p>
+<blockquote>
+<p>注：所谓前后端分离就是前后端职责明晰：后端只提供数据接口地址返回json数据，前端用ajax请求json数据，页面的所有业务逻辑都是前端来写，让前端控制力更强，并且减轻后端逻辑处理压力。</p>
+</blockquote>
+<h3 id="深拷贝和浅拷贝"><a href="#深拷贝和浅拷贝" class="headerlink" title="深拷贝和浅拷贝"></a>深拷贝和浅拷贝</h3><p>用es6的Object.assign({},{})进行对象合并，如果是数组可以用es6的Array.from，或是es6的扩展运算符…arr，如果使用es5需要用循环来做浅拷贝，如果是深拷贝需要用递归的形式来实现.当然也可以使用JSON.parse(JSON.stringify(对象))的方式实现深拷贝<br><a href="https://juejin.im/post/6844904174979645453" target="_blank" rel="noopener">javascrip的浅拷贝和深拷贝</a></p>
+<pre class="highlight"><span class="line"><span class="keyword">var</span> lilei1 = &#123;</span><br><span class="line">  name: <span class="string">"李磊"</span>,</span><br><span class="line">  age: <span class="number">12</span>,</span><br><span class="line">  address: &#123;</span><br><span class="line">    city: <span class="string">"西安"</span>,</span><br><span class="line">    street: <span class="string">"体育场"</span></span><br><span class="line">  &#125;</span><br><span class="line">&#125;</span><br><span class="line"><span class="comment">// 浅拷贝</span></span><br><span class="line"><span class="function"><span class="keyword">function</span> <span class="title">clone</span>(<span class="params">oldObj</span>) </span>&#123;</span><br><span class="line">  <span class="keyword">if</span> (oldObj == <span class="literal">null</span>) &#123;</span><br><span class="line">    <span class="keyword">return</span> <span class="literal">null</span></span><br><span class="line">  &#125;</span><br><span class="line">  <span class="keyword">if</span> (<span class="keyword">typeof</span> (oldObj) !== <span class="string">"object"</span>) &#123;</span><br><span class="line">    <span class="keyword">return</span> oldObj</span><br><span class="line">  &#125;</span><br><span class="line">  <span class="keyword">var</span> newObj=&#123;&#125;</span><br><span class="line">  <span class="keyword">var</span> newObj = <span class="built_in">Array</span>.isArray(oldObj) ? [] : &#123;&#125;;</span><br><span class="line">  <span class="keyword">for</span> (<span class="keyword">var</span> key <span class="keyword">in</span> oldObj) &#123;</span><br><span class="line">    newObj[key] = oldObj[key]</span><br><span class="line">  &#125;</span><br><span class="line">  <span class="keyword">return</span> newObj;</span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line"><span class="keyword">var</span> lilei2 = clone(lilei1)</span><br><span class="line">lilei2.age=<span class="number">33</span></span><br><span class="line">lilei2.address.city=<span class="string">"北京"</span></span><br><span class="line">lilei2.address.street=<span class="string">"五棵松"</span></span><br><span class="line"><span class="built_in">console</span>.log(lilei1)</span><br><span class="line"><span class="built_in">console</span>.log(lilei2)</span><br><span class="line"></span><br><span class="line"><span class="comment">// 特定方法Object.assign(&#123;&#125;, obj)</span></span><br><span class="line">lilei5=<span class="built_in">Object</span>.assign(&#123;&#125;, lilei1)</span><br><span class="line">lilei5.age=<span class="number">22</span></span><br><span class="line">lilei5.address.city=<span class="string">"汉中"</span></span><br><span class="line">lilei5.address.street=<span class="string">"郑国渠"</span></span><br><span class="line"><span class="built_in">console</span>.log(lilei1)</span><br><span class="line"><span class="built_in">console</span>.log(lilei5)</span><br><span class="line"></span><br><span class="line"><span class="comment">// 深拷贝</span></span><br><span class="line"><span class="function"><span class="keyword">function</span> <span class="title">deepclone</span>(<span class="params">obj</span>) </span>&#123;</span><br><span class="line">  <span class="keyword">if</span>(obj==<span class="literal">null</span>)&#123;<span class="keyword">return</span> <span class="literal">null</span>&#125;</span><br><span class="line">  <span class="keyword">if</span>(<span class="keyword">typeof</span>(obj)!==<span class="string">"object"</span>)&#123;<span class="keyword">return</span> obj&#125;</span><br><span class="line">  <span class="keyword">var</span> newobj = <span class="built_in">Array</span>.isArray(obj)?[]:&#123;&#125;;</span><br><span class="line">  <span class="keyword">for</span> (<span class="keyword">var</span> key <span class="keyword">in</span> obj) &#123;</span><br><span class="line">    newobj[key]=deepclone(obj[key])</span><br><span class="line">  &#125;</span><br><span class="line">  <span class="keyword">return</span> newobj</span><br><span class="line">&#125;</span><br><span class="line"><span class="keyword">var</span> lilei3=deepclone(lilei1)</span><br><span class="line">lilei3.age=<span class="number">13</span></span><br><span class="line">lilei3.address.city=<span class="string">"成都"</span></span><br><span class="line">lilei3.address.street=<span class="string">"酒馆"</span></span><br><span class="line"><span class="built_in">console</span>.log(lilei1)</span><br><span class="line"><span class="built_in">console</span>.log(lilei3)<span class="comment">//13,成都，酒馆</span></span><br><span class="line"></span><br><span class="line"><span class="comment">// JSON.parse(JSON.stringify( obj ))</span></span><br><span class="line">lilei6=<span class="built_in">JSON</span>.parse(<span class="built_in">JSON</span>.stringify(lilei1))</span><br><span class="line">lilei6.age=<span class="number">13</span></span><br><span class="line">lilei6.address.city=<span class="string">"成都"</span></span><br><span class="line">lilei6.address.street=<span class="string">"酒馆"</span></span><br><span class="line"><span class="built_in">console</span>.log(lilei1)</span><br><span class="line"><span class="built_in">console</span>.log(lilei6)</span><br></pre>
+
+<h3 id="webpack"><a href="#webpack" class="headerlink" title="webpack"></a>webpack</h3><p>静态打包资源，核心</p>
+<p>1.<code>entry</code>：入口<br>2.<code>output</code>：输出，指定最终输出的资源包文件<br>3.<code>loader</code>：加载器，让webpack可以处理非js文件，如CSS/图片<br>4.<code>mode</code>：运行模式，可以指定production(产品模式下，输出文件最小化)或者development(开发模式，输出文件不会最小化)<br>5.<code>plugins</code>:定义扩展功能性插件</p>
+<h3 id="中间件"><a href="#中间件" class="headerlink" title="中间件"></a>中间件</h3><p>express有五中类别的中间件：</p>
+<ul>
+<li>应用级别的中间件： 挂载到 <code>app</code> 上的中间件，例如：<code>app.use()</code></li>
+<li>路由级别的中间件： 挂载到 router 对象上的中间件，例如：<code>router.get()</code>、 <code>router.post</code></li>
+<li>错误级别的中间件： 回调函数中，有四个参数 <code>app.use((err, req, res, next)=&gt;{})</code></li>
+<li>内置中间件： <code>express.static()</code>,express提供的唯一内置中间件</li>
+<li>第三方中间件： 非express框架提供的，需要程序员手动安装才能使用的中间件；<code>body-parser</code>解析post 表单数据</li>
+</ul>
+<h3 id="for–in和for–of应用场景"><a href="#for–in和for–of应用场景" class="headerlink" title="for–in和for–of应用场景"></a>for–in和for–of应用场景</h3><p><strong>答：</strong>在循环对象属性的时候，使用for…in,在遍历数组的时候的时候使用for…of</p>
+<h3 id="HTTP和HTTPS差别"><a href="#HTTP和HTTPS差别" class="headerlink" title="HTTP和HTTPS差别"></a>HTTP和HTTPS差别</h3><p>Http 协议运行在 TCP 之上，明文传输，客户端与服务器端都无法验证对方的身份；Https 是身披 SSL(Secure Socket Layer)外壳的 Http，运行于 SSL 上，SSL 运行于 TCP 之上，是添加了加密和认证机制的 HTTP。二者之间存在如下不同：</p>
+<ol>
+<li>端口不同：Http 与 Http 使用不同的连接方式，用的端口也不一样，前者是 80，后者是 443；</li>
+<li>资源消耗：和 HTTP 通信相比，Https 通信会由于加减密处理消耗更多的 CPU 和内存资源；</li>
+<li>开销：Https 通信需要证书，而证书一般需要向认证机构购买；</li>
+<li>Https 的加密机制是一种共享密钥加密和公开密钥加密并用的混合加密机制。</li>
+</ol>
+<h3 id="字符串为什么可以通过下标访问"><a href="#字符串为什么可以通过下标访问" class="headerlink" title="字符串为什么可以通过下标访问"></a>字符串为什么可以通过下标访问</h3><p>字符串的两种写法</p>
+<pre class="highlight"><span class="line"><span class="keyword">var</span> str1=<span class="string">"123"</span></span><br><span class="line"><span class="keyword">var</span> str=<span class="keyword">new</span> <span class="built_in">String</span>(<span class="string">"456"</span>)</span><br></pre>
+<p>可以通过下标访问是因为字符串就是对象，length就是他的方法</p>
+<pre class="highlight"><span class="line"><span class="comment">//字符串就是对象</span></span><br><span class="line"><span class="keyword">var</span> str1=<span class="string">'123'</span><span class="comment">//不是对象===栈</span></span><br><span class="line"><span class="keyword">var</span> str2=<span class="keyword">new</span> <span class="built_in">String</span>() <span class="comment">//对象===对内存</span></span><br><span class="line">str2.charAt()</span><br><span class="line">str1.charAt()</span><br><span class="line"><span class="built_in">console</span>.log(str2);</span><br></pre>
+  </div>
+  <div>
+  
+  <div class="post-note note-warning copyright" style="margin-top: 42px">
+    <p><span style="font-weight: bold;">作者：</span><a target="_blank" rel="nofollow noopener noreferrer" href="https://xiaobai123-4.github.io/about">MaQisong</a></p>
+    <p><span style="font-weight: bold;">文章链接：</span><a target="_blank" rel="nofollow noopener noreferrer" href="https://xiaobai123-4.github.io/2020/08/10/javascript/">https://xiaobai123-4.github.io/2020/08/10/javascript/</a></p>
+    <p><span style="font-weight: bold;">版权声明：</span>本博客所有文章除特别声明外，均采用<a target="_blank" rel="noopener" href="https://creativecommons.org/licenses/by-nc-sa/4.0/deed.zh">CC BY-NC-SA 4.0 协议</a>。转载请注明出处！</p>
+  </div>
+  
+  </div>
+</article>
+<div class="nav">
+  
+  <div class="nav-item-prev">
+    <a href="/2020/08/11/innerHTML/" class="nav-link">
+      <i class="iconfont icon-left nav-prev-icon"></i>
+      <div>
+        <div class="nav-label">上一篇</div>
+        
+        <div class="nav-title">innerHTML </div>
+        
+      </div>
+    </a>
+  </div>
+  
+  
+  <div class="nav-item-next">
+    <a href="/2020/07/18/拷贝/" class="nav-link">
+      <div>
+        <div class="nav-label">下一篇</div>
+        
+        <div class="nav-title">拷贝 </div>
+        
+      </div>
+      <i class="iconfont icon-right nav-next-icon"></i>
+    </a>
+  </div>
+  
+</div>
+
+<div class="card card-content toc-card" id="mobiletoc">
+  <div class="toc-header"><i class="iconfont icon-menu" style="padding-right: 2px;"></i>目录</div>
+<ol class="toc"><li class="toc-item toc-level-3"><a class="toc-link" href="#作用域和作用域链"><span class="toc-text">作用域和作用域链</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#null-和undefined-的区别"><span class="toc-text">null 和undefined 的区别</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#cookies，sessionStorage和localStorage的区别"><span class="toc-text">cookies，sessionStorage和localStorage的区别</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#闭包"><span class="toc-text">闭包</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#构造函数"><span class="toc-text">构造函数</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#原型链的理解"><span class="toc-text">原型链的理解</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#js继承"><span class="toc-text">js继承</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#js原生事件的绑定"><span class="toc-text">js原生事件的绑定</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#JS原生常用dom操作方法？"><span class="toc-text">JS原生常用dom操作方法？</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#说一下ES6新增特性"><span class="toc-text">说一下ES6新增特性</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#了解-JS设计模式有哪些-单例模式观察者模式等"><span class="toc-text">(了解)JS设计模式有哪些(单例模式观察者模式等)</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#说一下你对JS面向对象的理解"><span class="toc-text">说一下你对JS面向对象的理解</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#js数组常用方法"><span class="toc-text">js数组常用方法</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#JS数组内置遍历方法有哪些和区别"><span class="toc-text">JS数组内置遍历方法有哪些和区别</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#说一下从输入URL到页面加载完中间发生了什么？"><span class="toc-text">说一下从输入URL到页面加载完中间发生了什么？</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#js事件代理（事件委托）以及实现原理？"><span class="toc-text">js事件代理（事件委托）以及实现原理？</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#js数据类型"><span class="toc-text">js数据类型</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#说一下call-apply-bind区别"><span class="toc-text">说一下call,apply,bind区别</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#判断是否是数组"><span class="toc-text">判断是否是数组</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#http状态码"><span class="toc-text">http状态码</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#你上家公司项目是前后端分离的吗"><span class="toc-text">你上家公司项目是前后端分离的吗</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#深拷贝和浅拷贝"><span class="toc-text">深拷贝和浅拷贝</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#webpack"><span class="toc-text">webpack</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#中间件"><span class="toc-text">中间件</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#for–in和for–of应用场景"><span class="toc-text">for–in和for–of应用场景</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#HTTP和HTTPS差别"><span class="toc-text">HTTP和HTTPS差别</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#字符串为什么可以通过下标访问"><span class="toc-text">字符串为什么可以通过下标访问</span></a></li></ol>
+</div></main>
+          <aside class="left-column">
+            
+            <div class="card card-author">
+              
+<img src="https://s3.ax1x.com/2021/03/04/6VEJaQ.jpg" class="author-img">
+
+<p class="author-name">MaQisong</p>
+<p class="author-description">学习永不止步</p>
+<div class="author-message">
+  <a class="author-posts-count" href="/archives">
+    <span>65</span>
+    <span>文章</span>
+  </a>
+  <a class="author-categories-count" href="/categories">
+    <span>25</span>
+    <span>分类</span>
+  </a>
+  <a class="author-tags-count" href="/tags">
+    <span>38</span>
+    <span>标签</span>
+  </a>
+</div>
+
+            </div>
+            
+            <div class="sticky-tablet">
+  
+  
+  <article class="display-when-two-columns spacer">
+    <div class="card card-content toc-card">
+      <div class="toc-header"><i class="iconfont icon-menu" style="padding-right: 2px;"></i>目录</div>
+<ol class="toc"><li class="toc-item toc-level-3"><a class="toc-link" href="#作用域和作用域链"><span class="toc-text">作用域和作用域链</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#null-和undefined-的区别"><span class="toc-text">null 和undefined 的区别</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#cookies，sessionStorage和localStorage的区别"><span class="toc-text">cookies，sessionStorage和localStorage的区别</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#闭包"><span class="toc-text">闭包</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#构造函数"><span class="toc-text">构造函数</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#原型链的理解"><span class="toc-text">原型链的理解</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#js继承"><span class="toc-text">js继承</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#js原生事件的绑定"><span class="toc-text">js原生事件的绑定</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#JS原生常用dom操作方法？"><span class="toc-text">JS原生常用dom操作方法？</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#说一下ES6新增特性"><span class="toc-text">说一下ES6新增特性</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#了解-JS设计模式有哪些-单例模式观察者模式等"><span class="toc-text">(了解)JS设计模式有哪些(单例模式观察者模式等)</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#说一下你对JS面向对象的理解"><span class="toc-text">说一下你对JS面向对象的理解</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#js数组常用方法"><span class="toc-text">js数组常用方法</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#JS数组内置遍历方法有哪些和区别"><span class="toc-text">JS数组内置遍历方法有哪些和区别</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#说一下从输入URL到页面加载完中间发生了什么？"><span class="toc-text">说一下从输入URL到页面加载完中间发生了什么？</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#js事件代理（事件委托）以及实现原理？"><span class="toc-text">js事件代理（事件委托）以及实现原理？</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#js数据类型"><span class="toc-text">js数据类型</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#说一下call-apply-bind区别"><span class="toc-text">说一下call,apply,bind区别</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#判断是否是数组"><span class="toc-text">判断是否是数组</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#http状态码"><span class="toc-text">http状态码</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#你上家公司项目是前后端分离的吗"><span class="toc-text">你上家公司项目是前后端分离的吗</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#深拷贝和浅拷贝"><span class="toc-text">深拷贝和浅拷贝</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#webpack"><span class="toc-text">webpack</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#中间件"><span class="toc-text">中间件</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#for–in和for–of应用场景"><span class="toc-text">for–in和for–of应用场景</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#HTTP和HTTPS差别"><span class="toc-text">HTTP和HTTPS差别</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#字符串为什么可以通过下标访问"><span class="toc-text">字符串为什么可以通过下标访问</span></a></li></ol>
+    </div>
+  </article>
+  
+  
+  <article class="card card-content categories-widget">
+    <div class="categories-card">
+  <div class="categories-header"><i class="iconfont icon-fenlei" style="padding-right: 2px;"></i>分类</div>
+  <div class="categories-list">
+    
+      <a href="/categories/正则表达式/">
+        <div class="categories-list-item">
+          正则表达式
+          <span class="categories-list-item-badge">1</span>
+        </div>
+      </a>
+    
+      <a href="/categories/ajax/">
+        <div class="categories-list-item">
+          ajax
+          <span class="categories-list-item-badge">1</span>
+        </div>
+      </a>
+    
+      <a href="/categories/CSS/">
+        <div class="categories-list-item">
+          CSS
+          <span class="categories-list-item-badge">3</span>
+        </div>
+      </a>
+    
+      <a href="/categories/ES6/">
+        <div class="categories-list-item">
+          ES6
+          <span class="categories-list-item-badge">1</span>
+        </div>
+      </a>
+    
+      <a href="/categories/css/">
+        <div class="categories-list-item">
+          css
+          <span class="categories-list-item-badge">1</span>
+        </div>
+      </a>
+    
+      <a href="/categories/HTML5/">
+        <div class="categories-list-item">
+          HTML5
+          <span class="categories-list-item-badge">4</span>
+        </div>
+      </a>
+    
+      <a href="/categories/git/">
+        <div class="categories-list-item">
+          git
+          <span class="categories-list-item-badge">1</span>
+        </div>
+      </a>
+    
+      <a href="/categories/Markdown/">
+        <div class="categories-list-item">
+          Markdown
+          <span class="categories-list-item-badge">1</span>
+        </div>
+      </a>
+    
+      <a href="/categories/javascript/">
+        <div class="categories-list-item">
+          javascript
+          <span class="categories-list-item-badge">17</span>
+        </div>
+      </a>
+    
+      <a href="/categories/SqlServer/">
+        <div class="categories-list-item">
+          SqlServer
+          <span class="categories-list-item-badge">1</span>
+        </div>
+      </a>
+    
+      <a href="/categories/bootstrap/">
+        <div class="categories-list-item">
+          bootstrap
+          <span class="categories-list-item-badge">1</span>
+        </div>
+      </a>
+    
+      <a href="/categories/分类/">
+        <div class="categories-list-item">
+          分类
+          <span class="categories-list-item-badge">1</span>
+        </div>
+      </a>
+    
+      <a href="/categories/其他/">
+        <div class="categories-list-item">
+          其他
+          <span class="categories-list-item-badge">1</span>
+        </div>
+      </a>
+    
+      <a href="/categories/Vue/">
+        <div class="categories-list-item">
+          Vue
+          <span class="categories-list-item-badge">10</span>
+        </div>
+      </a>
+    
+      <a href="/categories/HTML/">
+        <div class="categories-list-item">
+          HTML
+          <span class="categories-list-item-badge">2</span>
+        </div>
+      </a>
+    
+      <a href="/categories/ionic/">
+        <div class="categories-list-item">
+          ionic
+          <span class="categories-list-item-badge">2</span>
+        </div>
+      </a>
+    
+      <a href="/categories/javascript/Vue/">
+        <div class="categories-list-item">
+          javascript/Vue
+          <span class="categories-list-item-badge">2</span>
+        </div>
+      </a>
+    
+      <a href="/categories/webpack/">
+        <div class="categories-list-item">
+          webpack
+          <span class="categories-list-item-badge">1</span>
+        </div>
+      </a>
+    
+      <a href="/categories/前端/">
+        <div class="categories-list-item">
+          前端
+          <span class="categories-list-item-badge">1</span>
+        </div>
+      </a>
+    
+      <a href="/categories/NodeJS/">
+        <div class="categories-list-item">
+          NodeJS
+          <span class="categories-list-item-badge">1</span>
+        </div>
+      </a>
+    
+      <a href="/categories/镜寰-工作/">
+        <div class="categories-list-item">
+          镜寰-工作
+          <span class="categories-list-item-badge">10</span>
+        </div>
+      </a>
+    
+      <a href="/categories/html/">
+        <div class="categories-list-item">
+          html
+          <span class="categories-list-item-badge">1</span>
+        </div>
+      </a>
+    
+      <a href="/categories/移动端/">
+        <div class="categories-list-item">
+          移动端
+          <span class="categories-list-item-badge">2</span>
+        </div>
+      </a>
+    
+      <a href="/categories/Vue/前端/">
+        <div class="categories-list-item">
+          Vue/前端
+          <span class="categories-list-item-badge">3</span>
+        </div>
+      </a>
+    
+      <a href="/categories/镜寰-工作/数据库/">
+        <div class="categories-list-item">
+          镜寰-工作/数据库
+          <span class="categories-list-item-badge">1</span>
+        </div>
+      </a>
+    
+  </div>
+</div>
+  </article>
+  
+  <article class="card card-content tags-widget">
+    <div class="tags-card">
+  <div class="tags-header"><i class="iconfont icon-biaoqian" style="padding-right: 2px;"></i>热门标签</div>
+  <div class="tags-list">
+    
+    <a href="/tags/前端/" title="前端"><div class="tags-list-item">前端</div></a>
+    
+    <a href="/tags/html/" title="html"><div class="tags-list-item">html</div></a>
+    
+    <a href="/tags/javascript/" title="javascript"><div class="tags-list-item">javascript</div></a>
+    
+    <a href="/tags/Vue/" title="Vue"><div class="tags-list-item">Vue</div></a>
+    
+    <a href="/tags/工作总结/" title="工作总结"><div class="tags-list-item">工作总结</div></a>
+    
+    <a href="/tags/框架/" title="框架"><div class="tags-list-item">框架</div></a>
+    
+    <a href="/tags/算法/" title="算法"><div class="tags-list-item">算法</div></a>
+    
+    <a href="/tags/笔记/" title="笔记"><div class="tags-list-item">笔记</div></a>
+    
+    <a href="/tags/常见问题/" title="常见问题"><div class="tags-list-item">常见问题</div></a>
+    
+    <a href="/tags/css/" title="css"><div class="tags-list-item">css</div></a>
+    
+    <a href="/tags/移动端/" title="移动端"><div class="tags-list-item">移动端</div></a>
+    
+    <a href="/tags/跨域/" title="跨域"><div class="tags-list-item">跨域</div></a>
+    
+    <a href="/tags/基础/" title="基础"><div class="tags-list-item">基础</div></a>
+    
+    <a href="/tags/规范/" title="规范"><div class="tags-list-item">规范</div></a>
+    
+    <a href="/tags/webpack/" title="webpack"><div class="tags-list-item">webpack</div></a>
+    
+    <a href="/tags/博客/" title="博客"><div class="tags-list-item">博客</div></a>
+    
+  </div>
+</div>
+  </article>
+  
+  
+</div>
+          </aside>
+          <aside class="right-column">
+            <div class="sticky-widescreen">
+  
+  
+  <article class="card card-content toc-card">
+    <div class="toc-header"><i class="iconfont icon-menu" style="padding-right: 2px;"></i>目录</div>
+<ol class="toc"><li class="toc-item toc-level-3"><a class="toc-link" href="#作用域和作用域链"><span class="toc-text">作用域和作用域链</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#null-和undefined-的区别"><span class="toc-text">null 和undefined 的区别</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#cookies，sessionStorage和localStorage的区别"><span class="toc-text">cookies，sessionStorage和localStorage的区别</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#闭包"><span class="toc-text">闭包</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#构造函数"><span class="toc-text">构造函数</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#原型链的理解"><span class="toc-text">原型链的理解</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#js继承"><span class="toc-text">js继承</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#js原生事件的绑定"><span class="toc-text">js原生事件的绑定</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#JS原生常用dom操作方法？"><span class="toc-text">JS原生常用dom操作方法？</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#说一下ES6新增特性"><span class="toc-text">说一下ES6新增特性</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#了解-JS设计模式有哪些-单例模式观察者模式等"><span class="toc-text">(了解)JS设计模式有哪些(单例模式观察者模式等)</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#说一下你对JS面向对象的理解"><span class="toc-text">说一下你对JS面向对象的理解</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#js数组常用方法"><span class="toc-text">js数组常用方法</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#JS数组内置遍历方法有哪些和区别"><span class="toc-text">JS数组内置遍历方法有哪些和区别</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#说一下从输入URL到页面加载完中间发生了什么？"><span class="toc-text">说一下从输入URL到页面加载完中间发生了什么？</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#js事件代理（事件委托）以及实现原理？"><span class="toc-text">js事件代理（事件委托）以及实现原理？</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#js数据类型"><span class="toc-text">js数据类型</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#说一下call-apply-bind区别"><span class="toc-text">说一下call,apply,bind区别</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#判断是否是数组"><span class="toc-text">判断是否是数组</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#http状态码"><span class="toc-text">http状态码</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#你上家公司项目是前后端分离的吗"><span class="toc-text">你上家公司项目是前后端分离的吗</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#深拷贝和浅拷贝"><span class="toc-text">深拷贝和浅拷贝</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#webpack"><span class="toc-text">webpack</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#中间件"><span class="toc-text">中间件</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#for–in和for–of应用场景"><span class="toc-text">for–in和for–of应用场景</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#HTTP和HTTPS差别"><span class="toc-text">HTTP和HTTPS差别</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#字符串为什么可以通过下标访问"><span class="toc-text">字符串为什么可以通过下标访问</span></a></li></ol>
+  </article>
+  
+  
+  <article class="card card-content">
+    <div class="recent-posts-card">
+  <div class="recent-posts-header"><i class="iconfont icon-wenzhang_huaban" style="padding-right: 2px;"></i>最近文章</div>
+  <div class="recent-posts-list">
+    
+      <div class="recent-posts-item">
+        <div class="recent-posts-item-title">2021-03-28</div>
+        <a href="/2021/03/28/vue学习记录4/"><div class="recent-posts-item-content">vue学习记录4</div></a>
+      </div>
+    
+      <div class="recent-posts-item">
+        <div class="recent-posts-item-title">2021-03-27</div>
+        <a href="/2021/03/27/vue学习记录3/"><div class="recent-posts-item-content">vue学习记录3</div></a>
+      </div>
+    
+      <div class="recent-posts-item">
+        <div class="recent-posts-item-title">2021-03-26</div>
+        <a href="/2021/03/26/vue学习记录2/"><div class="recent-posts-item-content">vue学习记录2</div></a>
+      </div>
+    
+      <div class="recent-posts-item">
+        <div class="recent-posts-item-title">2021-03-04</div>
+        <a href="/2021/03/04/vue学习记录1/"><div class="recent-posts-item-content">学习记录1</div></a>
+      </div>
+    
+  </div>
+</div>
+  </article>
+  
+  
+</div>
+          </aside>
+        </div>
+      </div>
+    </div>
+  </div>
+  
+  <footer class="footer">
+  <div class="footer-container">
+    <div>
+      <div class="footer-dsc">
+        <span>Copyright ©
+          
+          2020 -
+          
+          2021
+        </span>
+        &nbsp;
+        <a href="/" class="footer-link">小白的博客 </a>
+      </div>
+    </div>
+
+    
+    <div class="footer-dsc">
+      
+      Powered by
+      <a href="https://hexo.io/" class="footer-link" target="_blank" rel="nofollow noopener noreferrer">&nbsp;Hexo </a>
+      
+      
+      <span>&nbsp;|&nbsp;</span>
+      
+      
+      Theme -
+      <a href="https://github.com/theme-kaze" class="footer-link" target="_blank"
+        rel="nofollow noopener noreferrer">&nbsp;Kaze</a>
+      
+    </div>
+    
+    
+    
+    
+</footer>
+  <a role="button" id="scrollbutton" class="basebutton"  aria-label="回到顶部">
+  <i class="iconfont icon-arrowleft button-icon"></i>
+</a>
+<a role="button" id="menubutton" class="basebutton">
+  <i class="iconfont icon-menu button-icon"></i>
+</a>
+<a role="button" id="popbutton" class="basebutton" aria-label="控制中心">
+  <i class="iconfont icon-expand button-icon"></i>
+</a>
+<a role="button" id="darkbutton" class="basebutton darkwidget" aria-label="夜色模式">
+  <i class="iconfont icon-weather button-icon"></i>
+</a>
+<a role="button" id="searchbutton" class="basebutton searchwidget" aria-label="搜索">
+  <i class="iconfont icon-search button-icon"></i>
+</a>
+
+  
+  
+  
+  <script>
+  var addImgLayout = function () {
+    var img = document.querySelectorAll('.post-content img');
+    var i;
+    for (i = 0; i < img.length; i++) {
+      var wrapper = document.createElement('a');
+      wrapper.setAttribute('href', img[i].getAttribute('data-src'));
+      wrapper.setAttribute('aria-label', 'illustration');
+      wrapper.style.cssText = 'width: 100%; display: flex; justify-content: center;';
+      if (img[i].alt) wrapper.dataset.caption = img[i].alt;
+      wrapper.dataset.nolink = true;
+      img[i].before(wrapper);
+      wrapper.append(img[i]);
+      var divWrap = document.createElement('div');
+      divWrap.classList.add('gallery');
+      wrapper.before(divWrap);
+      divWrap.append(wrapper);
+    }
+    baguetteBox.run('.gallery');
+  }
+</script>
+<script>loadScript("/js/lib/lightbox/baguetteBox.min.js", addImgLayout)</script>
+  
+  
+  
+<script src="/js/main.js"></script>
+
+  
+  
+  <script>
+    var addLazyload = function () {
+      var observer = lozad('.lozad', {
+        load: function (el) {
+          el.srcset = el.getAttribute('data-src');
+        },
+        loaded: function (el) {
+          el.classList.add('loaded');
+        }
+      });
+      observer.observe();
+    }
+  </script>
+  <script>loadScript("/js/lib/lozad.min.js", addLazyload)</script>
+  
+  
+</body>
+
+</html>

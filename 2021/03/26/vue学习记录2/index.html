@@ -1,0 +1,713 @@
+<!DOCTYPE html>
+<html  lang="zh-CN" >
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport"
+    content="width=device-width, initial-scale=1.0, minimum-scale=1.0">
+  <meta http-equiv="X-UA-Compatible" content="ie=edge">
+  <meta name="theme-color" content="#fff" id="theme-color">
+  <meta name="description" content="学习永不止步">
+  <link rel="icon" href="https://s3.ax1x.com/2021/03/04/6VEJaQ.jpg">
+  <title>vue学习记录2</title>
+  
+  
+  <meta property="og:title" content="vue学习记录2">
+  
+  
+  <meta property="og:url" content="https://xiaobai123-4.github.io/2021/03/26/vue%E5%AD%A6%E4%B9%A0%E8%AE%B0%E5%BD%952/index.html">
+  
+  
+  <meta property="og:img" content="https://z3.ax1x.com/2021/03/26/6vpiK1.jpg">
+  
+  
+  <meta property="og:img" content="vue请求数据">
+  
+  
+  <meta property="og:type" content="article">
+  <meta property="og:article:published_time" content="2021-03-26">
+  <meta property="og:article:modified_time" content="2021-03-27">
+  <meta property="og:article:author" content="MaQisong">
+  
+  
+  <meta property="og:article:tag" content="Vue">
+  
+  
+  
+  
+  <script>
+    // control reverse button
+    var reverseDarkList = {
+      dark: 'light',
+      light: 'dark'
+    };
+    var themeColor = {
+      dark: '#1c1c1e',
+      light: '#fff'
+    }
+    // get the data of css prefers-color-scheme
+    var getCssMediaQuery = function() {
+      return window.matchMedia('(prefers-color-scheme: dark)').matches ? 'dark' : 'light';
+    };
+    // reverse current darkmode setting function
+    var reverseDarkModeSetting = function() {
+      var setting = localStorage.getItem('user-color-scheme');
+      if(reverseDarkList[setting]) {
+        setting = reverseDarkList[setting];
+      } else if(setting === null) {
+        setting = reverseDarkList[getCssMediaQuery()];
+      } else {
+        return;
+      }
+      localStorage.setItem('user-color-scheme', setting);
+      return setting;
+    };
+    // apply current darkmode setting
+    var setDarkmode = function(mode) {
+      var setting = mode || localStorage.getItem('user-color-scheme');
+      if(setting === getCssMediaQuery()) {
+        document.documentElement.removeAttribute('data-user-color-scheme');
+        localStorage.removeItem('user-color-scheme');
+        document.getElementById('theme-color').content = themeColor[setting];
+      } else if(reverseDarkList[setting]) {
+        document.documentElement.setAttribute('data-user-color-scheme', setting);
+        document.getElementById('theme-color').content = themeColor[setting];
+      } else {
+        document.documentElement.removeAttribute('data-user-color-scheme');
+        localStorage.removeItem('user-color-scheme');
+        document.getElementById('theme-color').content = themeColor[getCssMediaQuery()];
+      }
+    };
+    setDarkmode();
+  </script>
+  <script>
+    function loadScript(url, cb) {
+      var script = document.createElement('script');
+      script.src = url;
+      if (cb) script.onload = cb;
+      script.async = true;
+      document.body.appendChild(script);
+    }
+  </script>
+  
+  <link rel="preload" href="//at.alicdn.com/t/font_1946621_i1kgafibvw.css" as="style" >
+  <link rel="preload" href="//at.alicdn.com/t/font_1952792_89b4ac4k4up.css" as="style" >
+  
+  <link rel="preload" href="/js/lib/lightbox/baguetteBox.min.js" as="script">
+  <link rel="preload" href="/js/lib/lightbox/baguetteBox.min.css" as="style" >
+  
+  
+  <link rel="preload" href="/js/lib/lozad.min.js" as="script">
+  
+  
+  
+  
+  
+  
+  
+  
+<link rel="stylesheet" href="/css/main.css">
+
+  
+  
+<link rel="stylesheet" href="//at.alicdn.com/t/font_1946621_i1kgafibvw.css">
+
+  
+  
+<link rel="stylesheet" href="//at.alicdn.com/t/font_1952792_89b4ac4k4up.css">
+
+  
+  
+<link rel="stylesheet" href="/js/lib/lightbox/baguetteBox.min.css">
+
+  
+  
+<meta name="generator" content="Hexo 4.2.1"></head>
+
+
+<body>
+  <div class="wrapper">
+    
+    <nav class="navbar">
+  <div class="navbar-logo">
+    <span class="navbar-logo-main">
+      
+      <img class="navbar-logo-img" src="https://s3.ax1x.com/2021/03/04/6VEJaQ.jpg" alt="logo">
+      
+      <span class="navbar-logo-dsc">小白的博客</span>
+    </span>
+  </div>
+  <div class="navbar-menu">
+    
+    <a href="/" class="navbar-menu-item">
+    
+    首页
+    
+    </a>
+    
+    <a href="/archives" class="navbar-menu-item">
+    
+    归档
+    
+    </a>
+    
+    <a href="/tags" class="navbar-menu-item">
+    
+    标签
+    
+    </a>
+    
+    <a href="/categories" class="navbar-menu-item">
+    
+    分类
+    
+    </a>
+    
+    <a href="/about" class="navbar-menu-item">
+    
+    关于
+    
+    </a>
+    
+    <a class="navbar-menu-item darknavbar" id="dark"><i class="iconfont icon-weather"></i></a>
+    <a class="navbar-menu-item searchnavbar" id="search"><i class="iconfont icon-search" style="font-size: 1.2rem; font-weight: 400;"></i></a>
+  </div>
+</nav>
+    
+    <div id="local-search" style="display: none;">
+      <input class="navbar-menu-item" id="search-input" placeholder="请输入搜索内容...">
+      <div id="search-content"></div>
+    </div>
+    
+    <div class="section-wrap">
+      <div class="container">
+        <div class="columns">
+          <main class="main-column">
+<div class="image-wrapper">
+  <img src="https://z3.ax1x.com/2021/03/26/6vpiK1.jpg" data-src="https://z3.ax1x.com/2021/03/26/6vpiK1.jpg"
+    srcset="data:image/svg+xml,%3Csvg%20xmlns=&#39;http://www.w3.org/2000/svg&#39;%20viewBox=&#39;0%200%20300%20300&#39;%3E%3C/svg%3E"
+    class="image lozad"
+    alt="thumbnail"
+  >
+</div>
+
+<article class="card card-content">
+  <header>
+    <h1 class="post-title">
+      vue学习记录2
+    </h1>
+  </header>
+  <div class="post-meta post-show-meta">
+    <time datetime="2021-03-26T08:32:57.000Z">
+      <i class="iconfont icon-calendar" style="margin-right: 2px;"></i>
+      <span>2021-03-26</span>
+    </time>
+    
+    <span class="dot"></span>
+    
+    <a href="/categories/Vue/" class="post-meta-link">Vue</a>
+    
+    <a href="/categories/Vue/前端/" class="post-meta-link">前端</a>
+    
+    
+    
+    <span class="dot"></span>
+    <span>344 字</span>
+    
+  </div>
+  
+  <div class="post-meta post-show-meta" style="margin-top: -10px;">
+    <div style="display: flex; align-items: center;">
+      <i class="iconfont icon-biaoqian" style="margin-right: 2px; font-size: 1.15rem;"></i>
+      
+      
+        <a href="/tags/Vue/" class="post-meta-link">Vue</a>
+      
+    </div>
+  </div>
+  
+  </header>
+  <div id="section" class="post-content">
+    <h3 id="一、Axios"><a href="#一、Axios" class="headerlink" title="一、Axios"></a>一、<code>Axios</code></h3><h4 id="安装"><a href="#安装" class="headerlink" title="- 安装"></a>- 安装</h4><blockquote>
+<p><code>npm install axios --save</code></p>
+</blockquote>
+<h4 id="在需要-vue中引入-并使用"><a href="#在需要-vue中引入-并使用" class="headerlink" title="- 在需要**.vue中引入,并使用"></a>- 在需要<code>**.vue</code>中引入,并使用</h4><blockquote>
+<pre class="highlight"><span class="line"><span class="keyword">import</span> axios  <span class="keyword">from</span> <span class="string">'axios '</span></span><br></pre>
+
+</blockquote>
+<h4 id="请求方式"><a href="#请求方式" class="headerlink" title="- 请求方式"></a>- 请求方式</h4><h5 id="1-post请求"><a href="#1-post请求" class="headerlink" title="1. post请求"></a>1. <code>post</code>请求</h5><pre class="highlight"><span class="line">axios.post(<span class="string">'/user'</span>, &#123;</span><br><span class="line">	firstName: <span class="string">'One'</span>,</span><br><span class="line">	lastName: <span class="string">'Second'</span></span><br><span class="line">&#125;)</span><br><span class="line">.then(<span class="function"><span class="keyword">function</span> (<span class="params">response</span>) </span>&#123;</span><br><span class="line">	<span class="built_in">console</span>.log(response);</span><br><span class="line">&#125;)</span><br><span class="line">.catch(<span class="function"><span class="keyword">function</span> (<span class="params">error</span>) </span>&#123;</span><br><span class="line">	<span class="built_in">console</span>.log(error);</span><br><span class="line">&#125;);</span><br></pre>
+
+<h5 id="2-get请求"><a href="#2-get请求" class="headerlink" title="2.get请求"></a>2.<code>get</code>请求</h5><pre class="highlight"><span class="line"><span class="function"><span class="keyword">function</span> <span class="title">getUserID</span>(<span class="params"></span>) </span>&#123;</span><br><span class="line">	<span class="keyword">return</span> axios.get(<span class="string">'/user/123'</span>);</span><br><span class="line">&#125;</span><br><span class="line"> </span><br><span class="line"><span class="function"><span class="keyword">function</span> <span class="title">getUserCompelete</span>(<span class="params"></span>) </span>&#123;</span><br><span class="line">	<span class="keyword">return</span> axios.get(<span class="string">'/user/123/compelete'</span>);</span><br><span class="line">&#125;</span><br><span class="line"> </span><br><span class="line">axios.all([getUserID(), getUserCompelete()])</span><br><span class="line">	.then(axios.spread(<span class="function"><span class="keyword">function</span> (<span class="params">user_id, uesr_com</span>) </span>&#123;</span><br><span class="line"><span class="comment">//两个请求现已完成</span></span><br><span class="line">&#125;));</span><br></pre>
+
+
+
+
+<h3 id="二、vue-resource"><a href="#二、vue-resource" class="headerlink" title="二、vue-resource"></a>二、<code>vue-resource</code></h3><h4 id="安装-1"><a href="#安装-1" class="headerlink" title="- 安装"></a>- 安装</h4><blockquote>
+<p><code>npm install vue-resource --save</code></p>
+</blockquote>
+<h4 id="在main-js中引入-并使用"><a href="#在main-js中引入-并使用" class="headerlink" title="- 在main.js中引入,并使用"></a>- 在<code>main.js</code>中引入,并使用</h4><blockquote>
+<pre class="highlight"><span class="line"><span class="keyword">import</span> VueResource <span class="keyword">from</span> <span class="string">'vue-resource'</span></span><br><span class="line">Vue.use(VueResource)</span><br></pre>
+</blockquote>
+<h4 id="请求方式-1"><a href="#请求方式-1" class="headerlink" title="- 请求方式"></a>- 请求方式</h4><h5 id="1-post请求-1"><a href="#1-post请求-1" class="headerlink" title="1. post请求"></a>1. <code>post</code>请求</h5><pre class="highlight"><span class="line">getInfo()&#123;</span><br><span class="line">    <span class="keyword">this</span>.$http.get(<span class="string">'http:***********'</span>).then(<span class="function"><span class="params">result</span>=&gt;</span>&#123;</span><br><span class="line">        <span class="built_in">console</span>.log(result.body)</span><br><span class="line">    &#125;)</span><br><span class="line"> &#125;</span><br></pre>
+
+<h5 id="2-get请求-1"><a href="#2-get请求-1" class="headerlink" title="2.get请求"></a>2.<code>get</code>请求</h5><pre class="highlight"><span class="line">postInfo()&#123;</span><br><span class="line"><span class="comment">//手动发起的post请求，默认没有表单格式，所以，有的服务器处理不了，通过post方法的第三个参数&#123; emulateJSON: true &#125;设置提交的内容类型为普通表单数据格式。</span></span><br><span class="line">     <span class="keyword">this</span>.$http.post(<span class="string">'http:*******'</span>,&#123;&#125;,&#123; <span class="attr">emulateJSON</span>: <span class="literal">true</span> &#125;)</span><br><span class="line">     .then(<span class="function"><span class="params">result</span>=&gt;</span>&#123;<span class="built_in">console</span>.log(result.body)&#125;)</span><br><span class="line">&#125;</span><br></pre>
+
+<h5 id="3-json请求"><a href="#3-json请求" class="headerlink" title="3.json请求"></a>3.<code>json</code>请求</h5><pre class="highlight"><span class="line">getInfo()&#123;<span class="comment">// JSONP形式从服务器获取数据</span></span><br><span class="line">    <span class="keyword">this</span>.$http.json(<span class="string">'http:*********'</span>).then(<span class="function"><span class="params">result</span>=&gt;</span>&#123;</span><br><span class="line">        <span class="built_in">console</span>.log(result.body)</span><br><span class="line">    &#125;)</span><br><span class="line"> &#125;</span><br></pre>
+
+<pre class="highlight"><span class="line"><span class="comment">// 请求方式总计</span></span><br><span class="line"><span class="keyword">get</span>(url, [options])</span><br><span class="line">head(url, [options])</span><br><span class="line">elete(url, [options])</span><br><span class="line">jsonp(url, [options])</span><br><span class="line">post(url, [body], [options])</span><br><span class="line">put(url, [body], [options])</span><br><span class="line">patch(url, [body], [options])</span><br><span class="line">// 注意：</span><br><span class="line">// 1.url，请求地址。可被options对象中url属性覆盖。</span><br><span class="line">// 2.body（可选，字符串或对象），要发送的数据，可被options对象中的body属性覆盖。</span><br><span class="line">// 3.options 请求选项对象</span><br></pre>
+  </div>
+  <div>
+  
+  <div class="post-note note-warning copyright" style="margin-top: 42px">
+    <p><span style="font-weight: bold;">作者：</span><a target="_blank" rel="nofollow noopener noreferrer" href="https://xiaobai123-4.github.io/about">MaQisong</a></p>
+    <p><span style="font-weight: bold;">文章链接：</span><a target="_blank" rel="nofollow noopener noreferrer" href="https://xiaobai123-4.github.io/2021/03/26/vue%E5%AD%A6%E4%B9%A0%E8%AE%B0%E5%BD%952/">https://xiaobai123-4.github.io/2021/03/26/vue%E5%AD%A6%E4%B9%A0%E8%AE%B0%E5%BD%952/</a></p>
+    <p><span style="font-weight: bold;">版权声明：</span>本博客所有文章除特别声明外，均采用<a target="_blank" rel="noopener" href="https://creativecommons.org/licenses/by-nc-sa/4.0/deed.zh">CC BY-NC-SA 4.0 协议</a>。转载请注明出处！</p>
+  </div>
+  
+  </div>
+</article>
+<div class="nav">
+  
+  <div class="nav-item-prev">
+    <a href="/2021/03/27/vue学习记录3/" class="nav-link">
+      <i class="iconfont icon-left nav-prev-icon"></i>
+      <div>
+        <div class="nav-label">上一篇</div>
+        
+        <div class="nav-title">vue学习记录3 </div>
+        
+      </div>
+    </a>
+  </div>
+  
+  
+  <div class="nav-item-next">
+    <a href="/2021/03/04/vue学习记录1/" class="nav-link">
+      <div>
+        <div class="nav-label">下一篇</div>
+        
+        <div class="nav-title">学习记录1 </div>
+        
+      </div>
+      <i class="iconfont icon-right nav-next-icon"></i>
+    </a>
+  </div>
+  
+</div>
+
+<div class="card card-content toc-card" id="mobiletoc">
+  <div class="toc-header"><i class="iconfont icon-menu" style="padding-right: 2px;"></i>目录</div>
+<ol class="toc"><li class="toc-item toc-level-3"><a class="toc-link" href="#一、Axios"><span class="toc-text">一、Axios</span></a><ol class="toc-child"><li class="toc-item toc-level-4"><a class="toc-link" href="#安装"><span class="toc-text">- 安装</span></a></li><li class="toc-item toc-level-4"><a class="toc-link" href="#在需要-vue中引入-并使用"><span class="toc-text">- 在需要**.vue中引入,并使用</span></a></li><li class="toc-item toc-level-4"><a class="toc-link" href="#请求方式"><span class="toc-text">- 请求方式</span></a><ol class="toc-child"><li class="toc-item toc-level-5"><a class="toc-link" href="#1-post请求"><span class="toc-text">1. post请求</span></a></li><li class="toc-item toc-level-5"><a class="toc-link" href="#2-get请求"><span class="toc-text">2.get请求</span></a></li></ol></li></ol></li><li class="toc-item toc-level-3"><a class="toc-link" href="#二、vue-resource"><span class="toc-text">二、vue-resource</span></a><ol class="toc-child"><li class="toc-item toc-level-4"><a class="toc-link" href="#安装-1"><span class="toc-text">- 安装</span></a></li><li class="toc-item toc-level-4"><a class="toc-link" href="#在main-js中引入-并使用"><span class="toc-text">- 在main.js中引入,并使用</span></a></li><li class="toc-item toc-level-4"><a class="toc-link" href="#请求方式-1"><span class="toc-text">- 请求方式</span></a><ol class="toc-child"><li class="toc-item toc-level-5"><a class="toc-link" href="#1-post请求-1"><span class="toc-text">1. post请求</span></a></li><li class="toc-item toc-level-5"><a class="toc-link" href="#2-get请求-1"><span class="toc-text">2.get请求</span></a></li><li class="toc-item toc-level-5"><a class="toc-link" href="#3-json请求"><span class="toc-text">3.json请求</span></a></li></ol></li></ol></li></ol>
+</div></main>
+          <aside class="left-column">
+            
+            <div class="card card-author">
+              
+<img src="https://s3.ax1x.com/2021/03/04/6VEJaQ.jpg" class="author-img">
+
+<p class="author-name">MaQisong</p>
+<p class="author-description">学习永不止步</p>
+<div class="author-message">
+  <a class="author-posts-count" href="/archives">
+    <span>65</span>
+    <span>文章</span>
+  </a>
+  <a class="author-categories-count" href="/categories">
+    <span>25</span>
+    <span>分类</span>
+  </a>
+  <a class="author-tags-count" href="/tags">
+    <span>38</span>
+    <span>标签</span>
+  </a>
+</div>
+
+            </div>
+            
+            <div class="sticky-tablet">
+  
+  
+  <article class="display-when-two-columns spacer">
+    <div class="card card-content toc-card">
+      <div class="toc-header"><i class="iconfont icon-menu" style="padding-right: 2px;"></i>目录</div>
+<ol class="toc"><li class="toc-item toc-level-3"><a class="toc-link" href="#一、Axios"><span class="toc-text">一、Axios</span></a><ol class="toc-child"><li class="toc-item toc-level-4"><a class="toc-link" href="#安装"><span class="toc-text">- 安装</span></a></li><li class="toc-item toc-level-4"><a class="toc-link" href="#在需要-vue中引入-并使用"><span class="toc-text">- 在需要**.vue中引入,并使用</span></a></li><li class="toc-item toc-level-4"><a class="toc-link" href="#请求方式"><span class="toc-text">- 请求方式</span></a><ol class="toc-child"><li class="toc-item toc-level-5"><a class="toc-link" href="#1-post请求"><span class="toc-text">1. post请求</span></a></li><li class="toc-item toc-level-5"><a class="toc-link" href="#2-get请求"><span class="toc-text">2.get请求</span></a></li></ol></li></ol></li><li class="toc-item toc-level-3"><a class="toc-link" href="#二、vue-resource"><span class="toc-text">二、vue-resource</span></a><ol class="toc-child"><li class="toc-item toc-level-4"><a class="toc-link" href="#安装-1"><span class="toc-text">- 安装</span></a></li><li class="toc-item toc-level-4"><a class="toc-link" href="#在main-js中引入-并使用"><span class="toc-text">- 在main.js中引入,并使用</span></a></li><li class="toc-item toc-level-4"><a class="toc-link" href="#请求方式-1"><span class="toc-text">- 请求方式</span></a><ol class="toc-child"><li class="toc-item toc-level-5"><a class="toc-link" href="#1-post请求-1"><span class="toc-text">1. post请求</span></a></li><li class="toc-item toc-level-5"><a class="toc-link" href="#2-get请求-1"><span class="toc-text">2.get请求</span></a></li><li class="toc-item toc-level-5"><a class="toc-link" href="#3-json请求"><span class="toc-text">3.json请求</span></a></li></ol></li></ol></li></ol>
+    </div>
+  </article>
+  
+  
+  <article class="card card-content categories-widget">
+    <div class="categories-card">
+  <div class="categories-header"><i class="iconfont icon-fenlei" style="padding-right: 2px;"></i>分类</div>
+  <div class="categories-list">
+    
+      <a href="/categories/正则表达式/">
+        <div class="categories-list-item">
+          正则表达式
+          <span class="categories-list-item-badge">1</span>
+        </div>
+      </a>
+    
+      <a href="/categories/ajax/">
+        <div class="categories-list-item">
+          ajax
+          <span class="categories-list-item-badge">1</span>
+        </div>
+      </a>
+    
+      <a href="/categories/CSS/">
+        <div class="categories-list-item">
+          CSS
+          <span class="categories-list-item-badge">3</span>
+        </div>
+      </a>
+    
+      <a href="/categories/ES6/">
+        <div class="categories-list-item">
+          ES6
+          <span class="categories-list-item-badge">1</span>
+        </div>
+      </a>
+    
+      <a href="/categories/css/">
+        <div class="categories-list-item">
+          css
+          <span class="categories-list-item-badge">1</span>
+        </div>
+      </a>
+    
+      <a href="/categories/HTML5/">
+        <div class="categories-list-item">
+          HTML5
+          <span class="categories-list-item-badge">4</span>
+        </div>
+      </a>
+    
+      <a href="/categories/git/">
+        <div class="categories-list-item">
+          git
+          <span class="categories-list-item-badge">1</span>
+        </div>
+      </a>
+    
+      <a href="/categories/Markdown/">
+        <div class="categories-list-item">
+          Markdown
+          <span class="categories-list-item-badge">1</span>
+        </div>
+      </a>
+    
+      <a href="/categories/javascript/">
+        <div class="categories-list-item">
+          javascript
+          <span class="categories-list-item-badge">17</span>
+        </div>
+      </a>
+    
+      <a href="/categories/SqlServer/">
+        <div class="categories-list-item">
+          SqlServer
+          <span class="categories-list-item-badge">1</span>
+        </div>
+      </a>
+    
+      <a href="/categories/bootstrap/">
+        <div class="categories-list-item">
+          bootstrap
+          <span class="categories-list-item-badge">1</span>
+        </div>
+      </a>
+    
+      <a href="/categories/分类/">
+        <div class="categories-list-item">
+          分类
+          <span class="categories-list-item-badge">1</span>
+        </div>
+      </a>
+    
+      <a href="/categories/其他/">
+        <div class="categories-list-item">
+          其他
+          <span class="categories-list-item-badge">1</span>
+        </div>
+      </a>
+    
+      <a href="/categories/Vue/">
+        <div class="categories-list-item">
+          Vue
+          <span class="categories-list-item-badge">10</span>
+        </div>
+      </a>
+    
+      <a href="/categories/HTML/">
+        <div class="categories-list-item">
+          HTML
+          <span class="categories-list-item-badge">2</span>
+        </div>
+      </a>
+    
+      <a href="/categories/ionic/">
+        <div class="categories-list-item">
+          ionic
+          <span class="categories-list-item-badge">2</span>
+        </div>
+      </a>
+    
+      <a href="/categories/javascript/Vue/">
+        <div class="categories-list-item">
+          javascript/Vue
+          <span class="categories-list-item-badge">2</span>
+        </div>
+      </a>
+    
+      <a href="/categories/webpack/">
+        <div class="categories-list-item">
+          webpack
+          <span class="categories-list-item-badge">1</span>
+        </div>
+      </a>
+    
+      <a href="/categories/前端/">
+        <div class="categories-list-item">
+          前端
+          <span class="categories-list-item-badge">1</span>
+        </div>
+      </a>
+    
+      <a href="/categories/NodeJS/">
+        <div class="categories-list-item">
+          NodeJS
+          <span class="categories-list-item-badge">1</span>
+        </div>
+      </a>
+    
+      <a href="/categories/镜寰-工作/">
+        <div class="categories-list-item">
+          镜寰-工作
+          <span class="categories-list-item-badge">10</span>
+        </div>
+      </a>
+    
+      <a href="/categories/html/">
+        <div class="categories-list-item">
+          html
+          <span class="categories-list-item-badge">1</span>
+        </div>
+      </a>
+    
+      <a href="/categories/移动端/">
+        <div class="categories-list-item">
+          移动端
+          <span class="categories-list-item-badge">2</span>
+        </div>
+      </a>
+    
+      <a href="/categories/Vue/前端/">
+        <div class="categories-list-item">
+          Vue/前端
+          <span class="categories-list-item-badge">3</span>
+        </div>
+      </a>
+    
+      <a href="/categories/镜寰-工作/数据库/">
+        <div class="categories-list-item">
+          镜寰-工作/数据库
+          <span class="categories-list-item-badge">1</span>
+        </div>
+      </a>
+    
+  </div>
+</div>
+  </article>
+  
+  <article class="card card-content tags-widget">
+    <div class="tags-card">
+  <div class="tags-header"><i class="iconfont icon-biaoqian" style="padding-right: 2px;"></i>热门标签</div>
+  <div class="tags-list">
+    
+    <a href="/tags/前端/" title="前端"><div class="tags-list-item">前端</div></a>
+    
+    <a href="/tags/html/" title="html"><div class="tags-list-item">html</div></a>
+    
+    <a href="/tags/javascript/" title="javascript"><div class="tags-list-item">javascript</div></a>
+    
+    <a href="/tags/Vue/" title="Vue"><div class="tags-list-item">Vue</div></a>
+    
+    <a href="/tags/工作总结/" title="工作总结"><div class="tags-list-item">工作总结</div></a>
+    
+    <a href="/tags/框架/" title="框架"><div class="tags-list-item">框架</div></a>
+    
+    <a href="/tags/算法/" title="算法"><div class="tags-list-item">算法</div></a>
+    
+    <a href="/tags/笔记/" title="笔记"><div class="tags-list-item">笔记</div></a>
+    
+    <a href="/tags/常见问题/" title="常见问题"><div class="tags-list-item">常见问题</div></a>
+    
+    <a href="/tags/css/" title="css"><div class="tags-list-item">css</div></a>
+    
+    <a href="/tags/移动端/" title="移动端"><div class="tags-list-item">移动端</div></a>
+    
+    <a href="/tags/跨域/" title="跨域"><div class="tags-list-item">跨域</div></a>
+    
+    <a href="/tags/基础/" title="基础"><div class="tags-list-item">基础</div></a>
+    
+    <a href="/tags/规范/" title="规范"><div class="tags-list-item">规范</div></a>
+    
+    <a href="/tags/webpack/" title="webpack"><div class="tags-list-item">webpack</div></a>
+    
+    <a href="/tags/博客/" title="博客"><div class="tags-list-item">博客</div></a>
+    
+  </div>
+</div>
+  </article>
+  
+  
+</div>
+          </aside>
+          <aside class="right-column">
+            <div class="sticky-widescreen">
+  
+  
+  <article class="card card-content toc-card">
+    <div class="toc-header"><i class="iconfont icon-menu" style="padding-right: 2px;"></i>目录</div>
+<ol class="toc"><li class="toc-item toc-level-3"><a class="toc-link" href="#一、Axios"><span class="toc-text">一、Axios</span></a><ol class="toc-child"><li class="toc-item toc-level-4"><a class="toc-link" href="#安装"><span class="toc-text">- 安装</span></a></li><li class="toc-item toc-level-4"><a class="toc-link" href="#在需要-vue中引入-并使用"><span class="toc-text">- 在需要**.vue中引入,并使用</span></a></li><li class="toc-item toc-level-4"><a class="toc-link" href="#请求方式"><span class="toc-text">- 请求方式</span></a><ol class="toc-child"><li class="toc-item toc-level-5"><a class="toc-link" href="#1-post请求"><span class="toc-text">1. post请求</span></a></li><li class="toc-item toc-level-5"><a class="toc-link" href="#2-get请求"><span class="toc-text">2.get请求</span></a></li></ol></li></ol></li><li class="toc-item toc-level-3"><a class="toc-link" href="#二、vue-resource"><span class="toc-text">二、vue-resource</span></a><ol class="toc-child"><li class="toc-item toc-level-4"><a class="toc-link" href="#安装-1"><span class="toc-text">- 安装</span></a></li><li class="toc-item toc-level-4"><a class="toc-link" href="#在main-js中引入-并使用"><span class="toc-text">- 在main.js中引入,并使用</span></a></li><li class="toc-item toc-level-4"><a class="toc-link" href="#请求方式-1"><span class="toc-text">- 请求方式</span></a><ol class="toc-child"><li class="toc-item toc-level-5"><a class="toc-link" href="#1-post请求-1"><span class="toc-text">1. post请求</span></a></li><li class="toc-item toc-level-5"><a class="toc-link" href="#2-get请求-1"><span class="toc-text">2.get请求</span></a></li><li class="toc-item toc-level-5"><a class="toc-link" href="#3-json请求"><span class="toc-text">3.json请求</span></a></li></ol></li></ol></li></ol>
+  </article>
+  
+  
+  <article class="card card-content">
+    <div class="recent-posts-card">
+  <div class="recent-posts-header"><i class="iconfont icon-wenzhang_huaban" style="padding-right: 2px;"></i>最近文章</div>
+  <div class="recent-posts-list">
+    
+      <div class="recent-posts-item">
+        <div class="recent-posts-item-title">2021-03-28</div>
+        <a href="/2021/03/28/vue学习记录4/"><div class="recent-posts-item-content">vue学习记录4</div></a>
+      </div>
+    
+      <div class="recent-posts-item">
+        <div class="recent-posts-item-title">2021-03-27</div>
+        <a href="/2021/03/27/vue学习记录3/"><div class="recent-posts-item-content">vue学习记录3</div></a>
+      </div>
+    
+      <div class="recent-posts-item">
+        <div class="recent-posts-item-title">2021-03-26</div>
+        <a href="/2021/03/26/vue学习记录2/"><div class="recent-posts-item-content">vue学习记录2</div></a>
+      </div>
+    
+      <div class="recent-posts-item">
+        <div class="recent-posts-item-title">2021-03-04</div>
+        <a href="/2021/03/04/vue学习记录1/"><div class="recent-posts-item-content">学习记录1</div></a>
+      </div>
+    
+  </div>
+</div>
+  </article>
+  
+  
+</div>
+          </aside>
+        </div>
+      </div>
+    </div>
+  </div>
+  
+  <footer class="footer">
+  <div class="footer-container">
+    <div>
+      <div class="footer-dsc">
+        <span>Copyright ©
+          
+          2020 -
+          
+          2021
+        </span>
+        &nbsp;
+        <a href="/" class="footer-link">小白的博客 </a>
+      </div>
+    </div>
+
+    
+    <div class="footer-dsc">
+      
+      Powered by
+      <a href="https://hexo.io/" class="footer-link" target="_blank" rel="nofollow noopener noreferrer">&nbsp;Hexo </a>
+      
+      
+      <span>&nbsp;|&nbsp;</span>
+      
+      
+      Theme -
+      <a href="https://github.com/theme-kaze" class="footer-link" target="_blank"
+        rel="nofollow noopener noreferrer">&nbsp;Kaze</a>
+      
+    </div>
+    
+    
+    
+    
+</footer>
+  <a role="button" id="scrollbutton" class="basebutton"  aria-label="回到顶部">
+  <i class="iconfont icon-arrowleft button-icon"></i>
+</a>
+<a role="button" id="menubutton" class="basebutton">
+  <i class="iconfont icon-menu button-icon"></i>
+</a>
+<a role="button" id="popbutton" class="basebutton" aria-label="控制中心">
+  <i class="iconfont icon-expand button-icon"></i>
+</a>
+<a role="button" id="darkbutton" class="basebutton darkwidget" aria-label="夜色模式">
+  <i class="iconfont icon-weather button-icon"></i>
+</a>
+<a role="button" id="searchbutton" class="basebutton searchwidget" aria-label="搜索">
+  <i class="iconfont icon-search button-icon"></i>
+</a>
+
+  
+  
+  
+  <script>
+  var addImgLayout = function () {
+    var img = document.querySelectorAll('.post-content img');
+    var i;
+    for (i = 0; i < img.length; i++) {
+      var wrapper = document.createElement('a');
+      wrapper.setAttribute('href', img[i].getAttribute('data-src'));
+      wrapper.setAttribute('aria-label', 'illustration');
+      wrapper.style.cssText = 'width: 100%; display: flex; justify-content: center;';
+      if (img[i].alt) wrapper.dataset.caption = img[i].alt;
+      wrapper.dataset.nolink = true;
+      img[i].before(wrapper);
+      wrapper.append(img[i]);
+      var divWrap = document.createElement('div');
+      divWrap.classList.add('gallery');
+      wrapper.before(divWrap);
+      divWrap.append(wrapper);
+    }
+    baguetteBox.run('.gallery');
+  }
+</script>
+<script>loadScript("/js/lib/lightbox/baguetteBox.min.js", addImgLayout)</script>
+  
+  
+  
+<script src="/js/main.js"></script>
+
+  
+  
+  <script>
+    var addLazyload = function () {
+      var observer = lozad('.lozad', {
+        load: function (el) {
+          el.srcset = el.getAttribute('data-src');
+        },
+        loaded: function (el) {
+          el.classList.add('loaded');
+        }
+      });
+      observer.observe();
+    }
+  </script>
+  <script>loadScript("/js/lib/lozad.min.js", addLazyload)</script>
+  
+  
+</body>
+
+</html>

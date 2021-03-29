@@ -1,0 +1,691 @@
+<!DOCTYPE html>
+<html  lang="zh-CN" >
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport"
+    content="width=device-width, initial-scale=1.0, minimum-scale=1.0">
+  <meta http-equiv="X-UA-Compatible" content="ie=edge">
+  <meta name="theme-color" content="#fff" id="theme-color">
+  <meta name="description" content="学习永不止步">
+  <link rel="icon" href="https://s3.ax1x.com/2021/03/04/6VEJaQ.jpg">
+  <title>vue常见面试题</title>
+  
+  
+  <meta property="og:title" content="vue常见面试题">
+  
+  
+  <meta property="og:url" content="https://xiaobai123-4.github.io/2020/11/06/vue%E5%B8%B8%E8%A7%81%E9%9D%A2%E8%AF%95%E9%A2%98/index.html">
+  
+  
+  <meta property="og:img" content="https://s3.ax1x.com/2021/03/04/6VEJaQ.jpg">
+  
+  
+  <meta property="og:img" content="学习永不止步">
+  
+  
+  <meta property="og:type" content="article">
+  <meta property="og:article:published_time" content="2020-11-06">
+  <meta property="og:article:modified_time" content="2020-11-06">
+  <meta property="og:article:author" content="MaQisong">
+  
+  
+  <meta property="og:article:tag" content="javascript">
+  
+  <meta property="og:article:tag" content="Vue">
+  
+  <meta property="og:article:tag" content="框架">
+  
+  
+  
+  
+  <script>
+    // control reverse button
+    var reverseDarkList = {
+      dark: 'light',
+      light: 'dark'
+    };
+    var themeColor = {
+      dark: '#1c1c1e',
+      light: '#fff'
+    }
+    // get the data of css prefers-color-scheme
+    var getCssMediaQuery = function() {
+      return window.matchMedia('(prefers-color-scheme: dark)').matches ? 'dark' : 'light';
+    };
+    // reverse current darkmode setting function
+    var reverseDarkModeSetting = function() {
+      var setting = localStorage.getItem('user-color-scheme');
+      if(reverseDarkList[setting]) {
+        setting = reverseDarkList[setting];
+      } else if(setting === null) {
+        setting = reverseDarkList[getCssMediaQuery()];
+      } else {
+        return;
+      }
+      localStorage.setItem('user-color-scheme', setting);
+      return setting;
+    };
+    // apply current darkmode setting
+    var setDarkmode = function(mode) {
+      var setting = mode || localStorage.getItem('user-color-scheme');
+      if(setting === getCssMediaQuery()) {
+        document.documentElement.removeAttribute('data-user-color-scheme');
+        localStorage.removeItem('user-color-scheme');
+        document.getElementById('theme-color').content = themeColor[setting];
+      } else if(reverseDarkList[setting]) {
+        document.documentElement.setAttribute('data-user-color-scheme', setting);
+        document.getElementById('theme-color').content = themeColor[setting];
+      } else {
+        document.documentElement.removeAttribute('data-user-color-scheme');
+        localStorage.removeItem('user-color-scheme');
+        document.getElementById('theme-color').content = themeColor[getCssMediaQuery()];
+      }
+    };
+    setDarkmode();
+  </script>
+  <script>
+    function loadScript(url, cb) {
+      var script = document.createElement('script');
+      script.src = url;
+      if (cb) script.onload = cb;
+      script.async = true;
+      document.body.appendChild(script);
+    }
+  </script>
+  
+  <link rel="preload" href="//at.alicdn.com/t/font_1946621_i1kgafibvw.css" as="style" >
+  <link rel="preload" href="//at.alicdn.com/t/font_1952792_89b4ac4k4up.css" as="style" >
+  
+  <link rel="preload" href="/js/lib/lightbox/baguetteBox.min.js" as="script">
+  <link rel="preload" href="/js/lib/lightbox/baguetteBox.min.css" as="style" >
+  
+  
+  <link rel="preload" href="/js/lib/lozad.min.js" as="script">
+  
+  
+  
+  
+  
+  
+  
+  
+<link rel="stylesheet" href="/css/main.css">
+
+  
+  
+<link rel="stylesheet" href="//at.alicdn.com/t/font_1946621_i1kgafibvw.css">
+
+  
+  
+<link rel="stylesheet" href="//at.alicdn.com/t/font_1952792_89b4ac4k4up.css">
+
+  
+  
+<link rel="stylesheet" href="/js/lib/lightbox/baguetteBox.min.css">
+
+  
+  
+<meta name="generator" content="Hexo 4.2.1"></head>
+
+
+<body>
+  <div class="wrapper">
+    
+    <nav class="navbar">
+  <div class="navbar-logo">
+    <span class="navbar-logo-main">
+      
+      <img class="navbar-logo-img" src="https://s3.ax1x.com/2021/03/04/6VEJaQ.jpg" alt="logo">
+      
+      <span class="navbar-logo-dsc">小白的博客</span>
+    </span>
+  </div>
+  <div class="navbar-menu">
+    
+    <a href="/" class="navbar-menu-item">
+    
+    首页
+    
+    </a>
+    
+    <a href="/archives" class="navbar-menu-item">
+    
+    归档
+    
+    </a>
+    
+    <a href="/tags" class="navbar-menu-item">
+    
+    标签
+    
+    </a>
+    
+    <a href="/categories" class="navbar-menu-item">
+    
+    分类
+    
+    </a>
+    
+    <a href="/about" class="navbar-menu-item">
+    
+    关于
+    
+    </a>
+    
+    <a class="navbar-menu-item darknavbar" id="dark"><i class="iconfont icon-weather"></i></a>
+    <a class="navbar-menu-item searchnavbar" id="search"><i class="iconfont icon-search" style="font-size: 1.2rem; font-weight: 400;"></i></a>
+  </div>
+</nav>
+    
+    <div id="local-search" style="display: none;">
+      <input class="navbar-menu-item" id="search-input" placeholder="请输入搜索内容...">
+      <div id="search-content"></div>
+    </div>
+    
+    <div class="section-wrap">
+      <div class="container">
+        <div class="columns">
+          <main class="main-column">
+<article class="card card-content">
+  <header>
+    <h1 class="post-title">
+      vue常见面试题
+    </h1>
+  </header>
+  <div class="post-meta post-show-meta">
+    <time datetime="2020-11-06T02:51:41.000Z">
+      <i class="iconfont icon-calendar" style="margin-right: 2px;"></i>
+      <span>2020-11-06</span>
+    </time>
+    
+    <span class="dot"></span>
+    
+    <a href="/categories/Vue/" class="post-meta-link">Vue</a>
+    
+    
+    
+    <span class="dot"></span>
+    <span>122 字</span>
+    
+  </div>
+  
+  <div class="post-meta post-show-meta" style="margin-top: -10px;">
+    <div style="display: flex; align-items: center;">
+      <i class="iconfont icon-biaoqian" style="margin-right: 2px; font-size: 1.15rem;"></i>
+      
+      
+        <a href="/tags/javascript/" class="post-meta-link">javascript</a>
+      
+      
+      <span class="dot"></span>
+      
+        <a href="/tags/Vue/" class="post-meta-link">Vue</a>
+      
+      
+      <span class="dot"></span>
+      
+        <a href="/tags/框架/" class="post-meta-link">框架</a>
+      
+    </div>
+  </div>
+  
+  </header>
+  <div id="section" class="post-content">
+    <h3 id="路由守卫是什么"><a href="#路由守卫是什么" class="headerlink" title="路由守卫是什么"></a>路由守卫是什么</h3><h3 id="清除浮动的方式"><a href="#清除浮动的方式" class="headerlink" title="清除浮动的方式"></a>清除浮动的方式</h3><h3 id="MVVM与MVC的区别"><a href="#MVVM与MVC的区别" class="headerlink" title="MVVM与MVC的区别"></a>MVVM与MVC的区别</h3><h3 id="双向数据绑定"><a href="#双向数据绑定" class="headerlink" title="双向数据绑定"></a>双向数据绑定</h3><h3 id="封装插件"><a href="#封装插件" class="headerlink" title="封装插件"></a>封装插件</h3><h3 id="封装组件"><a href="#封装组件" class="headerlink" title="封装组件"></a>封装组件</h3><h3 id="项目的哪些部分是你负责-如何实现"><a href="#项目的哪些部分是你负责-如何实现" class="headerlink" title="项目的哪些部分是你负责,如何实现"></a>项目的哪些部分是你负责,如何实现</h3><h3 id="工作内容"><a href="#工作内容" class="headerlink" title="工作内容"></a>工作内容</h3><h3 id="原型链"><a href="#原型链" class="headerlink" title="原型链"></a>原型链</h3><h3 id="弹性布局"><a href="#弹性布局" class="headerlink" title="弹性布局"></a>弹性布局</h3><h3 id="冒泡排序的底层原理"><a href="#冒泡排序的底层原理" class="headerlink" title="冒泡排序的底层原理"></a>冒泡排序的底层原理</h3><h3 id="跨域的方式"><a href="#跨域的方式" class="headerlink" title="跨域的方式"></a>跨域的方式</h3><h3 id="element-ui组件的使用"><a href="#element-ui组件的使用" class="headerlink" title="element-ui组件的使用"></a>element-ui组件的使用</h3><h3 id="es6有哪些"><a href="#es6有哪些" class="headerlink" title="es6有哪些"></a>es6有哪些</h3><h3 id="call-apply-bind的区别"><a href="#call-apply-bind的区别" class="headerlink" title="call apply bind的区别"></a>call apply bind的区别</h3><h3 id="this的指向问题"><a href="#this的指向问题" class="headerlink" title="this的指向问题"></a>this的指向问题</h3><h3 id="token的实现"><a href="#token的实现" class="headerlink" title="token的实现"></a>token的实现</h3><h3 id="vuex的实现"><a href="#vuex的实现" class="headerlink" title="vuex的实现"></a>vuex的实现</h3><h3 id="组件间通信-父传子-子传父"><a href="#组件间通信-父传子-子传父" class="headerlink" title="组件间通信,父传子,子传父"></a>组件间通信,父传子,子传父</h3><h3 id="兄弟间传值"><a href="#兄弟间传值" class="headerlink" title="兄弟间传值"></a>兄弟间传值</h3><h3 id="关于继承的问题"><a href="#关于继承的问题" class="headerlink" title="关于继承的问题"></a>关于继承的问题</h3>
+  </div>
+  <div>
+  
+  <div class="post-note note-warning copyright" style="margin-top: 42px">
+    <p><span style="font-weight: bold;">作者：</span><a target="_blank" rel="nofollow noopener noreferrer" href="https://xiaobai123-4.github.io/about">MaQisong</a></p>
+    <p><span style="font-weight: bold;">文章链接：</span><a target="_blank" rel="nofollow noopener noreferrer" href="https://xiaobai123-4.github.io/2020/11/06/vue%E5%B8%B8%E8%A7%81%E9%9D%A2%E8%AF%95%E9%A2%98/">https://xiaobai123-4.github.io/2020/11/06/vue%E5%B8%B8%E8%A7%81%E9%9D%A2%E8%AF%95%E9%A2%98/</a></p>
+    <p><span style="font-weight: bold;">版权声明：</span>本博客所有文章除特别声明外，均采用<a target="_blank" rel="noopener" href="https://creativecommons.org/licenses/by-nc-sa/4.0/deed.zh">CC BY-NC-SA 4.0 协议</a>。转载请注明出处！</p>
+  </div>
+  
+  </div>
+</article>
+<div class="nav">
+  
+  <div class="nav-item-prev">
+    <a href="/2020/11/30/Mockjs使用/" class="nav-link">
+      <i class="iconfont icon-left nav-prev-icon"></i>
+      <div>
+        <div class="nav-label">上一篇</div>
+        
+        <div class="nav-title">Mockjs使用 </div>
+        
+      </div>
+    </a>
+  </div>
+  
+  
+  <div class="nav-item-next">
+    <a href="/2020/09/25/工作总结9-25/" class="nav-link">
+      <div>
+        <div class="nav-label">下一篇</div>
+        
+        <div class="nav-title">工作总结9-25 </div>
+        
+      </div>
+      <i class="iconfont icon-right nav-next-icon"></i>
+    </a>
+  </div>
+  
+</div>
+
+<div class="card card-content toc-card" id="mobiletoc">
+  <div class="toc-header"><i class="iconfont icon-menu" style="padding-right: 2px;"></i>目录</div>
+<ol class="toc"><li class="toc-item toc-level-3"><a class="toc-link" href="#路由守卫是什么"><span class="toc-text">路由守卫是什么</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#清除浮动的方式"><span class="toc-text">清除浮动的方式</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#MVVM与MVC的区别"><span class="toc-text">MVVM与MVC的区别</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#双向数据绑定"><span class="toc-text">双向数据绑定</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#封装插件"><span class="toc-text">封装插件</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#封装组件"><span class="toc-text">封装组件</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#项目的哪些部分是你负责-如何实现"><span class="toc-text">项目的哪些部分是你负责,如何实现</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#工作内容"><span class="toc-text">工作内容</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#原型链"><span class="toc-text">原型链</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#弹性布局"><span class="toc-text">弹性布局</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#冒泡排序的底层原理"><span class="toc-text">冒泡排序的底层原理</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#跨域的方式"><span class="toc-text">跨域的方式</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#element-ui组件的使用"><span class="toc-text">element-ui组件的使用</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#es6有哪些"><span class="toc-text">es6有哪些</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#call-apply-bind的区别"><span class="toc-text">call apply bind的区别</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#this的指向问题"><span class="toc-text">this的指向问题</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#token的实现"><span class="toc-text">token的实现</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#vuex的实现"><span class="toc-text">vuex的实现</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#组件间通信-父传子-子传父"><span class="toc-text">组件间通信,父传子,子传父</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#兄弟间传值"><span class="toc-text">兄弟间传值</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#关于继承的问题"><span class="toc-text">关于继承的问题</span></a></li></ol>
+</div></main>
+          <aside class="left-column">
+            
+            <div class="card card-author">
+              
+<img src="https://s3.ax1x.com/2021/03/04/6VEJaQ.jpg" class="author-img">
+
+<p class="author-name">MaQisong</p>
+<p class="author-description">学习永不止步</p>
+<div class="author-message">
+  <a class="author-posts-count" href="/archives">
+    <span>65</span>
+    <span>文章</span>
+  </a>
+  <a class="author-categories-count" href="/categories">
+    <span>25</span>
+    <span>分类</span>
+  </a>
+  <a class="author-tags-count" href="/tags">
+    <span>38</span>
+    <span>标签</span>
+  </a>
+</div>
+
+            </div>
+            
+            <div class="sticky-tablet">
+  
+  
+  <article class="display-when-two-columns spacer">
+    <div class="card card-content toc-card">
+      <div class="toc-header"><i class="iconfont icon-menu" style="padding-right: 2px;"></i>目录</div>
+<ol class="toc"><li class="toc-item toc-level-3"><a class="toc-link" href="#路由守卫是什么"><span class="toc-text">路由守卫是什么</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#清除浮动的方式"><span class="toc-text">清除浮动的方式</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#MVVM与MVC的区别"><span class="toc-text">MVVM与MVC的区别</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#双向数据绑定"><span class="toc-text">双向数据绑定</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#封装插件"><span class="toc-text">封装插件</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#封装组件"><span class="toc-text">封装组件</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#项目的哪些部分是你负责-如何实现"><span class="toc-text">项目的哪些部分是你负责,如何实现</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#工作内容"><span class="toc-text">工作内容</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#原型链"><span class="toc-text">原型链</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#弹性布局"><span class="toc-text">弹性布局</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#冒泡排序的底层原理"><span class="toc-text">冒泡排序的底层原理</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#跨域的方式"><span class="toc-text">跨域的方式</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#element-ui组件的使用"><span class="toc-text">element-ui组件的使用</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#es6有哪些"><span class="toc-text">es6有哪些</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#call-apply-bind的区别"><span class="toc-text">call apply bind的区别</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#this的指向问题"><span class="toc-text">this的指向问题</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#token的实现"><span class="toc-text">token的实现</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#vuex的实现"><span class="toc-text">vuex的实现</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#组件间通信-父传子-子传父"><span class="toc-text">组件间通信,父传子,子传父</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#兄弟间传值"><span class="toc-text">兄弟间传值</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#关于继承的问题"><span class="toc-text">关于继承的问题</span></a></li></ol>
+    </div>
+  </article>
+  
+  
+  <article class="card card-content categories-widget">
+    <div class="categories-card">
+  <div class="categories-header"><i class="iconfont icon-fenlei" style="padding-right: 2px;"></i>分类</div>
+  <div class="categories-list">
+    
+      <a href="/categories/正则表达式/">
+        <div class="categories-list-item">
+          正则表达式
+          <span class="categories-list-item-badge">1</span>
+        </div>
+      </a>
+    
+      <a href="/categories/ajax/">
+        <div class="categories-list-item">
+          ajax
+          <span class="categories-list-item-badge">1</span>
+        </div>
+      </a>
+    
+      <a href="/categories/CSS/">
+        <div class="categories-list-item">
+          CSS
+          <span class="categories-list-item-badge">3</span>
+        </div>
+      </a>
+    
+      <a href="/categories/ES6/">
+        <div class="categories-list-item">
+          ES6
+          <span class="categories-list-item-badge">1</span>
+        </div>
+      </a>
+    
+      <a href="/categories/css/">
+        <div class="categories-list-item">
+          css
+          <span class="categories-list-item-badge">1</span>
+        </div>
+      </a>
+    
+      <a href="/categories/HTML5/">
+        <div class="categories-list-item">
+          HTML5
+          <span class="categories-list-item-badge">4</span>
+        </div>
+      </a>
+    
+      <a href="/categories/git/">
+        <div class="categories-list-item">
+          git
+          <span class="categories-list-item-badge">1</span>
+        </div>
+      </a>
+    
+      <a href="/categories/Markdown/">
+        <div class="categories-list-item">
+          Markdown
+          <span class="categories-list-item-badge">1</span>
+        </div>
+      </a>
+    
+      <a href="/categories/javascript/">
+        <div class="categories-list-item">
+          javascript
+          <span class="categories-list-item-badge">17</span>
+        </div>
+      </a>
+    
+      <a href="/categories/SqlServer/">
+        <div class="categories-list-item">
+          SqlServer
+          <span class="categories-list-item-badge">1</span>
+        </div>
+      </a>
+    
+      <a href="/categories/bootstrap/">
+        <div class="categories-list-item">
+          bootstrap
+          <span class="categories-list-item-badge">1</span>
+        </div>
+      </a>
+    
+      <a href="/categories/分类/">
+        <div class="categories-list-item">
+          分类
+          <span class="categories-list-item-badge">1</span>
+        </div>
+      </a>
+    
+      <a href="/categories/其他/">
+        <div class="categories-list-item">
+          其他
+          <span class="categories-list-item-badge">1</span>
+        </div>
+      </a>
+    
+      <a href="/categories/Vue/">
+        <div class="categories-list-item">
+          Vue
+          <span class="categories-list-item-badge">10</span>
+        </div>
+      </a>
+    
+      <a href="/categories/HTML/">
+        <div class="categories-list-item">
+          HTML
+          <span class="categories-list-item-badge">2</span>
+        </div>
+      </a>
+    
+      <a href="/categories/ionic/">
+        <div class="categories-list-item">
+          ionic
+          <span class="categories-list-item-badge">2</span>
+        </div>
+      </a>
+    
+      <a href="/categories/javascript/Vue/">
+        <div class="categories-list-item">
+          javascript/Vue
+          <span class="categories-list-item-badge">2</span>
+        </div>
+      </a>
+    
+      <a href="/categories/webpack/">
+        <div class="categories-list-item">
+          webpack
+          <span class="categories-list-item-badge">1</span>
+        </div>
+      </a>
+    
+      <a href="/categories/前端/">
+        <div class="categories-list-item">
+          前端
+          <span class="categories-list-item-badge">1</span>
+        </div>
+      </a>
+    
+      <a href="/categories/NodeJS/">
+        <div class="categories-list-item">
+          NodeJS
+          <span class="categories-list-item-badge">1</span>
+        </div>
+      </a>
+    
+      <a href="/categories/镜寰-工作/">
+        <div class="categories-list-item">
+          镜寰-工作
+          <span class="categories-list-item-badge">10</span>
+        </div>
+      </a>
+    
+      <a href="/categories/html/">
+        <div class="categories-list-item">
+          html
+          <span class="categories-list-item-badge">1</span>
+        </div>
+      </a>
+    
+      <a href="/categories/移动端/">
+        <div class="categories-list-item">
+          移动端
+          <span class="categories-list-item-badge">2</span>
+        </div>
+      </a>
+    
+      <a href="/categories/Vue/前端/">
+        <div class="categories-list-item">
+          Vue/前端
+          <span class="categories-list-item-badge">3</span>
+        </div>
+      </a>
+    
+      <a href="/categories/镜寰-工作/数据库/">
+        <div class="categories-list-item">
+          镜寰-工作/数据库
+          <span class="categories-list-item-badge">1</span>
+        </div>
+      </a>
+    
+  </div>
+</div>
+  </article>
+  
+  <article class="card card-content tags-widget">
+    <div class="tags-card">
+  <div class="tags-header"><i class="iconfont icon-biaoqian" style="padding-right: 2px;"></i>热门标签</div>
+  <div class="tags-list">
+    
+    <a href="/tags/前端/" title="前端"><div class="tags-list-item">前端</div></a>
+    
+    <a href="/tags/html/" title="html"><div class="tags-list-item">html</div></a>
+    
+    <a href="/tags/javascript/" title="javascript"><div class="tags-list-item">javascript</div></a>
+    
+    <a href="/tags/Vue/" title="Vue"><div class="tags-list-item">Vue</div></a>
+    
+    <a href="/tags/工作总结/" title="工作总结"><div class="tags-list-item">工作总结</div></a>
+    
+    <a href="/tags/框架/" title="框架"><div class="tags-list-item">框架</div></a>
+    
+    <a href="/tags/算法/" title="算法"><div class="tags-list-item">算法</div></a>
+    
+    <a href="/tags/笔记/" title="笔记"><div class="tags-list-item">笔记</div></a>
+    
+    <a href="/tags/常见问题/" title="常见问题"><div class="tags-list-item">常见问题</div></a>
+    
+    <a href="/tags/css/" title="css"><div class="tags-list-item">css</div></a>
+    
+    <a href="/tags/移动端/" title="移动端"><div class="tags-list-item">移动端</div></a>
+    
+    <a href="/tags/跨域/" title="跨域"><div class="tags-list-item">跨域</div></a>
+    
+    <a href="/tags/基础/" title="基础"><div class="tags-list-item">基础</div></a>
+    
+    <a href="/tags/规范/" title="规范"><div class="tags-list-item">规范</div></a>
+    
+    <a href="/tags/webpack/" title="webpack"><div class="tags-list-item">webpack</div></a>
+    
+    <a href="/tags/博客/" title="博客"><div class="tags-list-item">博客</div></a>
+    
+  </div>
+</div>
+  </article>
+  
+  
+</div>
+          </aside>
+          <aside class="right-column">
+            <div class="sticky-widescreen">
+  
+  
+  <article class="card card-content toc-card">
+    <div class="toc-header"><i class="iconfont icon-menu" style="padding-right: 2px;"></i>目录</div>
+<ol class="toc"><li class="toc-item toc-level-3"><a class="toc-link" href="#路由守卫是什么"><span class="toc-text">路由守卫是什么</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#清除浮动的方式"><span class="toc-text">清除浮动的方式</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#MVVM与MVC的区别"><span class="toc-text">MVVM与MVC的区别</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#双向数据绑定"><span class="toc-text">双向数据绑定</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#封装插件"><span class="toc-text">封装插件</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#封装组件"><span class="toc-text">封装组件</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#项目的哪些部分是你负责-如何实现"><span class="toc-text">项目的哪些部分是你负责,如何实现</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#工作内容"><span class="toc-text">工作内容</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#原型链"><span class="toc-text">原型链</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#弹性布局"><span class="toc-text">弹性布局</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#冒泡排序的底层原理"><span class="toc-text">冒泡排序的底层原理</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#跨域的方式"><span class="toc-text">跨域的方式</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#element-ui组件的使用"><span class="toc-text">element-ui组件的使用</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#es6有哪些"><span class="toc-text">es6有哪些</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#call-apply-bind的区别"><span class="toc-text">call apply bind的区别</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#this的指向问题"><span class="toc-text">this的指向问题</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#token的实现"><span class="toc-text">token的实现</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#vuex的实现"><span class="toc-text">vuex的实现</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#组件间通信-父传子-子传父"><span class="toc-text">组件间通信,父传子,子传父</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#兄弟间传值"><span class="toc-text">兄弟间传值</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#关于继承的问题"><span class="toc-text">关于继承的问题</span></a></li></ol>
+  </article>
+  
+  
+  <article class="card card-content">
+    <div class="recent-posts-card">
+  <div class="recent-posts-header"><i class="iconfont icon-wenzhang_huaban" style="padding-right: 2px;"></i>最近文章</div>
+  <div class="recent-posts-list">
+    
+      <div class="recent-posts-item">
+        <div class="recent-posts-item-title">2021-03-28</div>
+        <a href="/2021/03/28/vue学习记录4/"><div class="recent-posts-item-content">vue学习记录4</div></a>
+      </div>
+    
+      <div class="recent-posts-item">
+        <div class="recent-posts-item-title">2021-03-27</div>
+        <a href="/2021/03/27/vue学习记录3/"><div class="recent-posts-item-content">vue学习记录3</div></a>
+      </div>
+    
+      <div class="recent-posts-item">
+        <div class="recent-posts-item-title">2021-03-26</div>
+        <a href="/2021/03/26/vue学习记录2/"><div class="recent-posts-item-content">vue学习记录2</div></a>
+      </div>
+    
+      <div class="recent-posts-item">
+        <div class="recent-posts-item-title">2021-03-04</div>
+        <a href="/2021/03/04/vue学习记录1/"><div class="recent-posts-item-content">学习记录1</div></a>
+      </div>
+    
+  </div>
+</div>
+  </article>
+  
+  
+</div>
+          </aside>
+        </div>
+      </div>
+    </div>
+  </div>
+  
+  <footer class="footer">
+  <div class="footer-container">
+    <div>
+      <div class="footer-dsc">
+        <span>Copyright ©
+          
+          2020 -
+          
+          2021
+        </span>
+        &nbsp;
+        <a href="/" class="footer-link">小白的博客 </a>
+      </div>
+    </div>
+
+    
+    <div class="footer-dsc">
+      
+      Powered by
+      <a href="https://hexo.io/" class="footer-link" target="_blank" rel="nofollow noopener noreferrer">&nbsp;Hexo </a>
+      
+      
+      <span>&nbsp;|&nbsp;</span>
+      
+      
+      Theme -
+      <a href="https://github.com/theme-kaze" class="footer-link" target="_blank"
+        rel="nofollow noopener noreferrer">&nbsp;Kaze</a>
+      
+    </div>
+    
+    
+    
+    
+</footer>
+  <a role="button" id="scrollbutton" class="basebutton"  aria-label="回到顶部">
+  <i class="iconfont icon-arrowleft button-icon"></i>
+</a>
+<a role="button" id="menubutton" class="basebutton">
+  <i class="iconfont icon-menu button-icon"></i>
+</a>
+<a role="button" id="popbutton" class="basebutton" aria-label="控制中心">
+  <i class="iconfont icon-expand button-icon"></i>
+</a>
+<a role="button" id="darkbutton" class="basebutton darkwidget" aria-label="夜色模式">
+  <i class="iconfont icon-weather button-icon"></i>
+</a>
+<a role="button" id="searchbutton" class="basebutton searchwidget" aria-label="搜索">
+  <i class="iconfont icon-search button-icon"></i>
+</a>
+
+  
+  
+  
+  <script>
+  var addImgLayout = function () {
+    var img = document.querySelectorAll('.post-content img');
+    var i;
+    for (i = 0; i < img.length; i++) {
+      var wrapper = document.createElement('a');
+      wrapper.setAttribute('href', img[i].getAttribute('data-src'));
+      wrapper.setAttribute('aria-label', 'illustration');
+      wrapper.style.cssText = 'width: 100%; display: flex; justify-content: center;';
+      if (img[i].alt) wrapper.dataset.caption = img[i].alt;
+      wrapper.dataset.nolink = true;
+      img[i].before(wrapper);
+      wrapper.append(img[i]);
+      var divWrap = document.createElement('div');
+      divWrap.classList.add('gallery');
+      wrapper.before(divWrap);
+      divWrap.append(wrapper);
+    }
+    baguetteBox.run('.gallery');
+  }
+</script>
+<script>loadScript("/js/lib/lightbox/baguetteBox.min.js", addImgLayout)</script>
+  
+  
+  
+<script src="/js/main.js"></script>
+
+  
+  
+  <script>
+    var addLazyload = function () {
+      var observer = lozad('.lozad', {
+        load: function (el) {
+          el.srcset = el.getAttribute('data-src');
+        },
+        loaded: function (el) {
+          el.classList.add('loaded');
+        }
+      });
+      observer.observe();
+    }
+  </script>
+  <script>loadScript("/js/lib/lozad.min.js", addLazyload)</script>
+  
+  
+</body>
+
+</html>

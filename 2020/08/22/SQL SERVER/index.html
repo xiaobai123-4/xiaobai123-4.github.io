@@ -1,0 +1,689 @@
+<!DOCTYPE html>
+<html  lang="zh-CN" >
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport"
+    content="width=device-width, initial-scale=1.0, minimum-scale=1.0">
+  <meta http-equiv="X-UA-Compatible" content="ie=edge">
+  <meta name="theme-color" content="#fff" id="theme-color">
+  <meta name="description" content="学习永不止步">
+  <link rel="icon" href="https://s3.ax1x.com/2021/03/04/6VEJaQ.jpg">
+  <title>SQLserver</title>
+  
+  
+  <meta property="og:title" content="SQLserver">
+  
+  
+  <meta property="og:url" content="https://xiaobai123-4.github.io/2020/08/22/SQL%20SERVER/index.html">
+  
+  
+  <meta property="og:img" content="https://s3.ax1x.com/2021/03/04/6VEJaQ.jpg">
+  
+  
+  <meta property="og:img" content="&lt;h2 id=&#34;创建数据库&#34;&gt;&lt;a href=&#34;#创建数据库&#34; class=&#34;headerlink&#34; title=&#34;创建数据库&#34;&gt;&lt;/a&gt;创建数据库&lt;/h2&gt;&lt;p&gt;常见数据库操作,最常用的是对表的一些查询方法&lt;/p&gt;">
+  
+  
+  <meta property="og:type" content="article">
+  <meta property="og:article:published_time" content="2020-08-22">
+  <meta property="og:article:modified_time" content="2020-09-03">
+  <meta property="og:article:author" content="MaQisong">
+  
+  
+  <meta property="og:article:tag" content="SQLserver">
+  
+  
+  
+  
+  <script>
+    // control reverse button
+    var reverseDarkList = {
+      dark: 'light',
+      light: 'dark'
+    };
+    var themeColor = {
+      dark: '#1c1c1e',
+      light: '#fff'
+    }
+    // get the data of css prefers-color-scheme
+    var getCssMediaQuery = function() {
+      return window.matchMedia('(prefers-color-scheme: dark)').matches ? 'dark' : 'light';
+    };
+    // reverse current darkmode setting function
+    var reverseDarkModeSetting = function() {
+      var setting = localStorage.getItem('user-color-scheme');
+      if(reverseDarkList[setting]) {
+        setting = reverseDarkList[setting];
+      } else if(setting === null) {
+        setting = reverseDarkList[getCssMediaQuery()];
+      } else {
+        return;
+      }
+      localStorage.setItem('user-color-scheme', setting);
+      return setting;
+    };
+    // apply current darkmode setting
+    var setDarkmode = function(mode) {
+      var setting = mode || localStorage.getItem('user-color-scheme');
+      if(setting === getCssMediaQuery()) {
+        document.documentElement.removeAttribute('data-user-color-scheme');
+        localStorage.removeItem('user-color-scheme');
+        document.getElementById('theme-color').content = themeColor[setting];
+      } else if(reverseDarkList[setting]) {
+        document.documentElement.setAttribute('data-user-color-scheme', setting);
+        document.getElementById('theme-color').content = themeColor[setting];
+      } else {
+        document.documentElement.removeAttribute('data-user-color-scheme');
+        localStorage.removeItem('user-color-scheme');
+        document.getElementById('theme-color').content = themeColor[getCssMediaQuery()];
+      }
+    };
+    setDarkmode();
+  </script>
+  <script>
+    function loadScript(url, cb) {
+      var script = document.createElement('script');
+      script.src = url;
+      if (cb) script.onload = cb;
+      script.async = true;
+      document.body.appendChild(script);
+    }
+  </script>
+  
+  <link rel="preload" href="//at.alicdn.com/t/font_1946621_i1kgafibvw.css" as="style" >
+  <link rel="preload" href="//at.alicdn.com/t/font_1952792_89b4ac4k4up.css" as="style" >
+  
+  <link rel="preload" href="/js/lib/lightbox/baguetteBox.min.js" as="script">
+  <link rel="preload" href="/js/lib/lightbox/baguetteBox.min.css" as="style" >
+  
+  
+  <link rel="preload" href="/js/lib/lozad.min.js" as="script">
+  
+  
+  
+  
+  
+  
+  
+  
+<link rel="stylesheet" href="/css/main.css">
+
+  
+  
+<link rel="stylesheet" href="//at.alicdn.com/t/font_1946621_i1kgafibvw.css">
+
+  
+  
+<link rel="stylesheet" href="//at.alicdn.com/t/font_1952792_89b4ac4k4up.css">
+
+  
+  
+<link rel="stylesheet" href="/js/lib/lightbox/baguetteBox.min.css">
+
+  
+  
+<meta name="generator" content="Hexo 4.2.1"></head>
+
+
+<body>
+  <div class="wrapper">
+    
+    <nav class="navbar">
+  <div class="navbar-logo">
+    <span class="navbar-logo-main">
+      
+      <img class="navbar-logo-img" src="https://s3.ax1x.com/2021/03/04/6VEJaQ.jpg" alt="logo">
+      
+      <span class="navbar-logo-dsc">小白的博客</span>
+    </span>
+  </div>
+  <div class="navbar-menu">
+    
+    <a href="/" class="navbar-menu-item">
+    
+    首页
+    
+    </a>
+    
+    <a href="/archives" class="navbar-menu-item">
+    
+    归档
+    
+    </a>
+    
+    <a href="/tags" class="navbar-menu-item">
+    
+    标签
+    
+    </a>
+    
+    <a href="/categories" class="navbar-menu-item">
+    
+    分类
+    
+    </a>
+    
+    <a href="/about" class="navbar-menu-item">
+    
+    关于
+    
+    </a>
+    
+    <a class="navbar-menu-item darknavbar" id="dark"><i class="iconfont icon-weather"></i></a>
+    <a class="navbar-menu-item searchnavbar" id="search"><i class="iconfont icon-search" style="font-size: 1.2rem; font-weight: 400;"></i></a>
+  </div>
+</nav>
+    
+    <div id="local-search" style="display: none;">
+      <input class="navbar-menu-item" id="search-input" placeholder="请输入搜索内容...">
+      <div id="search-content"></div>
+    </div>
+    
+    <div class="section-wrap">
+      <div class="container">
+        <div class="columns">
+          <main class="main-column">
+<article class="card card-content">
+  <header>
+    <h1 class="post-title">
+      SQLserver
+    </h1>
+  </header>
+  <div class="post-meta post-show-meta">
+    <time datetime="2020-08-22T10:37:30.000Z">
+      <i class="iconfont icon-calendar" style="margin-right: 2px;"></i>
+      <span>2020-08-22</span>
+    </time>
+    
+    <span class="dot"></span>
+    
+    <a href="/categories/SqlServer/" class="post-meta-link">SqlServer</a>
+    
+    
+    
+    <span class="dot"></span>
+    <span>1.1k 字</span>
+    
+  </div>
+  
+  <div class="post-meta post-show-meta" style="margin-top: -10px;">
+    <div style="display: flex; align-items: center;">
+      <i class="iconfont icon-biaoqian" style="margin-right: 2px; font-size: 1.15rem;"></i>
+      
+      
+        <a href="/tags/SQLserver/" class="post-meta-link">SQLserver</a>
+      
+    </div>
+  </div>
+  
+  </header>
+  <div id="section" class="post-content">
+    <h2 id="创建数据库"><a href="#创建数据库" class="headerlink" title="创建数据库"></a>创建数据库</h2><p>常见数据库操作,最常用的是对表的一些查询方法</p>
+<a id="more"></a>
+
+<pre class="highlight"><span class="line"><span class="comment">#丢弃数据库bookstore，如果存在的话</span></span><br><span class="line"><span class="keyword">DROP</span> <span class="keyword">DATABASE</span> <span class="keyword">IF</span> <span class="keyword">EXISTS</span> bookstore;</span><br><span class="line"><span class="comment">#创建数据库bookstore</span></span><br><span class="line"><span class="keyword">CREATE</span> <span class="keyword">DATABASE</span> bookstore <span class="keyword">CHARSET</span>=UTF8;</span><br><span class="line"><span class="comment">#进入该数据库</span></span><br><span class="line"><span class="keyword">USE</span> bookstore;</span><br><span class="line"><span class="comment">#创建保存图书数据的表</span></span><br><span class="line"><span class="keyword">CREATE</span> <span class="keyword">TABLE</span> <span class="keyword">store</span>(</span><br><span class="line">  bid <span class="built_in">INT</span>,</span><br><span class="line">  title <span class="built_in">VARCHAR</span>(<span class="number">16</span>),</span><br><span class="line">  price <span class="built_in">INT</span></span><br><span class="line">);</span><br><span class="line"><span class="comment">#插入数据</span></span><br><span class="line"><span class="keyword">INSERT</span> <span class="keyword">INTO</span> <span class="keyword">store</span> <span class="keyword">VALUES</span>(<span class="string">'11'</span>,<span class="string">'《JAVA程序设计》'</span>,<span class="string">'78'</span>);</span><br><span class="line"><span class="keyword">INSERT</span> <span class="keyword">INTO</span> <span class="keyword">store</span> <span class="keyword">VALUES</span>(<span class="string">'12'</span>,<span class="string">'《JavaScript高级程序设计》'</span>,<span class="string">'99'</span>);</span><br><span class="line"><span class="keyword">INSERT</span> <span class="keyword">INTO</span> <span class="keyword">store</span> <span class="keyword">VALUES</span>(<span class="string">'13'</span>,<span class="string">'《Speaking JavaScript》'</span>,<span class="string">'108'</span>);</span><br><span class="line"><span class="keyword">INSERT</span> <span class="keyword">INTO</span> <span class="keyword">store</span> <span class="keyword">VALUES</span>(<span class="string">'14'</span>,<span class="string">'《1234》'</span>,<span class="string">'18'</span>);</span><br><span class="line"><span class="keyword">INSERT</span> <span class="keyword">INTO</span> <span class="keyword">store</span> <span class="keyword">VALUES</span>(<span class="string">'15'</span>,<span class="string">'《1fdfd》'</span>,<span class="string">'65'</span>);</span><br><span class="line"><span class="comment">#简写</span></span><br><span class="line"><span class="keyword">INSERT</span> <span class="keyword">INTO</span> <span class="keyword">store</span> <span class="keyword">VALUES</span>(<span class="number">21</span>,<span class="string">'《SQL Server数据库》'</span>,<span class="number">55</span>),(<span class="number">22</span>,<span class="string">'《c++技术编程设计》'</span>,<span class="number">66</span>),(<span class="number">23</span>,<span class="string">'《c语言程序设计》'</span>,<span class="number">65</span>);</span><br><span class="line"><span class="comment">#查询数据</span></span><br><span class="line"><span class="keyword">SELECT</span> * <span class="keyword">FROM</span> <span class="keyword">store</span>;</span><br><span class="line"><span class="comment">#删除数据</span></span><br><span class="line"><span class="keyword">DELETE</span> <span class="keyword">FROM</span> <span class="keyword">store</span> <span class="keyword">WHERE</span> bid=<span class="string">'14'</span>;</span><br><span class="line"><span class="comment">#修改数据</span></span><br><span class="line"><span class="keyword">UPDATE</span> <span class="keyword">store</span> <span class="keyword">set</span> title=<span class="string">'《计算机网络基础》'</span>,price=<span class="number">55</span> <span class="keyword">WHERE</span> bid=<span class="string">'15'</span>;</span><br></pre>
+
+<h2 id="复杂查询"><a href="#复杂查询" class="headerlink" title="复杂查询"></a>复杂查询</h2><h3 id="聚合查询-分组查询"><a href="#聚合查询-分组查询" class="headerlink" title="聚合查询/分组查询"></a>聚合查询/分组查询</h3><p>  示例: 查询所有员工的数量<br>  <code>SELECT COUNT(ename) FROM emp;</code><br>  练习: 分别使用部门编号和员工编号获取数量<br> <code>SELECT COUNT(deptId) FROM emp;</code><br>  <code>SELECT COUNT(eid) FROM emp; #推荐写法</code><br>  练习: 查询出所有男员工的数量<br>  <code>SELECT COUNT(*) FROM emp WHERE sex=1;</code></p>
+<blockquote>
+<p>聚合函数<br>函数是一个功能体，提供若干个数据，产出特定结果——饺子机<br>COUNT()/SUM()/AVG()/MAX()/MIN()</p>
+</blockquote>
+<p>  练习: 查询所有员工的工资总和<br>  <code>SELECT SUM(salary) FROM emp;</code><br>  练习: 查询出男员工的平均工资<br>  <code>SELECT AVG(salary) FROM emp WHERE sex=1;</code><br>  <code>SELECT SUM(salary)/COUNT(salary) FROM emp WHERE sex=1;</code><br>  练习: 查询出工资最高的员工<br>  <code>SELECT MAX(salary) FROM emp;</code><br>  练习: 查询出年龄最大的员工<br>  <code>SELECT MIN(birthday) FROM emp;</code></p>
+<h3 id="分组查询-只能查询分组条件和聚合函数"><a href="#分组查询-只能查询分组条件和聚合函数" class="headerlink" title="分组查询: 只能查询分组条件和聚合函数"></a>分组查询: 只能查询分组条件和聚合函数</h3><p>  示例: 查询出每个部门员工的最高工资，最低工资，平均工资<br>  <code>SELECT deptId,MAX(salary),MIN(salary),AVG(salary) FROM emp GROUP BY deptId;</code><br>  练习: 分组查询出男女员工的数量，最高工资和最低工资<br>  <code>SELECT sex,COUNT(eid),MAX(salary),MIN(salary) FROM emp GROUP BY sex;</code><br>  示例: 查询日期中的年份<br>  <code>SELECT YEAR(&#39;2019-11-6&#39;);</code><br>  示例: 查询日期中的月份<br>  <code>SELECT MONTH(&#39;2019-11-6&#39;);</code><br>  练习: 查询出1991年出生的员工有哪些<br>  <code>SELECT * FROM emp WHERE YEAR(birthday)=1991;</code><br>  练习: 查询出3月份生日的员工有哪些<br>  <code>SELECT * FROM emp WHERE MONTH(birthday)=3;</code><br> (2)子查询<br>  示例: 查询出研发部的员工有哪些<br>   步骤1: 查询出研发部的部门编号<br>   <code>SELECT did FROM dept WHERE dname=&#39;研发部&#39;;</code><br>   步骤2: 根据所得到的编号查询对应的员工<br>   <code>SELECT * FROM emp WHERE deptId=10;</code><br>   综合:<br>   <code>SELECT * FROM emp WHERE deptId=(SELECT did FROM dept WHERE dname=&#39;研发部&#39;);</code><br>  练习: 查询出比tom工资高的员工有哪些<br>   步骤1:查询出tom的工资是多少<br>   <code>SELECT salary FROM emp WHERE ename=&#39;tom&#39;;</code><br>   步骤2:根据tom工资查询员工<br>   <code>SELECT * FROM emp WHERE salary&gt;6000;</code><br>   综合：<br>   <code>SELECT * FROM emp WHERE salary&gt;( SELECT salary FROM emp WHERE ename=&#39;tom&#39;);</code><br>  练习: 查询出和tom同一年出生的员工有哪些<br>   步骤1: 查询出tom出生的年份<br>   <code>SELECT YEAR(birthday) FROM emp WHERE ename=&#39;tom&#39;;</code><br>   步骤2: 查询年份对应的员工有哪些<br>   <code>SELECT * FROM emp WHERE YEAR(birthday)=1990;</code><br>   综合:<br>   <code>SELECT * FROM emp WHERE YEAR(birthday)=( SELECT YEAR(birthday) FROM emp WHERE ename=&#39;tom&#39;) AND ename!=&#39;tom&#39;;</code></p>
+<h3 id="多表查询"><a href="#多表查询" class="headerlink" title="多表查询"></a>多表查询</h3><p>  查询出所有的员工姓名及其部门名称<br>  <code>SELECT ename,dname FROM emp,dept;</code><br>  错误: 笛卡尔积<br>  解决方法: 添加查询条件，两个表之间的关联(外键和主键)<br>  <code>SELECT ename,dname FROM emp,dept WHERE deptId=did;</code><br>上述语法无法查询出没有部门的员工，无法查询出没有员工的部门<br> (1)内连接——和之前查询结果一致<br>  <code>SELECT ename,dname FROM emp INNER JOIN dept ON deptId=did;</code><br> (2)左外连接——显示左侧表中所有的记录<br>  <code>SELECT ename,dname FROM emp LEFT OUTER JOIN dept ON deptId=did;</code><br>  先写哪个表哪个表就是左侧的，OUTER关键字可以省略<br> (3)右外连接——显示右侧表中所有记录<br>  <code>SELECT ename,dname FROM emp RIGHT OUTER JOIN dept ON deptId=did;</code><br>  后写哪个表哪个表就是右侧，OUTER关键字可以省略<br> (4)全连接<br>  显示左侧和右侧表中所有记录——FULL JOIN<br>  mysql不支持全连接<br>  UNION  合并相同的记录<br>  UNION ALL  不合并相同的记录<br> 把左外连接的结果和右外连接的结果合并起来<br>  <code>(SELECT ename,dname FROM emp LEFT OUTER JOIN dept ON deptId=did) UNION (SELECT ename,dname FROM emp RIGHT OUTER JOIN dept ON deptId=did);</code></p>
+
+  </div>
+  <div>
+  
+  <div class="post-note note-warning copyright" style="margin-top: 42px">
+    <p><span style="font-weight: bold;">作者：</span><a target="_blank" rel="nofollow noopener noreferrer" href="https://xiaobai123-4.github.io/about">MaQisong</a></p>
+    <p><span style="font-weight: bold;">文章链接：</span><a target="_blank" rel="nofollow noopener noreferrer" href="https://xiaobai123-4.github.io/2020/08/22/SQL%20SERVER/">https://xiaobai123-4.github.io/2020/08/22/SQL%20SERVER/</a></p>
+    <p><span style="font-weight: bold;">版权声明：</span>本博客所有文章除特别声明外，均采用<a target="_blank" rel="noopener" href="https://creativecommons.org/licenses/by-nc-sa/4.0/deed.zh">CC BY-NC-SA 4.0 协议</a>。转载请注明出处！</p>
+  </div>
+  
+  </div>
+</article>
+<div class="nav">
+  
+  <div class="nav-item-prev">
+    <a href="/2020/09/03/React/" class="nav-link">
+      <i class="iconfont icon-left nav-prev-icon"></i>
+      <div>
+        <div class="nav-label">上一篇</div>
+        
+        <div class="nav-title">React </div>
+        
+      </div>
+    </a>
+  </div>
+  
+  
+  <div class="nav-item-next">
+    <a href="/2020/08/22/中间件/" class="nav-link">
+      <div>
+        <div class="nav-label">下一篇</div>
+        
+        <div class="nav-title">中间件 </div>
+        
+      </div>
+      <i class="iconfont icon-right nav-next-icon"></i>
+    </a>
+  </div>
+  
+</div>
+
+<div class="card card-content toc-card" id="mobiletoc">
+  <div class="toc-header"><i class="iconfont icon-menu" style="padding-right: 2px;"></i>目录</div>
+<ol class="toc"><li class="toc-item toc-level-2"><a class="toc-link" href="#创建数据库"><span class="toc-text">创建数据库</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#复杂查询"><span class="toc-text">复杂查询</span></a><ol class="toc-child"><li class="toc-item toc-level-3"><a class="toc-link" href="#聚合查询-分组查询"><span class="toc-text">聚合查询&#x2F;分组查询</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#分组查询-只能查询分组条件和聚合函数"><span class="toc-text">分组查询: 只能查询分组条件和聚合函数</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#多表查询"><span class="toc-text">多表查询</span></a></li></ol></li></ol>
+</div></main>
+          <aside class="left-column">
+            
+            <div class="card card-author">
+              
+<img src="https://s3.ax1x.com/2021/03/04/6VEJaQ.jpg" class="author-img">
+
+<p class="author-name">MaQisong</p>
+<p class="author-description">学习永不止步</p>
+<div class="author-message">
+  <a class="author-posts-count" href="/archives">
+    <span>65</span>
+    <span>文章</span>
+  </a>
+  <a class="author-categories-count" href="/categories">
+    <span>25</span>
+    <span>分类</span>
+  </a>
+  <a class="author-tags-count" href="/tags">
+    <span>38</span>
+    <span>标签</span>
+  </a>
+</div>
+
+            </div>
+            
+            <div class="sticky-tablet">
+  
+  
+  <article class="display-when-two-columns spacer">
+    <div class="card card-content toc-card">
+      <div class="toc-header"><i class="iconfont icon-menu" style="padding-right: 2px;"></i>目录</div>
+<ol class="toc"><li class="toc-item toc-level-2"><a class="toc-link" href="#创建数据库"><span class="toc-text">创建数据库</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#复杂查询"><span class="toc-text">复杂查询</span></a><ol class="toc-child"><li class="toc-item toc-level-3"><a class="toc-link" href="#聚合查询-分组查询"><span class="toc-text">聚合查询&#x2F;分组查询</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#分组查询-只能查询分组条件和聚合函数"><span class="toc-text">分组查询: 只能查询分组条件和聚合函数</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#多表查询"><span class="toc-text">多表查询</span></a></li></ol></li></ol>
+    </div>
+  </article>
+  
+  
+  <article class="card card-content categories-widget">
+    <div class="categories-card">
+  <div class="categories-header"><i class="iconfont icon-fenlei" style="padding-right: 2px;"></i>分类</div>
+  <div class="categories-list">
+    
+      <a href="/categories/正则表达式/">
+        <div class="categories-list-item">
+          正则表达式
+          <span class="categories-list-item-badge">1</span>
+        </div>
+      </a>
+    
+      <a href="/categories/ajax/">
+        <div class="categories-list-item">
+          ajax
+          <span class="categories-list-item-badge">1</span>
+        </div>
+      </a>
+    
+      <a href="/categories/CSS/">
+        <div class="categories-list-item">
+          CSS
+          <span class="categories-list-item-badge">3</span>
+        </div>
+      </a>
+    
+      <a href="/categories/ES6/">
+        <div class="categories-list-item">
+          ES6
+          <span class="categories-list-item-badge">1</span>
+        </div>
+      </a>
+    
+      <a href="/categories/css/">
+        <div class="categories-list-item">
+          css
+          <span class="categories-list-item-badge">1</span>
+        </div>
+      </a>
+    
+      <a href="/categories/HTML5/">
+        <div class="categories-list-item">
+          HTML5
+          <span class="categories-list-item-badge">4</span>
+        </div>
+      </a>
+    
+      <a href="/categories/git/">
+        <div class="categories-list-item">
+          git
+          <span class="categories-list-item-badge">1</span>
+        </div>
+      </a>
+    
+      <a href="/categories/Markdown/">
+        <div class="categories-list-item">
+          Markdown
+          <span class="categories-list-item-badge">1</span>
+        </div>
+      </a>
+    
+      <a href="/categories/javascript/">
+        <div class="categories-list-item">
+          javascript
+          <span class="categories-list-item-badge">17</span>
+        </div>
+      </a>
+    
+      <a href="/categories/SqlServer/">
+        <div class="categories-list-item">
+          SqlServer
+          <span class="categories-list-item-badge">1</span>
+        </div>
+      </a>
+    
+      <a href="/categories/bootstrap/">
+        <div class="categories-list-item">
+          bootstrap
+          <span class="categories-list-item-badge">1</span>
+        </div>
+      </a>
+    
+      <a href="/categories/分类/">
+        <div class="categories-list-item">
+          分类
+          <span class="categories-list-item-badge">1</span>
+        </div>
+      </a>
+    
+      <a href="/categories/其他/">
+        <div class="categories-list-item">
+          其他
+          <span class="categories-list-item-badge">1</span>
+        </div>
+      </a>
+    
+      <a href="/categories/Vue/">
+        <div class="categories-list-item">
+          Vue
+          <span class="categories-list-item-badge">10</span>
+        </div>
+      </a>
+    
+      <a href="/categories/HTML/">
+        <div class="categories-list-item">
+          HTML
+          <span class="categories-list-item-badge">2</span>
+        </div>
+      </a>
+    
+      <a href="/categories/ionic/">
+        <div class="categories-list-item">
+          ionic
+          <span class="categories-list-item-badge">2</span>
+        </div>
+      </a>
+    
+      <a href="/categories/javascript/Vue/">
+        <div class="categories-list-item">
+          javascript/Vue
+          <span class="categories-list-item-badge">2</span>
+        </div>
+      </a>
+    
+      <a href="/categories/webpack/">
+        <div class="categories-list-item">
+          webpack
+          <span class="categories-list-item-badge">1</span>
+        </div>
+      </a>
+    
+      <a href="/categories/前端/">
+        <div class="categories-list-item">
+          前端
+          <span class="categories-list-item-badge">1</span>
+        </div>
+      </a>
+    
+      <a href="/categories/NodeJS/">
+        <div class="categories-list-item">
+          NodeJS
+          <span class="categories-list-item-badge">1</span>
+        </div>
+      </a>
+    
+      <a href="/categories/镜寰-工作/">
+        <div class="categories-list-item">
+          镜寰-工作
+          <span class="categories-list-item-badge">10</span>
+        </div>
+      </a>
+    
+      <a href="/categories/html/">
+        <div class="categories-list-item">
+          html
+          <span class="categories-list-item-badge">1</span>
+        </div>
+      </a>
+    
+      <a href="/categories/移动端/">
+        <div class="categories-list-item">
+          移动端
+          <span class="categories-list-item-badge">2</span>
+        </div>
+      </a>
+    
+      <a href="/categories/Vue/前端/">
+        <div class="categories-list-item">
+          Vue/前端
+          <span class="categories-list-item-badge">3</span>
+        </div>
+      </a>
+    
+      <a href="/categories/镜寰-工作/数据库/">
+        <div class="categories-list-item">
+          镜寰-工作/数据库
+          <span class="categories-list-item-badge">1</span>
+        </div>
+      </a>
+    
+  </div>
+</div>
+  </article>
+  
+  <article class="card card-content tags-widget">
+    <div class="tags-card">
+  <div class="tags-header"><i class="iconfont icon-biaoqian" style="padding-right: 2px;"></i>热门标签</div>
+  <div class="tags-list">
+    
+    <a href="/tags/前端/" title="前端"><div class="tags-list-item">前端</div></a>
+    
+    <a href="/tags/html/" title="html"><div class="tags-list-item">html</div></a>
+    
+    <a href="/tags/javascript/" title="javascript"><div class="tags-list-item">javascript</div></a>
+    
+    <a href="/tags/Vue/" title="Vue"><div class="tags-list-item">Vue</div></a>
+    
+    <a href="/tags/工作总结/" title="工作总结"><div class="tags-list-item">工作总结</div></a>
+    
+    <a href="/tags/框架/" title="框架"><div class="tags-list-item">框架</div></a>
+    
+    <a href="/tags/算法/" title="算法"><div class="tags-list-item">算法</div></a>
+    
+    <a href="/tags/笔记/" title="笔记"><div class="tags-list-item">笔记</div></a>
+    
+    <a href="/tags/常见问题/" title="常见问题"><div class="tags-list-item">常见问题</div></a>
+    
+    <a href="/tags/css/" title="css"><div class="tags-list-item">css</div></a>
+    
+    <a href="/tags/移动端/" title="移动端"><div class="tags-list-item">移动端</div></a>
+    
+    <a href="/tags/跨域/" title="跨域"><div class="tags-list-item">跨域</div></a>
+    
+    <a href="/tags/基础/" title="基础"><div class="tags-list-item">基础</div></a>
+    
+    <a href="/tags/规范/" title="规范"><div class="tags-list-item">规范</div></a>
+    
+    <a href="/tags/webpack/" title="webpack"><div class="tags-list-item">webpack</div></a>
+    
+    <a href="/tags/博客/" title="博客"><div class="tags-list-item">博客</div></a>
+    
+  </div>
+</div>
+  </article>
+  
+  
+</div>
+          </aside>
+          <aside class="right-column">
+            <div class="sticky-widescreen">
+  
+  
+  <article class="card card-content toc-card">
+    <div class="toc-header"><i class="iconfont icon-menu" style="padding-right: 2px;"></i>目录</div>
+<ol class="toc"><li class="toc-item toc-level-2"><a class="toc-link" href="#创建数据库"><span class="toc-text">创建数据库</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#复杂查询"><span class="toc-text">复杂查询</span></a><ol class="toc-child"><li class="toc-item toc-level-3"><a class="toc-link" href="#聚合查询-分组查询"><span class="toc-text">聚合查询&#x2F;分组查询</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#分组查询-只能查询分组条件和聚合函数"><span class="toc-text">分组查询: 只能查询分组条件和聚合函数</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#多表查询"><span class="toc-text">多表查询</span></a></li></ol></li></ol>
+  </article>
+  
+  
+  <article class="card card-content">
+    <div class="recent-posts-card">
+  <div class="recent-posts-header"><i class="iconfont icon-wenzhang_huaban" style="padding-right: 2px;"></i>最近文章</div>
+  <div class="recent-posts-list">
+    
+      <div class="recent-posts-item">
+        <div class="recent-posts-item-title">2021-03-28</div>
+        <a href="/2021/03/28/vue学习记录4/"><div class="recent-posts-item-content">vue学习记录4</div></a>
+      </div>
+    
+      <div class="recent-posts-item">
+        <div class="recent-posts-item-title">2021-03-27</div>
+        <a href="/2021/03/27/vue学习记录3/"><div class="recent-posts-item-content">vue学习记录3</div></a>
+      </div>
+    
+      <div class="recent-posts-item">
+        <div class="recent-posts-item-title">2021-03-26</div>
+        <a href="/2021/03/26/vue学习记录2/"><div class="recent-posts-item-content">vue学习记录2</div></a>
+      </div>
+    
+      <div class="recent-posts-item">
+        <div class="recent-posts-item-title">2021-03-04</div>
+        <a href="/2021/03/04/vue学习记录1/"><div class="recent-posts-item-content">学习记录1</div></a>
+      </div>
+    
+  </div>
+</div>
+  </article>
+  
+  
+</div>
+          </aside>
+        </div>
+      </div>
+    </div>
+  </div>
+  
+  <footer class="footer">
+  <div class="footer-container">
+    <div>
+      <div class="footer-dsc">
+        <span>Copyright ©
+          
+          2020 -
+          
+          2021
+        </span>
+        &nbsp;
+        <a href="/" class="footer-link">小白的博客 </a>
+      </div>
+    </div>
+
+    
+    <div class="footer-dsc">
+      
+      Powered by
+      <a href="https://hexo.io/" class="footer-link" target="_blank" rel="nofollow noopener noreferrer">&nbsp;Hexo </a>
+      
+      
+      <span>&nbsp;|&nbsp;</span>
+      
+      
+      Theme -
+      <a href="https://github.com/theme-kaze" class="footer-link" target="_blank"
+        rel="nofollow noopener noreferrer">&nbsp;Kaze</a>
+      
+    </div>
+    
+    
+    
+    
+</footer>
+  <a role="button" id="scrollbutton" class="basebutton"  aria-label="回到顶部">
+  <i class="iconfont icon-arrowleft button-icon"></i>
+</a>
+<a role="button" id="menubutton" class="basebutton">
+  <i class="iconfont icon-menu button-icon"></i>
+</a>
+<a role="button" id="popbutton" class="basebutton" aria-label="控制中心">
+  <i class="iconfont icon-expand button-icon"></i>
+</a>
+<a role="button" id="darkbutton" class="basebutton darkwidget" aria-label="夜色模式">
+  <i class="iconfont icon-weather button-icon"></i>
+</a>
+<a role="button" id="searchbutton" class="basebutton searchwidget" aria-label="搜索">
+  <i class="iconfont icon-search button-icon"></i>
+</a>
+
+  
+  
+  
+  <script>
+  var addImgLayout = function () {
+    var img = document.querySelectorAll('.post-content img');
+    var i;
+    for (i = 0; i < img.length; i++) {
+      var wrapper = document.createElement('a');
+      wrapper.setAttribute('href', img[i].getAttribute('data-src'));
+      wrapper.setAttribute('aria-label', 'illustration');
+      wrapper.style.cssText = 'width: 100%; display: flex; justify-content: center;';
+      if (img[i].alt) wrapper.dataset.caption = img[i].alt;
+      wrapper.dataset.nolink = true;
+      img[i].before(wrapper);
+      wrapper.append(img[i]);
+      var divWrap = document.createElement('div');
+      divWrap.classList.add('gallery');
+      wrapper.before(divWrap);
+      divWrap.append(wrapper);
+    }
+    baguetteBox.run('.gallery');
+  }
+</script>
+<script>loadScript("/js/lib/lightbox/baguetteBox.min.js", addImgLayout)</script>
+  
+  
+  
+<script src="/js/main.js"></script>
+
+  
+  
+  <script>
+    var addLazyload = function () {
+      var observer = lozad('.lozad', {
+        load: function (el) {
+          el.srcset = el.getAttribute('data-src');
+        },
+        loaded: function (el) {
+          el.classList.add('loaded');
+        }
+      });
+      observer.observe();
+    }
+  </script>
+  <script>loadScript("/js/lib/lozad.min.js", addLazyload)</script>
+  
+  
+</body>
+
+</html>

@@ -1,0 +1,867 @@
+<!DOCTYPE html>
+<html  lang="zh-CN" >
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport"
+    content="width=device-width, initial-scale=1.0, minimum-scale=1.0">
+  <meta http-equiv="X-UA-Compatible" content="ie=edge">
+  <meta name="theme-color" content="#fff" id="theme-color">
+  <meta name="description" content="学习永不止步">
+  <link rel="icon" href="https://s3.ax1x.com/2021/03/04/6VEJaQ.jpg">
+  <title>vue-4</title>
+  
+  
+  <meta property="og:title" content="vue-4">
+  
+  
+  <meta property="og:url" content="https://xiaobai123-4.github.io/2020/06/22/vue_4/index.html">
+  
+  
+  <meta property="og:img" content="https://s3.ax1x.com/2021/03/04/6VEJaQ.jpg">
+  
+  
+  <meta property="og:img" content="&lt;h2 id=&#34;Vue常用特性&#34;&gt;&lt;a href=&#34;#Vue常用特性&#34; class=&#34;headerlink&#34; title=&#34;Vue常用特性&#34;&gt;&lt;/a&gt;Vue常用特性&lt;/h2&gt;&lt;h3 id=&#34;接口调用方式&#34;&gt;&lt;a href=&#34;#接口调用方式&#34; class=&#34;headerlink&#34; title=&#34;接口调用方式&#34;&gt;&lt;/a&gt;接口调用方式&lt;/h3&gt;&lt;ul&gt;
+&lt;li&gt;原生ajax&lt;/li&gt;
+&lt;li&gt;基于jQuery的ajax&lt;/li&gt;
+&lt;li&gt;fetch&lt;/li&gt;
+&lt;li&gt;axios&lt;/li&gt;
+&lt;/ul&gt;
+&lt;h3 id=&#34;异步&#34;&gt;&lt;a href=&#34;#异步&#34; class=&#34;headerlink&#34; title=&#34;异步&#34;&gt;&lt;/a&gt;异步&lt;/h3&gt;&lt;ul&gt;
+&lt;li&gt;JavaScript的执行环境是「单线程」&lt;/li&gt;
+&lt;li&gt;所谓单线程，是指JS引擎中负责解释和执行JavaScript代码的线程只有一个，也就是一次只能完成一项任务，这个任务执行完后才能执行下一个，它会「阻塞」其他任务。这个任务可称为主线程&lt;/li&gt;
+&lt;li&gt;异步模式可以一起执行&lt;strong&gt;多个任务&lt;/strong&gt;&lt;/li&gt;
+&lt;li&gt;JS中常见的异步调用&lt;ul&gt;
+&lt;li&gt;定时任何&lt;/li&gt;
+&lt;li&gt;ajax&lt;/li&gt;
+&lt;li&gt;事件函数&lt;/li&gt;
+&lt;/ul&gt;
+&lt;/li&gt;
+&lt;/ul&gt;">
+  
+  
+  <meta property="og:type" content="article">
+  <meta property="og:article:published_time" content="2020-06-22">
+  <meta property="og:article:modified_time" content="2020-08-18">
+  <meta property="og:article:author" content="MaQisong">
+  
+  
+  <meta property="og:article:tag" content="javascript">
+  
+  <meta property="og:article:tag" content="Vue">
+  
+  <meta property="og:article:tag" content="框架">
+  
+  
+  
+  
+  <script>
+    // control reverse button
+    var reverseDarkList = {
+      dark: 'light',
+      light: 'dark'
+    };
+    var themeColor = {
+      dark: '#1c1c1e',
+      light: '#fff'
+    }
+    // get the data of css prefers-color-scheme
+    var getCssMediaQuery = function() {
+      return window.matchMedia('(prefers-color-scheme: dark)').matches ? 'dark' : 'light';
+    };
+    // reverse current darkmode setting function
+    var reverseDarkModeSetting = function() {
+      var setting = localStorage.getItem('user-color-scheme');
+      if(reverseDarkList[setting]) {
+        setting = reverseDarkList[setting];
+      } else if(setting === null) {
+        setting = reverseDarkList[getCssMediaQuery()];
+      } else {
+        return;
+      }
+      localStorage.setItem('user-color-scheme', setting);
+      return setting;
+    };
+    // apply current darkmode setting
+    var setDarkmode = function(mode) {
+      var setting = mode || localStorage.getItem('user-color-scheme');
+      if(setting === getCssMediaQuery()) {
+        document.documentElement.removeAttribute('data-user-color-scheme');
+        localStorage.removeItem('user-color-scheme');
+        document.getElementById('theme-color').content = themeColor[setting];
+      } else if(reverseDarkList[setting]) {
+        document.documentElement.setAttribute('data-user-color-scheme', setting);
+        document.getElementById('theme-color').content = themeColor[setting];
+      } else {
+        document.documentElement.removeAttribute('data-user-color-scheme');
+        localStorage.removeItem('user-color-scheme');
+        document.getElementById('theme-color').content = themeColor[getCssMediaQuery()];
+      }
+    };
+    setDarkmode();
+  </script>
+  <script>
+    function loadScript(url, cb) {
+      var script = document.createElement('script');
+      script.src = url;
+      if (cb) script.onload = cb;
+      script.async = true;
+      document.body.appendChild(script);
+    }
+  </script>
+  
+  <link rel="preload" href="//at.alicdn.com/t/font_1946621_i1kgafibvw.css" as="style" >
+  <link rel="preload" href="//at.alicdn.com/t/font_1952792_89b4ac4k4up.css" as="style" >
+  
+  <link rel="preload" href="/js/lib/lightbox/baguetteBox.min.js" as="script">
+  <link rel="preload" href="/js/lib/lightbox/baguetteBox.min.css" as="style" >
+  
+  
+  <link rel="preload" href="/js/lib/lozad.min.js" as="script">
+  
+  
+  
+  
+  
+  
+  
+  
+<link rel="stylesheet" href="/css/main.css">
+
+  
+  
+<link rel="stylesheet" href="//at.alicdn.com/t/font_1946621_i1kgafibvw.css">
+
+  
+  
+<link rel="stylesheet" href="//at.alicdn.com/t/font_1952792_89b4ac4k4up.css">
+
+  
+  
+<link rel="stylesheet" href="/js/lib/lightbox/baguetteBox.min.css">
+
+  
+  
+<meta name="generator" content="Hexo 4.2.1"></head>
+
+
+<body>
+  <div class="wrapper">
+    
+    <nav class="navbar">
+  <div class="navbar-logo">
+    <span class="navbar-logo-main">
+      
+      <img class="navbar-logo-img" src="https://s3.ax1x.com/2021/03/04/6VEJaQ.jpg" alt="logo">
+      
+      <span class="navbar-logo-dsc">小白的博客</span>
+    </span>
+  </div>
+  <div class="navbar-menu">
+    
+    <a href="/" class="navbar-menu-item">
+    
+    首页
+    
+    </a>
+    
+    <a href="/archives" class="navbar-menu-item">
+    
+    归档
+    
+    </a>
+    
+    <a href="/tags" class="navbar-menu-item">
+    
+    标签
+    
+    </a>
+    
+    <a href="/categories" class="navbar-menu-item">
+    
+    分类
+    
+    </a>
+    
+    <a href="/about" class="navbar-menu-item">
+    
+    关于
+    
+    </a>
+    
+    <a class="navbar-menu-item darknavbar" id="dark"><i class="iconfont icon-weather"></i></a>
+    <a class="navbar-menu-item searchnavbar" id="search"><i class="iconfont icon-search" style="font-size: 1.2rem; font-weight: 400;"></i></a>
+  </div>
+</nav>
+    
+    <div id="local-search" style="display: none;">
+      <input class="navbar-menu-item" id="search-input" placeholder="请输入搜索内容...">
+      <div id="search-content"></div>
+    </div>
+    
+    <div class="section-wrap">
+      <div class="container">
+        <div class="columns">
+          <main class="main-column">
+<article class="card card-content">
+  <header>
+    <h1 class="post-title">
+      vue-4
+    </h1>
+  </header>
+  <div class="post-meta post-show-meta">
+    <time datetime="2020-06-22T05:24:55.000Z">
+      <i class="iconfont icon-calendar" style="margin-right: 2px;"></i>
+      <span>2020-06-22</span>
+    </time>
+    
+    <span class="dot"></span>
+    
+    <a href="/categories/Vue/" class="post-meta-link">Vue</a>
+    
+    
+    
+    <span class="dot"></span>
+    <span>4k 字</span>
+    
+  </div>
+  
+  <div class="post-meta post-show-meta" style="margin-top: -10px;">
+    <div style="display: flex; align-items: center;">
+      <i class="iconfont icon-biaoqian" style="margin-right: 2px; font-size: 1.15rem;"></i>
+      
+      
+        <a href="/tags/javascript/" class="post-meta-link">javascript</a>
+      
+      
+      <span class="dot"></span>
+      
+        <a href="/tags/Vue/" class="post-meta-link">Vue</a>
+      
+      
+      <span class="dot"></span>
+      
+        <a href="/tags/框架/" class="post-meta-link">框架</a>
+      
+    </div>
+  </div>
+  
+  </header>
+  <div id="section" class="post-content">
+    <h2 id="Vue常用特性"><a href="#Vue常用特性" class="headerlink" title="Vue常用特性"></a>Vue常用特性</h2><h3 id="接口调用方式"><a href="#接口调用方式" class="headerlink" title="接口调用方式"></a>接口调用方式</h3><ul>
+<li>原生ajax</li>
+<li>基于jQuery的ajax</li>
+<li>fetch</li>
+<li>axios</li>
+</ul>
+<h3 id="异步"><a href="#异步" class="headerlink" title="异步"></a>异步</h3><ul>
+<li>JavaScript的执行环境是「单线程」</li>
+<li>所谓单线程，是指JS引擎中负责解释和执行JavaScript代码的线程只有一个，也就是一次只能完成一项任务，这个任务执行完后才能执行下一个，它会「阻塞」其他任务。这个任务可称为主线程</li>
+<li>异步模式可以一起执行<strong>多个任务</strong></li>
+<li>JS中常见的异步调用<ul>
+<li>定时任何</li>
+<li>ajax</li>
+<li>事件函数</li>
+</ul>
+</li>
+</ul>
+<a id="more"></a>
+
+
+<h3 id="promise"><a href="#promise" class="headerlink" title="promise"></a>promise</h3><ul>
+<li>主要解决异步深层嵌套的问题</li>
+<li>promise 提供了简洁的API  使得异步操作更加容易</li>
+</ul>
+<pre class="highlight"><span class="line"> </span><br><span class="line"><span class="tag">&lt;<span class="name">script</span> <span class="attr">type</span>=<span class="string">"text/javascript"</span>&gt;</span></span><br><span class="line">  /*</span><br><span class="line"><span class="javascript">   <span class="number">1.</span> <span class="built_in">Promise</span>基本使用</span></span><br><span class="line"><span class="javascript">         我们使用<span class="keyword">new</span>来构建一个<span class="built_in">Promise</span>  <span class="built_in">Promise</span>的构造函数接收一个参数，是函数，并且传入两个参数：		   resolve，reject， 分别表示异步操作执行成功后的回调函数和异步操作执行失败后的回调函数</span></span><br><span class="line">  */</span><br><span class="line"></span><br><span class="line"></span><br><span class="line"><span class="javascript">  <span class="keyword">var</span> p = <span class="keyword">new</span> <span class="built_in">Promise</span>(<span class="function"><span class="keyword">function</span>(<span class="params">resolve, reject</span>)</span>&#123;</span></span><br><span class="line"><span class="actionscript">    <span class="comment">//2. 这里用于实现异步任务  setTimeout</span></span></span><br><span class="line"><span class="actionscript">    setTimeout(<span class="function"><span class="keyword">function</span><span class="params">()</span></span>&#123;</span></span><br><span class="line"><span class="actionscript">      <span class="keyword">var</span> flag = <span class="literal">false</span>;</span></span><br><span class="line">      if(flag) &#123;</span><br><span class="line"><span class="actionscript">        <span class="comment">//3. 正常情况</span></span></span><br><span class="line"><span class="actionscript">        resolve(<span class="string">'hello'</span>);</span></span><br><span class="line"><span class="actionscript">      &#125;<span class="keyword">else</span>&#123;</span></span><br><span class="line"><span class="actionscript">        <span class="comment">//4. 异常情况</span></span></span><br><span class="line"><span class="actionscript">        reject(<span class="string">'出错了'</span>);</span></span><br><span class="line">      &#125;</span><br><span class="line">    &#125;, 100);</span><br><span class="line">  &#125;);</span><br><span class="line"><span class="actionscript">  <span class="comment">//  5 Promise实例生成以后，可以用then方法指定resolved状态和reject状态的回调函数 </span></span></span><br><span class="line"><span class="actionscript">  <span class="comment">//  在then方法中，你也可以直接return数据而不是Promise对象，在后面的then中就可以接收到数据了  </span></span></span><br><span class="line"><span class="actionscript">  p.then(<span class="function"><span class="keyword">function</span><span class="params">(data)</span></span>&#123;</span></span><br><span class="line"><span class="javascript">    <span class="built_in">console</span>.log(data)</span></span><br><span class="line"><span class="actionscript">  &#125;,<span class="function"><span class="keyword">function</span><span class="params">(info)</span></span>&#123;</span></span><br><span class="line"><span class="javascript">    <span class="built_in">console</span>.log(info)</span></span><br><span class="line">  &#125;);</span><br><span class="line"><span class="tag">&lt;/<span class="name">script</span>&gt;</span></span><br></pre>
+
+<h3 id="基于Promise发送Ajax请求"><a href="#基于Promise发送Ajax请求" class="headerlink" title="基于Promise发送Ajax请求"></a>基于Promise发送Ajax请求</h3><pre class="highlight"><span class="line"></span><br><span class="line"> <span class="tag">&lt;<span class="name">script</span> <span class="attr">type</span>=<span class="string">"text/javascript"</span>&gt;</span></span><br><span class="line">   /*</span><br><span class="line"><span class="javascript">     基于<span class="built_in">Promise</span>发送Ajax请求</span></span><br><span class="line">   */</span><br><span class="line"><span class="actionscript">   <span class="function"><span class="keyword">function</span> <span class="title">queryData</span><span class="params">(url)</span> </span>&#123;</span></span><br><span class="line">    #   1.1 创建一个Promise实例</span><br><span class="line"><span class="javascript">     <span class="keyword">var</span> p = <span class="keyword">new</span> <span class="built_in">Promise</span>(<span class="function"><span class="keyword">function</span>(<span class="params">resolve, reject</span>)</span>&#123;</span></span><br><span class="line"><span class="actionscript">       <span class="keyword">var</span> xhr = <span class="keyword">new</span> XMLHttpRequest();</span></span><br><span class="line"><span class="actionscript">       xhr.onreadystatechange = <span class="function"><span class="keyword">function</span><span class="params">()</span></span>&#123;</span></span><br><span class="line"><span class="actionscript">         <span class="keyword">if</span>(xhr.readyState != <span class="number">4</span>) <span class="keyword">return</span>;</span></span><br><span class="line">         if(xhr.readyState == 4 &amp;&amp; xhr.status == 200) &#123;</span><br><span class="line">           # 1.2 处理正常的情况</span><br><span class="line">           resolve(xhr.responseText);</span><br><span class="line"><span class="actionscript">         &#125;<span class="keyword">else</span>&#123;</span></span><br><span class="line">           # 1.3 处理异常情况</span><br><span class="line"><span class="actionscript">           reject(<span class="string">'服务器错误'</span>);</span></span><br><span class="line">         &#125;</span><br><span class="line">       &#125;;</span><br><span class="line"><span class="actionscript">       xhr.open(<span class="string">'get'</span>, url);</span></span><br><span class="line"><span class="actionscript">       xhr.send(<span class="literal">null</span>);</span></span><br><span class="line">     &#125;);</span><br><span class="line"><span class="actionscript">     <span class="keyword">return</span> p;</span></span><br><span class="line">   &#125;</span><br><span class="line"># 注意：  这里需要开启一个服务 </span><br><span class="line">   # 在then方法中，你也可以直接return数据而不是Promise对象，在后面的then中就可以接收到数据了</span><br><span class="line"><span class="actionscript">   queryData(<span class="string">'http://localhost:3000/data'</span>)</span></span><br><span class="line"><span class="actionscript">     .then(<span class="function"><span class="keyword">function</span><span class="params">(data)</span></span>&#123;</span></span><br><span class="line"><span class="javascript">       <span class="built_in">console</span>.log(data)</span></span><br><span class="line">       #  1.4 想要继续链式编程下去 需要 return  </span><br><span class="line"><span class="actionscript">       <span class="keyword">return</span> queryData(<span class="string">'http://localhost:3000/data1'</span>);</span></span><br><span class="line">     &#125;)</span><br><span class="line"><span class="actionscript">     .then(<span class="function"><span class="keyword">function</span><span class="params">(data)</span></span>&#123;</span></span><br><span class="line"><span class="javascript">       <span class="built_in">console</span>.log(data);</span></span><br><span class="line"><span class="actionscript">       <span class="keyword">return</span> queryData(<span class="string">'http://localhost:3000/data2'</span>);</span></span><br><span class="line">     &#125;)</span><br><span class="line"><span class="actionscript">     .then(<span class="function"><span class="keyword">function</span><span class="params">(data)</span></span>&#123;</span></span><br><span class="line"><span class="javascript">       <span class="built_in">console</span>.log(data)</span></span><br><span class="line">     &#125;);</span><br><span class="line"> <span class="tag">&lt;/<span class="name">script</span>&gt;</span></span><br></pre>
+
+<h3 id="Promise-基本API"><a href="#Promise-基本API" class="headerlink" title="Promise  基本API"></a>Promise  基本API</h3><h4 id="实例方法"><a href="#实例方法" class="headerlink" title="实例方法"></a>实例方法</h4><h5 id="then"><a href="#then" class="headerlink" title=".then()"></a>.then()</h5><ul>
+<li>得到异步任务正确的结果</li>
+</ul>
+<h5 id="catch"><a href="#catch" class="headerlink" title=".catch()"></a>.catch()</h5><ul>
+<li>获取异常信息</li>
+</ul>
+<h5 id="finally"><a href="#finally" class="headerlink" title=".finally()"></a>.finally()</h5><ul>
+<li>成功与否都会执行（不是正式标准） </li>
+</ul>
+<pre class="highlight"><span class="line"></span><br><span class="line"><span class="tag">&lt;<span class="name">script</span> <span class="attr">type</span>=<span class="string">"text/javascript"</span>&gt;</span></span><br><span class="line">  /*</span><br><span class="line"><span class="javascript">    <span class="built_in">Promise</span>常用API-实例方法</span></span><br><span class="line">  */</span><br><span class="line"><span class="actionscript">  <span class="comment">// console.dir(Promise);</span></span></span><br><span class="line"><span class="actionscript">  <span class="function"><span class="keyword">function</span> <span class="title">foo</span><span class="params">()</span> </span>&#123;</span></span><br><span class="line"><span class="javascript">    <span class="keyword">return</span> <span class="keyword">new</span> <span class="built_in">Promise</span>(<span class="function"><span class="keyword">function</span>(<span class="params">resolve, reject</span>)</span>&#123;</span></span><br><span class="line"><span class="actionscript">      setTimeout(<span class="function"><span class="keyword">function</span><span class="params">()</span></span>&#123;</span></span><br><span class="line"><span class="actionscript">        <span class="comment">// resolve(123);</span></span></span><br><span class="line"><span class="actionscript">        reject(<span class="string">'error'</span>);</span></span><br><span class="line">      &#125;, 100);</span><br><span class="line">    &#125;)</span><br><span class="line">  &#125;</span><br><span class="line"><span class="actionscript">  <span class="comment">// foo()</span></span></span><br><span class="line"><span class="actionscript">  <span class="comment">//   .then(function(data)&#123;</span></span></span><br><span class="line"><span class="actionscript">  <span class="comment">//     console.log(data)</span></span></span><br><span class="line"><span class="actionscript">  <span class="comment">//   &#125;)</span></span></span><br><span class="line"><span class="actionscript">  <span class="comment">//   .catch(function(data)&#123;</span></span></span><br><span class="line"><span class="actionscript">  <span class="comment">//     console.log(data)</span></span></span><br><span class="line"><span class="actionscript">  <span class="comment">//   &#125;)</span></span></span><br><span class="line"><span class="actionscript">  <span class="comment">//   .finally(function()&#123;</span></span></span><br><span class="line"><span class="actionscript">  <span class="comment">//     console.log('finished')</span></span></span><br><span class="line"><span class="actionscript">  <span class="comment">//   &#125;);</span></span></span><br><span class="line"></span><br><span class="line"><span class="actionscript">  <span class="comment">// --------------------------</span></span></span><br><span class="line"><span class="actionscript">  <span class="comment">// 两种写法是等效的</span></span></span><br><span class="line">  foo()</span><br><span class="line"><span class="actionscript">    .then(<span class="function"><span class="keyword">function</span><span class="params">(data)</span></span>&#123;</span></span><br><span class="line">      # 得到异步任务正确的结果</span><br><span class="line"><span class="javascript">      <span class="built_in">console</span>.log(data)</span></span><br><span class="line"><span class="actionscript">    &#125;,<span class="function"><span class="keyword">function</span><span class="params">(data)</span></span>&#123;</span></span><br><span class="line">      # 获取异常信息</span><br><span class="line"><span class="javascript">      <span class="built_in">console</span>.log(data)</span></span><br><span class="line">    &#125;)</span><br><span class="line">    # 成功与否都会执行（不是正式标准） </span><br><span class="line"><span class="actionscript">    .finally(<span class="function"><span class="keyword">function</span><span class="params">()</span></span>&#123;</span></span><br><span class="line"><span class="javascript">      <span class="built_in">console</span>.log(<span class="string">'finished'</span>)</span></span><br><span class="line">    &#125;);</span><br><span class="line"><span class="tag">&lt;/<span class="name">script</span>&gt;</span></span><br></pre>
+
+<h4 id="静态方法"><a href="#静态方法" class="headerlink" title="静态方法"></a>静态方法</h4><h5 id="all"><a href="#all" class="headerlink" title=".all()"></a>.all()</h5><ul>
+<li><code>Promise.all</code>方法接受一个数组作参数，数组中的对象（p1、p2、p3）均为promise实例（如果不是一个promise，该项会被用<code>Promise.resolve</code>转换为一个promise)。它的状态由这三个promise实例决定</li>
+</ul>
+<h5 id="race"><a href="#race" class="headerlink" title=".race()"></a>.race()</h5><ul>
+<li><code>Promise.race</code>方法同样接受一个数组作参数。当p1, p2, p3中有一个实例的状态发生改变（变为<code>fulfilled</code>或<code>rejected</code>），p的状态就跟着改变。并把第一个改变状态的promise的返回值，传给p的回调函数</li>
+</ul>
+<p>​    </p>
+<pre class="highlight"><span class="line"><span class="tag">&lt;<span class="name">script</span> <span class="attr">type</span>=<span class="string">"text/javascript"</span>&gt;</span></span><br><span class="line">  /*</span><br><span class="line"><span class="javascript">    <span class="built_in">Promise</span>常用API-对象方法</span></span><br><span class="line">  */</span><br><span class="line"><span class="actionscript">  <span class="comment">// console.dir(Promise)</span></span></span><br><span class="line"><span class="actionscript">  <span class="function"><span class="keyword">function</span> <span class="title">queryData</span><span class="params">(url)</span> </span>&#123;</span></span><br><span class="line"><span class="javascript">    <span class="keyword">return</span> <span class="keyword">new</span> <span class="built_in">Promise</span>(<span class="function"><span class="keyword">function</span>(<span class="params">resolve, reject</span>)</span>&#123;</span></span><br><span class="line"><span class="actionscript">      <span class="keyword">var</span> xhr = <span class="keyword">new</span> XMLHttpRequest();</span></span><br><span class="line"><span class="actionscript">      xhr.onreadystatechange = <span class="function"><span class="keyword">function</span><span class="params">()</span></span>&#123;</span></span><br><span class="line"><span class="actionscript">        <span class="keyword">if</span>(xhr.readyState != <span class="number">4</span>) <span class="keyword">return</span>;</span></span><br><span class="line">        if(xhr.readyState == 4 &amp;&amp; xhr.status == 200) &#123;</span><br><span class="line"><span class="actionscript">          <span class="comment">// 处理正常的情况</span></span></span><br><span class="line">          resolve(xhr.responseText);</span><br><span class="line"><span class="actionscript">        &#125;<span class="keyword">else</span>&#123;</span></span><br><span class="line"><span class="actionscript">          <span class="comment">// 处理异常情况</span></span></span><br><span class="line"><span class="actionscript">          reject(<span class="string">'服务器错误'</span>);</span></span><br><span class="line">        &#125;</span><br><span class="line">      &#125;;</span><br><span class="line"><span class="actionscript">      xhr.open(<span class="string">'get'</span>, url);</span></span><br><span class="line"><span class="actionscript">      xhr.send(<span class="literal">null</span>);</span></span><br><span class="line">    &#125;);</span><br><span class="line">  &#125;</span><br><span class="line"></span><br><span class="line"><span class="actionscript">  <span class="keyword">var</span> p1 = queryData(<span class="string">'http://localhost:3000/a1'</span>);</span></span><br><span class="line"><span class="actionscript">  <span class="keyword">var</span> p2 = queryData(<span class="string">'http://localhost:3000/a2'</span>);</span></span><br><span class="line"><span class="actionscript">  <span class="keyword">var</span> p3 = queryData(<span class="string">'http://localhost:3000/a3'</span>);</span></span><br><span class="line"><span class="javascript">   <span class="built_in">Promise</span>.all([p1,p2,p3]).then(<span class="function"><span class="keyword">function</span>(<span class="params">result</span>)</span>&#123;</span></span><br><span class="line"><span class="actionscript">     <span class="comment">//   all 中的参数  [p1,p2,p3]   和 返回的结果一 一对应["HELLO TOM", "HELLO JERRY", "HELLO SPIKE"]</span></span></span><br><span class="line"><span class="javascript">     <span class="built_in">console</span>.log(result) <span class="comment">//["HELLO TOM", "HELLO JERRY", "HELLO SPIKE"]</span></span></span><br><span class="line">   &#125;)</span><br><span class="line"><span class="javascript">  <span class="built_in">Promise</span>.race([p1,p2,p3]).then(<span class="function"><span class="keyword">function</span>(<span class="params">result</span>)</span>&#123;</span></span><br><span class="line"><span class="actionscript">    <span class="comment">// 由于p1执行较快，Promise的then()将获得结果'P1'。p2,p3仍在继续执行，但执行结果将被丢弃。</span></span></span><br><span class="line"><span class="javascript">    <span class="built_in">console</span>.log(result) <span class="comment">// "HELLO TOM"</span></span></span><br><span class="line">  &#125;)</span><br><span class="line"><span class="tag">&lt;/<span class="name">script</span>&gt;</span></span><br></pre>
+
+<h3 id="fetch"><a href="#fetch" class="headerlink" title="fetch"></a>fetch</h3><ul>
+<li>Fetch API是新的ajax解决方案 Fetch会返回Promise</li>
+<li><strong>fetch不是ajax的进一步封装，而是原生js，没有使用XMLHttpRequest对象</strong>。</li>
+<li>fetch(url, options).then(）</li>
+</ul>
+<pre class="highlight"><span class="line"><span class="tag">&lt;<span class="name">script</span> <span class="attr">type</span>=<span class="string">"text/javascript"</span>&gt;</span></span><br><span class="line">  /*</span><br><span class="line">    Fetch API 基本用法</span><br><span class="line">    	fetch(url).then()</span><br><span class="line"><span class="javascript">   	第一个参数请求的路径   Fetch会返回<span class="built_in">Promise</span>   所以我们可以使用then 拿到请求成功的结果 </span></span><br><span class="line">  */</span><br><span class="line"><span class="actionscript">  fetch(<span class="string">'http://localhost:3000/fdata'</span>).then(<span class="function"><span class="keyword">function</span><span class="params">(data)</span></span>&#123;</span></span><br><span class="line"><span class="actionscript">    <span class="comment">// text()方法属于fetchAPI的一部分，它返回一个Promise实例对象，用于获取后台返回的数据</span></span></span><br><span class="line"><span class="actionscript">    <span class="keyword">return</span> data.text();</span></span><br><span class="line"><span class="actionscript">  &#125;).then(<span class="function"><span class="keyword">function</span><span class="params">(data)</span></span>&#123;</span></span><br><span class="line"><span class="actionscript">    <span class="comment">//   在这个then里面我们能拿到最终的数据  </span></span></span><br><span class="line"><span class="javascript">    <span class="built_in">console</span>.log(data);</span></span><br><span class="line">  &#125;)</span><br><span class="line"><span class="tag">&lt;/<span class="name">script</span>&gt;</span></span><br></pre>
+
+<h4 id="fetch-API-中的-HTTP-请求"><a href="#fetch-API-中的-HTTP-请求" class="headerlink" title="fetch API  中的 HTTP  请求"></a>fetch API  中的 HTTP  请求</h4><ul>
+<li>fetch(url, options).then(）</li>
+<li>HTTP协议，它给我们提供了很多的方法，如POST，GET，DELETE，UPDATE，PATCH和PUT<ul>
+<li>默认的是 GET 请求</li>
+<li>需要在 options 对象中 指定对应的 method       method:请求使用的方法 </li>
+<li>post 和 普通 请求的时候 需要在options 中 设置  请求头 headers   和  body</li>
+</ul>
+</li>
+</ul>
+<pre class="highlight"><span class="line"><span class="tag">&lt;<span class="name">script</span> <span class="attr">type</span>=<span class="string">"text/javascript"</span>&gt;</span></span><br><span class="line">     /*</span><br><span class="line">           Fetch API 调用接口传递参数</span><br><span class="line">     */</span><br><span class="line">    #1.1 GET参数传递 - 传统URL  通过url  ？ 的形式传参 </span><br><span class="line"><span class="actionscript">     fetch(<span class="string">'http://localhost:3000/books?id=123'</span>, &#123;</span></span><br><span class="line">         	# get 请求可以省略不写 默认的是GET </span><br><span class="line"><span class="actionscript">             method: <span class="string">'get'</span></span></span><br><span class="line">         &#125;)</span><br><span class="line"><span class="actionscript">         .then(<span class="function"><span class="keyword">function</span><span class="params">(data)</span> </span>&#123;</span></span><br><span class="line">         	# 它返回一个Promise实例对象，用于获取后台返回的数据</span><br><span class="line"><span class="actionscript">             <span class="keyword">return</span> data.text();</span></span><br><span class="line"><span class="actionscript">         &#125;).then(<span class="function"><span class="keyword">function</span><span class="params">(data)</span> </span>&#123;</span></span><br><span class="line">         	# 在这个then里面我们能拿到最终的数据  </span><br><span class="line"><span class="javascript">             <span class="built_in">console</span>.log(data)</span></span><br><span class="line">         &#125;);</span><br><span class="line"></span><br><span class="line">   #1.2  GET参数传递  restful形式的URL  通过/ 的形式传递参数  即  id = 456 和id后台的配置有关   </span><br><span class="line"><span class="actionscript">     fetch(<span class="string">'http://localhost:3000/books/456'</span>, &#123;</span></span><br><span class="line">         	# get 请求可以省略不写 默认的是GET </span><br><span class="line"><span class="actionscript">             method: <span class="string">'get'</span></span></span><br><span class="line">         &#125;)</span><br><span class="line"><span class="actionscript">         .then(<span class="function"><span class="keyword">function</span><span class="params">(data)</span> </span>&#123;</span></span><br><span class="line"><span class="actionscript">             <span class="keyword">return</span> data.text();</span></span><br><span class="line"><span class="actionscript">         &#125;).then(<span class="function"><span class="keyword">function</span><span class="params">(data)</span> </span>&#123;</span></span><br><span class="line"><span class="javascript">             <span class="built_in">console</span>.log(data)</span></span><br><span class="line">         &#125;);</span><br><span class="line"></span><br><span class="line">    #2.1  DELETE请求方式参数传递      删除id  是  id=789</span><br><span class="line"><span class="actionscript">     fetch(<span class="string">'http://localhost:3000/books/789'</span>, &#123;</span></span><br><span class="line"><span class="actionscript">             method: <span class="string">'delete'</span></span></span><br><span class="line">         &#125;)</span><br><span class="line"><span class="actionscript">         .then(<span class="function"><span class="keyword">function</span><span class="params">(data)</span> </span>&#123;</span></span><br><span class="line"><span class="actionscript">             <span class="keyword">return</span> data.text();</span></span><br><span class="line"><span class="actionscript">         &#125;).then(<span class="function"><span class="keyword">function</span><span class="params">(data)</span> </span>&#123;</span></span><br><span class="line"><span class="javascript">             <span class="built_in">console</span>.log(data)</span></span><br><span class="line">         &#125;);</span><br><span class="line"></span><br><span class="line">    #3 POST请求传参</span><br><span class="line"><span class="actionscript">     fetch(<span class="string">'http://localhost:3000/books'</span>, &#123;</span></span><br><span class="line"><span class="actionscript">             method: <span class="string">'post'</span>,</span></span><br><span class="line">         	# 3.1  传递数据 </span><br><span class="line"><span class="actionscript">             body: <span class="string">'uname=lisi&amp;pwd=123'</span>,</span></span><br><span class="line">         	#  3.2  设置请求头 </span><br><span class="line">             headers: &#123;</span><br><span class="line"><span class="actionscript">                 <span class="string">'Content-Type'</span>: <span class="string">'application/x-www-form-urlencoded'</span></span></span><br><span class="line">             &#125;</span><br><span class="line">         &#125;)</span><br><span class="line"><span class="actionscript">         .then(<span class="function"><span class="keyword">function</span><span class="params">(data)</span> </span>&#123;</span></span><br><span class="line"><span class="actionscript">             <span class="keyword">return</span> data.text();</span></span><br><span class="line"><span class="actionscript">         &#125;).then(<span class="function"><span class="keyword">function</span><span class="params">(data)</span> </span>&#123;</span></span><br><span class="line"><span class="javascript">             <span class="built_in">console</span>.log(data)</span></span><br><span class="line">         &#125;);</span><br><span class="line"></span><br><span class="line">    # POST请求传参</span><br><span class="line"><span class="actionscript">     fetch(<span class="string">'http://localhost:3000/books'</span>, &#123;</span></span><br><span class="line"><span class="actionscript">             method: <span class="string">'post'</span>,</span></span><br><span class="line"><span class="javascript">             body: <span class="built_in">JSON</span>.stringify(&#123;</span></span><br><span class="line"><span class="actionscript">                 uname: <span class="string">'张三'</span>,</span></span><br><span class="line"><span class="actionscript">                 pwd: <span class="string">'456'</span></span></span><br><span class="line">             &#125;),</span><br><span class="line">             headers: &#123;</span><br><span class="line"><span class="actionscript">                 <span class="string">'Content-Type'</span>: <span class="string">'application/json'</span></span></span><br><span class="line">             &#125;</span><br><span class="line">         &#125;)</span><br><span class="line"><span class="actionscript">         .then(<span class="function"><span class="keyword">function</span><span class="params">(data)</span> </span>&#123;</span></span><br><span class="line"><span class="actionscript">             <span class="keyword">return</span> data.text();</span></span><br><span class="line"><span class="actionscript">         &#125;).then(<span class="function"><span class="keyword">function</span><span class="params">(data)</span> </span>&#123;</span></span><br><span class="line"><span class="javascript">             <span class="built_in">console</span>.log(data)</span></span><br><span class="line">         &#125;);</span><br><span class="line"></span><br><span class="line">     # PUT请求传参     修改id 是 123 的 </span><br><span class="line"><span class="actionscript">     fetch(<span class="string">'http://localhost:3000/books/123'</span>, &#123;</span></span><br><span class="line"><span class="actionscript">             method: <span class="string">'put'</span>,</span></span><br><span class="line"><span class="javascript">             body: <span class="built_in">JSON</span>.stringify(&#123;</span></span><br><span class="line"><span class="actionscript">                 uname: <span class="string">'张三'</span>,</span></span><br><span class="line"><span class="actionscript">                 pwd: <span class="string">'789'</span></span></span><br><span class="line">             &#125;),</span><br><span class="line">             headers: &#123;</span><br><span class="line"><span class="actionscript">                 <span class="string">'Content-Type'</span>: <span class="string">'application/json'</span></span></span><br><span class="line">             &#125;</span><br><span class="line">         &#125;)</span><br><span class="line"><span class="actionscript">         .then(<span class="function"><span class="keyword">function</span><span class="params">(data)</span> </span>&#123;</span></span><br><span class="line"><span class="actionscript">             <span class="keyword">return</span> data.text();</span></span><br><span class="line"><span class="actionscript">         &#125;).then(<span class="function"><span class="keyword">function</span><span class="params">(data)</span> </span>&#123;</span></span><br><span class="line"><span class="javascript">             <span class="built_in">console</span>.log(data)</span></span><br><span class="line">         &#125;);</span><br><span class="line"> <span class="tag">&lt;/<span class="name">script</span>&gt;</span></span><br></pre>
+
+<h4 id="fetchAPI-中-响应格式"><a href="#fetchAPI-中-响应格式" class="headerlink" title="fetchAPI 中 响应格式"></a>fetchAPI 中 响应格式</h4><ul>
+<li>用fetch来获取数据，如果响应正常返回，我们首先看到的是一个response对象，其中包括返回的一堆原始字节，这些字节需要在收到后，需要我们通过调用方法将其转换为相应格式的数据，比如<code>JSON</code>，<code>BLOB</code>或者<code>TEXT</code>等等</li>
+</ul>
+<pre class="highlight"><span class="line"><span class="comment">/*</span></span><br><span class="line"><span class="comment">  Fetch响应结果的数据格式</span></span><br><span class="line"><span class="comment">*/</span></span><br><span class="line">fetch(<span class="string">'http://localhost:3000/json'</span>).then(<span class="function"><span class="keyword">function</span>(<span class="params">data</span>)</span>&#123;</span><br><span class="line">  <span class="comment">// return data.json();   //  将获取到的数据使用 json 转换对象</span></span><br><span class="line">  <span class="keyword">return</span> data.text(); <span class="comment">//  //  将获取到的数据 转换成字符串 </span></span><br><span class="line">&#125;).then(<span class="function"><span class="keyword">function</span>(<span class="params">data</span>)</span>&#123;</span><br><span class="line">  <span class="comment">// console.log(data.uname)</span></span><br><span class="line">  <span class="comment">// console.log(typeof data)</span></span><br><span class="line">  <span class="keyword">var</span> obj = <span class="built_in">JSON</span>.parse(data);</span><br><span class="line">  <span class="built_in">console</span>.log(obj.uname,obj.age,obj.gender)</span><br><span class="line">&#125;)</span><br></pre>
+
+<h3 id="axios"><a href="#axios" class="headerlink" title="axios"></a>axios</h3><ul>
+<li>基于promise用于浏览器和node.js的http客户端</li>
+<li>支持浏览器和node.js</li>
+<li>支持promise</li>
+<li>能拦截请求和响应</li>
+<li>自动转换JSON数据</li>
+<li>能转换请求和响应数据</li>
+</ul>
+<h4 id="axios基础用法"><a href="#axios基础用法" class="headerlink" title="axios基础用法"></a>axios基础用法</h4><ul>
+<li>get和 delete请求传递参数<ul>
+<li>通过传统的url  以 ? 的形式传递参数</li>
+<li>restful 形式传递参数 </li>
+<li>通过params  形式传递参数 </li>
+</ul>
+</li>
+<li>post  和 put  请求传递参数<ul>
+<li>通过选项传递参数</li>
+<li>通过 URLSearchParams  传递参数 </li>
+</ul>
+</li>
+</ul>
+<pre class="highlight"><span class="line">   # 1. 发送get 请求 </span><br><span class="line">axios.get(<span class="string">'http://localhost:3000/adata'</span>).then(<span class="function"><span class="keyword">function</span>(<span class="params">ret</span>)</span>&#123; </span><br><span class="line">     #  拿到 ret 是一个对象      所有的对象都存在 ret 的data 属性里面</span><br><span class="line">     <span class="comment">// 注意data属性是固定的用法，用于获取后台的实际数据</span></span><br><span class="line">     <span class="comment">// console.log(ret.data)</span></span><br><span class="line">     <span class="built_in">console</span>.log(ret)</span><br><span class="line">   &#125;)</span><br><span class="line"># 2.  get 请求传递参数</span><br><span class="line">   # 2.1  通过传统的url  以 ? 的形式传递参数</span><br><span class="line">axios.get(<span class="string">'http://localhost:3000/axios?id=123'</span>).then(<span class="function"><span class="keyword">function</span>(<span class="params">ret</span>)</span>&#123;</span><br><span class="line">     <span class="built_in">console</span>.log(ret.data)</span><br><span class="line">   &#125;)</span><br><span class="line">   # 2.2  restful 形式传递参数 </span><br><span class="line">   axios.get(<span class="string">'http://localhost:3000/axios/123'</span>).then(<span class="function"><span class="keyword">function</span>(<span class="params">ret</span>)</span>&#123;</span><br><span class="line">     <span class="built_in">console</span>.log(ret.data)</span><br><span class="line">   &#125;)</span><br><span class="line"># 2.3  通过params  形式传递参数 </span><br><span class="line">   axios.get(<span class="string">'http://localhost:3000/axios'</span>, &#123;</span><br><span class="line">     params: &#123;</span><br><span class="line">       id: <span class="number">789</span></span><br><span class="line">     &#125;</span><br><span class="line">   &#125;).then(<span class="function"><span class="keyword">function</span>(<span class="params">ret</span>)</span>&#123;</span><br><span class="line">     <span class="built_in">console</span>.log(ret.data)</span><br><span class="line">   &#125;)</span><br><span class="line">#3 axios delete 请求传参     传参的形式和 get 请求一样</span><br><span class="line">   axios.delete(<span class="string">'http://localhost:3000/axios'</span>, &#123;</span><br><span class="line">     params: &#123;</span><br><span class="line">       id: <span class="number">111</span></span><br><span class="line">     &#125;</span><br><span class="line">   &#125;).then(<span class="function"><span class="keyword">function</span>(<span class="params">ret</span>)</span>&#123;</span><br><span class="line">     <span class="built_in">console</span>.log(ret.data)</span><br><span class="line">   &#125;)</span><br><span class="line"></span><br><span class="line"># 4  axios 的 post 请求</span><br><span class="line">   # 4.1  通过选项传递参数</span><br><span class="line">   axios.post(<span class="string">'http://localhost:3000/axios'</span>, &#123;</span><br><span class="line">     uname: <span class="string">'lisi'</span>,</span><br><span class="line">     pwd: <span class="number">123</span></span><br><span class="line">   &#125;).then(<span class="function"><span class="keyword">function</span>(<span class="params">ret</span>)</span>&#123;</span><br><span class="line">     <span class="built_in">console</span>.log(ret.data)</span><br><span class="line">   &#125;)</span><br><span class="line"># 4.2  通过 URLSearchParams  传递参数 </span><br><span class="line">   <span class="keyword">var</span> params = <span class="keyword">new</span> URLSearchParams();</span><br><span class="line">   params.append(<span class="string">'uname'</span>, <span class="string">'zhangsan'</span>);</span><br><span class="line">   params.append(<span class="string">'pwd'</span>, <span class="string">'111'</span>);</span><br><span class="line">   axios.post(<span class="string">'http://localhost:3000/axios'</span>, params).then(<span class="function"><span class="keyword">function</span>(<span class="params">ret</span>)</span>&#123;</span><br><span class="line">     <span class="built_in">console</span>.log(ret.data)</span><br><span class="line">   &#125;)</span><br><span class="line"></span><br><span class="line">	#5  axios put 请求传参   和 post 请求一样 </span><br><span class="line">   axios.put(<span class="string">'http://localhost:3000/axios/123'</span>, &#123;</span><br><span class="line">     uname: <span class="string">'lisi'</span>,</span><br><span class="line">     pwd: <span class="number">123</span></span><br><span class="line">   &#125;).then(<span class="function"><span class="keyword">function</span>(<span class="params">ret</span>)</span>&#123;</span><br><span class="line">     <span class="built_in">console</span>.log(ret.data)</span><br><span class="line">   &#125;)</span><br></pre>
+
+<h4 id="axios-全局配置"><a href="#axios-全局配置" class="headerlink" title="axios 全局配置"></a>axios 全局配置</h4><pre class="highlight"><span class="line">#  配置公共的请求头 </span><br><span class="line">axios.defaults.baseURL = <span class="string">'https://api.example.com'</span>;</span><br><span class="line">#  配置 超时时间</span><br><span class="line">axios.defaults.timeout = <span class="number">2500</span>;</span><br><span class="line">#  配置公共的请求头</span><br><span class="line">axios.defaults.headers.common[<span class="string">'Authorization'</span>] = AUTH_TOKEN;</span><br><span class="line"># 配置公共的 post 的 Content-Type</span><br><span class="line">axios.defaults.headers.post[<span class="string">'Content-Type'</span>] = <span class="string">'application/x-www-form-urlencoded'</span>;</span><br></pre>
+
+<h4 id="axios-拦截器"><a href="#axios-拦截器" class="headerlink" title="axios 拦截器"></a>axios 拦截器</h4><ul>
+<li>请求拦截器<ul>
+<li>请求拦截器的作用是在请求发送前进行一些操作<ul>
+<li>例如在每个请求体里加上token，统一做了处理如果以后要改也非常容易</li>
+</ul>
+</li>
+</ul>
+</li>
+<li>响应拦截器<ul>
+<li>响应拦截器的作用是在接收到响应后进行一些操作<ul>
+<li>例如在服务器返回登录状态失效，需要重新登录的时候，跳转到登录页</li>
+</ul>
+</li>
+</ul>
+</li>
+</ul>
+<pre class="highlight"><span class="line"># 1. 请求拦截器 </span><br><span class="line">axios.interceptors.request.use(<span class="function"><span class="keyword">function</span>(<span class="params">config</span>) </span>&#123;</span><br><span class="line">     <span class="built_in">console</span>.log(config.url)</span><br><span class="line">     # 1.1  任何请求都会经过这一步   在发送请求之前做些什么   </span><br><span class="line">     config.headers.mytoken = <span class="string">'nihao'</span>;</span><br><span class="line">     # 1.2  这里一定要return   否则配置不成功  </span><br><span class="line">     <span class="keyword">return</span> config;</span><br><span class="line">   &#125;, <span class="function"><span class="keyword">function</span>(<span class="params">err</span>)</span>&#123;</span><br><span class="line">      #1.3 对请求错误做点什么    </span><br><span class="line">     <span class="built_in">console</span>.log(err)</span><br><span class="line">   &#125;)</span><br><span class="line">#2. 响应拦截器 </span><br><span class="line">   axios.interceptors.response.use(<span class="function"><span class="keyword">function</span>(<span class="params">res</span>) </span>&#123;</span><br><span class="line">     #2.1  在接收响应做些什么  </span><br><span class="line">     <span class="keyword">var</span> data = res.data;</span><br><span class="line">     <span class="keyword">return</span> data;</span><br><span class="line">   &#125;, <span class="function"><span class="keyword">function</span>(<span class="params">err</span>)</span>&#123;</span><br><span class="line">     #2.2 对响应错误做点什么  </span><br><span class="line">     <span class="built_in">console</span>.log(err)</span><br><span class="line">   &#125;)</span><br></pre>
+
+<h3 id="async-和-await"><a href="#async-和-await" class="headerlink" title="async  和 await"></a>async  和 await</h3><ul>
+<li>async作为一个关键字放到函数前面<ul>
+<li>任何一个<code>async</code>函数都会隐式返回一个<code>promise</code></li>
+</ul>
+</li>
+<li><code>await</code>关键字只能在使用<code>async</code>定义的函数中使用<ul>
+<li>​    await后面可以直接跟一个 Promise实例对象</li>
+<li>​     await函数不能单独使用</li>
+</ul>
+</li>
+<li><strong>async/await 让异步代码看起来、表现起来更像同步代码</strong></li>
+</ul>
+<pre class="highlight"><span class="line">	# 1.  async 基础用法</span><br><span class="line">   # 1.1 async作为一个关键字放到函数前面</span><br><span class="line"><span class="keyword">async</span> <span class="function"><span class="keyword">function</span> <span class="title">queryData</span>(<span class="params"></span>) </span>&#123;</span><br><span class="line">     # 1.2 await关键字只能在使用async定义的函数中使用      await后面可以直接跟一个 Promise实例对象</span><br><span class="line">     <span class="keyword">var</span> ret = <span class="keyword">await</span> <span class="keyword">new</span> <span class="built_in">Promise</span>(<span class="function"><span class="keyword">function</span>(<span class="params">resolve, reject</span>)</span>&#123;</span><br><span class="line">       setTimeout(<span class="function"><span class="keyword">function</span>(<span class="params"></span>)</span>&#123;</span><br><span class="line">         resolve(<span class="string">'nihao'</span>)</span><br><span class="line">       &#125;,<span class="number">1000</span>);</span><br><span class="line">     &#125;)</span><br><span class="line">     <span class="comment">// console.log(ret.data)</span></span><br><span class="line">     <span class="keyword">return</span> ret;</span><br><span class="line">   &#125;</span><br><span class="line"># 1.3 任何一个async函数都会隐式返回一个promise   我们可以使用then 进行链式编程</span><br><span class="line">   queryData().then(<span class="function"><span class="keyword">function</span>(<span class="params">data</span>)</span>&#123;</span><br><span class="line">     <span class="built_in">console</span>.log(data)</span><br><span class="line">   &#125;)</span><br><span class="line"></span><br><span class="line">#2.  async    函数处理多个异步函数</span><br><span class="line">   axios.defaults.baseURL = <span class="string">'http://localhost:3000'</span>;</span><br><span class="line"></span><br><span class="line">   <span class="keyword">async</span> <span class="function"><span class="keyword">function</span> <span class="title">queryData</span>(<span class="params"></span>) </span>&#123;</span><br><span class="line">     # 2.1  添加await之后 当前的await 返回结果之后才会执行后面的代码   </span><br><span class="line">     </span><br><span class="line">     <span class="keyword">var</span> info = <span class="keyword">await</span> axios.get(<span class="string">'async1'</span>);</span><br><span class="line">     #2.2  让异步代码看起来、表现起来更像同步代码</span><br><span class="line">     <span class="keyword">var</span> ret = <span class="keyword">await</span> axios.get(<span class="string">'async2?info='</span> + info.data);</span><br><span class="line">     <span class="keyword">return</span> ret.data;</span><br><span class="line">   &#125;</span><br><span class="line"></span><br><span class="line">   queryData().then(<span class="function"><span class="keyword">function</span>(<span class="params">data</span>)</span>&#123;</span><br><span class="line">     <span class="built_in">console</span>.log(data)</span><br><span class="line">   &#125;)</span><br></pre>
+
+<h3 id="图书列表案例"><a href="#图书列表案例" class="headerlink" title="图书列表案例"></a>图书列表案例</h3><h4 id="1-基于接口案例-获取图书列表"><a href="#1-基于接口案例-获取图书列表" class="headerlink" title="1. 基于接口案例-获取图书列表"></a>1. 基于接口案例-获取图书列表</h4><ul>
+<li>导入axios   用来发送ajax </li>
+<li>把获取到的数据渲染到页面上 </li>
+</ul>
+<pre class="highlight"><span class="line"> <span class="tag">&lt;<span class="name">div</span> <span class="attr">id</span>=<span class="string">"app"</span>&gt;</span></span><br><span class="line">       <span class="tag">&lt;<span class="name">div</span> <span class="attr">class</span>=<span class="string">"grid"</span>&gt;</span></span><br><span class="line">           <span class="tag">&lt;<span class="name">table</span>&gt;</span></span><br><span class="line">               <span class="tag">&lt;<span class="name">thead</span>&gt;</span></span><br><span class="line">                   <span class="tag">&lt;<span class="name">tr</span>&gt;</span></span><br><span class="line">                       <span class="tag">&lt;<span class="name">th</span>&gt;</span>编号<span class="tag">&lt;/<span class="name">th</span>&gt;</span></span><br><span class="line">                       <span class="tag">&lt;<span class="name">th</span>&gt;</span>名称<span class="tag">&lt;/<span class="name">th</span>&gt;</span></span><br><span class="line">                       <span class="tag">&lt;<span class="name">th</span>&gt;</span>时间<span class="tag">&lt;/<span class="name">th</span>&gt;</span></span><br><span class="line">                       <span class="tag">&lt;<span class="name">th</span>&gt;</span>操作<span class="tag">&lt;/<span class="name">th</span>&gt;</span></span><br><span class="line">                   <span class="tag">&lt;/<span class="name">tr</span>&gt;</span></span><br><span class="line">               <span class="tag">&lt;/<span class="name">thead</span>&gt;</span></span><br><span class="line">               <span class="tag">&lt;<span class="name">tbody</span>&gt;</span></span><br><span class="line">                   <span class="comment">&lt;!-- 5.  把books  中的数据渲染到页面上   --&gt;</span></span><br><span class="line">                   <span class="tag">&lt;<span class="name">tr</span> <span class="attr">:key</span>=<span class="string">'item.id'</span> <span class="attr">v-for</span>=<span class="string">'item in books'</span>&gt;</span></span><br><span class="line">                       <span class="tag">&lt;<span class="name">td</span>&gt;</span>&#123;&#123;item.id&#125;&#125;<span class="tag">&lt;/<span class="name">td</span>&gt;</span></span><br><span class="line">                       <span class="tag">&lt;<span class="name">td</span>&gt;</span>&#123;&#123;item.name&#125;&#125;<span class="tag">&lt;/<span class="name">td</span>&gt;</span></span><br><span class="line">                       <span class="tag">&lt;<span class="name">td</span>&gt;</span>&#123;&#123;item.date &#125;&#125;<span class="tag">&lt;/<span class="name">td</span>&gt;</span></span><br><span class="line">                       <span class="tag">&lt;<span class="name">td</span>&gt;</span></span><br><span class="line">                           <span class="tag">&lt;<span class="name">a</span> <span class="attr">href</span>=<span class="string">""</span>&gt;</span>修改<span class="tag">&lt;/<span class="name">a</span>&gt;</span></span><br><span class="line">                           <span class="tag">&lt;<span class="name">span</span>&gt;</span>|<span class="tag">&lt;/<span class="name">span</span>&gt;</span></span><br><span class="line">                           <span class="tag">&lt;<span class="name">a</span> <span class="attr">href</span>=<span class="string">""</span>&gt;</span>删除<span class="tag">&lt;/<span class="name">a</span>&gt;</span></span><br><span class="line">                       <span class="tag">&lt;/<span class="name">td</span>&gt;</span></span><br><span class="line">                   <span class="tag">&lt;/<span class="name">tr</span>&gt;</span></span><br><span class="line">               <span class="tag">&lt;/<span class="name">tbody</span>&gt;</span></span><br><span class="line">           <span class="tag">&lt;/<span class="name">table</span>&gt;</span></span><br><span class="line">       <span class="tag">&lt;/<span class="name">div</span>&gt;</span></span><br><span class="line">   <span class="tag">&lt;/<span class="name">div</span>&gt;</span></span><br><span class="line">   <span class="tag">&lt;<span class="name">script</span> <span class="attr">type</span>=<span class="string">"text/javascript"</span> <span class="attr">src</span>=<span class="string">"js/vue.js"</span>&gt;</span><span class="tag">&lt;/<span class="name">script</span>&gt;</span></span><br><span class="line">1.  导入axios   </span><br><span class="line">   <span class="tag">&lt;<span class="name">script</span> <span class="attr">type</span>=<span class="string">"text/javascript"</span> <span class="attr">src</span>=<span class="string">"js/axios.js"</span>&gt;</span><span class="tag">&lt;/<span class="name">script</span>&gt;</span></span><br><span class="line">   <span class="tag">&lt;<span class="name">script</span> <span class="attr">type</span>=<span class="string">"text/javascript"</span>&gt;</span></span><br><span class="line">       /*</span><br><span class="line">            图书管理-添加图书</span><br><span class="line">        */</span><br><span class="line">       # 2   配置公共的url地址  简化后面的调用方式</span><br><span class="line"><span class="actionscript">       axios.defaults.baseURL = <span class="string">'http://localhost:3000/'</span>;</span></span><br><span class="line"><span class="actionscript">       axios.interceptors.response.use(<span class="function"><span class="keyword">function</span><span class="params">(res)</span> </span>&#123;</span></span><br><span class="line"><span class="actionscript">           <span class="keyword">return</span> res.data;</span></span><br><span class="line"><span class="actionscript">       &#125;, <span class="function"><span class="keyword">function</span><span class="params">(error)</span> </span>&#123;</span></span><br><span class="line"><span class="javascript">           <span class="built_in">console</span>.log(error)</span></span><br><span class="line">       &#125;);</span><br><span class="line"></span><br><span class="line"><span class="actionscript">       <span class="keyword">var</span> vm = <span class="keyword">new</span> Vue(&#123;</span></span><br><span class="line"><span class="actionscript">           el: <span class="string">'#app'</span>,</span></span><br><span class="line">           data: &#123;</span><br><span class="line"><span class="actionscript">               flag: <span class="literal">false</span>,</span></span><br><span class="line"><span class="actionscript">               submitFlag: <span class="literal">false</span>,</span></span><br><span class="line"><span class="actionscript">               id: <span class="string">''</span>,</span></span><br><span class="line"><span class="actionscript">               name: <span class="string">''</span>,</span></span><br><span class="line">               books: []</span><br><span class="line">           &#125;,</span><br><span class="line">           methods: &#123;</span><br><span class="line">               # 3 定义一个方法 用来发送 ajax </span><br><span class="line">               # 3.1  使用 async  来 让异步的代码  以同步的形式书写 </span><br><span class="line"><span class="javascript">               queryData: <span class="keyword">async</span> <span class="function"><span class="keyword">function</span>(<span class="params"></span>) </span>&#123;</span></span><br><span class="line"><span class="actionscript">                   <span class="comment">// 调用后台接口获取图书列表数据</span></span></span><br><span class="line"><span class="actionscript">                   <span class="comment">// var ret = await axios.get('books');</span></span></span><br><span class="line"><span class="actionscript">                   <span class="comment">// this.books = ret.data;</span></span></span><br><span class="line">				# 3.2  发送ajax请求  把拿到的数据放在books 里面   </span><br><span class="line"><span class="javascript">                   <span class="keyword">this</span>.books = <span class="keyword">await</span> axios.get(<span class="string">'books'</span>);</span></span><br><span class="line">               &#125;</span><br><span class="line">           &#125;,</span><br><span class="line"></span><br><span class="line"><span class="actionscript">           mounted: <span class="function"><span class="keyword">function</span><span class="params">()</span> </span>&#123;</span></span><br><span class="line">			#  4 mounted  里面 DOM已经加载完毕  在这里调用函数  </span><br><span class="line"><span class="actionscript">               <span class="keyword">this</span>.queryData();</span></span><br><span class="line">           &#125;</span><br><span class="line">       &#125;);</span><br><span class="line">   <span class="tag">&lt;/<span class="name">script</span>&gt;</span></span><br></pre>
+
+<h4 id="2-添加图书"><a href="#2-添加图书" class="headerlink" title="2   添加图书"></a>2   添加图书</h4><ul>
+<li>获取用户输入的数据   发送到后台</li>
+<li>渲染最新的数据到页面上</li>
+</ul>
+<pre class="highlight"><span class="line">methods: &#123;</span><br><span class="line">   handle: <span class="keyword">async</span> <span class="function"><span class="keyword">function</span>(<span class="params"></span>)</span>&#123;</span><br><span class="line">         <span class="keyword">if</span>(<span class="keyword">this</span>.flag) &#123;</span><br><span class="line">           <span class="comment">// 编辑图书</span></span><br><span class="line">           <span class="comment">// 就是根据当前的ID去更新数组中对应的数据</span></span><br><span class="line">           <span class="keyword">this</span>.books.some(<span class="function">(<span class="params">item</span>) =&gt;</span> &#123;</span><br><span class="line">             <span class="keyword">if</span>(item.id == <span class="keyword">this</span>.id) &#123;</span><br><span class="line">               item.name = <span class="keyword">this</span>.name;</span><br><span class="line">               <span class="comment">// 完成更新操作之后，需要终止循环</span></span><br><span class="line">               <span class="keyword">return</span> <span class="literal">true</span>;</span><br><span class="line">             &#125;</span><br><span class="line">           &#125;);</span><br><span class="line">           <span class="keyword">this</span>.flag = <span class="literal">false</span>;</span><br><span class="line">         &#125;<span class="keyword">else</span>&#123;</span><br><span class="line">           # 1.1  在前面封装好的 handle 方法中  发送ajax请求  </span><br><span class="line">           # 1.2  使用async  和 await 简化操作 需要在 function 前面添加 async   </span><br><span class="line">           <span class="keyword">var</span> ret = <span class="keyword">await</span> axios.post(<span class="string">'books'</span>, &#123;</span><br><span class="line">             name: <span class="keyword">this</span>.name</span><br><span class="line">           &#125;)</span><br><span class="line">           # 1.3  根据后台返回的状态码判断是否加载数据 </span><br><span class="line">           <span class="keyword">if</span>(ret.status == <span class="number">200</span>) &#123;</span><br><span class="line">            # 1.4  调用 queryData 这个方法  渲染最新的数据 </span><br><span class="line">             <span class="keyword">this</span>.queryData();</span><br><span class="line">           &#125;</span><br><span class="line">         &#125;</span><br><span class="line">         <span class="comment">// 清空表单</span></span><br><span class="line">         <span class="keyword">this</span>.id = <span class="string">''</span>;</span><br><span class="line">         <span class="keyword">this</span>.name = <span class="string">''</span>;</span><br><span class="line">       &#125;,        </span><br><span class="line">&#125;</span><br></pre>
+
+<h4 id="3-验证图书名称是否存在"><a href="#3-验证图书名称是否存在" class="headerlink" title="3  验证图书名称是否存在"></a>3  验证图书名称是否存在</h4><ul>
+<li>添加图书之前发送请求验证图示是否已经存在</li>
+<li>如果不存在 往后台里面添加图书名称<ul>
+<li>图书存在与否只需要修改submitFlag的值即可</li>
+</ul>
+</li>
+</ul>
+<pre class="highlight"><span class="line"> watch: &#123;</span><br><span class="line">        name: <span class="keyword">async</span> <span class="function"><span class="keyword">function</span>(<span class="params">val</span>) </span>&#123;</span><br><span class="line">          <span class="comment">// 验证图书名称是否已经存在</span></span><br><span class="line">          <span class="comment">// var flag = this.books.some(function(item)&#123;</span></span><br><span class="line">          <span class="comment">//   return item.name == val;</span></span><br><span class="line">          <span class="comment">// &#125;);</span></span><br><span class="line">          <span class="keyword">var</span> ret = <span class="keyword">await</span> axios.get(<span class="string">'/books/book/'</span> + <span class="keyword">this</span>.name);</span><br><span class="line">          <span class="keyword">if</span>(ret.status == <span class="number">1</span>) &#123;</span><br><span class="line">            <span class="comment">// 图书名称存在</span></span><br><span class="line">            <span class="keyword">this</span>.submitFlag = <span class="literal">true</span>;</span><br><span class="line">          &#125;<span class="keyword">else</span>&#123;</span><br><span class="line">            <span class="comment">// 图书名称不存在</span></span><br><span class="line">            <span class="keyword">this</span>.submitFlag = <span class="literal">false</span>;</span><br><span class="line">          &#125;</span><br><span class="line">        &#125;</span><br><span class="line">&#125;,</span><br></pre>
+
+<h4 id="4-编辑图书"><a href="#4-编辑图书" class="headerlink" title="4.  编辑图书"></a>4.  编辑图书</h4><ul>
+<li>根据当前书的id 查询需要编辑的书籍</li>
+<li>需要根据状态位判断是添加还是编辑 </li>
+</ul>
+<pre class="highlight"><span class="line">methods: &#123;</span><br><span class="line">       handle: <span class="keyword">async</span> <span class="function"><span class="keyword">function</span>(<span class="params"></span>)</span>&#123;</span><br><span class="line">         <span class="keyword">if</span>(<span class="keyword">this</span>.flag) &#123;</span><br><span class="line">           #4.3 编辑图书   把用户输入的信息提交到后台</span><br><span class="line">           <span class="keyword">var</span> ret = <span class="keyword">await</span> axios.put(<span class="string">'books/'</span> + <span class="keyword">this</span>.id, &#123;</span><br><span class="line">             name: <span class="keyword">this</span>.name</span><br><span class="line">           &#125;);</span><br><span class="line">           <span class="keyword">if</span>(ret.status == <span class="number">200</span>)&#123;</span><br><span class="line">             #4.4  完成添加后 重新加载列表数据</span><br><span class="line">             <span class="keyword">this</span>.queryData();</span><br><span class="line">           &#125;</span><br><span class="line">           <span class="keyword">this</span>.flag = <span class="literal">false</span>;</span><br><span class="line">         &#125;<span class="keyword">else</span>&#123;</span><br><span class="line">           <span class="comment">// 添加图书</span></span><br><span class="line">           <span class="keyword">var</span> ret = <span class="keyword">await</span> axios.post(<span class="string">'books'</span>, &#123;</span><br><span class="line">             name: <span class="keyword">this</span>.name</span><br><span class="line">           &#125;)</span><br><span class="line">           <span class="keyword">if</span>(ret.status == <span class="number">200</span>) &#123;</span><br><span class="line">             <span class="comment">// 重新加载列表数据</span></span><br><span class="line">             <span class="keyword">this</span>.queryData();</span><br><span class="line">           &#125;</span><br><span class="line">         &#125;</span><br><span class="line">         <span class="comment">// 清空表单</span></span><br><span class="line">         <span class="keyword">this</span>.id = <span class="string">''</span>;</span><br><span class="line">         <span class="keyword">this</span>.name = <span class="string">''</span>;</span><br><span class="line">       &#125;,</span><br><span class="line">       toEdit: <span class="keyword">async</span> <span class="function"><span class="keyword">function</span>(<span class="params">id</span>)</span>&#123;</span><br><span class="line">         #4.1  flag状态位用于区分编辑和添加操作</span><br><span class="line">         <span class="keyword">this</span>.flag = <span class="literal">true</span>;</span><br><span class="line">         #4.2  根据id查询出对应的图书信息  页面中可以加载出来最新的信息</span><br><span class="line">         # 调用接口发送ajax 请求  </span><br><span class="line">         <span class="keyword">var</span> ret = <span class="keyword">await</span> axios.get(<span class="string">'books/'</span> + id);</span><br><span class="line">         <span class="keyword">this</span>.id = ret.id;</span><br><span class="line">         <span class="keyword">this</span>.name = ret.name;</span><br><span class="line">       &#125;,</span><br></pre>
+
+<h4 id="5-删除图书"><a href="#5-删除图书" class="headerlink" title="5 删除图书"></a>5 删除图书</h4><ul>
+<li>把需要删除的id书籍 通过参数的形式传递到后台</li>
+</ul>
+<pre class="highlight"><span class="line">deleteBook: <span class="keyword">async</span> <span class="function"><span class="keyword">function</span>(<span class="params">id</span>)</span>&#123;</span><br><span class="line">       <span class="comment">// 删除图书</span></span><br><span class="line">       <span class="keyword">var</span> ret = <span class="keyword">await</span> axios.delete(<span class="string">'books/'</span> + id);</span><br><span class="line">       <span class="keyword">if</span>(ret.status == <span class="number">200</span>) &#123;</span><br><span class="line">         <span class="comment">// 重新加载列表数据</span></span><br><span class="line">         <span class="keyword">this</span>.queryData();</span><br><span class="line">       &#125;</span><br><span class="line">&#125;</span><br></pre>
+
+
+  </div>
+  <div>
+  
+  <div class="post-note note-warning copyright" style="margin-top: 42px">
+    <p><span style="font-weight: bold;">作者：</span><a target="_blank" rel="nofollow noopener noreferrer" href="https://xiaobai123-4.github.io/about">MaQisong</a></p>
+    <p><span style="font-weight: bold;">文章链接：</span><a target="_blank" rel="nofollow noopener noreferrer" href="https://xiaobai123-4.github.io/2020/06/22/vue_4/">https://xiaobai123-4.github.io/2020/06/22/vue_4/</a></p>
+    <p><span style="font-weight: bold;">版权声明：</span>本博客所有文章除特别声明外，均采用<a target="_blank" rel="noopener" href="https://creativecommons.org/licenses/by-nc-sa/4.0/deed.zh">CC BY-NC-SA 4.0 协议</a>。转载请注明出处！</p>
+  </div>
+  
+  </div>
+</article>
+<div class="nav">
+  
+  <div class="nav-item-prev">
+    <a href="/2020/07/03/移动web开发_流式布局/" class="nav-link">
+      <i class="iconfont icon-left nav-prev-icon"></i>
+      <div>
+        <div class="nav-label">上一篇</div>
+        
+        <div class="nav-title">流式布局 </div>
+        
+      </div>
+    </a>
+  </div>
+  
+  
+  <div class="nav-item-next">
+    <a href="/2020/06/22/vue_3/" class="nav-link">
+      <div>
+        <div class="nav-label">下一篇</div>
+        
+        <div class="nav-title">vue-3 </div>
+        
+      </div>
+      <i class="iconfont icon-right nav-next-icon"></i>
+    </a>
+  </div>
+  
+</div>
+
+<div class="card card-content toc-card" id="mobiletoc">
+  <div class="toc-header"><i class="iconfont icon-menu" style="padding-right: 2px;"></i>目录</div>
+<ol class="toc"><li class="toc-item toc-level-2"><a class="toc-link" href="#Vue常用特性"><span class="toc-text">Vue常用特性</span></a><ol class="toc-child"><li class="toc-item toc-level-3"><a class="toc-link" href="#接口调用方式"><span class="toc-text">接口调用方式</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#异步"><span class="toc-text">异步</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#promise"><span class="toc-text">promise</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#基于Promise发送Ajax请求"><span class="toc-text">基于Promise发送Ajax请求</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#Promise-基本API"><span class="toc-text">Promise  基本API</span></a><ol class="toc-child"><li class="toc-item toc-level-4"><a class="toc-link" href="#实例方法"><span class="toc-text">实例方法</span></a><ol class="toc-child"><li class="toc-item toc-level-5"><a class="toc-link" href="#then"><span class="toc-text">.then()</span></a></li><li class="toc-item toc-level-5"><a class="toc-link" href="#catch"><span class="toc-text">.catch()</span></a></li><li class="toc-item toc-level-5"><a class="toc-link" href="#finally"><span class="toc-text">.finally()</span></a></li></ol></li><li class="toc-item toc-level-4"><a class="toc-link" href="#静态方法"><span class="toc-text">静态方法</span></a><ol class="toc-child"><li class="toc-item toc-level-5"><a class="toc-link" href="#all"><span class="toc-text">.all()</span></a></li><li class="toc-item toc-level-5"><a class="toc-link" href="#race"><span class="toc-text">.race()</span></a></li></ol></li></ol></li><li class="toc-item toc-level-3"><a class="toc-link" href="#fetch"><span class="toc-text">fetch</span></a><ol class="toc-child"><li class="toc-item toc-level-4"><a class="toc-link" href="#fetch-API-中的-HTTP-请求"><span class="toc-text">fetch API  中的 HTTP  请求</span></a></li><li class="toc-item toc-level-4"><a class="toc-link" href="#fetchAPI-中-响应格式"><span class="toc-text">fetchAPI 中 响应格式</span></a></li></ol></li><li class="toc-item toc-level-3"><a class="toc-link" href="#axios"><span class="toc-text">axios</span></a><ol class="toc-child"><li class="toc-item toc-level-4"><a class="toc-link" href="#axios基础用法"><span class="toc-text">axios基础用法</span></a></li><li class="toc-item toc-level-4"><a class="toc-link" href="#axios-全局配置"><span class="toc-text">axios 全局配置</span></a></li><li class="toc-item toc-level-4"><a class="toc-link" href="#axios-拦截器"><span class="toc-text">axios 拦截器</span></a></li></ol></li><li class="toc-item toc-level-3"><a class="toc-link" href="#async-和-await"><span class="toc-text">async  和 await</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#图书列表案例"><span class="toc-text">图书列表案例</span></a><ol class="toc-child"><li class="toc-item toc-level-4"><a class="toc-link" href="#1-基于接口案例-获取图书列表"><span class="toc-text">1. 基于接口案例-获取图书列表</span></a></li><li class="toc-item toc-level-4"><a class="toc-link" href="#2-添加图书"><span class="toc-text">2   添加图书</span></a></li><li class="toc-item toc-level-4"><a class="toc-link" href="#3-验证图书名称是否存在"><span class="toc-text">3  验证图书名称是否存在</span></a></li><li class="toc-item toc-level-4"><a class="toc-link" href="#4-编辑图书"><span class="toc-text">4.  编辑图书</span></a></li><li class="toc-item toc-level-4"><a class="toc-link" href="#5-删除图书"><span class="toc-text">5 删除图书</span></a></li></ol></li></ol></li></ol>
+</div></main>
+          <aside class="left-column">
+            
+            <div class="card card-author">
+              
+<img src="https://s3.ax1x.com/2021/03/04/6VEJaQ.jpg" class="author-img">
+
+<p class="author-name">MaQisong</p>
+<p class="author-description">学习永不止步</p>
+<div class="author-message">
+  <a class="author-posts-count" href="/archives">
+    <span>65</span>
+    <span>文章</span>
+  </a>
+  <a class="author-categories-count" href="/categories">
+    <span>25</span>
+    <span>分类</span>
+  </a>
+  <a class="author-tags-count" href="/tags">
+    <span>38</span>
+    <span>标签</span>
+  </a>
+</div>
+
+            </div>
+            
+            <div class="sticky-tablet">
+  
+  
+  <article class="display-when-two-columns spacer">
+    <div class="card card-content toc-card">
+      <div class="toc-header"><i class="iconfont icon-menu" style="padding-right: 2px;"></i>目录</div>
+<ol class="toc"><li class="toc-item toc-level-2"><a class="toc-link" href="#Vue常用特性"><span class="toc-text">Vue常用特性</span></a><ol class="toc-child"><li class="toc-item toc-level-3"><a class="toc-link" href="#接口调用方式"><span class="toc-text">接口调用方式</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#异步"><span class="toc-text">异步</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#promise"><span class="toc-text">promise</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#基于Promise发送Ajax请求"><span class="toc-text">基于Promise发送Ajax请求</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#Promise-基本API"><span class="toc-text">Promise  基本API</span></a><ol class="toc-child"><li class="toc-item toc-level-4"><a class="toc-link" href="#实例方法"><span class="toc-text">实例方法</span></a><ol class="toc-child"><li class="toc-item toc-level-5"><a class="toc-link" href="#then"><span class="toc-text">.then()</span></a></li><li class="toc-item toc-level-5"><a class="toc-link" href="#catch"><span class="toc-text">.catch()</span></a></li><li class="toc-item toc-level-5"><a class="toc-link" href="#finally"><span class="toc-text">.finally()</span></a></li></ol></li><li class="toc-item toc-level-4"><a class="toc-link" href="#静态方法"><span class="toc-text">静态方法</span></a><ol class="toc-child"><li class="toc-item toc-level-5"><a class="toc-link" href="#all"><span class="toc-text">.all()</span></a></li><li class="toc-item toc-level-5"><a class="toc-link" href="#race"><span class="toc-text">.race()</span></a></li></ol></li></ol></li><li class="toc-item toc-level-3"><a class="toc-link" href="#fetch"><span class="toc-text">fetch</span></a><ol class="toc-child"><li class="toc-item toc-level-4"><a class="toc-link" href="#fetch-API-中的-HTTP-请求"><span class="toc-text">fetch API  中的 HTTP  请求</span></a></li><li class="toc-item toc-level-4"><a class="toc-link" href="#fetchAPI-中-响应格式"><span class="toc-text">fetchAPI 中 响应格式</span></a></li></ol></li><li class="toc-item toc-level-3"><a class="toc-link" href="#axios"><span class="toc-text">axios</span></a><ol class="toc-child"><li class="toc-item toc-level-4"><a class="toc-link" href="#axios基础用法"><span class="toc-text">axios基础用法</span></a></li><li class="toc-item toc-level-4"><a class="toc-link" href="#axios-全局配置"><span class="toc-text">axios 全局配置</span></a></li><li class="toc-item toc-level-4"><a class="toc-link" href="#axios-拦截器"><span class="toc-text">axios 拦截器</span></a></li></ol></li><li class="toc-item toc-level-3"><a class="toc-link" href="#async-和-await"><span class="toc-text">async  和 await</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#图书列表案例"><span class="toc-text">图书列表案例</span></a><ol class="toc-child"><li class="toc-item toc-level-4"><a class="toc-link" href="#1-基于接口案例-获取图书列表"><span class="toc-text">1. 基于接口案例-获取图书列表</span></a></li><li class="toc-item toc-level-4"><a class="toc-link" href="#2-添加图书"><span class="toc-text">2   添加图书</span></a></li><li class="toc-item toc-level-4"><a class="toc-link" href="#3-验证图书名称是否存在"><span class="toc-text">3  验证图书名称是否存在</span></a></li><li class="toc-item toc-level-4"><a class="toc-link" href="#4-编辑图书"><span class="toc-text">4.  编辑图书</span></a></li><li class="toc-item toc-level-4"><a class="toc-link" href="#5-删除图书"><span class="toc-text">5 删除图书</span></a></li></ol></li></ol></li></ol>
+    </div>
+  </article>
+  
+  
+  <article class="card card-content categories-widget">
+    <div class="categories-card">
+  <div class="categories-header"><i class="iconfont icon-fenlei" style="padding-right: 2px;"></i>分类</div>
+  <div class="categories-list">
+    
+      <a href="/categories/正则表达式/">
+        <div class="categories-list-item">
+          正则表达式
+          <span class="categories-list-item-badge">1</span>
+        </div>
+      </a>
+    
+      <a href="/categories/ajax/">
+        <div class="categories-list-item">
+          ajax
+          <span class="categories-list-item-badge">1</span>
+        </div>
+      </a>
+    
+      <a href="/categories/CSS/">
+        <div class="categories-list-item">
+          CSS
+          <span class="categories-list-item-badge">3</span>
+        </div>
+      </a>
+    
+      <a href="/categories/ES6/">
+        <div class="categories-list-item">
+          ES6
+          <span class="categories-list-item-badge">1</span>
+        </div>
+      </a>
+    
+      <a href="/categories/css/">
+        <div class="categories-list-item">
+          css
+          <span class="categories-list-item-badge">1</span>
+        </div>
+      </a>
+    
+      <a href="/categories/HTML5/">
+        <div class="categories-list-item">
+          HTML5
+          <span class="categories-list-item-badge">4</span>
+        </div>
+      </a>
+    
+      <a href="/categories/git/">
+        <div class="categories-list-item">
+          git
+          <span class="categories-list-item-badge">1</span>
+        </div>
+      </a>
+    
+      <a href="/categories/Markdown/">
+        <div class="categories-list-item">
+          Markdown
+          <span class="categories-list-item-badge">1</span>
+        </div>
+      </a>
+    
+      <a href="/categories/javascript/">
+        <div class="categories-list-item">
+          javascript
+          <span class="categories-list-item-badge">17</span>
+        </div>
+      </a>
+    
+      <a href="/categories/SqlServer/">
+        <div class="categories-list-item">
+          SqlServer
+          <span class="categories-list-item-badge">1</span>
+        </div>
+      </a>
+    
+      <a href="/categories/bootstrap/">
+        <div class="categories-list-item">
+          bootstrap
+          <span class="categories-list-item-badge">1</span>
+        </div>
+      </a>
+    
+      <a href="/categories/分类/">
+        <div class="categories-list-item">
+          分类
+          <span class="categories-list-item-badge">1</span>
+        </div>
+      </a>
+    
+      <a href="/categories/其他/">
+        <div class="categories-list-item">
+          其他
+          <span class="categories-list-item-badge">1</span>
+        </div>
+      </a>
+    
+      <a href="/categories/Vue/">
+        <div class="categories-list-item">
+          Vue
+          <span class="categories-list-item-badge">10</span>
+        </div>
+      </a>
+    
+      <a href="/categories/HTML/">
+        <div class="categories-list-item">
+          HTML
+          <span class="categories-list-item-badge">2</span>
+        </div>
+      </a>
+    
+      <a href="/categories/ionic/">
+        <div class="categories-list-item">
+          ionic
+          <span class="categories-list-item-badge">2</span>
+        </div>
+      </a>
+    
+      <a href="/categories/javascript/Vue/">
+        <div class="categories-list-item">
+          javascript/Vue
+          <span class="categories-list-item-badge">2</span>
+        </div>
+      </a>
+    
+      <a href="/categories/webpack/">
+        <div class="categories-list-item">
+          webpack
+          <span class="categories-list-item-badge">1</span>
+        </div>
+      </a>
+    
+      <a href="/categories/前端/">
+        <div class="categories-list-item">
+          前端
+          <span class="categories-list-item-badge">1</span>
+        </div>
+      </a>
+    
+      <a href="/categories/NodeJS/">
+        <div class="categories-list-item">
+          NodeJS
+          <span class="categories-list-item-badge">1</span>
+        </div>
+      </a>
+    
+      <a href="/categories/镜寰-工作/">
+        <div class="categories-list-item">
+          镜寰-工作
+          <span class="categories-list-item-badge">10</span>
+        </div>
+      </a>
+    
+      <a href="/categories/html/">
+        <div class="categories-list-item">
+          html
+          <span class="categories-list-item-badge">1</span>
+        </div>
+      </a>
+    
+      <a href="/categories/移动端/">
+        <div class="categories-list-item">
+          移动端
+          <span class="categories-list-item-badge">2</span>
+        </div>
+      </a>
+    
+      <a href="/categories/Vue/前端/">
+        <div class="categories-list-item">
+          Vue/前端
+          <span class="categories-list-item-badge">3</span>
+        </div>
+      </a>
+    
+      <a href="/categories/镜寰-工作/数据库/">
+        <div class="categories-list-item">
+          镜寰-工作/数据库
+          <span class="categories-list-item-badge">1</span>
+        </div>
+      </a>
+    
+  </div>
+</div>
+  </article>
+  
+  <article class="card card-content tags-widget">
+    <div class="tags-card">
+  <div class="tags-header"><i class="iconfont icon-biaoqian" style="padding-right: 2px;"></i>热门标签</div>
+  <div class="tags-list">
+    
+    <a href="/tags/前端/" title="前端"><div class="tags-list-item">前端</div></a>
+    
+    <a href="/tags/html/" title="html"><div class="tags-list-item">html</div></a>
+    
+    <a href="/tags/javascript/" title="javascript"><div class="tags-list-item">javascript</div></a>
+    
+    <a href="/tags/Vue/" title="Vue"><div class="tags-list-item">Vue</div></a>
+    
+    <a href="/tags/工作总结/" title="工作总结"><div class="tags-list-item">工作总结</div></a>
+    
+    <a href="/tags/框架/" title="框架"><div class="tags-list-item">框架</div></a>
+    
+    <a href="/tags/算法/" title="算法"><div class="tags-list-item">算法</div></a>
+    
+    <a href="/tags/笔记/" title="笔记"><div class="tags-list-item">笔记</div></a>
+    
+    <a href="/tags/常见问题/" title="常见问题"><div class="tags-list-item">常见问题</div></a>
+    
+    <a href="/tags/css/" title="css"><div class="tags-list-item">css</div></a>
+    
+    <a href="/tags/移动端/" title="移动端"><div class="tags-list-item">移动端</div></a>
+    
+    <a href="/tags/跨域/" title="跨域"><div class="tags-list-item">跨域</div></a>
+    
+    <a href="/tags/基础/" title="基础"><div class="tags-list-item">基础</div></a>
+    
+    <a href="/tags/规范/" title="规范"><div class="tags-list-item">规范</div></a>
+    
+    <a href="/tags/webpack/" title="webpack"><div class="tags-list-item">webpack</div></a>
+    
+    <a href="/tags/博客/" title="博客"><div class="tags-list-item">博客</div></a>
+    
+  </div>
+</div>
+  </article>
+  
+  
+</div>
+          </aside>
+          <aside class="right-column">
+            <div class="sticky-widescreen">
+  
+  
+  <article class="card card-content toc-card">
+    <div class="toc-header"><i class="iconfont icon-menu" style="padding-right: 2px;"></i>目录</div>
+<ol class="toc"><li class="toc-item toc-level-2"><a class="toc-link" href="#Vue常用特性"><span class="toc-text">Vue常用特性</span></a><ol class="toc-child"><li class="toc-item toc-level-3"><a class="toc-link" href="#接口调用方式"><span class="toc-text">接口调用方式</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#异步"><span class="toc-text">异步</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#promise"><span class="toc-text">promise</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#基于Promise发送Ajax请求"><span class="toc-text">基于Promise发送Ajax请求</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#Promise-基本API"><span class="toc-text">Promise  基本API</span></a><ol class="toc-child"><li class="toc-item toc-level-4"><a class="toc-link" href="#实例方法"><span class="toc-text">实例方法</span></a><ol class="toc-child"><li class="toc-item toc-level-5"><a class="toc-link" href="#then"><span class="toc-text">.then()</span></a></li><li class="toc-item toc-level-5"><a class="toc-link" href="#catch"><span class="toc-text">.catch()</span></a></li><li class="toc-item toc-level-5"><a class="toc-link" href="#finally"><span class="toc-text">.finally()</span></a></li></ol></li><li class="toc-item toc-level-4"><a class="toc-link" href="#静态方法"><span class="toc-text">静态方法</span></a><ol class="toc-child"><li class="toc-item toc-level-5"><a class="toc-link" href="#all"><span class="toc-text">.all()</span></a></li><li class="toc-item toc-level-5"><a class="toc-link" href="#race"><span class="toc-text">.race()</span></a></li></ol></li></ol></li><li class="toc-item toc-level-3"><a class="toc-link" href="#fetch"><span class="toc-text">fetch</span></a><ol class="toc-child"><li class="toc-item toc-level-4"><a class="toc-link" href="#fetch-API-中的-HTTP-请求"><span class="toc-text">fetch API  中的 HTTP  请求</span></a></li><li class="toc-item toc-level-4"><a class="toc-link" href="#fetchAPI-中-响应格式"><span class="toc-text">fetchAPI 中 响应格式</span></a></li></ol></li><li class="toc-item toc-level-3"><a class="toc-link" href="#axios"><span class="toc-text">axios</span></a><ol class="toc-child"><li class="toc-item toc-level-4"><a class="toc-link" href="#axios基础用法"><span class="toc-text">axios基础用法</span></a></li><li class="toc-item toc-level-4"><a class="toc-link" href="#axios-全局配置"><span class="toc-text">axios 全局配置</span></a></li><li class="toc-item toc-level-4"><a class="toc-link" href="#axios-拦截器"><span class="toc-text">axios 拦截器</span></a></li></ol></li><li class="toc-item toc-level-3"><a class="toc-link" href="#async-和-await"><span class="toc-text">async  和 await</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#图书列表案例"><span class="toc-text">图书列表案例</span></a><ol class="toc-child"><li class="toc-item toc-level-4"><a class="toc-link" href="#1-基于接口案例-获取图书列表"><span class="toc-text">1. 基于接口案例-获取图书列表</span></a></li><li class="toc-item toc-level-4"><a class="toc-link" href="#2-添加图书"><span class="toc-text">2   添加图书</span></a></li><li class="toc-item toc-level-4"><a class="toc-link" href="#3-验证图书名称是否存在"><span class="toc-text">3  验证图书名称是否存在</span></a></li><li class="toc-item toc-level-4"><a class="toc-link" href="#4-编辑图书"><span class="toc-text">4.  编辑图书</span></a></li><li class="toc-item toc-level-4"><a class="toc-link" href="#5-删除图书"><span class="toc-text">5 删除图书</span></a></li></ol></li></ol></li></ol>
+  </article>
+  
+  
+  <article class="card card-content">
+    <div class="recent-posts-card">
+  <div class="recent-posts-header"><i class="iconfont icon-wenzhang_huaban" style="padding-right: 2px;"></i>最近文章</div>
+  <div class="recent-posts-list">
+    
+      <div class="recent-posts-item">
+        <div class="recent-posts-item-title">2021-03-28</div>
+        <a href="/2021/03/28/vue学习记录4/"><div class="recent-posts-item-content">vue学习记录4</div></a>
+      </div>
+    
+      <div class="recent-posts-item">
+        <div class="recent-posts-item-title">2021-03-27</div>
+        <a href="/2021/03/27/vue学习记录3/"><div class="recent-posts-item-content">vue学习记录3</div></a>
+      </div>
+    
+      <div class="recent-posts-item">
+        <div class="recent-posts-item-title">2021-03-26</div>
+        <a href="/2021/03/26/vue学习记录2/"><div class="recent-posts-item-content">vue学习记录2</div></a>
+      </div>
+    
+      <div class="recent-posts-item">
+        <div class="recent-posts-item-title">2021-03-04</div>
+        <a href="/2021/03/04/vue学习记录1/"><div class="recent-posts-item-content">学习记录1</div></a>
+      </div>
+    
+  </div>
+</div>
+  </article>
+  
+  
+</div>
+          </aside>
+        </div>
+      </div>
+    </div>
+  </div>
+  
+  <footer class="footer">
+  <div class="footer-container">
+    <div>
+      <div class="footer-dsc">
+        <span>Copyright ©
+          
+          2020 -
+          
+          2021
+        </span>
+        &nbsp;
+        <a href="/" class="footer-link">小白的博客 </a>
+      </div>
+    </div>
+
+    
+    <div class="footer-dsc">
+      
+      Powered by
+      <a href="https://hexo.io/" class="footer-link" target="_blank" rel="nofollow noopener noreferrer">&nbsp;Hexo </a>
+      
+      
+      <span>&nbsp;|&nbsp;</span>
+      
+      
+      Theme -
+      <a href="https://github.com/theme-kaze" class="footer-link" target="_blank"
+        rel="nofollow noopener noreferrer">&nbsp;Kaze</a>
+      
+    </div>
+    
+    
+    
+    
+</footer>
+  <a role="button" id="scrollbutton" class="basebutton"  aria-label="回到顶部">
+  <i class="iconfont icon-arrowleft button-icon"></i>
+</a>
+<a role="button" id="menubutton" class="basebutton">
+  <i class="iconfont icon-menu button-icon"></i>
+</a>
+<a role="button" id="popbutton" class="basebutton" aria-label="控制中心">
+  <i class="iconfont icon-expand button-icon"></i>
+</a>
+<a role="button" id="darkbutton" class="basebutton darkwidget" aria-label="夜色模式">
+  <i class="iconfont icon-weather button-icon"></i>
+</a>
+<a role="button" id="searchbutton" class="basebutton searchwidget" aria-label="搜索">
+  <i class="iconfont icon-search button-icon"></i>
+</a>
+
+  
+  
+  
+  <script>
+  var addImgLayout = function () {
+    var img = document.querySelectorAll('.post-content img');
+    var i;
+    for (i = 0; i < img.length; i++) {
+      var wrapper = document.createElement('a');
+      wrapper.setAttribute('href', img[i].getAttribute('data-src'));
+      wrapper.setAttribute('aria-label', 'illustration');
+      wrapper.style.cssText = 'width: 100%; display: flex; justify-content: center;';
+      if (img[i].alt) wrapper.dataset.caption = img[i].alt;
+      wrapper.dataset.nolink = true;
+      img[i].before(wrapper);
+      wrapper.append(img[i]);
+      var divWrap = document.createElement('div');
+      divWrap.classList.add('gallery');
+      wrapper.before(divWrap);
+      divWrap.append(wrapper);
+    }
+    baguetteBox.run('.gallery');
+  }
+</script>
+<script>loadScript("/js/lib/lightbox/baguetteBox.min.js", addImgLayout)</script>
+  
+  
+  
+<script src="/js/main.js"></script>
+
+  
+  
+  <script>
+    var addLazyload = function () {
+      var observer = lozad('.lozad', {
+        load: function (el) {
+          el.srcset = el.getAttribute('data-src');
+        },
+        loaded: function (el) {
+          el.classList.add('loaded');
+        }
+      });
+      observer.observe();
+    }
+  </script>
+  <script>loadScript("/js/lib/lozad.min.js", addLazyload)</script>
+  
+  
+</body>
+
+</html>

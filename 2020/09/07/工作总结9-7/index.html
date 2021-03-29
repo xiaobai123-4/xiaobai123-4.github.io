@@ -1,0 +1,714 @@
+<!DOCTYPE html>
+<html  lang="zh-CN" >
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport"
+    content="width=device-width, initial-scale=1.0, minimum-scale=1.0">
+  <meta http-equiv="X-UA-Compatible" content="ie=edge">
+  <meta name="theme-color" content="#fff" id="theme-color">
+  <meta name="description" content="学习永不止步">
+  <link rel="icon" href="https://s3.ax1x.com/2021/03/04/6VEJaQ.jpg">
+  <title>工作总结9-7</title>
+  
+  
+  <meta property="og:title" content="工作总结9-7">
+  
+  
+  <meta property="og:url" content="https://xiaobai123-4.github.io/2020/09/07/%E5%B7%A5%E4%BD%9C%E6%80%BB%E7%BB%939-7/index.html">
+  
+  
+  <meta property="og:img" content="https://s3.ax1x.com/2021/03/04/6VEJaQ.jpg">
+  
+  
+  <meta property="og:img" content="&lt;p&gt;&lt;code&gt;jinghuan&lt;/code&gt;项目常见文件目录结构&lt;/p&gt;">
+  
+  
+  <meta property="og:type" content="article">
+  <meta property="og:article:published_time" content="2020-09-07">
+  <meta property="og:article:modified_time" content="2021-03-04">
+  <meta property="og:article:author" content="MaQisong">
+  
+  
+  <meta property="og:article:tag" content="工作总结">
+  
+  
+  
+  
+  <script>
+    // control reverse button
+    var reverseDarkList = {
+      dark: 'light',
+      light: 'dark'
+    };
+    var themeColor = {
+      dark: '#1c1c1e',
+      light: '#fff'
+    }
+    // get the data of css prefers-color-scheme
+    var getCssMediaQuery = function() {
+      return window.matchMedia('(prefers-color-scheme: dark)').matches ? 'dark' : 'light';
+    };
+    // reverse current darkmode setting function
+    var reverseDarkModeSetting = function() {
+      var setting = localStorage.getItem('user-color-scheme');
+      if(reverseDarkList[setting]) {
+        setting = reverseDarkList[setting];
+      } else if(setting === null) {
+        setting = reverseDarkList[getCssMediaQuery()];
+      } else {
+        return;
+      }
+      localStorage.setItem('user-color-scheme', setting);
+      return setting;
+    };
+    // apply current darkmode setting
+    var setDarkmode = function(mode) {
+      var setting = mode || localStorage.getItem('user-color-scheme');
+      if(setting === getCssMediaQuery()) {
+        document.documentElement.removeAttribute('data-user-color-scheme');
+        localStorage.removeItem('user-color-scheme');
+        document.getElementById('theme-color').content = themeColor[setting];
+      } else if(reverseDarkList[setting]) {
+        document.documentElement.setAttribute('data-user-color-scheme', setting);
+        document.getElementById('theme-color').content = themeColor[setting];
+      } else {
+        document.documentElement.removeAttribute('data-user-color-scheme');
+        localStorage.removeItem('user-color-scheme');
+        document.getElementById('theme-color').content = themeColor[getCssMediaQuery()];
+      }
+    };
+    setDarkmode();
+  </script>
+  <script>
+    function loadScript(url, cb) {
+      var script = document.createElement('script');
+      script.src = url;
+      if (cb) script.onload = cb;
+      script.async = true;
+      document.body.appendChild(script);
+    }
+  </script>
+  
+  <link rel="preload" href="//at.alicdn.com/t/font_1946621_i1kgafibvw.css" as="style" >
+  <link rel="preload" href="//at.alicdn.com/t/font_1952792_89b4ac4k4up.css" as="style" >
+  
+  <link rel="preload" href="/js/lib/lightbox/baguetteBox.min.js" as="script">
+  <link rel="preload" href="/js/lib/lightbox/baguetteBox.min.css" as="style" >
+  
+  
+  <link rel="preload" href="/js/lib/lozad.min.js" as="script">
+  
+  
+  
+  
+  
+  
+  
+  
+<link rel="stylesheet" href="/css/main.css">
+
+  
+  
+<link rel="stylesheet" href="//at.alicdn.com/t/font_1946621_i1kgafibvw.css">
+
+  
+  
+<link rel="stylesheet" href="//at.alicdn.com/t/font_1952792_89b4ac4k4up.css">
+
+  
+  
+<link rel="stylesheet" href="/js/lib/lightbox/baguetteBox.min.css">
+
+  
+  
+<meta name="generator" content="Hexo 4.2.1"></head>
+
+
+<body>
+  <div class="wrapper">
+    
+    <nav class="navbar">
+  <div class="navbar-logo">
+    <span class="navbar-logo-main">
+      
+      <img class="navbar-logo-img" src="https://s3.ax1x.com/2021/03/04/6VEJaQ.jpg" alt="logo">
+      
+      <span class="navbar-logo-dsc">小白的博客</span>
+    </span>
+  </div>
+  <div class="navbar-menu">
+    
+    <a href="/" class="navbar-menu-item">
+    
+    首页
+    
+    </a>
+    
+    <a href="/archives" class="navbar-menu-item">
+    
+    归档
+    
+    </a>
+    
+    <a href="/tags" class="navbar-menu-item">
+    
+    标签
+    
+    </a>
+    
+    <a href="/categories" class="navbar-menu-item">
+    
+    分类
+    
+    </a>
+    
+    <a href="/about" class="navbar-menu-item">
+    
+    关于
+    
+    </a>
+    
+    <a class="navbar-menu-item darknavbar" id="dark"><i class="iconfont icon-weather"></i></a>
+    <a class="navbar-menu-item searchnavbar" id="search"><i class="iconfont icon-search" style="font-size: 1.2rem; font-weight: 400;"></i></a>
+  </div>
+</nav>
+    
+    <div id="local-search" style="display: none;">
+      <input class="navbar-menu-item" id="search-input" placeholder="请输入搜索内容...">
+      <div id="search-content"></div>
+    </div>
+    
+    <div class="section-wrap">
+      <div class="container">
+        <div class="columns">
+          <main class="main-column">
+<article class="card card-content">
+  <header>
+    <h1 class="post-title">
+      工作总结9-7
+    </h1>
+  </header>
+  <div class="post-meta post-show-meta">
+    <time datetime="2020-09-07T01:46:48.000Z">
+      <i class="iconfont icon-calendar" style="margin-right: 2px;"></i>
+      <span>2020-09-07</span>
+    </time>
+    
+    <span class="dot"></span>
+    
+    <a href="/categories/镜寰-工作/" class="post-meta-link">镜寰-工作</a>
+    
+    
+    
+    <span class="dot"></span>
+    <span>3.5k 字</span>
+    
+  </div>
+  
+  <div class="post-meta post-show-meta" style="margin-top: -10px;">
+    <div style="display: flex; align-items: center;">
+      <i class="iconfont icon-biaoqian" style="margin-right: 2px; font-size: 1.15rem;"></i>
+      
+      
+        <a href="/tags/工作总结/" class="post-meta-link">工作总结</a>
+      
+    </div>
+  </div>
+  
+  </header>
+  <div id="section" class="post-content">
+    <p><code>jinghuan</code>项目常见文件目录结构</p>
+<a id="more"></a>
+
+<h2 id="其他"><a href="#其他" class="headerlink" title="其他"></a>其他</h2><p><strong>常见文件路径</strong></p>
+<pre class="highlight"><span class="line">demo&#x2F;assets(打包目录)</span><br><span class="line">.jinghuanjs(打包配置文件)</span><br><span class="line">.app&#x2F;admin(项目应用)</span><br><span class="line">controller(控制器)</span><br><span class="line">events(多个模块之间事件通知管理,&quot;index&quot;的值越大事件就越靠前,主要处理登录)</span><br><span class="line">sql(数据条件)</span><br><span class="line">auth.json(授权)</span><br><span class="line">lang(语言包)</span><br><span class="line">dev-config&#x2F;demo&#x2F;database.js(数据库中类似于连接池的写法)</span><br></pre>
+
+<p><strong><code>webpack</code>打包配置</strong></p>
+<pre class="highlight"><span class="line"><span class="comment">// 默认配置文件</span></span><br><span class="line"><span class="built_in">module</span>.exports = &#123;</span><br><span class="line">  <span class="comment">// 定义打包模式</span></span><br><span class="line">  mode: <span class="string">'production'</span>, <span class="comment">//默认值，产品模式下，输出文件最小化</span></span><br><span class="line">  <span class="comment">// mode:'development', //开发模式，输出文件不会最小化</span></span><br><span class="line">  <span class="comment">// 定义打包的入口文件--通常选取依赖于很多其他文件的JS做入口</span></span><br><span class="line">  entry: <span class="string">'./src/js/index.js'</span>,</span><br><span class="line">  <span class="comment">// 定义打包得到的输出文件及其所在目录</span></span><br><span class="line">  output: &#123;</span><br><span class="line">    filename: <span class="string">'app.js'</span>,</span><br><span class="line">    path: __dirname + <span class="string">'/dist'</span>,</span><br><span class="line">    publicPath: <span class="string">''</span></span><br><span class="line">  &#125;,</span><br><span class="line">  <span class="comment">// 定义打包非js文件所用到的加载器(loader)</span></span><br><span class="line">  <span class="built_in">module</span>: &#123;</span><br><span class="line">    rules: [</span><br><span class="line">      &#123;</span><br><span class="line">        test: <span class="regexp">/\.css$/</span>,</span><br><span class="line">        use: [<span class="string">'style-loader'</span>, <span class="string">'css-loader'</span>]</span><br><span class="line">      &#125;,</span><br><span class="line">      &#123;</span><br><span class="line">        test: <span class="regexp">/\.(jpg|png|gif|svg|ttf)$/i</span>,</span><br><span class="line">        use:[</span><br><span class="line">          &#123;</span><br><span class="line">            loader:<span class="string">'file-loader'</span>,</span><br><span class="line">            options:&#123;</span><br><span class="line">              name:<span class="string">'img/[name].[ext]?[hash]'</span>,</span><br><span class="line">              publicPath: <span class="string">'dist/'</span></span><br><span class="line">            &#125;</span><br><span class="line">          &#125;</span><br><span class="line">        ]</span><br><span class="line">      &#125;</span><br><span class="line">    ]</span><br><span class="line">  &#125;</span><br><span class="line">  <span class="comment">// 定义扩展功能性插件</span></span><br><span class="line">  plugins:[]</span><br><span class="line">&#125;</span><br></pre>
+
+<h2 id="启动服务"><a href="#启动服务" class="headerlink" title="启动服务"></a>启动服务</h2><pre class="highlight"><span class="line">WebpackFrameWork&#x2F;webpack4&#x2F;server.js</span><br><span class="line">WebpackFrameWork&#x2F;src&#x2F;demo&#x2F;webpack4&#x2F;dev.demo.admin.js</span><br><span class="line">WebpackFrameWork&#x2F;bootstarp&#x2F;demo.js</span><br></pre>
+
+<h2 id="页面搭建"><a href="#页面搭建" class="headerlink" title="页面搭建"></a>页面搭建</h2><pre class="highlight"><span class="line">页面逻辑实现</span><br><span class="line">WebpackFrameWork&#x2F;src&#x2F;demo&#x2F;controller&#x2F;test.js</span><br><span class="line">页面渲染</span><br><span class="line">WebpackFrameWork&#x2F;src&#x2F;demo&#x2F;assets&#x2F;app&#x2F;admin&#x2F;page&#x2F;test.jsx</span><br><span class="line"></span><br><span class="line">注册组件</span><br><span class="line">----WebpackFrameWork&#x2F;src&#x2F;demo&#x2F;assets&#x2F;app&#x2F;main&#x2F;admin.js</span><br><span class="line">import ToolXiaoBai from &quot;..&#x2F;app&#x2F;admin&#x2F;page&#x2F;tool_xiaobai&quot;;</span><br><span class="line">TabPage.register(&#39;ht_tools.tool_xiaobai&#39;,ToolXiaoBai);</span><br><span class="line"></span><br><span class="line">页面中需要用到的方法进行注册</span><br><span class="line">----WebpackFrameWork&#x2F;src&#x2F;demo&#x2F;auth.json</span><br><span class="line">&#123;&quot;xiaobai&quot;: &#123;</span><br><span class="line">        &quot;$&quot;: &#123;</span><br><span class="line">          &quot;tool_xiaobai&quot;: [</span><br><span class="line">            &quot;datatable&quot;,</span><br><span class="line">        	&quot;do_add&quot;,</span><br><span class="line">        	&quot;do_edit&quot;</span><br><span class="line">          ]</span><br><span class="line">       &#125;</span><br><span class="line">    &#125;</span><br><span class="line">&#125;</span><br><span class="line">语言包</span><br><span class="line">-----WebpackFrameWork&#x2F;src&#x2F;demo&#x2F;lang&#x2F;zh-cn.json</span><br><span class="line">&#123;</span><br><span class="line">    &quot;xiaobai&quot; : &quot;小白测试&quot;</span><br><span class="line">&#125;</span><br><span class="line">-----WebpackFrameWork&#x2F;src&#x2F;demo&#x2F;lang&#x2F;zh-cn&#x2F;demo.json</span><br><span class="line">&#123;</span><br><span class="line">	&quot;.&quot; : &quot;测试菜单一&quot;</span><br><span class="line">&#125;</span><br><span class="line">需要验证的话在admin.json中添加</span><br><span class="line">(required代表必填字段)</span><br><span class="line">&quot;demo&quot;:&#123;</span><br><span class="line">	&quot;do_add&quot;:&#123;</span><br><span class="line">		&quot;name&quot;:&quot;required&quot;,</span><br><span class="line">	&#125;</span><br><span class="line">&#125;</span><br></pre>
+
+<h2 id="框架中封装的生命周期demo-jsx"><a href="#框架中封装的生命周期demo-jsx" class="headerlink" title="框架中封装的生命周期demo.jsx"></a>框架中封装的生命周期<code>demo.jsx</code></h2><pre class="highlight"><span class="line"><span class="meta">'use strict'</span>;</span><br><span class="line"></span><br><span class="line"><span class="comment">// import Enhance from 'enhance';</span></span><br><span class="line"><span class="comment">// import React, &#123;&#125; from 'react';</span></span><br><span class="line"><span class="comment">// import handler, &#123;Component&#125; from 'handler';</span></span><br><span class="line"></span><br><span class="line"></span><br><span class="line"><span class="class"><span class="keyword">class</span> <span class="title">Demo</span> <span class="keyword">extends</span> <span class="title">Component</span> </span>&#123;</span><br><span class="line">    state = &#123;&#125;;</span><br><span class="line"></span><br><span class="line">    <span class="keyword">constructor</span>(props) &#123;</span><br><span class="line">        <span class="keyword">super</span>(props);</span><br><span class="line">    &#125;</span><br><span class="line"></span><br><span class="line">    <span class="comment">/**</span></span><br><span class="line"><span class="comment">     * 在componentWillMount()在挂载发生之前立即被调用。</span></span><br><span class="line"><span class="comment">     */</span></span><br><span class="line">    componentWillMount() &#123;</span><br><span class="line">    &#125;</span><br><span class="line"></span><br><span class="line">    <span class="comment">/**</span></span><br><span class="line"><span class="comment">     * componentDidMount()在挂载结束之后马上被调用。需要DOM节点的初始化操作应该放在这里。</span></span><br><span class="line"><span class="comment">     */</span></span><br><span class="line">    componentDidMount() &#123;</span><br><span class="line">        <span class="comment">// return ReactDom.findDOMNode</span></span><br><span class="line">    &#125;</span><br><span class="line"></span><br><span class="line">    <span class="comment">/**</span></span><br><span class="line"><span class="comment">     * 输入参数 nextProps 是即将被设置的属性，</span></span><br><span class="line"><span class="comment">     * 旧的属性还是可以通过 this.props 来获取。</span></span><br><span class="line"><span class="comment">     * 在这个回调函数里面，你可以根据属性的变化，</span></span><br><span class="line"><span class="comment">     * 通过调用 this.setState() 来更新你的组件状态，这里调用更新状态是安全的，</span></span><br><span class="line"><span class="comment">     * 并不会触发额外的 render() 调用</span></span><br><span class="line"><span class="comment">     */</span></span><br><span class="line">    componentWillReceiveProps(nextProps) &#123;</span><br><span class="line">    </span><br><span class="line">    &#125;</span><br><span class="line"></span><br><span class="line">    <span class="comment">/**</span></span><br><span class="line"><span class="comment">     *shouldComponentUpdate(object nextProps, object nextState): boolean</span></span><br><span class="line"><span class="comment">     * 当组件做出是否要更新DOM的决定的时候被调用。</span></span><br><span class="line"><span class="comment">     * 实现该函数，优化this.props和nextProps，以及this.state和nextState的比较，</span></span><br><span class="line"><span class="comment">     * 如果不需要React更新DOM，则返回false。</span></span><br><span class="line"><span class="comment">     */</span></span><br><span class="line">    shouldComponentUpdate(nextProps, nextState) &#123;</span><br><span class="line">    &#125;</span><br><span class="line"></span><br><span class="line">    <span class="comment">/**</span></span><br><span class="line"><span class="comment">     * componentWillUpdate(object nextProps, object nextState)在更新发生之前被调用。</span></span><br><span class="line"><span class="comment">     * 你可以在这里调用this.setState()。</span></span><br><span class="line"><span class="comment">     */</span></span><br><span class="line">    componentWillUpdate(nextProps, nextState) &#123;</span><br><span class="line">    &#125;</span><br><span class="line"></span><br><span class="line">    <span class="comment">/**</span></span><br><span class="line"><span class="comment">     * componentDidUpdate(object prevProps, object prevState)在更新发生之后调用。</span></span><br><span class="line"><span class="comment">     */</span></span><br><span class="line">    componentDidUpdate(prevProps, prevState) &#123;</span><br><span class="line">    &#125;</span><br><span class="line"></span><br><span class="line"></span><br><span class="line">    <span class="comment">/**</span></span><br><span class="line"><span class="comment">     * ReactDOM.findDOMNode(): DOMElement可以在任何挂载的组件上面调用，用于获取一个指向它的渲染DOM节点的引用。</span></span><br><span class="line"><span class="comment">     */</span></span><br><span class="line">    findDOMNode() &#123;</span><br><span class="line">    &#125;</span><br><span class="line"></span><br><span class="line"></span><br><span class="line">    <span class="comment">/**</span></span><br><span class="line"><span class="comment">     * forceUpdate()当你知道一些很深的组件state已经改变了的时候，可以在该组件上面调用，而不是使用this.setState()。</span></span><br><span class="line"><span class="comment">     */</span></span><br><span class="line">    forceUpdate() &#123;</span><br><span class="line">    &#125;</span><br><span class="line"></span><br><span class="line">    <span class="comment">/**</span></span><br><span class="line"><span class="comment">     * 在组件从 DOM 中移除的时候立刻被调用。</span></span><br><span class="line"><span class="comment">     */</span></span><br><span class="line">    componentWillUnmount() &#123;</span><br><span class="line"></span><br><span class="line">    &#125;</span><br><span class="line"></span><br><span class="line">    render() &#123;</span><br><span class="line">        <span class="keyword">return</span> (</span><br><span class="line">            &lt;div className=<span class="string">""</span>&gt;</span><br><span class="line">            &lt;<span class="regexp">/div&gt;</span></span><br><span class="line"><span class="regexp">        );</span></span><br><span class="line"><span class="regexp">    &#125;</span></span><br><span class="line"><span class="regexp">&#125;;</span></span><br></pre>
+
+<h2 id="jsx模板"><a href="#jsx模板" class="headerlink" title="jsx模板"></a><code>jsx</code>模板</h2><pre class="highlight"><span class="line"><span class="meta">"use strict"</span>;</span><br><span class="line"></span><br><span class="line"><span class="keyword">import</span> &#123;</span><br><span class="line">    <span class="comment">//核心</span></span><br><span class="line">    React, Enhance, Controller, Component, $, EventEmitter,</span><br><span class="line">    <span class="comment">//</span></span><br><span class="line">    tools, classnames,</span><br><span class="line">    <span class="comment">// 组件</span></span><br><span class="line">    Table, TabPage, Lang, Dialog, Tree,</span><br><span class="line">    Form, Page, Upload, Icon, Grid,</span><br><span class="line">    BoxWidget, Input, Button, Prompt, Link, Loaders, Editor, Resource, Directive, Lock, Fix, Http, Excel</span><br><span class="line">&#125; <span class="keyword">from</span> <span class="string">'admin'</span>;</span><br><span class="line"></span><br><span class="line"><span class="keyword">import</span> valid <span class="keyword">from</span> <span class="string">'../validate/admin.json'</span>;</span><br><span class="line"></span><br><span class="line"><span class="class"><span class="keyword">class</span> <span class="title">BaiFive</span> <span class="keyword">extends</span> <span class="title">Controller</span> </span>&#123;</span><br><span class="line"></span><br><span class="line">    state = &#123;</span><br><span class="line">        table: &#123;</span><br><span class="line">            <span class="comment">// 每行后面的按钮</span></span><br><span class="line">            buttons: &#123;</span><br><span class="line">                <span class="comment">//修改按钮</span></span><br><span class="line">                <span class="string">"edit"</span>: &#123;</span><br><span class="line">                    onClick: <span class="keyword">this</span>._handlerEditDialog</span><br><span class="line">                &#125;,</span><br><span class="line">                <span class="comment">//删除按钮</span></span><br><span class="line">                <span class="string">"delete"</span>: &#123;</span><br><span class="line">                    onClick: <span class="keyword">async</span> (data) =&gt; &#123;</span><br><span class="line">                        <span class="keyword">let</span> ret = <span class="keyword">await</span> <span class="built_in">window</span>.Confirm(<span class="string">"是否删除该条信息？"</span>);</span><br><span class="line">                        <span class="keyword">if</span> (ret) &#123;</span><br><span class="line">                            <span class="keyword">this</span>.http.send(<span class="built_in">window</span>.SERVER_URL + <span class="string">'/ht_tools/bai_five/do_delete'</span>, &#123;<span class="attr">id</span>: data.id&#125;)</span><br><span class="line">                                .success(<span class="function">(<span class="params">data</span>) =&gt;</span> &#123;</span><br><span class="line">                                    <span class="keyword">if</span> (data) &#123;</span><br><span class="line">                                        <span class="keyword">this</span>.refs.table.remove(data);</span><br><span class="line">                                        <span class="built_in">window</span>.toast(<span class="xml"><span class="tag">&lt;<span class="name">Lang</span> <span class="attr">lang</span>=<span class="string">"message.success.delete"</span>/&gt;</span></span>);</span><br><span class="line">                                    &#125; <span class="keyword">else</span> &#123;</span><br><span class="line">                                        <span class="built_in">window</span>.toast(<span class="xml"><span class="tag">&lt;<span class="name">Lang</span> <span class="attr">lang</span>=<span class="string">"message.error.delete"</span>/&gt;</span></span>);</span><br><span class="line">                                    &#125;</span><br><span class="line">                                &#125;)</span><br><span class="line">                        &#125;</span><br><span class="line">                    &#125;,</span><br><span class="line">                    icon: &#123;</span><br><span class="line">                        icon: <span class="string">'delete'</span></span><br><span class="line">                    &#125;</span><br><span class="line">                &#125;,</span><br><span class="line">            &#125;,</span><br><span class="line">            types:&#123;</span><br><span class="line">                course: <span class="function"><span class="keyword">function</span>(<span class="params">data,options</span>)</span>&#123;</span><br><span class="line">                    <span class="keyword">if</span>(data.val==<span class="number">0</span>)</span><br><span class="line">                        <span class="keyword">return</span> <span class="xml"><span class="tag">&lt;<span class="name">span</span> <span class="attr">className</span>=<span class="string">'label bg-green'</span>&gt;</span>文科<span class="tag">&lt;/<span class="name">span</span>&gt;</span></span></span><br><span class="line">                    <span class="keyword">if</span>(data.val==<span class="number">1</span>)</span><br><span class="line">                        <span class="keyword">return</span> <span class="xml"><span class="tag">&lt;<span class="name">span</span> <span class="attr">className</span>=<span class="string">'label bg-aqua-active'</span>&gt;</span>理科<span class="tag">&lt;/<span class="name">span</span>&gt;</span></span></span><br><span class="line">                &#125;,</span><br><span class="line">                gender: <span class="function"><span class="keyword">function</span>(<span class="params">data,options</span>)</span>&#123;</span><br><span class="line">                    <span class="keyword">if</span>(data.val==<span class="number">0</span>)</span><br><span class="line">                        <span class="keyword">return</span> <span class="xml"><span class="tag">&lt;<span class="name">span</span>&gt;</span>男<span class="tag">&lt;/<span class="name">span</span>&gt;</span></span></span><br><span class="line">                    <span class="keyword">if</span>(data.val==<span class="number">1</span>)</span><br><span class="line">                        <span class="keyword">return</span> <span class="xml"><span class="tag">&lt;<span class="name">span</span>&gt;</span>女<span class="tag">&lt;/<span class="name">span</span>&gt;</span></span></span><br><span class="line">                &#125;,</span><br><span class="line"></span><br><span class="line">            &#125;,</span><br><span class="line">            <span class="comment">//字段</span></span><br><span class="line">            fields: [</span><br><span class="line">                &#123;</span><br><span class="line">                    title: <span class="string">"#"</span>,</span><br><span class="line">                    width: <span class="number">1</span>,</span><br><span class="line">                    type: &#123;</span><br><span class="line">                        name: <span class="string">"#"</span></span><br><span class="line">                    &#125;</span><br><span class="line">                &#125;,</span><br><span class="line">                &#123;</span><br><span class="line">                    order: <span class="number">-1</span>,</span><br><span class="line">                    name: <span class="string">'id'</span>,</span><br><span class="line">                    width: <span class="number">1</span>,</span><br><span class="line">                    display: <span class="literal">false</span></span><br><span class="line">                &#125;,</span><br><span class="line">                &#123;</span><br><span class="line">                    order: <span class="number">0</span>,</span><br><span class="line">                    name: <span class="string">'name'</span>,</span><br><span class="line">                &#125;,</span><br><span class="line">                &#123;</span><br><span class="line">                    order: <span class="number">0</span>,</span><br><span class="line">                    name: <span class="string">'age'</span>,</span><br><span class="line">                &#125;,</span><br><span class="line">                &#123;</span><br><span class="line">                    order: <span class="number">0</span>,</span><br><span class="line">                    name: <span class="string">'phone'</span>,</span><br><span class="line">                &#125;,</span><br><span class="line">                &#123;</span><br><span class="line">                    order: <span class="number">0</span>,</span><br><span class="line">                    name: <span class="string">'classname'</span>,</span><br><span class="line">                &#125;,</span><br><span class="line">                &#123;</span><br><span class="line">                    order: <span class="number">-1</span>,</span><br><span class="line">                    name: <span class="string">"status"</span>,</span><br><span class="line">                    type: &#123;</span><br><span class="line">                        name: <span class="string">'status'</span></span><br><span class="line">                    &#125;,</span><br><span class="line">                    display: <span class="literal">false</span></span><br><span class="line">                &#125;,</span><br><span class="line">                &#123;</span><br><span class="line">                    order:<span class="number">0</span>,</span><br><span class="line">                    name:<span class="string">"gender"</span>,</span><br><span class="line">                    type:&#123;</span><br><span class="line">                        name:<span class="string">'gender'</span></span><br><span class="line">                    &#125;</span><br><span class="line">                &#125;,</span><br><span class="line">                &#123;</span><br><span class="line">                    order:<span class="number">0</span>,</span><br><span class="line">                    name:<span class="string">"course"</span>,</span><br><span class="line">                    type:&#123;</span><br><span class="line">                        name:<span class="string">'course'</span></span><br><span class="line">                    &#125;</span><br><span class="line">                &#125;,</span><br><span class="line">                &#123;</span><br><span class="line">                    order: <span class="number">-1</span>,</span><br><span class="line">                    name: <span class="string">"time"</span>,</span><br><span class="line">                    type: &#123;</span><br><span class="line">                        name: <span class="string">'datetime'</span></span><br><span class="line">                    &#125;,</span><br><span class="line">                    display:<span class="literal">false</span></span><br><span class="line">                &#125;,</span><br><span class="line">                &#123;</span><br><span class="line">                    order: <span class="number">0</span>,</span><br><span class="line">                    name: <span class="string">"u_time"</span>,</span><br><span class="line">                    type: &#123;</span><br><span class="line">                        name: <span class="string">'datetime'</span></span><br><span class="line">                    &#125;</span><br><span class="line">                &#125;</span><br><span class="line">            ]</span><br><span class="line">        &#125;,</span><br><span class="line">        parent:&#123;&#125;,</span><br><span class="line">        add: &#123;&#125;,</span><br><span class="line">        edit: &#123;&#125;,</span><br><span class="line">        search:&#123;&#125;,</span><br><span class="line">        gender:[</span><br><span class="line">            &#123;<span class="attr">title</span>:<span class="string">"男"</span>,<span class="attr">value</span>:<span class="number">0</span>&#125;,</span><br><span class="line">            &#123;<span class="attr">title</span>:<span class="string">"女"</span>,<span class="attr">value</span>:<span class="number">1</span>&#125;</span><br><span class="line">        ],</span><br><span class="line">        course:[</span><br><span class="line">            &#123;<span class="attr">title</span>:<span class="string">"文科"</span>,<span class="attr">value</span>:<span class="number">0</span>&#125;,</span><br><span class="line">            &#123;<span class="attr">title</span>:<span class="string">"理科"</span>,<span class="attr">value</span>:<span class="number">1</span>&#125;</span><br><span class="line">        ],</span><br><span class="line">        classnames:[]</span><br><span class="line">    &#125;</span><br><span class="line"></span><br><span class="line">    <span class="comment">/**</span></span><br><span class="line"><span class="comment">     * 在componentWillMount()在挂载发生之前立即被调用。</span></span><br><span class="line"><span class="comment">     */</span></span><br><span class="line">    componentWillMount() &#123;</span><br><span class="line">    &#125;</span><br><span class="line"></span><br><span class="line">    <span class="comment">/**</span></span><br><span class="line"><span class="comment">     * componentDidMount()在挂载结束之后马上被调用。需要DOM节点的初始化操作应该放在这里。</span></span><br><span class="line"><span class="comment">     */</span></span><br><span class="line"></span><br><span class="line">    <span class="comment">//发送请求获取classname</span></span><br><span class="line">    componentDidMount() &#123;</span><br><span class="line">        <span class="keyword">this</span>.http.send(<span class="keyword">this</span>._action(<span class="string">'get_class_name'</span>))</span><br><span class="line">            .success(<span class="function">(<span class="params">data</span>) =&gt;</span> &#123;</span><br><span class="line">                <span class="built_in">console</span>.log(data)</span><br><span class="line">                <span class="keyword">this</span>.setState(&#123;<span class="attr">classnames</span>: data&#125;)</span><br><span class="line">            &#125;)</span><br><span class="line">    &#125;</span><br><span class="line"></span><br><span class="line">    <span class="comment">/**</span></span><br><span class="line"><span class="comment">     * 输入参数 nextProps 是即将被设置的属性，</span></span><br><span class="line"><span class="comment">     * 旧的属性还是可以通过 this.props 来获取。</span></span><br><span class="line"><span class="comment">     * 在这个回调函数里面，你可以根据属性的变化，</span></span><br><span class="line"><span class="comment">     * 通过调用 this.setState() 来更新你的组件状态，这里调用更新状态是安全的，</span></span><br><span class="line"><span class="comment">     * 并不会触发额外的 render() 调用</span></span><br><span class="line"><span class="comment">     */</span></span><br><span class="line">    componentWillReceiveProps(nextProps) &#123;</span><br><span class="line"></span><br><span class="line">    &#125;</span><br><span class="line"></span><br><span class="line">    <span class="comment">/**</span></span><br><span class="line"><span class="comment">     *shouldComponentUpdate(object nextProps, object nextState): boolean</span></span><br><span class="line"><span class="comment">     * 当组件做出是否要更新DOM的决定的时候被调用。</span></span><br><span class="line"><span class="comment">     * 实现该函数，优化this.props和nextProps，以及this.state和nextState的比较，</span></span><br><span class="line"><span class="comment">     * 如果不需要React更新DOM，则返回false。</span></span><br><span class="line"><span class="comment">     */</span></span><br><span class="line">    shouldComponentUpdate(nextProps, nextState) &#123;</span><br><span class="line">    &#125;</span><br><span class="line"></span><br><span class="line">    <span class="comment">/**</span></span><br><span class="line"><span class="comment">     * componentWillUpdate(object nextProps, object nextState)在更新发生之前被调用。</span></span><br><span class="line"><span class="comment">     * 你可以在这里调用this.setState()。</span></span><br><span class="line"><span class="comment">     */</span></span><br><span class="line">    componentWillUpdate(nextProps, nextState) &#123;</span><br><span class="line">    &#125;</span><br><span class="line"></span><br><span class="line">    <span class="comment">/**</span></span><br><span class="line"><span class="comment">     * componentDidUpdate(object prevProps, object prevState)在更新发生之后调用。</span></span><br><span class="line"><span class="comment">     */</span></span><br><span class="line">    componentDidUpdate(prevProps, prevState) &#123;</span><br><span class="line">    &#125;</span><br><span class="line"></span><br><span class="line"></span><br><span class="line">    <span class="comment">/**</span></span><br><span class="line"><span class="comment">     * ReactDOM.findDOMNode(): DOMElement可以在任何挂载的组件上面调用，用于获取一个指向它的渲染DOM节点的引用。</span></span><br><span class="line"><span class="comment">     */</span></span><br><span class="line">    findDOMNode() &#123;</span><br><span class="line">    &#125;</span><br><span class="line"></span><br><span class="line"></span><br><span class="line">    <span class="comment">/**</span></span><br><span class="line"><span class="comment">     * forceUpdate()当你知道一些很深的组件state已经改变了的时候，可以在该组件上面调用，而不是使用this.setState()。</span></span><br><span class="line"><span class="comment">     */</span></span><br><span class="line">    forceUpdate() &#123;</span><br><span class="line">    &#125;</span><br><span class="line"></span><br><span class="line">    <span class="comment">/**</span></span><br><span class="line"><span class="comment">     * 在组件从 DOM 中移除的时候立刻被调用。</span></span><br><span class="line"><span class="comment">     */</span></span><br><span class="line">    componentWillUnmount() &#123;</span><br><span class="line"></span><br><span class="line">    &#125;</span><br><span class="line"></span><br><span class="line">    <span class="keyword">constructor</span>() &#123;</span><br><span class="line">        <span class="keyword">super</span>();</span><br><span class="line">    &#125;</span><br><span class="line"></span><br><span class="line">    <span class="comment">// 绘制整体页面</span></span><br><span class="line">    render() &#123;</span><br><span class="line">        <span class="keyword">return</span> (</span><br><span class="line">            &lt;Grid&gt;</span><br><span class="line">                &lt;Grid col=<span class="string">"12 12 12 12"</span>&gt;</span><br><span class="line">                    &#123;<span class="keyword">this</span>.renderSearch()&#125;</span><br><span class="line">                &lt;<span class="regexp">/Grid&gt;</span></span><br><span class="line"><span class="regexp">                &lt;Grid col="12 12 12 12"&gt;</span></span><br><span class="line"><span class="regexp">                    &#123;this.renderTable()&#125;</span></span><br><span class="line"><span class="regexp">                &lt;/</span>Grid&gt;</span><br><span class="line">                &#123;<span class="keyword">this</span>.renderAddDialog()&#125;</span><br><span class="line">                &#123;<span class="keyword">this</span>.renderEditDialog()&#125;</span><br><span class="line">            &lt;<span class="regexp">/Grid&gt;</span></span><br><span class="line"><span class="regexp">        );</span></span><br><span class="line"><span class="regexp">    &#125;</span></span><br><span class="line"><span class="regexp"></span></span><br><span class="line"><span class="regexp">    /</span><span class="regexp">/ 设置查询功能</span></span><br><span class="line"><span class="regexp">    _handlerSearch(data) &#123;</span></span><br><span class="line"><span class="regexp">        this.refs.table.query(data);</span></span><br><span class="line"><span class="regexp">        /</span><span class="regexp">/设置状态</span></span><br><span class="line"><span class="regexp">        this.setState(&#123;export1: data&#125;);</span></span><br><span class="line"><span class="regexp">        return false;</span></span><br><span class="line"><span class="regexp">    &#125;</span></span><br><span class="line"><span class="regexp"></span></span><br><span class="line"><span class="regexp">    /</span><span class="regexp">/ 绘制查询页面</span></span><br><span class="line"><span class="regexp">    renderSearch() &#123;</span></span><br><span class="line"><span class="regexp">        let &#123;search&#125; = this.state;</span></span><br><span class="line"><span class="regexp">        return (</span></span><br><span class="line"><span class="regexp">            &lt;BoxWidget</span></span><br><span class="line"><span class="regexp">                color="4"</span></span><br><span class="line"><span class="regexp">                className="no-padding"</span></span><br><span class="line"><span class="regexp">                style=&#123;&#123;zIndex: 1&#125;&#125;</span></span><br><span class="line"><span class="regexp">            &gt;</span></span><br><span class="line"><span class="regexp">                &lt;div data-fix="elem"&gt;</span></span><br><span class="line"><span class="regexp">                    &lt;Form onSubmit=&#123;this._handlerSearch&#125; ref="Search"/</span>&gt;</span><br><span class="line">                &lt;<span class="regexp">/div&gt;</span></span><br><span class="line"><span class="regexp">                &lt;div data-fix='buttons'&gt;</span></span><br><span class="line"><span class="regexp">                    &lt;Button type="submit"&gt;</span></span><br><span class="line"><span class="regexp">                        &lt;Icon icon='search'/</span>&gt;</span><br><span class="line">                        &lt;Lang lang=<span class="string">'search'</span>/&gt;</span><br><span class="line">                    &lt;<span class="regexp">/Button&gt;</span></span><br><span class="line"><span class="regexp">                &lt;/</span>div&gt;</span><br><span class="line">                &lt;div data-fix=<span class="string">"content"</span>&gt;</span><br><span class="line">                    &lt;Grid&gt;</span><br><span class="line">                        &lt;Http ref=&#123;http =&gt; <span class="keyword">this</span>.http = http&#125;/&gt;</span><br><span class="line">                        &lt;Grid col=<span class="string">"2 2 2 2"</span>&gt;</span><br><span class="line">                            &lt;Input type=<span class="string">"text"</span> name=<span class="string">"name"</span></span><br><span class="line">                                   message=&#123;<span class="keyword">this</span>._lang(<span class="string">'name'</span>)&#125;/&gt;</span><br><span class="line">                        &lt;<span class="regexp">/Grid&gt;</span></span><br><span class="line"><span class="regexp">                        &#123;/</span>*分类*<span class="regexp">/&#125;</span></span><br><span class="line"><span class="regexp">                        &lt;Grid col="2 2 2 2"&gt;</span></span><br><span class="line"><span class="regexp">                        &lt;Input</span></span><br><span class="line"><span class="regexp">                            model=&#123;search&#125;</span></span><br><span class="line"><span class="regexp">                            type="select"</span></span><br><span class="line"><span class="regexp">                            /</span>*name决定筛选内容*<span class="regexp">/</span></span><br><span class="line"><span class="regexp">                            name="class_id"</span></span><br><span class="line"><span class="regexp">                            /</span><span class="regexp">/ ref=&#123;course =&gt; this.type = course&#125;</span></span><br><span class="line"><span class="regexp">                            option=&#123;this.state.classnames&#125;</span></span><br><span class="line"><span class="regexp">                            message=&#123;this._lang('classname')&#125;</span></span><br><span class="line"><span class="regexp">                            placeholder="all"</span></span><br><span class="line"><span class="regexp">                            onValueChange=&#123;(e) =&gt; &#123;</span></span><br><span class="line"><span class="regexp">                                this.forceUpdate()</span></span><br><span class="line"><span class="regexp">                            &#125;&#125;</span></span><br><span class="line"><span class="regexp">                        /</span>&gt;</span><br><span class="line">                        &lt;<span class="regexp">/Grid&gt;</span></span><br><span class="line"><span class="regexp">                    &lt;/</span>Grid&gt;</span><br><span class="line">                &lt;<span class="regexp">/div&gt;</span></span><br><span class="line"><span class="regexp">            &lt;/</span>BoxWidget&gt;</span><br><span class="line">        );</span><br><span class="line">    &#125;</span><br><span class="line"></span><br><span class="line">    <span class="comment">// 绘制添加页面</span></span><br><span class="line">    renderTable() &#123;</span><br><span class="line">        <span class="keyword">return</span> (</span><br><span class="line">            &lt;BoxWidget</span><br><span class="line">                color=<span class="string">"3"</span></span><br><span class="line">                className=<span class="string">"table-height scroll"</span></span><br><span class="line">            &gt;</span><br><span class="line">                &lt;div data-fix=<span class="string">"buttons"</span>&gt;</span><br><span class="line">                    &lt;Button onClick=&#123;<span class="keyword">this</span>._handlerAddDialog&#125;&gt;</span><br><span class="line">                        &lt;Icon icon=<span class="string">"add"</span>&gt;&lt;<span class="regexp">/Icon&gt;</span></span><br><span class="line"><span class="regexp">                        &lt;Lang lang=&#123;"add"&#125;&gt;&lt;/</span>Lang&gt;</span><br><span class="line">                    &lt;<span class="regexp">/Button&gt;</span></span><br><span class="line"><span class="regexp">                &lt;/</span>div&gt;</span><br><span class="line">                &lt;div data-fix=<span class="string">"content"</span>&gt;</span><br><span class="line">                    &lt;Lock&gt;</span><br><span class="line">                        &lt;Table ref=<span class="string">"table"</span>  &#123;...this.props&#125; &#123;...this.state.table&#125; length=&#123;<span class="number">1000</span>&#125;/&gt;</span><br><span class="line">                    &lt;<span class="regexp">/Lock&gt;</span></span><br><span class="line"><span class="regexp">                &lt;/</span>div&gt;</span><br><span class="line">            &lt;<span class="regexp">/BoxWidget&gt;</span></span><br><span class="line"><span class="regexp">        );</span></span><br><span class="line"><span class="regexp">    &#125;</span></span><br><span class="line"><span class="regexp"></span></span><br><span class="line"><span class="regexp">    /</span><span class="regexp">/ 绘制添加会话框</span></span><br><span class="line"><span class="regexp">    renderAddDialog() &#123;</span></span><br><span class="line"><span class="regexp">        return (</span></span><br><span class="line"><span class="regexp">            &lt;Directive name="Modal"&gt;</span></span><br><span class="line"><span class="regexp">                &lt;Dialog</span></span><br><span class="line"><span class="regexp"></span></span><br><span class="line"><span class="regexp">                    title=&#123;this._lang('add')&#125;</span></span><br><span class="line"><span class="regexp">                    ref=&#123;addDialog =&gt; this.addDialog = addDialog&#125;</span></span><br><span class="line"><span class="regexp">                &gt;</span></span><br><span class="line"><span class="regexp">                    &lt;div data-fix="buttons"&gt;</span></span><br><span class="line"><span class="regexp">                        &lt;Button type='submit'&gt;</span></span><br><span class="line"><span class="regexp">                            &lt;Lang lang="submit"/</span>&gt;</span><br><span class="line">                        &lt;<span class="regexp">/Button&gt;</span></span><br><span class="line"><span class="regexp">                    &lt;/</span>div&gt;</span><br><span class="line">                    &lt;div data-fix=<span class="string">"elem"</span>&gt;</span><br><span class="line">                        &lt;Form</span><br><span class="line">                            onSuccess=&#123;<span class="keyword">this</span>._handlerAddSuccess&#125;</span><br><span class="line">                            action=&#123;<span class="keyword">this</span>._action(<span class="string">'do_add'</span>)&#125;</span><br><span class="line">                            <span class="comment">/*非空验证*/</span></span><br><span class="line">                            rules=&#123;valid.bai_five.do_add&#125;</span><br><span class="line">                        &gt;</span><br><span class="line">                        &lt;<span class="regexp">/Form&gt;</span></span><br><span class="line"><span class="regexp">                    &lt;/</span>div&gt;</span><br><span class="line">                    &lt;div data-fix=<span class="string">"content"</span>&gt;</span><br><span class="line">                        &lt;Input type=<span class="string">"text"</span> name=<span class="string">"name"</span> message=&#123;<span class="keyword">this</span>._lang(<span class="string">"name"</span>)&#125;/&gt;</span><br><span class="line">                        &lt;Input type=<span class="string">"text"</span> name=<span class="string">"age"</span> message=&#123;<span class="keyword">this</span>._lang(<span class="string">"age"</span>)&#125;/&gt;</span><br><span class="line">                        &lt;Input type=<span class="string">"text"</span> name=<span class="string">"phone"</span> message=&#123;<span class="keyword">this</span>._lang(<span class="string">"phone"</span>)&#125;/&gt;</span><br><span class="line">                        &lt;Input</span><br><span class="line">                            type=<span class="string">"select"</span></span><br><span class="line">                            name=<span class="string">"gender"</span></span><br><span class="line">                            ref=&#123;gender =&gt; <span class="keyword">this</span>.type = gender&#125;</span><br><span class="line">                            option=&#123;<span class="keyword">this</span>.state.gender&#125;</span><br><span class="line">                            message=&#123;<span class="keyword">this</span>._lang(<span class="string">'gender'</span>)&#125;</span><br><span class="line">                            onValueChange=&#123;(e) =&gt; &#123;</span><br><span class="line">                                <span class="keyword">this</span>.forceUpdate()</span><br><span class="line">                            &#125;&#125;</span><br><span class="line">                            placeholder=<span class="string">"Please select"</span></span><br><span class="line">                        /&gt;</span><br><span class="line">                        &lt;Input</span><br><span class="line">                            type=<span class="string">"select"</span></span><br><span class="line">                            name=<span class="string">"course"</span></span><br><span class="line">                            <span class="comment">// ref=&#123;course =&gt; this.type = course&#125;</span></span><br><span class="line">                            option=&#123;<span class="keyword">this</span>.state.course&#125;</span><br><span class="line">                            message=&#123;<span class="keyword">this</span>._lang(<span class="string">'course'</span>)&#125;</span><br><span class="line">                            onValueChange=&#123;(e) =&gt; &#123;</span><br><span class="line">                                <span class="keyword">this</span>.forceUpdate()</span><br><span class="line">                            &#125;&#125;</span><br><span class="line">                            placeholder=<span class="string">"Please select"</span></span><br><span class="line">                        /&gt;</span><br><span class="line">                    &lt;<span class="regexp">/div&gt;</span></span><br><span class="line"><span class="regexp">                &lt;/</span>Dialog&gt;</span><br><span class="line">            &lt;<span class="regexp">/Directive&gt;</span></span><br><span class="line"><span class="regexp"></span></span><br><span class="line"><span class="regexp">        );</span></span><br><span class="line"><span class="regexp">    &#125;</span></span><br><span class="line"><span class="regexp"></span></span><br><span class="line"><span class="regexp">    /</span><span class="regexp">/ 设置添加功能</span></span><br><span class="line"><span class="regexp">    _handlerAddDialog() &#123;</span></span><br><span class="line"><span class="regexp">        this.setState(&#123;parent: &#123;&#125;&#125;, () =&gt; &#123;</span></span><br><span class="line"><span class="regexp">            this.addDialog.show();</span></span><br><span class="line"><span class="regexp">        &#125;)</span></span><br><span class="line"><span class="regexp">    &#125;</span></span><br><span class="line"><span class="regexp"></span></span><br><span class="line"><span class="regexp">    /</span><span class="regexp">/ 添加成功与否</span></span><br><span class="line"><span class="regexp">    _handlerAddSuccess(data) &#123;</span></span><br><span class="line"><span class="regexp">        if (data) &#123;</span></span><br><span class="line"><span class="regexp">            this.addDialog.hide();</span></span><br><span class="line"><span class="regexp">            this.refs.table.append(data);</span></span><br><span class="line"><span class="regexp">            window.toast(&lt;Lang lang="message.success.add"/</span>&gt;);</span><br><span class="line">        &#125; <span class="keyword">else</span> &#123;</span><br><span class="line">            <span class="built_in">window</span>.toast(<span class="xml"><span class="tag">&lt;<span class="name">Lang</span> <span class="attr">lang</span>=<span class="string">"message.error.add"</span>/&gt;</span></span>);</span><br><span class="line">        &#125;</span><br><span class="line">    &#125;</span><br><span class="line"></span><br><span class="line">    <span class="comment">// 绘制编辑会话框</span></span><br><span class="line">    renderEditDialog() &#123;</span><br><span class="line">        <span class="keyword">var</span> &#123;edit&#125; = <span class="keyword">this</span>.state;</span><br><span class="line">        <span class="keyword">let</span> extend = &#123;&#125;</span><br><span class="line">        <span class="keyword">try</span> &#123;</span><br><span class="line">            extend = <span class="built_in">JSON</span>.parse(edit.extend);</span><br><span class="line">        &#125; <span class="keyword">catch</span> (e) &#123;</span><br><span class="line"></span><br><span class="line">        &#125;</span><br><span class="line">        <span class="keyword">return</span> (</span><br><span class="line">            &lt;Directive name=<span class="string">"Modal"</span>&gt;</span><br><span class="line">                &lt;Dialog</span><br><span class="line">                    ref=&#123;editDialog =&gt; <span class="keyword">this</span>.editDialog = editDialog&#125;</span><br><span class="line">                    title=&#123;<span class="keyword">this</span>._lang(<span class="string">'edit'</span>)&#125;</span><br><span class="line">                &gt;</span><br><span class="line">                    &lt;div data-fix=<span class="string">"elem"</span>&gt;</span><br><span class="line">                        &lt;Form</span><br><span class="line">                            action=&#123;<span class="keyword">this</span>._action(<span class="string">'do_edit'</span>)&#125;</span><br><span class="line">                            <span class="comment">// rules=&#123;valid.bai_five.do_edit&#125;</span></span><br><span class="line">                            onSuccess=&#123;<span class="keyword">this</span>._handlerEditSuccess&#125;</span><br><span class="line">                        /&gt;</span><br><span class="line">                    &lt;<span class="regexp">/div&gt;</span></span><br><span class="line"><span class="regexp">                    &lt;div data-fix="buttons"&gt;</span></span><br><span class="line"><span class="regexp">                        &lt;Button type='submit'&gt;</span></span><br><span class="line"><span class="regexp">                            &lt;Lang lang="submit"/</span>&gt;</span><br><span class="line">                        &lt;<span class="regexp">/Button&gt;</span></span><br><span class="line"><span class="regexp">                    &lt;/</span>div&gt;</span><br><span class="line">                    &lt;div data-fix=<span class="string">"content"</span>&gt;</span><br><span class="line">                        &lt;Input type=<span class="string">"hidden"</span> name=<span class="string">"id"</span> value=&#123;edit.id&#125;/&gt;</span><br><span class="line">                        &lt;Input type=<span class="string">"text"</span> name=<span class="string">"name"</span> message=&#123;<span class="keyword">this</span>._lang(<span class="string">"name"</span>)&#125; value=&#123;edit.name&#125; disabled /&gt;</span><br><span class="line">                        &lt;Input type=<span class="string">"text"</span> name=<span class="string">"age"</span> message=&#123;<span class="keyword">this</span>._lang(<span class="string">"age"</span>)&#125; value=&#123;edit.age&#125; disabled /&gt;</span><br><span class="line">                        &lt;Input type=<span class="string">"text"</span> name=<span class="string">"phone"</span> message=&#123;<span class="keyword">this</span>._lang(<span class="string">"phone"</span>)&#125; value=&#123;edit.phone&#125;/&gt;</span><br><span class="line">                    &lt;<span class="regexp">/div&gt;</span></span><br><span class="line"><span class="regexp">                &lt;/</span>Dialog&gt;</span><br><span class="line">            &lt;<span class="regexp">/Directive&gt;</span></span><br><span class="line"><span class="regexp">        );</span></span><br><span class="line"><span class="regexp">    &#125;</span></span><br><span class="line"><span class="regexp"></span></span><br><span class="line"><span class="regexp">    /</span><span class="regexp">/ 设置编辑会话框</span></span><br><span class="line"><span class="regexp">    _handlerEditDialog(edit) &#123;</span></span><br><span class="line"><span class="regexp">        this.setState(&#123;edit&#125;, () =&gt; &#123;</span></span><br><span class="line"><span class="regexp">            this.editDialog.show(this.state.edit);</span></span><br><span class="line"><span class="regexp">        &#125;);</span></span><br><span class="line"><span class="regexp">    &#125;</span></span><br><span class="line"><span class="regexp"></span></span><br><span class="line"><span class="regexp">    /</span><span class="regexp">/编辑成功</span></span><br><span class="line"><span class="regexp">    _handlerEditSuccess(data) &#123;</span></span><br><span class="line"><span class="regexp">        if (data) &#123;</span></span><br><span class="line"><span class="regexp">            this.refs.table.update(data);</span></span><br><span class="line"><span class="regexp">            this.editDialog.hide();</span></span><br><span class="line"><span class="regexp">            window.toast(&lt;Lang lang="message.success.edit"/</span>&gt;);</span><br><span class="line">        &#125; <span class="keyword">else</span> &#123;</span><br><span class="line">            <span class="built_in">window</span>.toast(<span class="xml"><span class="tag">&lt;<span class="name">Lang</span> <span class="attr">lang</span>=<span class="string">"message.error.edit"</span>/&gt;</span></span>);</span><br><span class="line">        &#125;</span><br><span class="line">    &#125;</span><br><span class="line"></span><br><span class="line">    <span class="comment">// 改变用户状态功能</span></span><br><span class="line">    <span class="comment">// @PropAction(&#123;&#125;)</span></span><br><span class="line">    <span class="comment">// async do_change_status(&#123;&#125;, &#123;id&#125;) &#123;</span></span><br><span class="line">    <span class="comment">//     try &#123;</span></span><br><span class="line">    <span class="comment">//         await this.default_change_status(this.db('jh_xiaobai_stu').where(&#123;id&#125;));</span></span><br><span class="line">    <span class="comment">//         this.record('设置状态成功');</span></span><br><span class="line">    <span class="comment">//         let data = await this._listModel(id);</span></span><br><span class="line">    <span class="comment">//         this.callback(data, &#123;toast: 'message.success.setting'&#125;);</span></span><br><span class="line">    <span class="comment">//     &#125; catch (ex) &#123;</span></span><br><span class="line">    <span class="comment">//         this.record('设置状态失败', false, ex.message);</span></span><br><span class="line">    <span class="comment">//         this.callback(false, &#123;toast: 'message.error.setting'&#125;);</span></span><br><span class="line">    <span class="comment">//     &#125;</span></span><br><span class="line">    <span class="comment">// &#125;</span></span><br><span class="line"></span><br><span class="line">    <span class="comment">// 删除功能</span></span><br><span class="line">    <span class="comment">// @PropAction(&#123;&#125;)</span></span><br><span class="line">    <span class="comment">// async do_delete(&#123;&#125;, &#123;id&#125;) &#123;</span></span><br><span class="line">    <span class="comment">//     try &#123;</span></span><br><span class="line">    <span class="comment">//         await this.db("jh_xiaobai_stu")</span></span><br><span class="line">    <span class="comment">//             .where(&#123;id&#125;)</span></span><br><span class="line">    <span class="comment">//             .update(&#123;</span></span><br><span class="line">    <span class="comment">//                 status: 0</span></span><br><span class="line">    <span class="comment">//             &#125;);</span></span><br><span class="line">    <span class="comment">//         this.record('删除成功!');</span></span><br><span class="line">    <span class="comment">//         this.callback(id, &#123;toast: "message.success.delete"&#125;);</span></span><br><span class="line">    <span class="comment">//     &#125; catch (e) &#123;</span></span><br><span class="line">    <span class="comment">//         this.record('删除失败!', false, e.message);</span></span><br><span class="line">    <span class="comment">//         jinghuan.logger.error(e);</span></span><br><span class="line">    <span class="comment">//         this.callback(false, &#123;toast: "message.error.delete"&#125;);</span></span><br><span class="line">    <span class="comment">//     &#125;</span></span><br><span class="line">    <span class="comment">// &#125;</span></span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line"><span class="keyword">export</span> <span class="keyword">default</span> BaiFive;</span><br></pre>
+
+<h2 id="js模板"><a href="#js模板" class="headerlink" title="js模板"></a><code>js</code>模板</h2><pre class="highlight"><span class="line"><span class="keyword">import</span> time <span class="keyword">from</span> <span class="string">"locutus/php/datetime/time"</span>;</span><br><span class="line"><span class="keyword">import</span> Base <span class="keyword">from</span> <span class="string">"../function/base"</span>;</span><br><span class="line"></span><br><span class="line"></span><br><span class="line"><span class="class"><span class="keyword">class</span> <span class="title">bai_five</span> <span class="keyword">extends</span> <span class="title">Base</span> </span>&#123;</span><br><span class="line"></span><br><span class="line">    _listModel(id = <span class="number">0</span>) &#123;</span><br><span class="line">        <span class="comment">// let model = this.db("jh_xiaobai_test");</span></span><br><span class="line">        <span class="keyword">let</span> model = <span class="keyword">this</span>.sql(<span class="string">'bai_five/database'</span>);</span><br><span class="line">        <span class="keyword">if</span> (id) &#123;</span><br><span class="line">            model.where(<span class="string">'id'</span>, id).first();</span><br><span class="line">        &#125;</span><br><span class="line">        <span class="keyword">return</span> model;</span><br><span class="line">    &#125;</span><br><span class="line"></span><br><span class="line">    <span class="comment">//列表</span></span><br><span class="line">    @PropAction(&#123;&#125;)</span><br><span class="line">    <span class="keyword">async</span> datatable(&#123;&#125;, &#123;&#125;) &#123;</span><br><span class="line">        <span class="comment">// let company_id = await this.session('company_id');</span></span><br><span class="line">        <span class="comment">// if (company_id) &#123;</span></span><br><span class="line">        <span class="comment">//     let model1 = this._listModel().whereRaw('find_in_set(?,a.company_id)', [company_id]);</span></span><br><span class="line">        <span class="comment">//     await this.default_datatable(model1, ['name'])</span></span><br><span class="line">        <span class="comment">// &#125; else &#123;</span></span><br><span class="line">        <span class="comment">//     let model1 = this._listModel();</span></span><br><span class="line">        <span class="comment">//     await this.default_datatable(model1, ['name'])</span></span><br><span class="line">        <span class="comment">// &#125;</span></span><br><span class="line">        <span class="keyword">let</span> model1 = <span class="keyword">this</span>._listModel();</span><br><span class="line">        <span class="keyword">let</span> model2 = <span class="keyword">this</span>._listModel().where(<span class="string">'status'</span>, <span class="string">'='</span>, <span class="number">1</span>)</span><br><span class="line">            .count(<span class="string">'id as count'</span>);</span><br><span class="line">        <span class="keyword">await</span> <span class="keyword">this</span>.default_datatable(model1,model2,[<span class="string">'name'</span>])</span><br><span class="line">    &#125;</span><br><span class="line"></span><br><span class="line">    <span class="comment">//使用get获取classname相关信息</span></span><br><span class="line">    @PropAction(&#123;<span class="attr">auth</span>: <span class="literal">false</span>&#125;)</span><br><span class="line">    <span class="keyword">async</span> get_class_name(<span class="keyword">get</span>, &#123;&#125;) &#123;</span><br><span class="line">        <span class="keyword">let</span> data = <span class="keyword">await</span> <span class="keyword">this</span>.db(<span class="string">"jh_xiaobai_class"</span>)</span><br><span class="line">            .select(<span class="string">"classname as title"</span>, <span class="string">"cid as value"</span>)</span><br><span class="line">        <span class="keyword">this</span>.callback(data);</span><br><span class="line">    &#125;</span><br><span class="line"></span><br><span class="line">    <span class="comment">//添加用户</span></span><br><span class="line">    @PropAction(&#123;&#125;)</span><br><span class="line">    <span class="keyword">async</span> do_add(&#123;&#125;, &#123;name,age,phone,gender,class_id&#125;) &#123;</span><br><span class="line">        <span class="keyword">try</span> &#123;</span><br><span class="line">            <span class="keyword">let</span> model = <span class="keyword">await</span> <span class="keyword">this</span>.db(<span class="string">'jh_xiaobai_test'</span>)</span><br><span class="line">                .insert(&#123;</span><br><span class="line">                    name,</span><br><span class="line">                    age,</span><br><span class="line">                    phone,</span><br><span class="line">                    gender,</span><br><span class="line">                    class_id,</span><br><span class="line">                    time: time(),</span><br><span class="line">                    <span class="comment">// 每次需要修改都会添加修改时间</span></span><br><span class="line">                    <span class="comment">// u_time: strtotime(u_time)</span></span><br><span class="line">                &#125;);</span><br><span class="line">            <span class="keyword">this</span>.record(<span class="string">'添加成功!'</span>);</span><br><span class="line">            <span class="keyword">let</span> data = <span class="keyword">await</span> <span class="keyword">this</span>._listModel(model[<span class="number">0</span>]);</span><br><span class="line">            <span class="keyword">this</span>.callback(data, &#123;<span class="attr">toast</span>: <span class="string">"message.success.add"</span>&#125;);</span><br><span class="line">        &#125; <span class="keyword">catch</span> (ex) &#123;</span><br><span class="line">            <span class="built_in">console</span>.log(ex)</span><br><span class="line">            <span class="keyword">this</span>.record(<span class="string">'添加失败!'</span>, <span class="literal">false</span>, ex.message);</span><br><span class="line">            <span class="keyword">this</span>.callback(<span class="literal">false</span>, &#123;<span class="attr">toast</span>: <span class="string">"message.error.add"</span>&#125;);</span><br><span class="line">        &#125;</span><br><span class="line">    &#125;</span><br><span class="line"></span><br><span class="line">    <span class="comment">// 修改</span></span><br><span class="line">    @PropAction(&#123;&#125;)</span><br><span class="line">    <span class="keyword">async</span> do_edit(&#123;&#125;, &#123;id,name,phone,gender,classname&#125;) &#123;</span><br><span class="line">        <span class="comment">// let user_id = await this.session('admin_user_id');</span></span><br><span class="line">        <span class="keyword">try</span> &#123;</span><br><span class="line">            <span class="keyword">let</span> model = [];</span><br><span class="line">            model = <span class="keyword">await</span> <span class="keyword">this</span>.db(<span class="string">'jh_xiaobai_test'</span>)</span><br><span class="line">                .where(<span class="string">'id'</span>, <span class="string">'='</span>, id)</span><br><span class="line">                .update(&#123;</span><br><span class="line">                    name,</span><br><span class="line">                    u_time: time(),</span><br><span class="line">                    classname,</span><br><span class="line">                    phone,</span><br><span class="line">                    gender</span><br><span class="line">                &#125;);</span><br><span class="line">            <span class="keyword">this</span>.record(<span class="string">'修改成功'</span>);</span><br><span class="line">            <span class="keyword">let</span> data = <span class="keyword">await</span> <span class="keyword">this</span>._listModel(id);</span><br><span class="line">            <span class="keyword">this</span>.callback(data, &#123;<span class="attr">toast</span>: <span class="string">"message.success.edit"</span>&#125;);</span><br><span class="line">        &#125; <span class="keyword">catch</span> (ex) &#123;</span><br><span class="line">            <span class="keyword">this</span>.record(<span class="string">'修改失败'</span>, <span class="literal">false</span>, ex.message);</span><br><span class="line">            <span class="keyword">this</span>.callback(<span class="literal">false</span>, &#123;<span class="attr">toast</span>: <span class="string">"message.error.edit"</span>&#125;);</span><br><span class="line">        &#125;</span><br><span class="line"></span><br><span class="line">    &#125;</span><br><span class="line"></span><br><span class="line"></span><br><span class="line">    <span class="comment">// 改变用户状态功能</span></span><br><span class="line">    <span class="comment">// @PropAction(&#123;&#125;)</span></span><br><span class="line">    <span class="comment">// async do_change_status(&#123;&#125;, &#123;id&#125;) &#123;</span></span><br><span class="line">    <span class="comment">//     try &#123;</span></span><br><span class="line">    <span class="comment">//         await this.default_change_status(this.db('jh_xiaobai_test').where(&#123;id&#125;));</span></span><br><span class="line">    <span class="comment">//         this.record('设置状态成功');</span></span><br><span class="line">    <span class="comment">//         let data = await this._listModel(id);</span></span><br><span class="line">    <span class="comment">//         this.callback(data, &#123;toast: 'message.success.setting'&#125;);</span></span><br><span class="line">    <span class="comment">//     &#125; catch (ex) &#123;</span></span><br><span class="line">    <span class="comment">//         this.record('设置状态失败', false, ex.message);</span></span><br><span class="line">    <span class="comment">//         this.callback(false, &#123;toast: 'message.error.setting'&#125;);</span></span><br><span class="line">    <span class="comment">//     &#125;</span></span><br><span class="line">    <span class="comment">// &#125;</span></span><br><span class="line"></span><br><span class="line"></span><br><span class="line">    <span class="comment">// 删除功能</span></span><br><span class="line">    @PropAction(&#123;&#125;)</span><br><span class="line">    <span class="keyword">async</span> do_delete(&#123;&#125;, &#123;id&#125;) &#123;</span><br><span class="line">        <span class="keyword">try</span> &#123;</span><br><span class="line">            <span class="keyword">await</span> <span class="keyword">this</span>.db(<span class="string">"jh_xiaobai_test"</span>)</span><br><span class="line">                .where(&#123;id&#125;)</span><br><span class="line">                .update(&#123;</span><br><span class="line">                    status: <span class="number">0</span></span><br><span class="line">                &#125;);</span><br><span class="line">            <span class="keyword">this</span>.record(<span class="string">'删除成功!'</span>);</span><br><span class="line">            <span class="keyword">this</span>.callback(id, &#123;<span class="attr">toast</span>: <span class="string">"message.success.delete"</span>&#125;);</span><br><span class="line">        &#125; <span class="keyword">catch</span> (e) &#123;</span><br><span class="line">            <span class="keyword">this</span>.record(<span class="string">'删除失败!'</span>, <span class="literal">false</span>, e.message);</span><br><span class="line">            jinghuan.logger.error(e);</span><br><span class="line">            <span class="keyword">this</span>.callback(<span class="literal">false</span>, &#123;<span class="attr">toast</span>: <span class="string">"message.error.delete"</span>&#125;);</span><br><span class="line">        &#125;</span><br><span class="line">    &#125;</span><br><span class="line"></span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line"><span class="keyword">export</span> <span class="keyword">default</span> bai_five;</span><br></pre>
+<h2 id="授权"><a href="#授权" class="headerlink" title="授权"></a>授权</h2><p><code>auth.json</code></p>
+<pre class="highlight"><span class="line">&#123;<span class="attr">"xiaobai"</span>: &#123;</span><br><span class="line">        <span class="attr">"$"</span>: &#123;</span><br><span class="line">          <span class="attr">"tool_xiaobai"</span>: [</span><br><span class="line">            <span class="string">"datatable"</span>,</span><br><span class="line">        	<span class="string">"do_add"</span>,</span><br><span class="line">        	<span class="string">"do_edit"</span></span><br><span class="line">          ]</span><br><span class="line">        &#125;</span><br><span class="line">     &#125;</span><br><span class="line">&#125;</span><br></pre>
+
+<h2 id="语言包"><a href="#语言包" class="headerlink" title="语言包"></a>语言包</h2><p><code>lang/zh-cn.json</code></p>
+<pre class="highlight"><span class="line">&#123;</span><br><span class="line">    <span class="attr">"xiaobai"</span>:<span class="string">"小白测试"</span></span><br><span class="line">&#125;</span><br></pre>
+
+<p><code>lang/zh-cn/tool_xiaobai.json</code></p>
+<pre class="highlight"><span class="line">&#123;</span><br><span class="line">  <span class="attr">"."</span>: <span class="string">"测试1"</span>,</span><br><span class="line">  <span class="attr">".id"</span>: <span class="string">"ID"</span>,</span><br><span class="line">  <span class="attr">".age"</span>: <span class="string">"年龄"</span>,</span><br><span class="line">  <span class="attr">".name"</span>: <span class="string">"姓名"</span>,</span><br><span class="line">  <span class="attr">".phone"</span>: <span class="string">"电话号码"</span>,</span><br><span class="line">  <span class="attr">".hobby"</span>: <span class="string">"爱好"</span>,</span><br><span class="line">  <span class="attr">".time"</span>: <span class="string">"注册时间"</span>,</span><br><span class="line">  <span class="attr">".u_time"</span>: <span class="string">"修改时间"</span>,</span><br><span class="line">  <span class="attr">".status"</span>: <span class="string">"状态"</span>,</span><br><span class="line">  <span class="attr">".add"</span>: <span class="string">"添加人员信息"</span>,</span><br><span class="line">  <span class="attr">".edit"</span>: <span class="string">"变更信息"</span>,</span><br><span class="line">  <span class="attr">".delete"</span>: <span class="string">"删除"</span>,</span><br><span class="line">  <span class="attr">".datatable"</span>:<span class="string">"【列表】"</span>,</span><br><span class="line">  <span class="attr">".do_add"</span>:<span class="string">"【添加】"</span>,</span><br><span class="line">  <span class="attr">".do_edit"</span>:<span class="string">"【编辑】"</span></span><br><span class="line">&#125;</span><br></pre>
+
+<h2 id="非空验证"><a href="#非空验证" class="headerlink" title="非空验证"></a>非空验证</h2><p>jsx中设置<code>rules={valid.bai_five.do_edit}</code>必填字段<br>demo/assets/app/admin/validate/admin.json</p>
+<pre class="highlight"><span class="line">"demo":&#123;</span><br><span class="line">	"do_add":&#123;</span><br><span class="line">		"name":"required"</span><br><span class="line">	&#125;</span><br><span class="line">&#125;</span><br></pre>
+
+<h2 id="访问方式"><a href="#访问方式" class="headerlink" title="访问方式"></a>访问方式</h2><p><code>dev-config/demo/database.js</code></p>
+<pre class="highlight"><span class="line">module.exports = &#123;</span><br><span class="line">        <span class="comment">// 本地</span></span><br><span class="line">        <span class="comment">// host: '192.168.3.10',</span></span><br><span class="line">        <span class="comment">// user: 'root',</span></span><br><span class="line">        <span class="comment">// password: '',</span></span><br><span class="line"></span><br><span class="line">        <span class="comment">//测试</span></span><br><span class="line">        host:'http://medical.jinghuan.info/medical/admin',</span><br><span class="line">        user:'admin',</span><br><span class="line">        password:'123456',</span><br><span class="line"></span><br><span class="line">        logSql: true,</span><br><span class="line">        debug: true,</span><br><span class="line">    &#125;,</span><br><span class="line">&#125;</span><br></pre>
+
+<p><code>http://127.0.0.1:8080/demo/admin</code></p>
+<h2 id="树形结构"><a href="#树形结构" class="headerlink" title="树形结构"></a>树形结构</h2><pre class="highlight"><span class="line">tree:true</span><br><span class="line">fields:&#123;</span><br><span class="line">	order: 0,</span><br><span class="line">    name: 'name',</span><br><span class="line">    type:&#123;</span><br><span class="line">    	name:"node"</span><br><span class="line">    &#125;</span><br><span class="line">&#125;,</span><br></pre>
+
+<p>切记,加权限</p>
+<pre class="highlight"><span class="line">@PropAction(&#123;&#125;)</span><br></pre>
+  </div>
+  <div>
+  
+  <div class="post-note note-warning copyright" style="margin-top: 42px">
+    <p><span style="font-weight: bold;">作者：</span><a target="_blank" rel="nofollow noopener noreferrer" href="https://xiaobai123-4.github.io/about">MaQisong</a></p>
+    <p><span style="font-weight: bold;">文章链接：</span><a target="_blank" rel="nofollow noopener noreferrer" href="https://xiaobai123-4.github.io/2020/09/07/%E5%B7%A5%E4%BD%9C%E6%80%BB%E7%BB%939-7/">https://xiaobai123-4.github.io/2020/09/07/%E5%B7%A5%E4%BD%9C%E6%80%BB%E7%BB%939-7/</a></p>
+    <p><span style="font-weight: bold;">版权声明：</span>本博客所有文章除特别声明外，均采用<a target="_blank" rel="noopener" href="https://creativecommons.org/licenses/by-nc-sa/4.0/deed.zh">CC BY-NC-SA 4.0 协议</a>。转载请注明出处！</p>
+  </div>
+  
+  </div>
+</article>
+<div class="nav">
+  
+  <div class="nav-item-prev">
+    <a href="/2020/09/08/工作总结9-8/" class="nav-link">
+      <i class="iconfont icon-left nav-prev-icon"></i>
+      <div>
+        <div class="nav-label">上一篇</div>
+        
+        <div class="nav-title">工作总结9.8 </div>
+        
+      </div>
+    </a>
+  </div>
+  
+  
+  <div class="nav-item-next">
+    <a href="/2020/09/07/工作总结11-13/" class="nav-link">
+      <div>
+        <div class="nav-label">下一篇</div>
+        
+        <div class="nav-title">工作总结9-7 </div>
+        
+      </div>
+      <i class="iconfont icon-right nav-next-icon"></i>
+    </a>
+  </div>
+  
+</div>
+
+<div class="card card-content toc-card" id="mobiletoc">
+  <div class="toc-header"><i class="iconfont icon-menu" style="padding-right: 2px;"></i>目录</div>
+<ol class="toc"><li class="toc-item toc-level-2"><a class="toc-link" href="#其他"><span class="toc-text">其他</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#启动服务"><span class="toc-text">启动服务</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#页面搭建"><span class="toc-text">页面搭建</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#框架中封装的生命周期demo-jsx"><span class="toc-text">框架中封装的生命周期demo.jsx</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#jsx模板"><span class="toc-text">jsx模板</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#js模板"><span class="toc-text">js模板</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#授权"><span class="toc-text">授权</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#语言包"><span class="toc-text">语言包</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#非空验证"><span class="toc-text">非空验证</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#访问方式"><span class="toc-text">访问方式</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#树形结构"><span class="toc-text">树形结构</span></a></li></ol>
+</div></main>
+          <aside class="left-column">
+            
+            <div class="card card-author">
+              
+<img src="https://s3.ax1x.com/2021/03/04/6VEJaQ.jpg" class="author-img">
+
+<p class="author-name">MaQisong</p>
+<p class="author-description">学习永不止步</p>
+<div class="author-message">
+  <a class="author-posts-count" href="/archives">
+    <span>65</span>
+    <span>文章</span>
+  </a>
+  <a class="author-categories-count" href="/categories">
+    <span>25</span>
+    <span>分类</span>
+  </a>
+  <a class="author-tags-count" href="/tags">
+    <span>38</span>
+    <span>标签</span>
+  </a>
+</div>
+
+            </div>
+            
+            <div class="sticky-tablet">
+  
+  
+  <article class="display-when-two-columns spacer">
+    <div class="card card-content toc-card">
+      <div class="toc-header"><i class="iconfont icon-menu" style="padding-right: 2px;"></i>目录</div>
+<ol class="toc"><li class="toc-item toc-level-2"><a class="toc-link" href="#其他"><span class="toc-text">其他</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#启动服务"><span class="toc-text">启动服务</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#页面搭建"><span class="toc-text">页面搭建</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#框架中封装的生命周期demo-jsx"><span class="toc-text">框架中封装的生命周期demo.jsx</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#jsx模板"><span class="toc-text">jsx模板</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#js模板"><span class="toc-text">js模板</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#授权"><span class="toc-text">授权</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#语言包"><span class="toc-text">语言包</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#非空验证"><span class="toc-text">非空验证</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#访问方式"><span class="toc-text">访问方式</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#树形结构"><span class="toc-text">树形结构</span></a></li></ol>
+    </div>
+  </article>
+  
+  
+  <article class="card card-content categories-widget">
+    <div class="categories-card">
+  <div class="categories-header"><i class="iconfont icon-fenlei" style="padding-right: 2px;"></i>分类</div>
+  <div class="categories-list">
+    
+      <a href="/categories/正则表达式/">
+        <div class="categories-list-item">
+          正则表达式
+          <span class="categories-list-item-badge">1</span>
+        </div>
+      </a>
+    
+      <a href="/categories/ajax/">
+        <div class="categories-list-item">
+          ajax
+          <span class="categories-list-item-badge">1</span>
+        </div>
+      </a>
+    
+      <a href="/categories/CSS/">
+        <div class="categories-list-item">
+          CSS
+          <span class="categories-list-item-badge">3</span>
+        </div>
+      </a>
+    
+      <a href="/categories/ES6/">
+        <div class="categories-list-item">
+          ES6
+          <span class="categories-list-item-badge">1</span>
+        </div>
+      </a>
+    
+      <a href="/categories/css/">
+        <div class="categories-list-item">
+          css
+          <span class="categories-list-item-badge">1</span>
+        </div>
+      </a>
+    
+      <a href="/categories/HTML5/">
+        <div class="categories-list-item">
+          HTML5
+          <span class="categories-list-item-badge">4</span>
+        </div>
+      </a>
+    
+      <a href="/categories/git/">
+        <div class="categories-list-item">
+          git
+          <span class="categories-list-item-badge">1</span>
+        </div>
+      </a>
+    
+      <a href="/categories/Markdown/">
+        <div class="categories-list-item">
+          Markdown
+          <span class="categories-list-item-badge">1</span>
+        </div>
+      </a>
+    
+      <a href="/categories/javascript/">
+        <div class="categories-list-item">
+          javascript
+          <span class="categories-list-item-badge">17</span>
+        </div>
+      </a>
+    
+      <a href="/categories/SqlServer/">
+        <div class="categories-list-item">
+          SqlServer
+          <span class="categories-list-item-badge">1</span>
+        </div>
+      </a>
+    
+      <a href="/categories/bootstrap/">
+        <div class="categories-list-item">
+          bootstrap
+          <span class="categories-list-item-badge">1</span>
+        </div>
+      </a>
+    
+      <a href="/categories/分类/">
+        <div class="categories-list-item">
+          分类
+          <span class="categories-list-item-badge">1</span>
+        </div>
+      </a>
+    
+      <a href="/categories/其他/">
+        <div class="categories-list-item">
+          其他
+          <span class="categories-list-item-badge">1</span>
+        </div>
+      </a>
+    
+      <a href="/categories/Vue/">
+        <div class="categories-list-item">
+          Vue
+          <span class="categories-list-item-badge">10</span>
+        </div>
+      </a>
+    
+      <a href="/categories/HTML/">
+        <div class="categories-list-item">
+          HTML
+          <span class="categories-list-item-badge">2</span>
+        </div>
+      </a>
+    
+      <a href="/categories/ionic/">
+        <div class="categories-list-item">
+          ionic
+          <span class="categories-list-item-badge">2</span>
+        </div>
+      </a>
+    
+      <a href="/categories/javascript/Vue/">
+        <div class="categories-list-item">
+          javascript/Vue
+          <span class="categories-list-item-badge">2</span>
+        </div>
+      </a>
+    
+      <a href="/categories/webpack/">
+        <div class="categories-list-item">
+          webpack
+          <span class="categories-list-item-badge">1</span>
+        </div>
+      </a>
+    
+      <a href="/categories/前端/">
+        <div class="categories-list-item">
+          前端
+          <span class="categories-list-item-badge">1</span>
+        </div>
+      </a>
+    
+      <a href="/categories/NodeJS/">
+        <div class="categories-list-item">
+          NodeJS
+          <span class="categories-list-item-badge">1</span>
+        </div>
+      </a>
+    
+      <a href="/categories/镜寰-工作/">
+        <div class="categories-list-item">
+          镜寰-工作
+          <span class="categories-list-item-badge">10</span>
+        </div>
+      </a>
+    
+      <a href="/categories/html/">
+        <div class="categories-list-item">
+          html
+          <span class="categories-list-item-badge">1</span>
+        </div>
+      </a>
+    
+      <a href="/categories/移动端/">
+        <div class="categories-list-item">
+          移动端
+          <span class="categories-list-item-badge">2</span>
+        </div>
+      </a>
+    
+      <a href="/categories/Vue/前端/">
+        <div class="categories-list-item">
+          Vue/前端
+          <span class="categories-list-item-badge">3</span>
+        </div>
+      </a>
+    
+      <a href="/categories/镜寰-工作/数据库/">
+        <div class="categories-list-item">
+          镜寰-工作/数据库
+          <span class="categories-list-item-badge">1</span>
+        </div>
+      </a>
+    
+  </div>
+</div>
+  </article>
+  
+  <article class="card card-content tags-widget">
+    <div class="tags-card">
+  <div class="tags-header"><i class="iconfont icon-biaoqian" style="padding-right: 2px;"></i>热门标签</div>
+  <div class="tags-list">
+    
+    <a href="/tags/前端/" title="前端"><div class="tags-list-item">前端</div></a>
+    
+    <a href="/tags/html/" title="html"><div class="tags-list-item">html</div></a>
+    
+    <a href="/tags/javascript/" title="javascript"><div class="tags-list-item">javascript</div></a>
+    
+    <a href="/tags/Vue/" title="Vue"><div class="tags-list-item">Vue</div></a>
+    
+    <a href="/tags/工作总结/" title="工作总结"><div class="tags-list-item">工作总结</div></a>
+    
+    <a href="/tags/框架/" title="框架"><div class="tags-list-item">框架</div></a>
+    
+    <a href="/tags/算法/" title="算法"><div class="tags-list-item">算法</div></a>
+    
+    <a href="/tags/笔记/" title="笔记"><div class="tags-list-item">笔记</div></a>
+    
+    <a href="/tags/常见问题/" title="常见问题"><div class="tags-list-item">常见问题</div></a>
+    
+    <a href="/tags/css/" title="css"><div class="tags-list-item">css</div></a>
+    
+    <a href="/tags/移动端/" title="移动端"><div class="tags-list-item">移动端</div></a>
+    
+    <a href="/tags/跨域/" title="跨域"><div class="tags-list-item">跨域</div></a>
+    
+    <a href="/tags/基础/" title="基础"><div class="tags-list-item">基础</div></a>
+    
+    <a href="/tags/规范/" title="规范"><div class="tags-list-item">规范</div></a>
+    
+    <a href="/tags/webpack/" title="webpack"><div class="tags-list-item">webpack</div></a>
+    
+    <a href="/tags/博客/" title="博客"><div class="tags-list-item">博客</div></a>
+    
+  </div>
+</div>
+  </article>
+  
+  
+</div>
+          </aside>
+          <aside class="right-column">
+            <div class="sticky-widescreen">
+  
+  
+  <article class="card card-content toc-card">
+    <div class="toc-header"><i class="iconfont icon-menu" style="padding-right: 2px;"></i>目录</div>
+<ol class="toc"><li class="toc-item toc-level-2"><a class="toc-link" href="#其他"><span class="toc-text">其他</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#启动服务"><span class="toc-text">启动服务</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#页面搭建"><span class="toc-text">页面搭建</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#框架中封装的生命周期demo-jsx"><span class="toc-text">框架中封装的生命周期demo.jsx</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#jsx模板"><span class="toc-text">jsx模板</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#js模板"><span class="toc-text">js模板</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#授权"><span class="toc-text">授权</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#语言包"><span class="toc-text">语言包</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#非空验证"><span class="toc-text">非空验证</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#访问方式"><span class="toc-text">访问方式</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#树形结构"><span class="toc-text">树形结构</span></a></li></ol>
+  </article>
+  
+  
+  <article class="card card-content">
+    <div class="recent-posts-card">
+  <div class="recent-posts-header"><i class="iconfont icon-wenzhang_huaban" style="padding-right: 2px;"></i>最近文章</div>
+  <div class="recent-posts-list">
+    
+      <div class="recent-posts-item">
+        <div class="recent-posts-item-title">2021-03-28</div>
+        <a href="/2021/03/28/vue学习记录4/"><div class="recent-posts-item-content">vue学习记录4</div></a>
+      </div>
+    
+      <div class="recent-posts-item">
+        <div class="recent-posts-item-title">2021-03-27</div>
+        <a href="/2021/03/27/vue学习记录3/"><div class="recent-posts-item-content">vue学习记录3</div></a>
+      </div>
+    
+      <div class="recent-posts-item">
+        <div class="recent-posts-item-title">2021-03-26</div>
+        <a href="/2021/03/26/vue学习记录2/"><div class="recent-posts-item-content">vue学习记录2</div></a>
+      </div>
+    
+      <div class="recent-posts-item">
+        <div class="recent-posts-item-title">2021-03-04</div>
+        <a href="/2021/03/04/vue学习记录1/"><div class="recent-posts-item-content">学习记录1</div></a>
+      </div>
+    
+  </div>
+</div>
+  </article>
+  
+  
+</div>
+          </aside>
+        </div>
+      </div>
+    </div>
+  </div>
+  
+  <footer class="footer">
+  <div class="footer-container">
+    <div>
+      <div class="footer-dsc">
+        <span>Copyright ©
+          
+          2020 -
+          
+          2021
+        </span>
+        &nbsp;
+        <a href="/" class="footer-link">小白的博客 </a>
+      </div>
+    </div>
+
+    
+    <div class="footer-dsc">
+      
+      Powered by
+      <a href="https://hexo.io/" class="footer-link" target="_blank" rel="nofollow noopener noreferrer">&nbsp;Hexo </a>
+      
+      
+      <span>&nbsp;|&nbsp;</span>
+      
+      
+      Theme -
+      <a href="https://github.com/theme-kaze" class="footer-link" target="_blank"
+        rel="nofollow noopener noreferrer">&nbsp;Kaze</a>
+      
+    </div>
+    
+    
+    
+    
+</footer>
+  <a role="button" id="scrollbutton" class="basebutton"  aria-label="回到顶部">
+  <i class="iconfont icon-arrowleft button-icon"></i>
+</a>
+<a role="button" id="menubutton" class="basebutton">
+  <i class="iconfont icon-menu button-icon"></i>
+</a>
+<a role="button" id="popbutton" class="basebutton" aria-label="控制中心">
+  <i class="iconfont icon-expand button-icon"></i>
+</a>
+<a role="button" id="darkbutton" class="basebutton darkwidget" aria-label="夜色模式">
+  <i class="iconfont icon-weather button-icon"></i>
+</a>
+<a role="button" id="searchbutton" class="basebutton searchwidget" aria-label="搜索">
+  <i class="iconfont icon-search button-icon"></i>
+</a>
+
+  
+  
+  
+  <script>
+  var addImgLayout = function () {
+    var img = document.querySelectorAll('.post-content img');
+    var i;
+    for (i = 0; i < img.length; i++) {
+      var wrapper = document.createElement('a');
+      wrapper.setAttribute('href', img[i].getAttribute('data-src'));
+      wrapper.setAttribute('aria-label', 'illustration');
+      wrapper.style.cssText = 'width: 100%; display: flex; justify-content: center;';
+      if (img[i].alt) wrapper.dataset.caption = img[i].alt;
+      wrapper.dataset.nolink = true;
+      img[i].before(wrapper);
+      wrapper.append(img[i]);
+      var divWrap = document.createElement('div');
+      divWrap.classList.add('gallery');
+      wrapper.before(divWrap);
+      divWrap.append(wrapper);
+    }
+    baguetteBox.run('.gallery');
+  }
+</script>
+<script>loadScript("/js/lib/lightbox/baguetteBox.min.js", addImgLayout)</script>
+  
+  
+  
+<script src="/js/main.js"></script>
+
+  
+  
+  <script>
+    var addLazyload = function () {
+      var observer = lozad('.lozad', {
+        load: function (el) {
+          el.srcset = el.getAttribute('data-src');
+        },
+        loaded: function (el) {
+          el.classList.add('loaded');
+        }
+      });
+      observer.observe();
+    }
+  </script>
+  <script>loadScript("/js/lib/lozad.min.js", addLazyload)</script>
+  
+  
+</body>
+
+</html>

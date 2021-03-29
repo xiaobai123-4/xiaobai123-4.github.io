@@ -1,0 +1,981 @@
+<!DOCTYPE html>
+<html  lang="zh-CN" >
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport"
+    content="width=device-width, initial-scale=1.0, minimum-scale=1.0">
+  <meta http-equiv="X-UA-Compatible" content="ie=edge">
+  <meta name="theme-color" content="#fff" id="theme-color">
+  <meta name="description" content="学习永不止步">
+  <link rel="icon" href="https://s3.ax1x.com/2021/03/04/6VEJaQ.jpg">
+  <title>React</title>
+  
+  
+  <meta property="og:title" content="React">
+  
+  
+  <meta property="og:url" content="https://xiaobai123-4.github.io/2020/09/03/React/index.html">
+  
+  
+  <meta property="og:img" content="https://s3.ax1x.com/2021/03/04/6VEJaQ.jpg">
+  
+  
+  <meta property="og:img" content="&lt;h2 id=&#34;ReactJS简介&#34;&gt;&lt;a href=&#34;#ReactJS简介&#34; class=&#34;headerlink&#34; title=&#34;ReactJS简介&#34;&gt;&lt;/a&gt;ReactJS简介&lt;/h2&gt;&lt;ul&gt;
+&lt;li&gt;React 起源于 Facebook 的内部项目，因为该公司对市场上所有 JavaScript MVC 框架，都不满意，就决定自己写一套，用来架设 Instagram 的网站。做出来以后，发现这套东西很好用，&lt;strong&gt;就在2013年5月开源了&lt;/strong&gt;。&lt;/li&gt;
+&lt;li&gt;由于 React 的设计思想极其独特，属于革命性创新，性能出众，代码逻辑却非常简单。所以，越来越多的人开始关注和使用，认为它可能是将来 Web 开发的主流工具。&lt;/li&gt;
+&lt;li&gt;library&lt;/li&gt;
+&lt;li&gt;Framework&lt;/li&gt;
+&lt;/ul&gt;">
+  
+  
+  <meta property="og:type" content="article">
+  <meta property="og:article:published_time" content="2020-09-03">
+  <meta property="og:article:modified_time" content="2020-09-03">
+  <meta property="og:article:author" content="MaQisong">
+  
+  
+  
+  
+  
+  <script>
+    // control reverse button
+    var reverseDarkList = {
+      dark: 'light',
+      light: 'dark'
+    };
+    var themeColor = {
+      dark: '#1c1c1e',
+      light: '#fff'
+    }
+    // get the data of css prefers-color-scheme
+    var getCssMediaQuery = function() {
+      return window.matchMedia('(prefers-color-scheme: dark)').matches ? 'dark' : 'light';
+    };
+    // reverse current darkmode setting function
+    var reverseDarkModeSetting = function() {
+      var setting = localStorage.getItem('user-color-scheme');
+      if(reverseDarkList[setting]) {
+        setting = reverseDarkList[setting];
+      } else if(setting === null) {
+        setting = reverseDarkList[getCssMediaQuery()];
+      } else {
+        return;
+      }
+      localStorage.setItem('user-color-scheme', setting);
+      return setting;
+    };
+    // apply current darkmode setting
+    var setDarkmode = function(mode) {
+      var setting = mode || localStorage.getItem('user-color-scheme');
+      if(setting === getCssMediaQuery()) {
+        document.documentElement.removeAttribute('data-user-color-scheme');
+        localStorage.removeItem('user-color-scheme');
+        document.getElementById('theme-color').content = themeColor[setting];
+      } else if(reverseDarkList[setting]) {
+        document.documentElement.setAttribute('data-user-color-scheme', setting);
+        document.getElementById('theme-color').content = themeColor[setting];
+      } else {
+        document.documentElement.removeAttribute('data-user-color-scheme');
+        localStorage.removeItem('user-color-scheme');
+        document.getElementById('theme-color').content = themeColor[getCssMediaQuery()];
+      }
+    };
+    setDarkmode();
+  </script>
+  <script>
+    function loadScript(url, cb) {
+      var script = document.createElement('script');
+      script.src = url;
+      if (cb) script.onload = cb;
+      script.async = true;
+      document.body.appendChild(script);
+    }
+  </script>
+  
+  <link rel="preload" href="//at.alicdn.com/t/font_1946621_i1kgafibvw.css" as="style" >
+  <link rel="preload" href="//at.alicdn.com/t/font_1952792_89b4ac4k4up.css" as="style" >
+  
+  <link rel="preload" href="/js/lib/lightbox/baguetteBox.min.js" as="script">
+  <link rel="preload" href="/js/lib/lightbox/baguetteBox.min.css" as="style" >
+  
+  
+  <link rel="preload" href="/js/lib/lozad.min.js" as="script">
+  
+  
+  
+  
+  
+  
+  
+  
+<link rel="stylesheet" href="/css/main.css">
+
+  
+  
+<link rel="stylesheet" href="//at.alicdn.com/t/font_1946621_i1kgafibvw.css">
+
+  
+  
+<link rel="stylesheet" href="//at.alicdn.com/t/font_1952792_89b4ac4k4up.css">
+
+  
+  
+<link rel="stylesheet" href="/js/lib/lightbox/baguetteBox.min.css">
+
+  
+  
+<meta name="generator" content="Hexo 4.2.1"></head>
+
+
+<body>
+  <div class="wrapper">
+    
+    <nav class="navbar">
+  <div class="navbar-logo">
+    <span class="navbar-logo-main">
+      
+      <img class="navbar-logo-img" src="https://s3.ax1x.com/2021/03/04/6VEJaQ.jpg" alt="logo">
+      
+      <span class="navbar-logo-dsc">小白的博客</span>
+    </span>
+  </div>
+  <div class="navbar-menu">
+    
+    <a href="/" class="navbar-menu-item">
+    
+    首页
+    
+    </a>
+    
+    <a href="/archives" class="navbar-menu-item">
+    
+    归档
+    
+    </a>
+    
+    <a href="/tags" class="navbar-menu-item">
+    
+    标签
+    
+    </a>
+    
+    <a href="/categories" class="navbar-menu-item">
+    
+    分类
+    
+    </a>
+    
+    <a href="/about" class="navbar-menu-item">
+    
+    关于
+    
+    </a>
+    
+    <a class="navbar-menu-item darknavbar" id="dark"><i class="iconfont icon-weather"></i></a>
+    <a class="navbar-menu-item searchnavbar" id="search"><i class="iconfont icon-search" style="font-size: 1.2rem; font-weight: 400;"></i></a>
+  </div>
+</nav>
+    
+    <div id="local-search" style="display: none;">
+      <input class="navbar-menu-item" id="search-input" placeholder="请输入搜索内容...">
+      <div id="search-content"></div>
+    </div>
+    
+    <div class="section-wrap">
+      <div class="container">
+        <div class="columns">
+          <main class="main-column">
+<article class="card card-content">
+  <header>
+    <h1 class="post-title">
+      React
+    </h1>
+  </header>
+  <div class="post-meta post-show-meta">
+    <time datetime="2020-09-03T02:39:41.000Z">
+      <i class="iconfont icon-calendar" style="margin-right: 2px;"></i>
+      <span>2020-09-03</span>
+    </time>
+    
+    
+    <span class="dot"></span>
+    <span>4.6k 字</span>
+    
+  </div>
+  
+  </header>
+  <div id="section" class="post-content">
+    <h2 id="ReactJS简介"><a href="#ReactJS简介" class="headerlink" title="ReactJS简介"></a>ReactJS简介</h2><ul>
+<li>React 起源于 Facebook 的内部项目，因为该公司对市场上所有 JavaScript MVC 框架，都不满意，就决定自己写一套，用来架设 Instagram 的网站。做出来以后，发现这套东西很好用，<strong>就在2013年5月开源了</strong>。</li>
+<li>由于 React 的设计思想极其独特，属于革命性创新，性能出众，代码逻辑却非常简单。所以，越来越多的人开始关注和使用，认为它可能是将来 Web 开发的主流工具。</li>
+<li>library</li>
+<li>Framework</li>
+</ul>
+<a id="more"></a>
+
+
+<h2 id="前端三大主流框架"><a href="#前端三大主流框架" class="headerlink" title="前端三大主流框架"></a>前端三大主流框架</h2><ul>
+<li>Angular.js：出来最早的前端框架，学习曲线比较陡，NG1学起来比较麻烦，NG2开始，进行了一系列的改革，也开始启用组件化了；在NG中，也支持使用TS（TypeScript）进行编程；</li>
+<li>Vue.js：最火的一门前端框架，它是中国人开发的，对我我们来说，文档要友好一些；</li>
+<li>React.js：最流行的一门框架，因为它的设计很优秀；</li>
+<li>windowsPhone 7    7.5   8   10</li>
+</ul>
+<h2 id="React与vue-js的对比"><a href="#React与vue-js的对比" class="headerlink" title="React与vue.js的对比"></a>React与vue.js的对比</h2><h3 id="组件化方面"><a href="#组件化方面" class="headerlink" title="组件化方面"></a>组件化方面</h3><ol>
+<li><p>什么是模块化：从 <strong>代码</strong> 的角度，去分析问题，把我们编程时候的业务逻辑，分割到不同的模块中来进行开发，这样能够<strong>方便代码的重用</strong>；</p>
+</li>
+<li><p>什么是组件化：从 <strong>UI</strong> 的角度，去分析问题，把一个页面，拆分为一些互不相干的小组件，随着我们项目的开发，我们手里的组件会越来越多，最后，我们如果要实现一个页面，可能直接把现有的组件拿过来进行拼接，就能快速得到一个完整的页面， 这样方<strong>便了UI元素的重用</strong>；<strong>组件是元素的集合体</strong>；</p>
+</li>
+<li><p>组件化的好处：</p>
+</li>
+<li><p>Vue是如何实现组件化的：.vue 组件模板文件，浏览器不识别这样的.vue文件，所以，在运行前，会把 .vue 预先编译成真正的组件；</p>
+<ul>
+<li>template： UI结构</li>
+<li>script： 业务逻辑和数据</li>
+<li>style： UI的样式</li>
+</ul>
+</li>
+<li><p>React如何实现组件化：在React中实现组件化的时候，根本没有 像 .vue 这样的模板文件，而是，直接使用JS代码的形式，去创建任何你想要的组件；</p>
+<ul>
+<li>React中的组件，都是直接在 js 文件中定义的；</li>
+<li>React的组件，并没有把一个组件 拆分为 三部分（结构、样式、业务逻辑），而是全部使用JS来实现一个组件的；（也就是说：结构、样式、业务逻辑是混合在JS里面一起编写出来的）</li>
+</ul>
+</li>
+</ol>
+<h3 id="开发团队方面"><a href="#开发团队方面" class="headerlink" title="开发团队方面"></a>开发团队方面</h3><ul>
+<li>React是由FaceBook前端官方团队进行维护和更新的；因此，React的维护开发团队，技术实力比较雄厚；</li>
+<li>Vue：第一版，主要是有作者 尤雨溪 专门进行维护的，当 Vue更新到 2.x 版本后，也有了一个小团队进行相关的维护和开发；</li>
+</ul>
+<h3 id="社区方面"><a href="#社区方面" class="headerlink" title="社区方面"></a>社区方面</h3><ul>
+<li>在社区方面，React由于诞生的较早，所以社区比较强大，一些常见的问题、坑、最优解决方案，文档、博客在社区中都是可以很方便就能找到的；</li>
+<li>Vue是近两年才诞生开源出来的，所以，它的社区相对于React来说，要小巧一些，所以，可能有的一些坑，没人踩过；</li>
+</ul>
+<h3 id="移动APP开发体验方面"><a href="#移动APP开发体验方面" class="headerlink" title="移动APP开发体验方面"></a>移动APP开发体验方面</h3><ul>
+<li>Vue，结合 Weex 这门技术，提供了 迁移到 移动端App开发的体验（Weex，目前只是一个 小的玩具， 并没有很成功的 大案例；）</li>
+<li>React，结合 ReactNative，也提供了无缝迁移到 移动App的开发体验（RN用的最多，也是最火最流行的）；</li>
+</ul>
+<h2 id="React中几个核心的概念"><a href="#React中几个核心的概念" class="headerlink" title="React中几个核心的概念"></a>React中几个核心的概念</h2><h3 id="虚拟DOM（Virtual-Document-Object-Model）"><a href="#虚拟DOM（Virtual-Document-Object-Model）" class="headerlink" title="虚拟DOM（Virtual Document Object Model）"></a>虚拟DOM（Virtual Document Object Model）</h3><ul>
+<li>DOM的本质是什么：就是用JS表示的UI元素</li>
+<li>DOM和虚拟DOM的区别：<ul>
+<li>DOM是由浏览器中的JS提供功能，所以我们只能人为的使用 浏览器提供的固定的API来操作DOM对象；</li>
+<li>虚拟DOM：并不是由浏览器提供的，而是我们程序员手动模拟实现的，类似于浏览器中的DOM，但是有着本质的区别；</li>
+</ul>
+</li>
+</ul>
+<h3 id="Diff算法"><a href="#Diff算法" class="headerlink" title="Diff算法"></a>Diff算法</h3><ul>
+<li>tree diff:新旧DOM树，逐层对比的方式，就叫做 tree diff,每当我们从前到后，把所有层的节点对比完后，必然能够找到那些 需要被更新的元素；</li>
+<li>component diff：在对比每一层的时候，组件之间的对比，叫做 component diff;当对比组件的时候，如果两个组件的类型相同，则暂时认为这个组件不需要被更新，如果组件的类型不同，则立即将旧组件移除，新建一个组件，替换到被移除的位置；</li>
+<li>element diff:在组件中，每个元素之间也要进行对比，那么，元素级别的对比，叫做 element diff；</li>
+<li>key：key这个属性，可以把 页面上的 DOM节点 和 虚拟DOM中的对象，做一层关联关系；<br><img src="http://qel69p8xd.bkt.clouddn.com/React/Diff.png" alt="Diff算法图" srcset="data:image/svg+xml,%3Csvg%20xmlns='http://www.w3.org/2000/svg'%20viewBox='0%200%20300%20300'%3E%3C/svg%3E" data-src="http://qel69p8xd.bkt.clouddn.com/React/Diff.png" class="lozad post-image"></li>
+</ul>
+<h2 id="React项目的创建"><a href="#React项目的创建" class="headerlink" title="React项目的创建"></a>React项目的创建</h2><ol>
+<li>运行 <code>cnpm i react react-dom -S</code> 安装包</li>
+<li>在项目中导入两个相关的包：</li>
+</ol>
+<pre class="highlight"><span class="line">&#x2F;&#x2F; 1. 在 React 学习中，需要安装 两个包 react  react-dom</span><br><span class="line">&#x2F;&#x2F; 1.1 react 这个包，是专门用来创建React组件、组件生命周期等这些东西的；</span><br><span class="line">&#x2F;&#x2F; 1.2 react-dom 里面主要封装了和 DOM 操作相关的包，比如，要把 组件渲染到页面上</span><br><span class="line">import React from &#39;react&#39;</span><br><span class="line">import ReactDOM from &#39;react-dom&#39;</span><br></pre>
+
+<ol start="3">
+<li>使用JS的创建虚拟DOM节点：</li>
+</ol>
+<pre class="highlight"><span class="line">&#x2F;&#x2F; 2. 在 react 中，如要要创建 DOM 元素了，只能使用 React 提供的 JS API 来创建，不能【直接】像 Vue 中那样，手写 HTML 元素</span><br><span class="line">&#x2F;&#x2F; React.createElement() 方法，用于创建 虚拟DOM 对象，它接收 3个及以上的参数</span><br><span class="line">&#x2F;&#x2F; 参数1： 是个字符串类型的参数，表示要创建的元素类型</span><br><span class="line">&#x2F;&#x2F; 参数2： 是一个属性对象，表示 创建的这个元素上，有哪些属性</span><br><span class="line">&#x2F;&#x2F; 参数3： 从第三个参数的位置开始，后面可以放好多的虚拟DOM对象，这写参数，表示当前元素的子节点</span><br><span class="line">&#x2F;&#x2F; &lt;div title&#x3D;&quot;this is a div&quot; id&#x3D;&quot;mydiv&quot;&gt;这是一个div&lt;&#x2F;div&gt;</span><br><span class="line"></span><br><span class="line">var myH1 &#x3D; React.createElement(&#39;h1&#39;, null, &#39;这是一个大大的H1&#39;)</span><br><span class="line"></span><br><span class="line">var myDiv &#x3D; React.createElement(&#39;div&#39;, &#123; title: &#39;this is a div&#39;, id: &#39;mydiv&#39; &#125;, &#39;这是一个div&#39;, myH1)</span><br></pre>
+
+<ol start="4">
+<li>使用 ReactDOM 把元素渲染到页面指定的容器中：</li>
+</ol>
+<pre class="highlight"><span class="line">&#x2F;&#x2F; ReactDOM.render(&#39;要渲染的虚拟DOM元素&#39;, &#39;要渲染到页面上的哪个位置中&#39;)</span><br><span class="line">&#x2F;&#x2F; 注意： ReactDOM.render() 方法的第二个参数，和vue不一样，不接受 &quot;#app&quot; 这样的字符串，而是需要传递一个 原生的 DOM 对象</span><br><span class="line">ReactDOM.render(myDiv, document.getElementById(&#39;app&#39;))</span><br></pre>
+
+
+<h2 id="JSX语法"><a href="#JSX语法" class="headerlink" title="JSX语法"></a>JSX语法</h2><ol>
+<li>如要要使用 JSX 语法，必须先运行 <code>cnpm i babel-preset-react -D</code>，然后再 <code>.babelrc</code> 中添加 语法配置；</li>
+<li>JSX语法的本质：还是以 React.createElement 的形式来实现的，并没有直接把 用户写的 HTML代码，渲染到页面上；</li>
+<li>如果要在 JSX 语法内部，书写 JS 代码了，那么，所有的JS代码，必须写到 {} 内部；</li>
+<li>当 编译引擎，在编译JSX代码的时候，如果遇到了<code>&lt;</code>那么就把它当作 HTML代码去编译，如果遇到了 <code>{}</code> 就把 花括号内部的代码当作 普通JS代码去编译；</li>
+<li>在{}内部，可以写任何符合JS规范的代码；</li>
+<li>在JSX中，如果要为元素添加<code>class</code>属性了，那么，必须写成<code>className</code>，因为 <code>class</code>在ES6中是一个关键字；和<code>class</code>类似，label标签的 <code>for</code> 属性需要替换为 <code>htmlFor</code>.</li>
+<li>在JSX创建DOM的时候，所有的节点，必须有唯一的根元素进行包裹；</li>
+<li>如果要写注释了，注释必须放到 {} 内部</li>
+</ol>
+<h2 id="React中：第一种创建组件的方式"><a href="#React中：第一种创建组件的方式" class="headerlink" title="React中：第一种创建组件的方式"></a>React中：第一种创建组件的方式</h2><h2 id="第一种基本组件的创建方式"><a href="#第一种基本组件的创建方式" class="headerlink" title="第一种基本组件的创建方式"></a>第一种基本组件的创建方式</h2><h3 id="父组件向子组件传递数据"><a href="#父组件向子组件传递数据" class="headerlink" title="父组件向子组件传递数据"></a>父组件向子组件传递数据</h3><h3 id="属性扩散"><a href="#属性扩散" class="headerlink" title="属性扩散"></a>属性扩散</h3><h3 id="将组件封装到单独的文件中"><a href="#将组件封装到单独的文件中" class="headerlink" title="将组件封装到单独的文件中"></a>将组件封装到单独的文件中</h3><h2 id="React中：第二种创建组件的方式"><a href="#React中：第二种创建组件的方式" class="headerlink" title="React中：第二种创建组件的方式"></a>React中：第二种创建组件的方式</h2><h3 id="了解ES6中class关键字的使用"><a href="#了解ES6中class关键字的使用" class="headerlink" title="了解ES6中class关键字的使用"></a>了解ES6中class关键字的使用</h3><h3 id="基于class关键字创建组件"><a href="#基于class关键字创建组件" class="headerlink" title="基于class关键字创建组件"></a>基于class关键字创建组件</h3><ul>
+<li>使用 class 关键字来创建组件</li>
+</ul>
+<pre class="highlight"><span class="line">class Person extends React.Component&#123;</span><br><span class="line">    &#x2F;&#x2F; 通过报错提示得知：在class创建的组件中，必须定义一个render函数</span><br><span class="line">    render()&#123;</span><br><span class="line">        &#x2F;&#x2F; 在render函数中，必须返回一个null或者符合规范的虚拟DOM元素</span><br><span class="line">        return &lt;div&gt;</span><br><span class="line">            &lt;h1&gt;这是用 class 关键字创建的组件！&lt;&#x2F;h1&gt;</span><br><span class="line">        &lt;&#x2F;div&gt;;</span><br><span class="line">    &#125;</span><br><span class="line">&#125;</span><br></pre>
+
+<h2 id="两种创建组件方式的对比"><a href="#两种创建组件方式的对比" class="headerlink" title="两种创建组件方式的对比"></a>两种创建组件方式的对比</h2><ol>
+<li>用构造函数创建出来的组件：专业的名字叫做“无状态组件”</li>
+<li>用class关键字创建出来的组件：专业的名字叫做“有状态组件”</li>
+</ol>
+<blockquote>
+<p>用构造函数创建出来的组件，和用class创建出来的组件，这两种不同的组件之间的<strong>本质区别就是</strong>：有无state属性！！！<br>有状态组件和无状态组件之间的本质区别就是：有无state属性！</p>
+</blockquote>
+<h2 id="一个小案例，巩固有状态组件和无状态组件的使用"><a href="#一个小案例，巩固有状态组件和无状态组件的使用" class="headerlink" title="一个小案例，巩固有状态组件和无状态组件的使用"></a>一个小案例，巩固有状态组件和无状态组件的使用</h2><h3 id="通过for循环生成多个组件"><a href="#通过for循环生成多个组件" class="headerlink" title="通过for循环生成多个组件"></a>通过for循环生成多个组件</h3><ol>
+<li>数据：</li>
+</ol>
+<pre class="highlight"><span class="line">CommentList &#x3D; [</span><br><span class="line">    &#123; user: &#39;张三&#39;, content: &#39;哈哈，沙发&#39; &#125;,</span><br><span class="line">    &#123; user: &#39;张三2&#39;, content: &#39;哈哈，板凳&#39; &#125;,</span><br><span class="line">    &#123; user: &#39;张三3&#39;, content: &#39;哈哈，凉席&#39; &#125;,</span><br><span class="line">    &#123; user: &#39;张三4&#39;, content: &#39;哈哈，砖头&#39; &#125;,</span><br><span class="line">    &#123; user: &#39;张三5&#39;, content: &#39;哈哈，楼下山炮&#39; &#125;</span><br><span class="line">]</span><br></pre>
+
+<h3 id="style样式"><a href="#style样式" class="headerlink" title="style样式"></a>style样式</h3><h2 id="使用CSS模块化"><a href="#使用CSS模块化" class="headerlink" title="使用CSS模块化"></a>使用CSS模块化</h2><ol>
+<li>可以在webpack.config.js中为css-loader启用模块化：<br><code>css-loader?modules&amp;localIdentName=[name]_[local]-[hash:8]</code></li>
+<li>使用<code>:global()</code>定义全局样式</li>
+</ol>
+<h2 id="组件的生命周期"><a href="#组件的生命周期" class="headerlink" title="组件的生命周期"></a>组件的生命周期</h2><ul>
+<li><p>概念：组件从创建、到运行、再到销毁，这期间总是伴随着各种各样的事件，那么，这些事件统称为 组件的生命周期函数；</p>
+</li>
+<li><p>组件生命周期分为三部分：</p>
+<ul>
+<li><p><strong>组件创建阶段</strong>：生命周期函数，有一个显著的特点：组件一生只执行一次；</p>
+</li>
+<li><p><strong>组件运行阶段</strong>：这些函数，也有显著的特点： 一生会根据属性props 和 状态 state 的改变，有选择性的触发0次或多次；</p>
+</li>
+<li><p><strong>组件销毁阶段</strong>：这些函数，也有显著的特点：一生只执行一次；</p>
+</li>
+</ul>
+</li>
+</ul>
+<p><a href="https://cn.vuejs.org/v2/guide/instance.html#生命周期图示" target="_blank" rel="noopener">vue中的生命周期图</a><br><a href="http://www.race604.com/react-native-component-lifecycle/" target="_blank" rel="noopener">React Native 中组件的生命周期</a></p>
+<p><img src="./images/React%E4%B8%AD%E7%BB%84%E4%BB%B6%E7%9A%84%E7%94%9F%E5%91%BD%E5%91%A8%E6%9C%9F.png" alt="React中组件的生命周期" srcset="data:image/svg+xml,%3Csvg%20xmlns='http://www.w3.org/2000/svg'%20viewBox='0%200%20300%20300'%3E%3C/svg%3E" data-src="./images/React%E4%B8%AD%E7%BB%84%E4%BB%B6%E7%9A%84%E7%94%9F%E5%91%BD%E5%91%A8%E6%9C%9F.png" class="lozad post-image"></p>
+<h3 id="defaultProps"><a href="#defaultProps" class="headerlink" title="defaultProps"></a>defaultProps</h3><blockquote>
+<p>在组件创建之前，会先初始化默认的props属性，这是全局调用一次，严格地来说，这不是组件的生命周期的一部分。在组件被创建并加载候，首先调用 constructor 构造器中的 this.state = {}，来初始化组件的状态。</p>
+</blockquote>
+<p>React生命周期的回调函数总结成表格如下：<br><img src="./images/React%E7%94%9F%E5%91%BD%E5%91%A8%E6%9C%9F%E8%A1%A8%E6%A0%BC.png" alt="React生命周期表格" srcset="data:image/svg+xml,%3Csvg%20xmlns='http://www.w3.org/2000/svg'%20viewBox='0%200%20300%20300'%3E%3C/svg%3E" data-src="./images/React%E7%94%9F%E5%91%BD%E5%91%A8%E6%9C%9F%E8%A1%A8%E6%A0%BC.png" class="lozad post-image"><br>组件生命周期的执行顺序：</p>
+<ul>
+<li>Mounting：<ul>
+<li>constructor()</li>
+<li>componentWillMount()</li>
+<li>render()</li>
+<li>componentDidMount()</li>
+</ul>
+</li>
+<li>Updating：<ul>
+<li>componentWillReceiveProps(nextProps)</li>
+<li>shouldComponentUpdate(nextProps, nextState)</li>
+<li>componentWillUpdate(nextProps, nextState)</li>
+<li>render()</li>
+<li>componentDidUpdate(prevProps, prevState)</li>
+</ul>
+</li>
+<li>Unmounting：<ul>
+<li>componentWillUnmount()</li>
+</ul>
+</li>
+</ul>
+<h2 id="通过Counter计数器的小案例-了解生命周期函数"><a href="#通过Counter计数器的小案例-了解生命周期函数" class="headerlink" title="通过Counter计数器的小案例 - 了解生命周期函数"></a>通过Counter计数器的小案例 - 了解生命周期函数</h2><ol>
+<li>给组件设置默认属性：</li>
+<li>给属性进行类型校验，需要先运行<code>cnpm i prop-types --save</code></li>
+</ol>
+<h2 id="组件初始化时生命周期事件总结"><a href="#组件初始化时生命周期事件总结" class="headerlink" title="组件初始化时生命周期事件总结"></a>组件初始化时生命周期事件总结</h2><ol>
+<li>componentWillMount：</li>
+<li>render：</li>
+<li>componentDidMount：</li>
+<li>注意：在render函数中，不能调用<code>setState()</code>方法</li>
+</ol>
+<h2 id="通过原生的方式获取元素并绑定事件"><a href="#通过原生的方式获取元素并绑定事件" class="headerlink" title="通过原生的方式获取元素并绑定事件"></a>通过原生的方式获取元素并绑定事件</h2><h2 id="React中使用ref属性获取DOM元素引用"><a href="#React中使用ref属性获取DOM元素引用" class="headerlink" title="React中使用ref属性获取DOM元素引用"></a>React中使用ref属性获取DOM元素引用</h2><h2 id="使用React中的事件，绑定count自增"><a href="#使用React中的事件，绑定count自增" class="headerlink" title="使用React中的事件，绑定count自增"></a>使用React中的事件，绑定count自增</h2><h2 id="组件运行中事件的对比"><a href="#组件运行中事件的对比" class="headerlink" title="组件运行中事件的对比"></a>组件运行中事件的对比</h2><ol>
+<li>shouldComponentUpdate：</li>
+<li>componentWillUpdate：</li>
+<li>render：</li>
+<li>componentDidUpdate：</li>
+</ol>
+<h2 id="绑定this并传参的三种方式"><a href="#绑定this并传参的三种方式" class="headerlink" title="绑定this并传参的三种方式"></a>绑定this并传参的三种方式</h2><ol>
+<li>在事件中绑定this并传参：<pre class="highlight"><span class="line">&lt;input type&#x3D;&quot;button&quot; value&#x3D;&quot;在事件中绑定this并传参&quot; onClick&#x3D;&#123;this.handleMsg1.bind(this, &#39;🍕&#39;, &#39;🍟&#39;)&#125; &#x2F;&gt;</span><br><span class="line"></span><br><span class="line">&#x2F;&#x2F; 在事件中绑定this并传参</span><br><span class="line">handleMsg1(arg1, arg2) &#123;</span><br><span class="line">    console.log(this);</span><br><span class="line">    &#x2F;&#x2F; 此时this是个null</span><br><span class="line">    this.setState(&#123;</span><br><span class="line">        msg: &#39;在事件中绑定this并传参：&#39; + arg1 + arg2</span><br><span class="line">    &#125;);</span><br><span class="line">&#125;</span><br></pre></li>
+<li>在构造函数中绑定this并传参:<pre class="highlight"><span class="line">&#x2F;&#x2F; 修改构造函数中的代码：</span><br><span class="line">this.handleMsg2 &#x3D; this.handleMsg2.bind(this, &#39;🚗&#39;, &#39;🚚&#39;);</span><br><span class="line"></span><br><span class="line">&lt;input type&#x3D;&quot;button&quot; value&#x3D;&quot;在构造函数中绑定this并传参&quot; onClick&#x3D;&#123;this.handleMsg2&#125; &#x2F;&gt;</span><br><span class="line"></span><br><span class="line">&#x2F;&#x2F; 在构造函数中绑定this并传参</span><br><span class="line">handleMsg2(arg1, arg2) &#123;</span><br><span class="line">    this.setState(&#123;</span><br><span class="line">        msg: &#39;在构造函数中绑定this并传参：&#39; + arg1 + arg2</span><br><span class="line">    &#125;);</span><br><span class="line">&#125;</span><br></pre></li>
+<li>用箭头函数绑定this并传参：<pre class="highlight"><span class="line">&lt;input type&#x3D;&quot;button&quot; value&#x3D;&quot;用箭头函数绑定this并传参&quot; onClick&#x3D;&#123;() &#x3D;&gt; &#123; this.handleMsg3(&#39;👩&#39;, &#39;👰&#39;) &#125;&#125; &#x2F;&gt;</span><br><span class="line"></span><br><span class="line">&#x2F;&#x2F; 用箭头函数绑定this并传参</span><br><span class="line">    handleMsg3(arg1, arg2) &#123;</span><br><span class="line">        this.setState(&#123;</span><br><span class="line">            msg: &#39;用箭头函数绑定this并传参：&#39; + arg1 + arg2</span><br><span class="line">        &#125;);</span><br><span class="line">    &#125;</span><br></pre>
+
+</li>
+</ol>
+<h2 id="绑定文本框与state中的值"><a href="#绑定文本框与state中的值" class="headerlink" title="绑定文本框与state中的值"></a>绑定文本框与state中的值</h2><ol>
+<li>在Vue.js中，默认可以通过<code>v-model</code>指令，将表单控件和我们的<code>data</code>上面的属性进行双向数据绑定，数据变化和页面之间的变化是同步的！</li>
+<li>在React.js中，默认没有提供双向数据绑定这一功能，默认的，只能把<code>state</code>之上的数据同步到界面的控件上，但是不能默认实现把界面上数据的改变，同步到<code>state</code>之上，需要程序员手动调用相关的事件，来进行逆向的数据传输！</li>
+<li>绑定文本框和state的值：<pre class="highlight"><span class="line">&#123;&#x2F;*只要将value属性，和state上的状态进行绑定，那么，这个表单元素就变成了受控表单元素，这时候，如果没有调用相关的事件，是无法手动修改表单元素中的值的*&#x2F;&#125;</span><br><span class="line">&lt;input style&#x3D;&#123;&#123; width: &#39;100%&#39; &#125;&#125; ref&#x3D;&quot;txt&quot; type&#x3D;&quot;text&quot; value&#x3D;&#123;this.state.msg&#125; onChange&#x3D;&#123;this.handleTextChange&#125; &#x2F;&gt;</span><br><span class="line"></span><br><span class="line">&#x2F;&#x2F; 这是文本框内容改变时候的处理函数</span><br><span class="line">handleTextChange &#x3D; () &#x3D;&gt; &#123;</span><br><span class="line">    this.setState(&#123;</span><br><span class="line">        msg: this.refs.txt.value</span><br><span class="line">    &#125;);</span><br><span class="line">&#125;</span><br></pre></li>
+<li>注意<code>setState的一个问题</code>：<pre class="highlight"><span class="line">&#x2F;&#x2F; 保存最新的state状态值，在保存的时候，是异步地进行保存的，所以，如果想要获取最新的，刚刚保存的那个状态，需要通过回掉函数的形式去获取最新state</span><br><span class="line">this.setState(&#123;</span><br><span class="line">    msg: this.refs.txt.value</span><br><span class="line">    &#x2F;&#x2F; msg: e.target.value</span><br><span class="line">&#125;, function () &#123;</span><br><span class="line">    &#x2F;&#x2F; 获取最新的state状态值</span><br><span class="line">    console.log(this.state.msg);</span><br><span class="line">&#125;);</span><br></pre>
+
+</li>
+</ol>
+<h2 id="Node-js设置跨域"><a href="#Node-js设置跨域" class="headerlink" title="Node.js设置跨域"></a>Node.js设置跨域</h2><pre class="highlight"><span class="line"></span><br><span class="line">app.use(&#39;*&#39;, function (req, res, next) &#123;</span><br><span class="line"></span><br><span class="line">	&#x2F;&#x2F; 设置请求头为允许跨域</span><br><span class="line"></span><br><span class="line">    res.header(&quot;Access-Control-Allow-Origin&quot;, &quot;*&quot;);</span><br><span class="line"></span><br><span class="line">    &#x2F;&#x2F; 设置服务器支持的所有头信息字段</span><br><span class="line"></span><br><span class="line">    res.header(&quot;Access-Control-Allow-Headers&quot;, &quot;Content-Type,Content-Length, Authorization, Accept,X-Requested-With&quot;);</span><br><span class="line"></span><br><span class="line">    &#x2F;&#x2F; 设置服务器支持的所有跨域请求的方法</span><br><span class="line"></span><br><span class="line">    res.header(&quot;Access-Control-Allow-Methods&quot;, &quot;POST,GET&quot;);</span><br><span class="line"></span><br><span class="line">    &#x2F;&#x2F; next()方法表示进入下一个路由</span><br><span class="line"></span><br><span class="line">    next();</span><br><span class="line"></span><br><span class="line">&#125;);</span><br></pre>
+
+
+
+<h2 id="Promise规范"><a href="#Promise规范" class="headerlink" title="Promise规范"></a>Promise规范</h2><ol>
+<li><p>定义：就是一个异步的代码规范；</p>
+</li>
+<li><p>好处：</p>
+<ul>
+<li><p>更好的帮我们解决回调地狱问题</p>
+</li>
+<li><p>能帮我们很好的实现代码的复用</p>
+</li>
+</ul>
+</li>
+</ol>
+<h2 id="基于Promise规范的fetch-API的使用"><a href="#基于Promise规范的fetch-API的使用" class="headerlink" title="基于Promise规范的fetch API的使用"></a>基于Promise规范的fetch API的使用</h2><h2 id="项目结构搭建和布局"><a href="#项目结构搭建和布局" class="headerlink" title="项目结构搭建和布局"></a>项目结构搭建和布局</h2><ol>
+<li><p>运行<code>npm install antd --save</code>安装ant design</p>
+</li>
+<li><p>导入相关组件：</p>
+</li>
+</ol>
+<pre class="highlight"><span class="line"></span><br><span class="line">import &#123; DatePicker &#125; from &#39;antd&#39;;</span><br></pre>
+
+<ol start="3">
+<li>导入样式：</li>
+</ol>
+<pre class="highlight"><span class="line"></span><br><span class="line">import &#39;antd&#x2F;dist&#x2F;antd.css&#39;;</span><br></pre>
+
+
+
+<h3 id="实现ANT组件的按需加载"><a href="#实现ANT组件的按需加载" class="headerlink" title="实现ANT组件的按需加载"></a>实现ANT组件的按需加载</h3><ol>
+<li><p>运行<code>cnpm i babel-plugin-import --save-dev</code></p>
+</li>
+<li><p>修改<code>.babelrc</code>文件：</p>
+</li>
+</ol>
+<pre class="highlight"><span class="line"></span><br><span class="line">&#123;</span><br><span class="line"></span><br><span class="line">    &quot;presets&quot;:[&quot;es2015&quot;, &quot;stage-0&quot;, &quot;react&quot;],</span><br><span class="line"></span><br><span class="line">    &quot;plugins&quot;:[</span><br><span class="line"></span><br><span class="line">        &quot;transform-runtime&quot;,</span><br><span class="line"></span><br><span class="line">        [&quot;import&quot;, &#123; &quot;libraryName&quot;: &quot;antd&quot;, &quot;style&quot;: &quot;css&quot; &#125;]</span><br><span class="line"></span><br><span class="line">        ]</span><br><span class="line"></span><br><span class="line">&#125;</span><br></pre>
+
+<ol start="3">
+<li>然后只需从 antd 引入模块即可，<strong>无需单独引入样式</strong>。等同于下面手动引入的方式。</li>
+</ol>
+<h2 id="使用react-router-dom实现路由跳转"><a href="#使用react-router-dom实现路由跳转" class="headerlink" title="使用react-router-dom实现路由跳转"></a>使用react-router-dom实现路由跳转</h2><ul>
+<li><p>HashRouter：是一个路由的跟容器，一个应用程序中，一般只需要唯一的一个HashRouter容器即可！将来，所有的Route和Link都要在HashRouter中进行使用</p>
+<ul>
+<li>注意：HashRouter中，只能有唯一的一个子元素</li>
+</ul>
+</li>
+<li><p>Link：是相当于超链接一般的存在；点击Link，跳转到相应的路由页面！负责进行路由地址的切换！</p>
+</li>
+<li><p>Route：是路由匹配规则，当路由地址发生切换的时候，就会来匹配这些定义好的Route规则，如果有能匹配到的路由规则，那么，就会展示当前路由规则所对应的页面！</p>
+</li>
+<li><p>Route：除了是一个匹配规则之外，还是一个占位符，将来，此Route所匹配到的组件页面，将会展示到Route所在的这个位置！</p>
+</li>
+</ul>
+<pre class="highlight"><span class="line"></span><br><span class="line">&#x2F;&#x2F; 其中path指定了路由匹配规则，component指定了当前规则所对应的组件</span><br><span class="line"></span><br><span class="line">&lt;Route path&#x3D;&quot;&quot; component&#x3D;&#123;&#125;&gt;&lt;&#x2F;Route&gt;</span><br></pre>
+
+<ul>
+<li><p>注意：react-router中的路由匹配，是进行模糊匹配的！可以通过<code>Route</code>身上的<code>exact</code>属性，来表示当前的<code>Route</code>是进行精确匹配的</p>
+</li>
+<li><p>可以使用<code>Redirect</code>实现路由重定向</p>
+</li>
+</ul>
+<pre class="highlight"><span class="line"></span><br><span class="line">&#x2F;&#x2F; 导入路由组件</span><br><span class="line"></span><br><span class="line">import &#123;Route, Link, Redirect&#125; from &#39;react-router-dom&#39;</span><br><span class="line"></span><br><span class="line"></span><br><span class="line"></span><br><span class="line">&lt;Redirect to&#x3D;&quot;&#x2F;movie&#x2F;in_theaters&quot;&gt;&lt;&#x2F;Redirect&gt;</span><br></pre>
+
+<h2 id="this-prop和Route的关系【重要】"><a href="#this-prop和Route的关系【重要】" class="headerlink" title="this.prop和Route的关系【重要】"></a>this.prop和Route的关系【重要】</h2><h2 id="总结"><a href="#总结" class="headerlink" title="总结"></a>总结</h2><p>理解React中虚拟DOM的概念<br>理解React中三种Diff算法的概念<br>使用JS中createElement的方式创建虚拟DOM<br>使用ReactDOM.render方法<br>使用JSX语法并理解其本质<br>掌握创建组件的两种方式<br>理解有状态组件和无状态组件的本质区别<br>理解props和state的区别</p>
+<h2 id="相关文章"><a href="#相关文章" class="headerlink" title="相关文章"></a>相关文章</h2><ul>
+<li><p><a href="http://www.cnblogs.com/tim100/p/6050514.html" target="_blank" rel="noopener">React数据流和组件间的沟通总结</a></p>
+</li>
+<li><p><a href="https://segmentfault.com/q/1010000005876655/a-1020000005876751" target="_blank" rel="noopener">单向数据流和双向绑定各有什么优缺点？</a></p>
+</li>
+<li><p><a href="https://www.zhihu.com/question/29504639?sort=created" target="_blank" rel="noopener">怎么更好的理解虚拟DOM?</a></p>
+</li>
+<li><p><a href="http://www.css88.com/react/index.html" target="_blank" rel="noopener">React中文文档 - 版本较低</a></p>
+</li>
+<li><p><a href="http://blog.csdn.net/yczz/article/details/49886061" target="_blank" rel="noopener">React 源码剖析系列 － 不可思议的 react diff</a></p>
+</li>
+<li><p><a href="http://www.infoq.com/cn/articles/react-dom-diff?from=timeline&isappinstalled=0" target="_blank" rel="noopener">深入浅出React（四）：虚拟DOM Diff算法解析</a></p>
+</li>
+<li><p><a href="http://www.cocoachina.com/webapp/20150721/12692.html" target="_blank" rel="noopener">一看就懂的ReactJs入门教程（精华版）</a></p>
+</li>
+<li><p><a href="http://www.ruanyifeng.com/blog/2016/06/css_modules.html" target="_blank" rel="noopener">CSS Modules 用法教程</a></p>
+</li>
+<li><p><a href="http://blog.csdn.net/itzhongzi/article/details/66045880" target="_blank" rel="noopener">将MarkDown转换为HTML页面</a></p>
+</li>
+<li><p><a href="https://jingyan.baidu.com/article/0320e2c1c9cf0e1b87507b26.html" target="_blank" rel="noopener">win7命令行 端口占用 查询进程号 杀进程</a></p>
+</li>
+<li><p><a href="https://facebook.github.io/react/docs/typechecking-with-proptypes.html" target="_blank" rel="noopener">类型校验</a></p>
+</li>
+<li><p><a href="https://reactjs.org/docs/animation.html#high-level-api-reactcsstransitiongroup" target="_blank" rel="noopener">Animation Add-Ons</a></p>
+</li>
+<li><p><a href="https://www.cnblogs.com/libin-1/p/5864376.html" target="_blank" rel="noopener">移动端 关于 键盘将input 框 顶上去的解决思路—个人见解</a></p>
+</li>
+<li><p><a href="http://www.ruanyifeng.com/blog/2016/04/cors.html" target="_blank" rel="noopener">跨域资源共享 CORS 详解 - 阮一峰</a></p>
+</li>
+<li><p><a href="https://github.com/request/request" target="_blank" rel="noopener">Request - Simplified HTTP client</a></p>
+</li>
+<li><p><a href="http://www.w3school.com.cn/cssref/pr_transform.asp" target="_blank" rel="noopener">CSS3 transform 属性</a></p>
+</li>
+<li><p><a href="http://es6.ruanyifeng.com/#docs/promise" target="_blank" rel="noopener">ES6 - Promise规范 - 阮一峰</a></p>
+</li>
+<li><p><a href="http://www.cnblogs.com/liulongbinblogs/p/6731288.html" target="_blank" rel="noopener">刘龙彬 - 博客园 - Javascript中Promise的简单使用</a></p>
+</li>
+<li><p><a href="http://www.jianshu.com/p/063f7e490e9a" target="_blank" rel="noopener">Javascript 中的神器——Promise</a></p>
+</li>
+<li><p><a href="https://developer.mozilla.org/zh-CN/docs/Web/API/Fetch_API" target="_blank" rel="noopener">MDN - Fetch API</a></p>
+</li>
+<li><p><a href="https://developer.mozilla.org/zh-CN/docs/Web/API/Response" target="_blank" rel="noopener">MDN - Response</a></p>
+</li>
+<li><p><a href="https://www.npmjs.com/package/fetch-jsonp" target="_blank" rel="noopener">fetch-jsonp - 支持JSONP的Fetch实现</a></p>
+</li>
+<li><p><a href="https://ant.design/index-cn" target="_blank" rel="noopener">ANT DESIGN 一个 UI 设计语言</a></p>
+</li>
+<li><p><a href="https://reacttraining.com/react-router/web/guides/quick-start" target="_blank" rel="noopener">react-router-dom</a></p>
+</li>
+<li><p><a href="http://www.ruanyifeng.com/blog/2016/04/cors.html" target="_blank" rel="noopener">跨域资源共享 CORS 详解 - 阮一峰</a></p>
+</li>
+<li><p><a href="https://github.com/request/request" target="_blank" rel="noopener">Request - Simplified HTTP client</a></p>
+</li>
+<li><p><a href="http://www.w3school.com.cn/cssref/pr_transform.asp" target="_blank" rel="noopener">CSS3 transform 属性</a></p>
+</li>
+<li><p><a href="http://es6.ruanyifeng.com/#docs/promise" target="_blank" rel="noopener">ES6 - Promise规范 - 阮一峰</a></p>
+</li>
+<li><p><a href="http://www.cnblogs.com/liulongbinblogs/p/6731288.html" target="_blank" rel="noopener">刘龙彬 - 博客园 - Javascript中Promise的简单使用</a></p>
+</li>
+<li><p><a href="http://www.jianshu.com/p/063f7e490e9a" target="_blank" rel="noopener">Javascript 中的神器——Promise</a></p>
+</li>
+<li><p><a href="https://developer.mozilla.org/zh-CN/docs/Web/API/Fetch_API" target="_blank" rel="noopener">MDN - Fetch API</a></p>
+</li>
+<li><p><a href="https://developer.mozilla.org/zh-CN/docs/Web/API/Response" target="_blank" rel="noopener">MDN - Response</a></p>
+</li>
+<li><p><a href="https://www.npmjs.com/package/fetch-jsonp" target="_blank" rel="noopener">fetch-jsonp - 支持JSONP的Fetch实现</a></p>
+</li>
+</ul>
+
+  </div>
+  <div>
+  
+  <div class="post-note note-warning copyright" style="margin-top: 42px">
+    <p><span style="font-weight: bold;">作者：</span><a target="_blank" rel="nofollow noopener noreferrer" href="https://xiaobai123-4.github.io/about">MaQisong</a></p>
+    <p><span style="font-weight: bold;">文章链接：</span><a target="_blank" rel="nofollow noopener noreferrer" href="https://xiaobai123-4.github.io/2020/09/03/React/">https://xiaobai123-4.github.io/2020/09/03/React/</a></p>
+    <p><span style="font-weight: bold;">版权声明：</span>本博客所有文章除特别声明外，均采用<a target="_blank" rel="noopener" href="https://creativecommons.org/licenses/by-nc-sa/4.0/deed.zh">CC BY-NC-SA 4.0 协议</a>。转载请注明出处！</p>
+  </div>
+  
+  </div>
+</article>
+<div class="nav">
+  
+  <div class="nav-item-prev">
+    <a href="/2020/09/07/工作总结11-13/" class="nav-link">
+      <i class="iconfont icon-left nav-prev-icon"></i>
+      <div>
+        <div class="nav-label">上一篇</div>
+        
+        <div class="nav-title">工作总结9-7 </div>
+        
+      </div>
+    </a>
+  </div>
+  
+  
+  <div class="nav-item-next">
+    <a href="/2020/08/22/SQL SERVER/" class="nav-link">
+      <div>
+        <div class="nav-label">下一篇</div>
+        
+        <div class="nav-title">SQLserver </div>
+        
+      </div>
+      <i class="iconfont icon-right nav-next-icon"></i>
+    </a>
+  </div>
+  
+</div>
+
+<div class="card card-content toc-card" id="mobiletoc">
+  <div class="toc-header"><i class="iconfont icon-menu" style="padding-right: 2px;"></i>目录</div>
+<ol class="toc"><li class="toc-item toc-level-2"><a class="toc-link" href="#ReactJS简介"><span class="toc-text">ReactJS简介</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#前端三大主流框架"><span class="toc-text">前端三大主流框架</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#React与vue-js的对比"><span class="toc-text">React与vue.js的对比</span></a><ol class="toc-child"><li class="toc-item toc-level-3"><a class="toc-link" href="#组件化方面"><span class="toc-text">组件化方面</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#开发团队方面"><span class="toc-text">开发团队方面</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#社区方面"><span class="toc-text">社区方面</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#移动APP开发体验方面"><span class="toc-text">移动APP开发体验方面</span></a></li></ol></li><li class="toc-item toc-level-2"><a class="toc-link" href="#React中几个核心的概念"><span class="toc-text">React中几个核心的概念</span></a><ol class="toc-child"><li class="toc-item toc-level-3"><a class="toc-link" href="#虚拟DOM（Virtual-Document-Object-Model）"><span class="toc-text">虚拟DOM（Virtual Document Object Model）</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#Diff算法"><span class="toc-text">Diff算法</span></a></li></ol></li><li class="toc-item toc-level-2"><a class="toc-link" href="#React项目的创建"><span class="toc-text">React项目的创建</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#JSX语法"><span class="toc-text">JSX语法</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#React中：第一种创建组件的方式"><span class="toc-text">React中：第一种创建组件的方式</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#第一种基本组件的创建方式"><span class="toc-text">第一种基本组件的创建方式</span></a><ol class="toc-child"><li class="toc-item toc-level-3"><a class="toc-link" href="#父组件向子组件传递数据"><span class="toc-text">父组件向子组件传递数据</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#属性扩散"><span class="toc-text">属性扩散</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#将组件封装到单独的文件中"><span class="toc-text">将组件封装到单独的文件中</span></a></li></ol></li><li class="toc-item toc-level-2"><a class="toc-link" href="#React中：第二种创建组件的方式"><span class="toc-text">React中：第二种创建组件的方式</span></a><ol class="toc-child"><li class="toc-item toc-level-3"><a class="toc-link" href="#了解ES6中class关键字的使用"><span class="toc-text">了解ES6中class关键字的使用</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#基于class关键字创建组件"><span class="toc-text">基于class关键字创建组件</span></a></li></ol></li><li class="toc-item toc-level-2"><a class="toc-link" href="#两种创建组件方式的对比"><span class="toc-text">两种创建组件方式的对比</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#一个小案例，巩固有状态组件和无状态组件的使用"><span class="toc-text">一个小案例，巩固有状态组件和无状态组件的使用</span></a><ol class="toc-child"><li class="toc-item toc-level-3"><a class="toc-link" href="#通过for循环生成多个组件"><span class="toc-text">通过for循环生成多个组件</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#style样式"><span class="toc-text">style样式</span></a></li></ol></li><li class="toc-item toc-level-2"><a class="toc-link" href="#使用CSS模块化"><span class="toc-text">使用CSS模块化</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#组件的生命周期"><span class="toc-text">组件的生命周期</span></a><ol class="toc-child"><li class="toc-item toc-level-3"><a class="toc-link" href="#defaultProps"><span class="toc-text">defaultProps</span></a></li></ol></li><li class="toc-item toc-level-2"><a class="toc-link" href="#通过Counter计数器的小案例-了解生命周期函数"><span class="toc-text">通过Counter计数器的小案例 - 了解生命周期函数</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#组件初始化时生命周期事件总结"><span class="toc-text">组件初始化时生命周期事件总结</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#通过原生的方式获取元素并绑定事件"><span class="toc-text">通过原生的方式获取元素并绑定事件</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#React中使用ref属性获取DOM元素引用"><span class="toc-text">React中使用ref属性获取DOM元素引用</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#使用React中的事件，绑定count自增"><span class="toc-text">使用React中的事件，绑定count自增</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#组件运行中事件的对比"><span class="toc-text">组件运行中事件的对比</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#绑定this并传参的三种方式"><span class="toc-text">绑定this并传参的三种方式</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#绑定文本框与state中的值"><span class="toc-text">绑定文本框与state中的值</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#Node-js设置跨域"><span class="toc-text">Node.js设置跨域</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#Promise规范"><span class="toc-text">Promise规范</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#基于Promise规范的fetch-API的使用"><span class="toc-text">基于Promise规范的fetch API的使用</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#项目结构搭建和布局"><span class="toc-text">项目结构搭建和布局</span></a><ol class="toc-child"><li class="toc-item toc-level-3"><a class="toc-link" href="#实现ANT组件的按需加载"><span class="toc-text">实现ANT组件的按需加载</span></a></li></ol></li><li class="toc-item toc-level-2"><a class="toc-link" href="#使用react-router-dom实现路由跳转"><span class="toc-text">使用react-router-dom实现路由跳转</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#this-prop和Route的关系【重要】"><span class="toc-text">this.prop和Route的关系【重要】</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#总结"><span class="toc-text">总结</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#相关文章"><span class="toc-text">相关文章</span></a></li></ol>
+</div></main>
+          <aside class="left-column">
+            
+            <div class="card card-author">
+              
+<img src="https://s3.ax1x.com/2021/03/04/6VEJaQ.jpg" class="author-img">
+
+<p class="author-name">MaQisong</p>
+<p class="author-description">学习永不止步</p>
+<div class="author-message">
+  <a class="author-posts-count" href="/archives">
+    <span>65</span>
+    <span>文章</span>
+  </a>
+  <a class="author-categories-count" href="/categories">
+    <span>25</span>
+    <span>分类</span>
+  </a>
+  <a class="author-tags-count" href="/tags">
+    <span>38</span>
+    <span>标签</span>
+  </a>
+</div>
+
+            </div>
+            
+            <div class="sticky-tablet">
+  
+  
+  <article class="display-when-two-columns spacer">
+    <div class="card card-content toc-card">
+      <div class="toc-header"><i class="iconfont icon-menu" style="padding-right: 2px;"></i>目录</div>
+<ol class="toc"><li class="toc-item toc-level-2"><a class="toc-link" href="#ReactJS简介"><span class="toc-text">ReactJS简介</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#前端三大主流框架"><span class="toc-text">前端三大主流框架</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#React与vue-js的对比"><span class="toc-text">React与vue.js的对比</span></a><ol class="toc-child"><li class="toc-item toc-level-3"><a class="toc-link" href="#组件化方面"><span class="toc-text">组件化方面</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#开发团队方面"><span class="toc-text">开发团队方面</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#社区方面"><span class="toc-text">社区方面</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#移动APP开发体验方面"><span class="toc-text">移动APP开发体验方面</span></a></li></ol></li><li class="toc-item toc-level-2"><a class="toc-link" href="#React中几个核心的概念"><span class="toc-text">React中几个核心的概念</span></a><ol class="toc-child"><li class="toc-item toc-level-3"><a class="toc-link" href="#虚拟DOM（Virtual-Document-Object-Model）"><span class="toc-text">虚拟DOM（Virtual Document Object Model）</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#Diff算法"><span class="toc-text">Diff算法</span></a></li></ol></li><li class="toc-item toc-level-2"><a class="toc-link" href="#React项目的创建"><span class="toc-text">React项目的创建</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#JSX语法"><span class="toc-text">JSX语法</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#React中：第一种创建组件的方式"><span class="toc-text">React中：第一种创建组件的方式</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#第一种基本组件的创建方式"><span class="toc-text">第一种基本组件的创建方式</span></a><ol class="toc-child"><li class="toc-item toc-level-3"><a class="toc-link" href="#父组件向子组件传递数据"><span class="toc-text">父组件向子组件传递数据</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#属性扩散"><span class="toc-text">属性扩散</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#将组件封装到单独的文件中"><span class="toc-text">将组件封装到单独的文件中</span></a></li></ol></li><li class="toc-item toc-level-2"><a class="toc-link" href="#React中：第二种创建组件的方式"><span class="toc-text">React中：第二种创建组件的方式</span></a><ol class="toc-child"><li class="toc-item toc-level-3"><a class="toc-link" href="#了解ES6中class关键字的使用"><span class="toc-text">了解ES6中class关键字的使用</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#基于class关键字创建组件"><span class="toc-text">基于class关键字创建组件</span></a></li></ol></li><li class="toc-item toc-level-2"><a class="toc-link" href="#两种创建组件方式的对比"><span class="toc-text">两种创建组件方式的对比</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#一个小案例，巩固有状态组件和无状态组件的使用"><span class="toc-text">一个小案例，巩固有状态组件和无状态组件的使用</span></a><ol class="toc-child"><li class="toc-item toc-level-3"><a class="toc-link" href="#通过for循环生成多个组件"><span class="toc-text">通过for循环生成多个组件</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#style样式"><span class="toc-text">style样式</span></a></li></ol></li><li class="toc-item toc-level-2"><a class="toc-link" href="#使用CSS模块化"><span class="toc-text">使用CSS模块化</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#组件的生命周期"><span class="toc-text">组件的生命周期</span></a><ol class="toc-child"><li class="toc-item toc-level-3"><a class="toc-link" href="#defaultProps"><span class="toc-text">defaultProps</span></a></li></ol></li><li class="toc-item toc-level-2"><a class="toc-link" href="#通过Counter计数器的小案例-了解生命周期函数"><span class="toc-text">通过Counter计数器的小案例 - 了解生命周期函数</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#组件初始化时生命周期事件总结"><span class="toc-text">组件初始化时生命周期事件总结</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#通过原生的方式获取元素并绑定事件"><span class="toc-text">通过原生的方式获取元素并绑定事件</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#React中使用ref属性获取DOM元素引用"><span class="toc-text">React中使用ref属性获取DOM元素引用</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#使用React中的事件，绑定count自增"><span class="toc-text">使用React中的事件，绑定count自增</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#组件运行中事件的对比"><span class="toc-text">组件运行中事件的对比</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#绑定this并传参的三种方式"><span class="toc-text">绑定this并传参的三种方式</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#绑定文本框与state中的值"><span class="toc-text">绑定文本框与state中的值</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#Node-js设置跨域"><span class="toc-text">Node.js设置跨域</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#Promise规范"><span class="toc-text">Promise规范</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#基于Promise规范的fetch-API的使用"><span class="toc-text">基于Promise规范的fetch API的使用</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#项目结构搭建和布局"><span class="toc-text">项目结构搭建和布局</span></a><ol class="toc-child"><li class="toc-item toc-level-3"><a class="toc-link" href="#实现ANT组件的按需加载"><span class="toc-text">实现ANT组件的按需加载</span></a></li></ol></li><li class="toc-item toc-level-2"><a class="toc-link" href="#使用react-router-dom实现路由跳转"><span class="toc-text">使用react-router-dom实现路由跳转</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#this-prop和Route的关系【重要】"><span class="toc-text">this.prop和Route的关系【重要】</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#总结"><span class="toc-text">总结</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#相关文章"><span class="toc-text">相关文章</span></a></li></ol>
+    </div>
+  </article>
+  
+  
+  <article class="card card-content categories-widget">
+    <div class="categories-card">
+  <div class="categories-header"><i class="iconfont icon-fenlei" style="padding-right: 2px;"></i>分类</div>
+  <div class="categories-list">
+    
+      <a href="/categories/正则表达式/">
+        <div class="categories-list-item">
+          正则表达式
+          <span class="categories-list-item-badge">1</span>
+        </div>
+      </a>
+    
+      <a href="/categories/ajax/">
+        <div class="categories-list-item">
+          ajax
+          <span class="categories-list-item-badge">1</span>
+        </div>
+      </a>
+    
+      <a href="/categories/CSS/">
+        <div class="categories-list-item">
+          CSS
+          <span class="categories-list-item-badge">3</span>
+        </div>
+      </a>
+    
+      <a href="/categories/ES6/">
+        <div class="categories-list-item">
+          ES6
+          <span class="categories-list-item-badge">1</span>
+        </div>
+      </a>
+    
+      <a href="/categories/css/">
+        <div class="categories-list-item">
+          css
+          <span class="categories-list-item-badge">1</span>
+        </div>
+      </a>
+    
+      <a href="/categories/HTML5/">
+        <div class="categories-list-item">
+          HTML5
+          <span class="categories-list-item-badge">4</span>
+        </div>
+      </a>
+    
+      <a href="/categories/git/">
+        <div class="categories-list-item">
+          git
+          <span class="categories-list-item-badge">1</span>
+        </div>
+      </a>
+    
+      <a href="/categories/Markdown/">
+        <div class="categories-list-item">
+          Markdown
+          <span class="categories-list-item-badge">1</span>
+        </div>
+      </a>
+    
+      <a href="/categories/javascript/">
+        <div class="categories-list-item">
+          javascript
+          <span class="categories-list-item-badge">17</span>
+        </div>
+      </a>
+    
+      <a href="/categories/SqlServer/">
+        <div class="categories-list-item">
+          SqlServer
+          <span class="categories-list-item-badge">1</span>
+        </div>
+      </a>
+    
+      <a href="/categories/bootstrap/">
+        <div class="categories-list-item">
+          bootstrap
+          <span class="categories-list-item-badge">1</span>
+        </div>
+      </a>
+    
+      <a href="/categories/分类/">
+        <div class="categories-list-item">
+          分类
+          <span class="categories-list-item-badge">1</span>
+        </div>
+      </a>
+    
+      <a href="/categories/其他/">
+        <div class="categories-list-item">
+          其他
+          <span class="categories-list-item-badge">1</span>
+        </div>
+      </a>
+    
+      <a href="/categories/Vue/">
+        <div class="categories-list-item">
+          Vue
+          <span class="categories-list-item-badge">10</span>
+        </div>
+      </a>
+    
+      <a href="/categories/HTML/">
+        <div class="categories-list-item">
+          HTML
+          <span class="categories-list-item-badge">2</span>
+        </div>
+      </a>
+    
+      <a href="/categories/ionic/">
+        <div class="categories-list-item">
+          ionic
+          <span class="categories-list-item-badge">2</span>
+        </div>
+      </a>
+    
+      <a href="/categories/javascript/Vue/">
+        <div class="categories-list-item">
+          javascript/Vue
+          <span class="categories-list-item-badge">2</span>
+        </div>
+      </a>
+    
+      <a href="/categories/webpack/">
+        <div class="categories-list-item">
+          webpack
+          <span class="categories-list-item-badge">1</span>
+        </div>
+      </a>
+    
+      <a href="/categories/前端/">
+        <div class="categories-list-item">
+          前端
+          <span class="categories-list-item-badge">1</span>
+        </div>
+      </a>
+    
+      <a href="/categories/NodeJS/">
+        <div class="categories-list-item">
+          NodeJS
+          <span class="categories-list-item-badge">1</span>
+        </div>
+      </a>
+    
+      <a href="/categories/镜寰-工作/">
+        <div class="categories-list-item">
+          镜寰-工作
+          <span class="categories-list-item-badge">10</span>
+        </div>
+      </a>
+    
+      <a href="/categories/html/">
+        <div class="categories-list-item">
+          html
+          <span class="categories-list-item-badge">1</span>
+        </div>
+      </a>
+    
+      <a href="/categories/移动端/">
+        <div class="categories-list-item">
+          移动端
+          <span class="categories-list-item-badge">2</span>
+        </div>
+      </a>
+    
+      <a href="/categories/Vue/前端/">
+        <div class="categories-list-item">
+          Vue/前端
+          <span class="categories-list-item-badge">3</span>
+        </div>
+      </a>
+    
+      <a href="/categories/镜寰-工作/数据库/">
+        <div class="categories-list-item">
+          镜寰-工作/数据库
+          <span class="categories-list-item-badge">1</span>
+        </div>
+      </a>
+    
+  </div>
+</div>
+  </article>
+  
+  <article class="card card-content tags-widget">
+    <div class="tags-card">
+  <div class="tags-header"><i class="iconfont icon-biaoqian" style="padding-right: 2px;"></i>热门标签</div>
+  <div class="tags-list">
+    
+    <a href="/tags/前端/" title="前端"><div class="tags-list-item">前端</div></a>
+    
+    <a href="/tags/html/" title="html"><div class="tags-list-item">html</div></a>
+    
+    <a href="/tags/javascript/" title="javascript"><div class="tags-list-item">javascript</div></a>
+    
+    <a href="/tags/Vue/" title="Vue"><div class="tags-list-item">Vue</div></a>
+    
+    <a href="/tags/工作总结/" title="工作总结"><div class="tags-list-item">工作总结</div></a>
+    
+    <a href="/tags/框架/" title="框架"><div class="tags-list-item">框架</div></a>
+    
+    <a href="/tags/算法/" title="算法"><div class="tags-list-item">算法</div></a>
+    
+    <a href="/tags/笔记/" title="笔记"><div class="tags-list-item">笔记</div></a>
+    
+    <a href="/tags/常见问题/" title="常见问题"><div class="tags-list-item">常见问题</div></a>
+    
+    <a href="/tags/css/" title="css"><div class="tags-list-item">css</div></a>
+    
+    <a href="/tags/移动端/" title="移动端"><div class="tags-list-item">移动端</div></a>
+    
+    <a href="/tags/跨域/" title="跨域"><div class="tags-list-item">跨域</div></a>
+    
+    <a href="/tags/基础/" title="基础"><div class="tags-list-item">基础</div></a>
+    
+    <a href="/tags/规范/" title="规范"><div class="tags-list-item">规范</div></a>
+    
+    <a href="/tags/webpack/" title="webpack"><div class="tags-list-item">webpack</div></a>
+    
+    <a href="/tags/博客/" title="博客"><div class="tags-list-item">博客</div></a>
+    
+  </div>
+</div>
+  </article>
+  
+  
+</div>
+          </aside>
+          <aside class="right-column">
+            <div class="sticky-widescreen">
+  
+  
+  <article class="card card-content toc-card">
+    <div class="toc-header"><i class="iconfont icon-menu" style="padding-right: 2px;"></i>目录</div>
+<ol class="toc"><li class="toc-item toc-level-2"><a class="toc-link" href="#ReactJS简介"><span class="toc-text">ReactJS简介</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#前端三大主流框架"><span class="toc-text">前端三大主流框架</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#React与vue-js的对比"><span class="toc-text">React与vue.js的对比</span></a><ol class="toc-child"><li class="toc-item toc-level-3"><a class="toc-link" href="#组件化方面"><span class="toc-text">组件化方面</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#开发团队方面"><span class="toc-text">开发团队方面</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#社区方面"><span class="toc-text">社区方面</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#移动APP开发体验方面"><span class="toc-text">移动APP开发体验方面</span></a></li></ol></li><li class="toc-item toc-level-2"><a class="toc-link" href="#React中几个核心的概念"><span class="toc-text">React中几个核心的概念</span></a><ol class="toc-child"><li class="toc-item toc-level-3"><a class="toc-link" href="#虚拟DOM（Virtual-Document-Object-Model）"><span class="toc-text">虚拟DOM（Virtual Document Object Model）</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#Diff算法"><span class="toc-text">Diff算法</span></a></li></ol></li><li class="toc-item toc-level-2"><a class="toc-link" href="#React项目的创建"><span class="toc-text">React项目的创建</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#JSX语法"><span class="toc-text">JSX语法</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#React中：第一种创建组件的方式"><span class="toc-text">React中：第一种创建组件的方式</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#第一种基本组件的创建方式"><span class="toc-text">第一种基本组件的创建方式</span></a><ol class="toc-child"><li class="toc-item toc-level-3"><a class="toc-link" href="#父组件向子组件传递数据"><span class="toc-text">父组件向子组件传递数据</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#属性扩散"><span class="toc-text">属性扩散</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#将组件封装到单独的文件中"><span class="toc-text">将组件封装到单独的文件中</span></a></li></ol></li><li class="toc-item toc-level-2"><a class="toc-link" href="#React中：第二种创建组件的方式"><span class="toc-text">React中：第二种创建组件的方式</span></a><ol class="toc-child"><li class="toc-item toc-level-3"><a class="toc-link" href="#了解ES6中class关键字的使用"><span class="toc-text">了解ES6中class关键字的使用</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#基于class关键字创建组件"><span class="toc-text">基于class关键字创建组件</span></a></li></ol></li><li class="toc-item toc-level-2"><a class="toc-link" href="#两种创建组件方式的对比"><span class="toc-text">两种创建组件方式的对比</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#一个小案例，巩固有状态组件和无状态组件的使用"><span class="toc-text">一个小案例，巩固有状态组件和无状态组件的使用</span></a><ol class="toc-child"><li class="toc-item toc-level-3"><a class="toc-link" href="#通过for循环生成多个组件"><span class="toc-text">通过for循环生成多个组件</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#style样式"><span class="toc-text">style样式</span></a></li></ol></li><li class="toc-item toc-level-2"><a class="toc-link" href="#使用CSS模块化"><span class="toc-text">使用CSS模块化</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#组件的生命周期"><span class="toc-text">组件的生命周期</span></a><ol class="toc-child"><li class="toc-item toc-level-3"><a class="toc-link" href="#defaultProps"><span class="toc-text">defaultProps</span></a></li></ol></li><li class="toc-item toc-level-2"><a class="toc-link" href="#通过Counter计数器的小案例-了解生命周期函数"><span class="toc-text">通过Counter计数器的小案例 - 了解生命周期函数</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#组件初始化时生命周期事件总结"><span class="toc-text">组件初始化时生命周期事件总结</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#通过原生的方式获取元素并绑定事件"><span class="toc-text">通过原生的方式获取元素并绑定事件</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#React中使用ref属性获取DOM元素引用"><span class="toc-text">React中使用ref属性获取DOM元素引用</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#使用React中的事件，绑定count自增"><span class="toc-text">使用React中的事件，绑定count自增</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#组件运行中事件的对比"><span class="toc-text">组件运行中事件的对比</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#绑定this并传参的三种方式"><span class="toc-text">绑定this并传参的三种方式</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#绑定文本框与state中的值"><span class="toc-text">绑定文本框与state中的值</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#Node-js设置跨域"><span class="toc-text">Node.js设置跨域</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#Promise规范"><span class="toc-text">Promise规范</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#基于Promise规范的fetch-API的使用"><span class="toc-text">基于Promise规范的fetch API的使用</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#项目结构搭建和布局"><span class="toc-text">项目结构搭建和布局</span></a><ol class="toc-child"><li class="toc-item toc-level-3"><a class="toc-link" href="#实现ANT组件的按需加载"><span class="toc-text">实现ANT组件的按需加载</span></a></li></ol></li><li class="toc-item toc-level-2"><a class="toc-link" href="#使用react-router-dom实现路由跳转"><span class="toc-text">使用react-router-dom实现路由跳转</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#this-prop和Route的关系【重要】"><span class="toc-text">this.prop和Route的关系【重要】</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#总结"><span class="toc-text">总结</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#相关文章"><span class="toc-text">相关文章</span></a></li></ol>
+  </article>
+  
+  
+  <article class="card card-content">
+    <div class="recent-posts-card">
+  <div class="recent-posts-header"><i class="iconfont icon-wenzhang_huaban" style="padding-right: 2px;"></i>最近文章</div>
+  <div class="recent-posts-list">
+    
+      <div class="recent-posts-item">
+        <div class="recent-posts-item-title">2021-03-28</div>
+        <a href="/2021/03/28/vue学习记录4/"><div class="recent-posts-item-content">vue学习记录4</div></a>
+      </div>
+    
+      <div class="recent-posts-item">
+        <div class="recent-posts-item-title">2021-03-27</div>
+        <a href="/2021/03/27/vue学习记录3/"><div class="recent-posts-item-content">vue学习记录3</div></a>
+      </div>
+    
+      <div class="recent-posts-item">
+        <div class="recent-posts-item-title">2021-03-26</div>
+        <a href="/2021/03/26/vue学习记录2/"><div class="recent-posts-item-content">vue学习记录2</div></a>
+      </div>
+    
+      <div class="recent-posts-item">
+        <div class="recent-posts-item-title">2021-03-04</div>
+        <a href="/2021/03/04/vue学习记录1/"><div class="recent-posts-item-content">学习记录1</div></a>
+      </div>
+    
+  </div>
+</div>
+  </article>
+  
+  
+</div>
+          </aside>
+        </div>
+      </div>
+    </div>
+  </div>
+  
+  <footer class="footer">
+  <div class="footer-container">
+    <div>
+      <div class="footer-dsc">
+        <span>Copyright ©
+          
+          2020 -
+          
+          2021
+        </span>
+        &nbsp;
+        <a href="/" class="footer-link">小白的博客 </a>
+      </div>
+    </div>
+
+    
+    <div class="footer-dsc">
+      
+      Powered by
+      <a href="https://hexo.io/" class="footer-link" target="_blank" rel="nofollow noopener noreferrer">&nbsp;Hexo </a>
+      
+      
+      <span>&nbsp;|&nbsp;</span>
+      
+      
+      Theme -
+      <a href="https://github.com/theme-kaze" class="footer-link" target="_blank"
+        rel="nofollow noopener noreferrer">&nbsp;Kaze</a>
+      
+    </div>
+    
+    
+    
+    
+</footer>
+  <a role="button" id="scrollbutton" class="basebutton"  aria-label="回到顶部">
+  <i class="iconfont icon-arrowleft button-icon"></i>
+</a>
+<a role="button" id="menubutton" class="basebutton">
+  <i class="iconfont icon-menu button-icon"></i>
+</a>
+<a role="button" id="popbutton" class="basebutton" aria-label="控制中心">
+  <i class="iconfont icon-expand button-icon"></i>
+</a>
+<a role="button" id="darkbutton" class="basebutton darkwidget" aria-label="夜色模式">
+  <i class="iconfont icon-weather button-icon"></i>
+</a>
+<a role="button" id="searchbutton" class="basebutton searchwidget" aria-label="搜索">
+  <i class="iconfont icon-search button-icon"></i>
+</a>
+
+  
+  
+  
+  <script>
+  var addImgLayout = function () {
+    var img = document.querySelectorAll('.post-content img');
+    var i;
+    for (i = 0; i < img.length; i++) {
+      var wrapper = document.createElement('a');
+      wrapper.setAttribute('href', img[i].getAttribute('data-src'));
+      wrapper.setAttribute('aria-label', 'illustration');
+      wrapper.style.cssText = 'width: 100%; display: flex; justify-content: center;';
+      if (img[i].alt) wrapper.dataset.caption = img[i].alt;
+      wrapper.dataset.nolink = true;
+      img[i].before(wrapper);
+      wrapper.append(img[i]);
+      var divWrap = document.createElement('div');
+      divWrap.classList.add('gallery');
+      wrapper.before(divWrap);
+      divWrap.append(wrapper);
+    }
+    baguetteBox.run('.gallery');
+  }
+</script>
+<script>loadScript("/js/lib/lightbox/baguetteBox.min.js", addImgLayout)</script>
+  
+  
+  
+<script src="/js/main.js"></script>
+
+  
+  
+  <script>
+    var addLazyload = function () {
+      var observer = lozad('.lozad', {
+        load: function (el) {
+          el.srcset = el.getAttribute('data-src');
+        },
+        loaded: function (el) {
+          el.classList.add('loaded');
+        }
+      });
+      observer.observe();
+    }
+  </script>
+  <script>loadScript("/js/lib/lozad.min.js", addLazyload)</script>
+  
+  
+</body>
+
+</html>

@@ -1,0 +1,712 @@
+<!DOCTYPE html>
+<html  lang="zh-CN" >
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport"
+    content="width=device-width, initial-scale=1.0, minimum-scale=1.0">
+  <meta http-equiv="X-UA-Compatible" content="ie=edge">
+  <meta name="theme-color" content="#fff" id="theme-color">
+  <meta name="description" content="学习永不止步">
+  <link rel="icon" href="https://s3.ax1x.com/2021/03/04/6VEJaQ.jpg">
+  <title>AJAX</title>
+  
+  
+  <meta property="og:title" content="AJAX">
+  
+  
+  <meta property="og:url" content="https://xiaobai123-4.github.io/2020/06/13/AJAX/index.html">
+  
+  
+  <meta property="og:img" content="https://s3.ax1x.com/2021/03/04/6VEJaQ.jpg">
+  
+  
+  <meta property="og:img" content="数据交互">
+  
+  
+  <meta property="og:type" content="article">
+  <meta property="og:article:published_time" content="2020-06-13">
+  <meta property="og:article:modified_time" content="2021-03-04">
+  <meta property="og:article:author" content="MaQisong">
+  
+  
+  <meta property="og:article:tag" content="前端">
+  
+  <meta property="og:article:tag" content="javascript">
+  
+  <meta property="og:article:tag" content="ajax">
+  
+  
+  
+  
+  <script>
+    // control reverse button
+    var reverseDarkList = {
+      dark: 'light',
+      light: 'dark'
+    };
+    var themeColor = {
+      dark: '#1c1c1e',
+      light: '#fff'
+    }
+    // get the data of css prefers-color-scheme
+    var getCssMediaQuery = function() {
+      return window.matchMedia('(prefers-color-scheme: dark)').matches ? 'dark' : 'light';
+    };
+    // reverse current darkmode setting function
+    var reverseDarkModeSetting = function() {
+      var setting = localStorage.getItem('user-color-scheme');
+      if(reverseDarkList[setting]) {
+        setting = reverseDarkList[setting];
+      } else if(setting === null) {
+        setting = reverseDarkList[getCssMediaQuery()];
+      } else {
+        return;
+      }
+      localStorage.setItem('user-color-scheme', setting);
+      return setting;
+    };
+    // apply current darkmode setting
+    var setDarkmode = function(mode) {
+      var setting = mode || localStorage.getItem('user-color-scheme');
+      if(setting === getCssMediaQuery()) {
+        document.documentElement.removeAttribute('data-user-color-scheme');
+        localStorage.removeItem('user-color-scheme');
+        document.getElementById('theme-color').content = themeColor[setting];
+      } else if(reverseDarkList[setting]) {
+        document.documentElement.setAttribute('data-user-color-scheme', setting);
+        document.getElementById('theme-color').content = themeColor[setting];
+      } else {
+        document.documentElement.removeAttribute('data-user-color-scheme');
+        localStorage.removeItem('user-color-scheme');
+        document.getElementById('theme-color').content = themeColor[getCssMediaQuery()];
+      }
+    };
+    setDarkmode();
+  </script>
+  <script>
+    function loadScript(url, cb) {
+      var script = document.createElement('script');
+      script.src = url;
+      if (cb) script.onload = cb;
+      script.async = true;
+      document.body.appendChild(script);
+    }
+  </script>
+  
+  <link rel="preload" href="//at.alicdn.com/t/font_1946621_i1kgafibvw.css" as="style" >
+  <link rel="preload" href="//at.alicdn.com/t/font_1952792_89b4ac4k4up.css" as="style" >
+  
+  <link rel="preload" href="/js/lib/lightbox/baguetteBox.min.js" as="script">
+  <link rel="preload" href="/js/lib/lightbox/baguetteBox.min.css" as="style" >
+  
+  
+  <link rel="preload" href="/js/lib/lozad.min.js" as="script">
+  
+  
+  
+  
+  
+  
+  
+  
+<link rel="stylesheet" href="/css/main.css">
+
+  
+  
+<link rel="stylesheet" href="//at.alicdn.com/t/font_1946621_i1kgafibvw.css">
+
+  
+  
+<link rel="stylesheet" href="//at.alicdn.com/t/font_1952792_89b4ac4k4up.css">
+
+  
+  
+<link rel="stylesheet" href="/js/lib/lightbox/baguetteBox.min.css">
+
+  
+  
+<meta name="generator" content="Hexo 4.2.1"></head>
+
+
+<body>
+  <div class="wrapper">
+    
+    <nav class="navbar">
+  <div class="navbar-logo">
+    <span class="navbar-logo-main">
+      
+      <img class="navbar-logo-img" src="https://s3.ax1x.com/2021/03/04/6VEJaQ.jpg" alt="logo">
+      
+      <span class="navbar-logo-dsc">小白的博客</span>
+    </span>
+  </div>
+  <div class="navbar-menu">
+    
+    <a href="/" class="navbar-menu-item">
+    
+    首页
+    
+    </a>
+    
+    <a href="/archives" class="navbar-menu-item">
+    
+    归档
+    
+    </a>
+    
+    <a href="/tags" class="navbar-menu-item">
+    
+    标签
+    
+    </a>
+    
+    <a href="/categories" class="navbar-menu-item">
+    
+    分类
+    
+    </a>
+    
+    <a href="/about" class="navbar-menu-item">
+    
+    关于
+    
+    </a>
+    
+    <a class="navbar-menu-item darknavbar" id="dark"><i class="iconfont icon-weather"></i></a>
+    <a class="navbar-menu-item searchnavbar" id="search"><i class="iconfont icon-search" style="font-size: 1.2rem; font-weight: 400;"></i></a>
+  </div>
+</nav>
+    
+    <div id="local-search" style="display: none;">
+      <input class="navbar-menu-item" id="search-input" placeholder="请输入搜索内容...">
+      <div id="search-content"></div>
+    </div>
+    
+    <div class="section-wrap">
+      <div class="container">
+        <div class="columns">
+          <main class="main-column">
+<article class="card card-content">
+  <header>
+    <h1 class="post-title">
+      AJAX
+    </h1>
+  </header>
+  <div class="post-meta post-show-meta">
+    <time datetime="2020-06-13T02:43:34.000Z">
+      <i class="iconfont icon-calendar" style="margin-right: 2px;"></i>
+      <span>2020-06-13</span>
+    </time>
+    
+    <span class="dot"></span>
+    
+    <a href="/categories/ajax/" class="post-meta-link">ajax</a>
+    
+    
+    
+    <span class="dot"></span>
+    <span>1k 字</span>
+    
+  </div>
+  
+  <div class="post-meta post-show-meta" style="margin-top: -10px;">
+    <div style="display: flex; align-items: center;">
+      <i class="iconfont icon-biaoqian" style="margin-right: 2px; font-size: 1.15rem;"></i>
+      
+      
+        <a href="/tags/前端/" class="post-meta-link">前端</a>
+      
+      
+      <span class="dot"></span>
+      
+        <a href="/tags/javascript/" class="post-meta-link">javascript</a>
+      
+      
+      <span class="dot"></span>
+      
+        <a href="/tags/ajax/" class="post-meta-link">ajax</a>
+      
+    </div>
+  </div>
+  
+  </header>
+  <div id="section" class="post-content">
+    <h1 id="前言"><a href="#前言" class="headerlink" title="前言"></a>前言</h1><p>AJAX也是一门前端入门必学的技术，jquery对其进行了封装，vue中的axios基于Promise的专门发送ajax请求的函数库</p>
+<!--more-->
+
+<h3 id="一、说一下你是如何与后端进行数据交互的"><a href="#一、说一下你是如何与后端进行数据交互的" class="headerlink" title="一、说一下你是如何与后端进行数据交互的"></a>一、说一下你是如何与后端进行数据交互的</h3><p>答：我和后端通过ajax来进行数据交互的，通过统一制定的接口文档，来实现前后端高效开发，如果接口文档不能详细说明，或者接口文档上的参数请求不出数据，我会主动和后端工程师沟通，直到完成跟接口相关的业务开发。当然这其中为了验证一些接口问题，会用到一些辅助工具，比方说，runapi这种在线测试工具</p>
+<h3 id="二、如果后端数据接口没有准备好，你是如何工作的"><a href="#二、如果后端数据接口没有准备好，你是如何工作的" class="headerlink" title="二、如果后端数据接口没有准备好，你是如何工作的"></a>二、如果后端数据接口没有准备好，你是如何工作的</h3><p>答：如果后端接口还没有准备好，我会和后端工程师沟通，通过制定接口返回数据的格式，然后前端通过一些mock数据的工具（上家公司使用的是easymock,贼简单）来批量生成假数据，可以让前端和后端同时开发，而无需等待后端数据接口写好再开发，这样提升项目整体的开发效率</p>
+<h3 id="三、说一下你对ajax的同源策略的理解"><a href="#三、说一下你对ajax的同源策略的理解" class="headerlink" title="三、说一下你对ajax的同源策略的理解"></a>三、说一下你对ajax的同源策略的理解</h3><p>答：ajax同源策略是因为安全的考虑，ajax不允许访问不同域名下的资源即所谓同源策略的意思。</p>
+<h3 id="四、说一下什么情况下会产生跨域及产生跨域的解决方案和实现原理？"><a href="#四、说一下什么情况下会产生跨域及产生跨域的解决方案和实现原理？" class="headerlink" title="四、说一下什么情况下会产生跨域及产生跨域的解决方案和实现原理？"></a>四、说一下什么情况下会产生跨域及产生跨域的解决方案和实现原理？</h3><p>答：产生跨域的情况有：不同协议，不同域名，不同端口以及域名和ip地址的访问都会产生跨域。</p>
+<h3 id="五、ajax交互流程"><a href="#五、ajax交互流程" class="headerlink" title="五、ajax交互流程"></a>五、ajax交互流程</h3><p>1.创建异步对象<br><code>var xhr=new XMLHttpRequest();</code><br>2.创建请求<br><code>xhr.open(method,url,isAsyn);</code><br><code>method</code> 请求的方法,string   “get”<br><code>url</code>  请求的url  string<br><code>isAsyn</code> 是否开启异步  boolean  true 异步,false 同步<br>3.发送请求<br><code>xhr.send(参数);</code><br>如果请求方法有请求主体,参数填请求主体<br>如果请求方法没有请求主体,参数填null或者不填<br>4.接收响应,创建监听</p>
+<pre class="highlight"><span class="line">xhr.onreadystatechange=<span class="function"><span class="keyword">function</span>(<span class="params"></span>)</span>&#123;</span><br><span class="line">  <span class="keyword">if</span>(xhr.readyState==<span class="number">4</span>&amp;&amp;xhr.status==<span class="number">200</span>)&#123;</span><br><span class="line">    <span class="keyword">var</span> result=xhr.responseText;</span><br><span class="line">  &#125;</span><br><span class="line">&#125;</span><br></pre>
+<p>xhr.readyState–&gt;xhr的请求状态<br>0 请求尚未初始化<br>1 已经打开服务器,请求正在发送<br>2 接收响应头信息<br>3 接收响应主体<br>4 接收响应成功</p>
+<h3 id="六、同步和异步的理解"><a href="#六、同步和异步的理解" class="headerlink" title="六、同步和异步的理解"></a>六、同步和异步的理解</h3><p><strong>答：</strong>同步即sync，形象的说就是代码一行行执行，前面代码和请求没有执行完，后面的代码和请求就不会被执行，<br><strong>缺点：</strong>容易导致代码阻塞<br><strong>优点：</strong>程序员容易理解（因为代码从上往下一行行执行，强调顺序）</p>
+<p><strong>异步：</strong>即async,形象的说就是代码可以在当前程序没有执行完，也可以执行后面的代码<br><strong>缺点：</strong>程序员不易理解（因为不是按顺序执行的）<br><strong>优点：</strong>可以解决代码阻塞问题，提升代码执行效率和性能</p>
+<p>异步解决方案主要有三个：</p>
+<ol>
+<li>回调函数</li>
+<li><code>promise</code>（重点掌握）<a href="https://juejin.im/post/6854573212223668232" target="_blank" rel="noopener">Promise详解</a></li>
+<li><code>generator</code>(了解)</li>
+<li><code>async</code>和<code>await</code>重点掌握）<a href="https://juejin.im/post/6844903574242066445" target="_blank" rel="noopener">JavaScript async 和 await</a></li>
+</ol>
+<h3 id="七、ajax缓存如何解决"><a href="#七、ajax缓存如何解决" class="headerlink" title="七、ajax缓存如何解决"></a>七、ajax缓存如何解决</h3><p><strong>答：</strong>通过在文件名后面添加随机数（也称为文件指纹）来实现，主要原理是浏览器对访问过的文件，首先会检测第二次请求的文件url在浏览器是否缓存过，如果缓存过就使用，否则如果是一个新的文件url，则从服务器重新请求</p>
+<h3 id="八、说一下javaScript原生-jQuery-vue-react-小程序ajax与后台交互主要用的什么技术"><a href="#八、说一下javaScript原生-jQuery-vue-react-小程序ajax与后台交互主要用的什么技术" class="headerlink" title="八、说一下javaScript原生,jQuery,vue,react,小程序ajax与后台交互主要用的什么技术"></a>八、说一下javaScript原生,jQuery,vue,react,小程序ajax与后台交互主要用的什么技术</h3><p>答：javaScript原生Ajax：用的是XMLHttpRequest对象<br>jQuery中的Ajax: <code>$.ajax(),$.getJSON(),$.get(),$.post()</code>等<br>vue中的Ajax:<code>vue-resource</code>（vue1.x中用）,axios(主流)<br>微信小程序Ajax:用的是小程序内置的<code>wx.request()</code>写法和jquery的<code>$.ajax()</code>类似，参数url,success,data,method,fail等</p>
+
+  </div>
+  <div>
+  
+  <div class="post-note note-warning copyright" style="margin-top: 42px">
+    <p><span style="font-weight: bold;">作者：</span><a target="_blank" rel="nofollow noopener noreferrer" href="https://xiaobai123-4.github.io/about">MaQisong</a></p>
+    <p><span style="font-weight: bold;">文章链接：</span><a target="_blank" rel="nofollow noopener noreferrer" href="https://xiaobai123-4.github.io/2020/06/13/AJAX/">https://xiaobai123-4.github.io/2020/06/13/AJAX/</a></p>
+    <p><span style="font-weight: bold;">版权声明：</span>本博客所有文章除特别声明外，均采用<a target="_blank" rel="noopener" href="https://creativecommons.org/licenses/by-nc-sa/4.0/deed.zh">CC BY-NC-SA 4.0 协议</a>。转载请注明出处！</p>
+  </div>
+  
+  </div>
+</article>
+<div class="nav">
+  
+  <div class="nav-item-prev">
+    <a href="/2020/06/15/ES6/" class="nav-link">
+      <i class="iconfont icon-left nav-prev-icon"></i>
+      <div>
+        <div class="nav-label">上一篇</div>
+        
+        <div class="nav-title">ES6 </div>
+        
+      </div>
+    </a>
+  </div>
+  
+  
+  <div class="nav-item-next">
+    <a href="/2020/06/12/事件冒泡/" class="nav-link">
+      <div>
+        <div class="nav-label">下一篇</div>
+        
+        <div class="nav-title">事件冒泡 </div>
+        
+      </div>
+      <i class="iconfont icon-right nav-next-icon"></i>
+    </a>
+  </div>
+  
+</div>
+
+<div class="card card-content toc-card" id="mobiletoc">
+  <div class="toc-header"><i class="iconfont icon-menu" style="padding-right: 2px;"></i>目录</div>
+<ol class="toc"><li class="toc-item toc-level-1"><a class="toc-link" href="#前言"><span class="toc-text">前言</span></a><ol class="toc-child"><li class="toc-item toc-level-3"><a class="toc-link" href="#一、说一下你是如何与后端进行数据交互的"><span class="toc-text">一、说一下你是如何与后端进行数据交互的</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#二、如果后端数据接口没有准备好，你是如何工作的"><span class="toc-text">二、如果后端数据接口没有准备好，你是如何工作的</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#三、说一下你对ajax的同源策略的理解"><span class="toc-text">三、说一下你对ajax的同源策略的理解</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#四、说一下什么情况下会产生跨域及产生跨域的解决方案和实现原理？"><span class="toc-text">四、说一下什么情况下会产生跨域及产生跨域的解决方案和实现原理？</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#五、ajax交互流程"><span class="toc-text">五、ajax交互流程</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#六、同步和异步的理解"><span class="toc-text">六、同步和异步的理解</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#七、ajax缓存如何解决"><span class="toc-text">七、ajax缓存如何解决</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#八、说一下javaScript原生-jQuery-vue-react-小程序ajax与后台交互主要用的什么技术"><span class="toc-text">八、说一下javaScript原生,jQuery,vue,react,小程序ajax与后台交互主要用的什么技术</span></a></li></ol></li></ol></li></ol>
+</div></main>
+          <aside class="left-column">
+            
+            <div class="card card-author">
+              
+<img src="https://s3.ax1x.com/2021/03/04/6VEJaQ.jpg" class="author-img">
+
+<p class="author-name">MaQisong</p>
+<p class="author-description">学习永不止步</p>
+<div class="author-message">
+  <a class="author-posts-count" href="/archives">
+    <span>65</span>
+    <span>文章</span>
+  </a>
+  <a class="author-categories-count" href="/categories">
+    <span>25</span>
+    <span>分类</span>
+  </a>
+  <a class="author-tags-count" href="/tags">
+    <span>38</span>
+    <span>标签</span>
+  </a>
+</div>
+
+            </div>
+            
+            <div class="sticky-tablet">
+  
+  
+  <article class="display-when-two-columns spacer">
+    <div class="card card-content toc-card">
+      <div class="toc-header"><i class="iconfont icon-menu" style="padding-right: 2px;"></i>目录</div>
+<ol class="toc"><li class="toc-item toc-level-1"><a class="toc-link" href="#前言"><span class="toc-text">前言</span></a><ol class="toc-child"><li class="toc-item toc-level-3"><a class="toc-link" href="#一、说一下你是如何与后端进行数据交互的"><span class="toc-text">一、说一下你是如何与后端进行数据交互的</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#二、如果后端数据接口没有准备好，你是如何工作的"><span class="toc-text">二、如果后端数据接口没有准备好，你是如何工作的</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#三、说一下你对ajax的同源策略的理解"><span class="toc-text">三、说一下你对ajax的同源策略的理解</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#四、说一下什么情况下会产生跨域及产生跨域的解决方案和实现原理？"><span class="toc-text">四、说一下什么情况下会产生跨域及产生跨域的解决方案和实现原理？</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#五、ajax交互流程"><span class="toc-text">五、ajax交互流程</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#六、同步和异步的理解"><span class="toc-text">六、同步和异步的理解</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#七、ajax缓存如何解决"><span class="toc-text">七、ajax缓存如何解决</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#八、说一下javaScript原生-jQuery-vue-react-小程序ajax与后台交互主要用的什么技术"><span class="toc-text">八、说一下javaScript原生,jQuery,vue,react,小程序ajax与后台交互主要用的什么技术</span></a></li></ol></li></ol></li></ol>
+    </div>
+  </article>
+  
+  
+  <article class="card card-content categories-widget">
+    <div class="categories-card">
+  <div class="categories-header"><i class="iconfont icon-fenlei" style="padding-right: 2px;"></i>分类</div>
+  <div class="categories-list">
+    
+      <a href="/categories/正则表达式/">
+        <div class="categories-list-item">
+          正则表达式
+          <span class="categories-list-item-badge">1</span>
+        </div>
+      </a>
+    
+      <a href="/categories/ajax/">
+        <div class="categories-list-item">
+          ajax
+          <span class="categories-list-item-badge">1</span>
+        </div>
+      </a>
+    
+      <a href="/categories/CSS/">
+        <div class="categories-list-item">
+          CSS
+          <span class="categories-list-item-badge">3</span>
+        </div>
+      </a>
+    
+      <a href="/categories/ES6/">
+        <div class="categories-list-item">
+          ES6
+          <span class="categories-list-item-badge">1</span>
+        </div>
+      </a>
+    
+      <a href="/categories/css/">
+        <div class="categories-list-item">
+          css
+          <span class="categories-list-item-badge">1</span>
+        </div>
+      </a>
+    
+      <a href="/categories/HTML5/">
+        <div class="categories-list-item">
+          HTML5
+          <span class="categories-list-item-badge">4</span>
+        </div>
+      </a>
+    
+      <a href="/categories/git/">
+        <div class="categories-list-item">
+          git
+          <span class="categories-list-item-badge">1</span>
+        </div>
+      </a>
+    
+      <a href="/categories/Markdown/">
+        <div class="categories-list-item">
+          Markdown
+          <span class="categories-list-item-badge">1</span>
+        </div>
+      </a>
+    
+      <a href="/categories/javascript/">
+        <div class="categories-list-item">
+          javascript
+          <span class="categories-list-item-badge">17</span>
+        </div>
+      </a>
+    
+      <a href="/categories/SqlServer/">
+        <div class="categories-list-item">
+          SqlServer
+          <span class="categories-list-item-badge">1</span>
+        </div>
+      </a>
+    
+      <a href="/categories/bootstrap/">
+        <div class="categories-list-item">
+          bootstrap
+          <span class="categories-list-item-badge">1</span>
+        </div>
+      </a>
+    
+      <a href="/categories/分类/">
+        <div class="categories-list-item">
+          分类
+          <span class="categories-list-item-badge">1</span>
+        </div>
+      </a>
+    
+      <a href="/categories/其他/">
+        <div class="categories-list-item">
+          其他
+          <span class="categories-list-item-badge">1</span>
+        </div>
+      </a>
+    
+      <a href="/categories/Vue/">
+        <div class="categories-list-item">
+          Vue
+          <span class="categories-list-item-badge">10</span>
+        </div>
+      </a>
+    
+      <a href="/categories/HTML/">
+        <div class="categories-list-item">
+          HTML
+          <span class="categories-list-item-badge">2</span>
+        </div>
+      </a>
+    
+      <a href="/categories/ionic/">
+        <div class="categories-list-item">
+          ionic
+          <span class="categories-list-item-badge">2</span>
+        </div>
+      </a>
+    
+      <a href="/categories/javascript/Vue/">
+        <div class="categories-list-item">
+          javascript/Vue
+          <span class="categories-list-item-badge">2</span>
+        </div>
+      </a>
+    
+      <a href="/categories/webpack/">
+        <div class="categories-list-item">
+          webpack
+          <span class="categories-list-item-badge">1</span>
+        </div>
+      </a>
+    
+      <a href="/categories/前端/">
+        <div class="categories-list-item">
+          前端
+          <span class="categories-list-item-badge">1</span>
+        </div>
+      </a>
+    
+      <a href="/categories/NodeJS/">
+        <div class="categories-list-item">
+          NodeJS
+          <span class="categories-list-item-badge">1</span>
+        </div>
+      </a>
+    
+      <a href="/categories/镜寰-工作/">
+        <div class="categories-list-item">
+          镜寰-工作
+          <span class="categories-list-item-badge">10</span>
+        </div>
+      </a>
+    
+      <a href="/categories/html/">
+        <div class="categories-list-item">
+          html
+          <span class="categories-list-item-badge">1</span>
+        </div>
+      </a>
+    
+      <a href="/categories/移动端/">
+        <div class="categories-list-item">
+          移动端
+          <span class="categories-list-item-badge">2</span>
+        </div>
+      </a>
+    
+      <a href="/categories/Vue/前端/">
+        <div class="categories-list-item">
+          Vue/前端
+          <span class="categories-list-item-badge">3</span>
+        </div>
+      </a>
+    
+      <a href="/categories/镜寰-工作/数据库/">
+        <div class="categories-list-item">
+          镜寰-工作/数据库
+          <span class="categories-list-item-badge">1</span>
+        </div>
+      </a>
+    
+  </div>
+</div>
+  </article>
+  
+  <article class="card card-content tags-widget">
+    <div class="tags-card">
+  <div class="tags-header"><i class="iconfont icon-biaoqian" style="padding-right: 2px;"></i>热门标签</div>
+  <div class="tags-list">
+    
+    <a href="/tags/前端/" title="前端"><div class="tags-list-item">前端</div></a>
+    
+    <a href="/tags/html/" title="html"><div class="tags-list-item">html</div></a>
+    
+    <a href="/tags/javascript/" title="javascript"><div class="tags-list-item">javascript</div></a>
+    
+    <a href="/tags/Vue/" title="Vue"><div class="tags-list-item">Vue</div></a>
+    
+    <a href="/tags/工作总结/" title="工作总结"><div class="tags-list-item">工作总结</div></a>
+    
+    <a href="/tags/框架/" title="框架"><div class="tags-list-item">框架</div></a>
+    
+    <a href="/tags/算法/" title="算法"><div class="tags-list-item">算法</div></a>
+    
+    <a href="/tags/笔记/" title="笔记"><div class="tags-list-item">笔记</div></a>
+    
+    <a href="/tags/常见问题/" title="常见问题"><div class="tags-list-item">常见问题</div></a>
+    
+    <a href="/tags/css/" title="css"><div class="tags-list-item">css</div></a>
+    
+    <a href="/tags/移动端/" title="移动端"><div class="tags-list-item">移动端</div></a>
+    
+    <a href="/tags/跨域/" title="跨域"><div class="tags-list-item">跨域</div></a>
+    
+    <a href="/tags/基础/" title="基础"><div class="tags-list-item">基础</div></a>
+    
+    <a href="/tags/规范/" title="规范"><div class="tags-list-item">规范</div></a>
+    
+    <a href="/tags/webpack/" title="webpack"><div class="tags-list-item">webpack</div></a>
+    
+    <a href="/tags/博客/" title="博客"><div class="tags-list-item">博客</div></a>
+    
+  </div>
+</div>
+  </article>
+  
+  
+</div>
+          </aside>
+          <aside class="right-column">
+            <div class="sticky-widescreen">
+  
+  
+  <article class="card card-content toc-card">
+    <div class="toc-header"><i class="iconfont icon-menu" style="padding-right: 2px;"></i>目录</div>
+<ol class="toc"><li class="toc-item toc-level-1"><a class="toc-link" href="#前言"><span class="toc-text">前言</span></a><ol class="toc-child"><li class="toc-item toc-level-3"><a class="toc-link" href="#一、说一下你是如何与后端进行数据交互的"><span class="toc-text">一、说一下你是如何与后端进行数据交互的</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#二、如果后端数据接口没有准备好，你是如何工作的"><span class="toc-text">二、如果后端数据接口没有准备好，你是如何工作的</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#三、说一下你对ajax的同源策略的理解"><span class="toc-text">三、说一下你对ajax的同源策略的理解</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#四、说一下什么情况下会产生跨域及产生跨域的解决方案和实现原理？"><span class="toc-text">四、说一下什么情况下会产生跨域及产生跨域的解决方案和实现原理？</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#五、ajax交互流程"><span class="toc-text">五、ajax交互流程</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#六、同步和异步的理解"><span class="toc-text">六、同步和异步的理解</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#七、ajax缓存如何解决"><span class="toc-text">七、ajax缓存如何解决</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#八、说一下javaScript原生-jQuery-vue-react-小程序ajax与后台交互主要用的什么技术"><span class="toc-text">八、说一下javaScript原生,jQuery,vue,react,小程序ajax与后台交互主要用的什么技术</span></a></li></ol></li></ol></li></ol>
+  </article>
+  
+  
+  <article class="card card-content">
+    <div class="recent-posts-card">
+  <div class="recent-posts-header"><i class="iconfont icon-wenzhang_huaban" style="padding-right: 2px;"></i>最近文章</div>
+  <div class="recent-posts-list">
+    
+      <div class="recent-posts-item">
+        <div class="recent-posts-item-title">2021-03-28</div>
+        <a href="/2021/03/28/vue学习记录4/"><div class="recent-posts-item-content">vue学习记录4</div></a>
+      </div>
+    
+      <div class="recent-posts-item">
+        <div class="recent-posts-item-title">2021-03-27</div>
+        <a href="/2021/03/27/vue学习记录3/"><div class="recent-posts-item-content">vue学习记录3</div></a>
+      </div>
+    
+      <div class="recent-posts-item">
+        <div class="recent-posts-item-title">2021-03-26</div>
+        <a href="/2021/03/26/vue学习记录2/"><div class="recent-posts-item-content">vue学习记录2</div></a>
+      </div>
+    
+      <div class="recent-posts-item">
+        <div class="recent-posts-item-title">2021-03-04</div>
+        <a href="/2021/03/04/vue学习记录1/"><div class="recent-posts-item-content">学习记录1</div></a>
+      </div>
+    
+  </div>
+</div>
+  </article>
+  
+  
+</div>
+          </aside>
+        </div>
+      </div>
+    </div>
+  </div>
+  
+  <footer class="footer">
+  <div class="footer-container">
+    <div>
+      <div class="footer-dsc">
+        <span>Copyright ©
+          
+          2020 -
+          
+          2021
+        </span>
+        &nbsp;
+        <a href="/" class="footer-link">小白的博客 </a>
+      </div>
+    </div>
+
+    
+    <div class="footer-dsc">
+      
+      Powered by
+      <a href="https://hexo.io/" class="footer-link" target="_blank" rel="nofollow noopener noreferrer">&nbsp;Hexo </a>
+      
+      
+      <span>&nbsp;|&nbsp;</span>
+      
+      
+      Theme -
+      <a href="https://github.com/theme-kaze" class="footer-link" target="_blank"
+        rel="nofollow noopener noreferrer">&nbsp;Kaze</a>
+      
+    </div>
+    
+    
+    
+    
+</footer>
+  <a role="button" id="scrollbutton" class="basebutton"  aria-label="回到顶部">
+  <i class="iconfont icon-arrowleft button-icon"></i>
+</a>
+<a role="button" id="menubutton" class="basebutton">
+  <i class="iconfont icon-menu button-icon"></i>
+</a>
+<a role="button" id="popbutton" class="basebutton" aria-label="控制中心">
+  <i class="iconfont icon-expand button-icon"></i>
+</a>
+<a role="button" id="darkbutton" class="basebutton darkwidget" aria-label="夜色模式">
+  <i class="iconfont icon-weather button-icon"></i>
+</a>
+<a role="button" id="searchbutton" class="basebutton searchwidget" aria-label="搜索">
+  <i class="iconfont icon-search button-icon"></i>
+</a>
+
+  
+  
+  
+  <script>
+  var addImgLayout = function () {
+    var img = document.querySelectorAll('.post-content img');
+    var i;
+    for (i = 0; i < img.length; i++) {
+      var wrapper = document.createElement('a');
+      wrapper.setAttribute('href', img[i].getAttribute('data-src'));
+      wrapper.setAttribute('aria-label', 'illustration');
+      wrapper.style.cssText = 'width: 100%; display: flex; justify-content: center;';
+      if (img[i].alt) wrapper.dataset.caption = img[i].alt;
+      wrapper.dataset.nolink = true;
+      img[i].before(wrapper);
+      wrapper.append(img[i]);
+      var divWrap = document.createElement('div');
+      divWrap.classList.add('gallery');
+      wrapper.before(divWrap);
+      divWrap.append(wrapper);
+    }
+    baguetteBox.run('.gallery');
+  }
+</script>
+<script>loadScript("/js/lib/lightbox/baguetteBox.min.js", addImgLayout)</script>
+  
+  
+  
+<script src="/js/main.js"></script>
+
+  
+  
+  <script>
+    var addLazyload = function () {
+      var observer = lozad('.lozad', {
+        load: function (el) {
+          el.srcset = el.getAttribute('data-src');
+        },
+        loaded: function (el) {
+          el.classList.add('loaded');
+        }
+      });
+      observer.observe();
+    }
+  </script>
+  <script>loadScript("/js/lib/lozad.min.js", addLazyload)</script>
+  
+  
+</body>
+
+</html>
