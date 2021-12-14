@@ -1,0 +1,562 @@
+<!DOCTYPE html>
+<html>
+<meta  lang="zh-CN" >
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport"
+    content="width=device-width, user-scalable=no, initial-scale=1.0, maximum-scale=1.0, minimum-scale=1.0">
+  <meta http-equiv="X-UA-Compatible" content="ie=edge">
+  <meta name="theme-color" content="#fff" id="theme-color">
+  <link rel="icon" href="https://s4.ax1x.com/2021/12/14/oxgQxg.jpg">
+  <title>学习永不止步</title>
+  <script>
+    // control reverse button
+    var reverseDarkList = {
+      dark: 'light',
+      light: 'dark'
+    };
+    var themeColor = {
+      dark: '#1c1c1e',
+      light: '#fff'
+    }
+    // get the data of css prefers-color-scheme
+    var getCssMediaQuery = function() {
+      return window.matchMedia('(prefers-color-scheme: dark)').matches ? 'dark' : 'light';
+    };
+    // reverse current darkmode setting function
+    var reverseDarkModeSetting = function() {
+      var setting = localStorage.getItem('user-color-scheme');
+      if(reverseDarkList[setting]) {
+        setting = reverseDarkList[setting];
+      } else if(setting === null) {
+        setting = reverseDarkList[getCssMediaQuery()];
+      } else {
+        return;
+      }
+      localStorage.setItem('user-color-scheme', setting);
+      return setting;
+    };
+    // apply current darkmode setting
+    var setDarkmode = function(mode) {
+      var setting = mode || localStorage.getItem('user-color-scheme');
+      if(setting === getCssMediaQuery()) {
+        document.documentElement.removeAttribute('data-user-color-scheme');
+        localStorage.removeItem('user-color-scheme');
+        document.getElementById('theme-color').content = themeColor[setting];
+      } else if(reverseDarkList[setting]) {
+        document.documentElement.setAttribute('data-user-color-scheme', setting);
+        document.getElementById('theme-color').content = themeColor[setting];
+      } else {
+        document.documentElement.removeAttribute('data-user-color-scheme');
+        localStorage.removeItem('user-color-scheme');
+        document.getElementById('theme-color').content = themeColor[getCssMediaQuery()];
+      }
+    };
+    setDarkmode();
+  </script>
+  <script>
+    function loadScript(url, cb) {
+      var script = document.createElement('script');
+      script.src = url;
+      if (cb) script.onload = cb;
+      script.async = true;
+      document.body.appendChild(script);
+    }
+  </script>
+  
+  <link rel="preload" href="//at.alicdn.com/t/font_1946621_vpj3dq9ceqa.css" as="style" >
+  <link rel="preload" href="//at.alicdn.com/t/font_1952792_89b4ac4k4up.css" as="style" >
+  
+  <link rel="preload" href="//cdn.jsdelivr.net/npm/fslightbox@3.1.0/index.min.js" as="script">
+  
+  
+  <link rel="preload" href="/js/lib/lozad.min.js" as="script">
+  
+  
+  
+  
+  
+  
+  
+  
+<link rel="stylesheet" href="/css/main.css">
+
+  
+  
+<link rel="stylesheet" href="//at.alicdn.com/t/font_1946621_vpj3dq9ceqa.css">
+
+  
+  
+<link rel="stylesheet" href="//at.alicdn.com/t/font_1952792_89b4ac4k4up.css">
+
+  
+  
+  
+<meta name="generator" content="Hexo 5.4.0"></head>
+
+
+<body>
+  <div class="wrapper">
+    
+    <nav class="navbar">
+  <div class="navbar-logo">
+    <span class="navbar-logo-main">
+      
+      <img class="navbar-logo-img" src="https://s4.ax1x.com/2021/12/14/oxgQxg.jpg">
+      
+      <span class="navbar-logo-dsc">学习永不止步</span>
+    </span>
+  </div>
+  <div class="navbar-menu">
+    
+    <a href="/" class="navbar-menu-item">首页 </a>
+    
+    <a href="/archives" class="navbar-menu-item">归档 </a>
+    
+    <a href="/tags" class="navbar-menu-item">标签 </a>
+    
+    <a href="/categories" class="navbar-menu-item">分类 </a>
+    
+    <a href="/links" class="navbar-menu-item">友链 </a>
+    
+    <a class="navbar-menu-item darknavbar" id="dark"><i class="iconfont icon-weather"></i></a>
+  </div>
+</nav>
+    
+    <div class="section-wrap">
+      <div class="container">
+        <div class="columns">
+          <main class="main-column">
+<article class="card card-content">
+  <header>
+    <h1 class="post-title">
+      ES6
+    </h1>
+  </header>
+  <div class="post-meta post-show-meta">
+    <time datetime="2020-06-15T00:43:34.000Z" style="display: flex; align-items: center;">
+      <i class="iconfont icon-calendar" style="margin-right: 2px;"></i>
+      <span>2020-06-15</span>
+    </time>
+    
+    <span class="dot"></span>
+    
+    <a href="/categories/ES6/" class="post-meta-link">ES6</a>
+    
+    
+    
+    <span class="dot"></span>
+    <span>1.4k 字</span>
+    
+  </div>
+  
+  <div class="post-meta post-show-meta" style="margin-top: -10px;">
+    <div style="display: flex; align-items: center;">
+      <i class="iconfont icon-biaoqian" style="margin-right: 2px; font-size: 1.15rem;"></i>
+      
+      
+        <a href="/tags/前端/" class="post-meta-link">前端</a>
+      
+      
+      <span class="dot"></span>
+      
+        <a href="/tags/html/" class="post-meta-link">html</a>
+      
+      
+      <span class="dot"></span>
+      
+        <a href="/tags/javascript/" class="post-meta-link">javascript</a>
+      
+    </div>
+  </div>
+  
+  </header>
+  <div id="section" class="post-content">
+    <p>摘自<a target="_blank" rel="noopener" href="https://www.yuque.com/ostwind/es6">ECMAScript 6入门</a></p>
+<!--more-->
+
+<h2 id="let"><a href="#let" class="headerlink" title="let"></a>let</h2><blockquote>
+<p>引入：块级作用域、变量提升、不允许重复命名、暂时性死区</p>
+</blockquote>
+<h3 id="不存在变量提升"><a href="#不存在变量提升" class="headerlink" title="不存在变量提升"></a>不存在变量提升</h3><p>var命令会发生”变量提升“现象，即变量可以在声明之前使用，值为undefined。按照一般的逻辑，变量应该在声明语句之后才可以使用。为了纠正这种现象，let命令改变了语法行为，它所声明的变量一定要在声明后使用，否则报错。</p>
+<pre class="highlight"><span class="line"><span class="comment">// var 的情况</span></span><br><span class="line"><span class="built_in">console</span>.log(foo); <span class="comment">// 输出undefined</span></span><br><span class="line"><span class="keyword">var</span> foo = <span class="number">2</span>;</span><br><span class="line"></span><br><span class="line"><span class="comment">// let 的情况</span></span><br><span class="line"><span class="built_in">console</span>.log(bar); <span class="comment">// 报错ReferenceError</span></span><br><span class="line"><span class="keyword">let</span> bar = <span class="number">2</span>;</span><br></pre>
+<h3 id="暂时性死区"><a href="#暂时性死区" class="headerlink" title="暂时性死区"></a>暂时性死区</h3><p>只要块级作用域内存在let命令，它所声明的变量就“绑定”（binding）这个区域，不再受外部的影响。</p>
+<pre class="highlight"><span class="line"><span class="keyword">if</span> (<span class="literal">true</span>) &#123;</span><br><span class="line">  <span class="comment">// TDZ开始</span></span><br><span class="line">  tmp = <span class="string">&#x27;abc&#x27;</span>; <span class="comment">// ReferenceError</span></span><br><span class="line">  <span class="built_in">console</span>.log(tmp); <span class="comment">// ReferenceError</span></span><br><span class="line"></span><br><span class="line">  <span class="keyword">let</span> tmp; <span class="comment">// TDZ结束</span></span><br><span class="line">  <span class="built_in">console</span>.log(tmp); <span class="comment">// undefined</span></span><br><span class="line"></span><br><span class="line">  tmp = <span class="number">123</span>;</span><br><span class="line">  <span class="built_in">console</span>.log(tmp); <span class="comment">// 123</span></span><br><span class="line">&#125;</span><br></pre>
+<h3 id="不允许重复声明"><a href="#不允许重复声明" class="headerlink" title="不允许重复声明"></a>不允许重复声明</h3><p>let不允许在相同作用域内，重复声明同一个变量。</p>
+<pre class="highlight"><span class="line"><span class="comment">// 报错</span></span><br><span class="line"><span class="function"><span class="keyword">function</span> <span class="title">func</span>(<span class="params"></span>) </span>&#123;</span><br><span class="line">  <span class="keyword">let</span> a = <span class="number">10</span>;</span><br><span class="line">  <span class="keyword">var</span> a = <span class="number">1</span>;</span><br><span class="line">&#125;</span><br><span class="line"><span class="comment">// 报错</span></span><br><span class="line"><span class="function"><span class="keyword">function</span> <span class="title">func</span>(<span class="params"></span>) </span>&#123;</span><br><span class="line">  <span class="keyword">let</span> a = <span class="number">10</span>;</span><br><span class="line">  <span class="keyword">let</span> a = <span class="number">1</span>;</span><br><span class="line">&#125;</span><br></pre>
+<p>因此，不能在函数内部重新声明参数。</p>
+<pre class="highlight"><span class="line"><span class="function"><span class="keyword">function</span> <span class="title">func</span>(<span class="params">arg</span>) </span>&#123;</span><br><span class="line">  <span class="keyword">let</span> arg; <span class="comment">// 报错</span></span><br><span class="line">&#125;</span><br><span class="line"><span class="function"><span class="keyword">function</span> <span class="title">func</span>(<span class="params">arg</span>) </span>&#123;</span><br><span class="line">  &#123;</span><br><span class="line">    <span class="keyword">let</span> arg; <span class="comment">// 不报错</span></span><br><span class="line">  &#125;</span><br><span class="line">&#125;</span><br></pre>
+<h3 id="块级作用域"><a href="#块级作用域" class="headerlink" title="块级作用域"></a>块级作用域</h3><p>ES5 只有全局作用域和函数作用域，没有块级作用域。<br>let实际上为 JavaScript 新增了块级作用域。</p>
+<pre class="highlight"><span class="line"><span class="function"><span class="keyword">function</span> <span class="title">f1</span>(<span class="params"></span>) </span>&#123;</span><br><span class="line">  <span class="keyword">let</span> n = <span class="number">5</span>;</span><br><span class="line">  <span class="keyword">if</span> (<span class="literal">true</span>) &#123;</span><br><span class="line">    <span class="keyword">let</span> n = <span class="number">10</span>;</span><br><span class="line">  &#125;</span><br><span class="line">  <span class="built_in">console</span>.log(n); <span class="comment">// 5</span></span><br><span class="line">&#125;</span><br></pre>
+<h2 id="const"><a href="#const" class="headerlink" title="const"></a>const</h2><p>const声明一个只读的常量。一旦声明，常量的值就不能改变。也不存在变量提升</p>
+<pre class="highlight"><span class="line"><span class="keyword">const</span> PI = <span class="number">3.1415</span>;</span><br><span class="line">PI <span class="comment">// 3.1415</span></span><br><span class="line">PI = <span class="number">3</span>;</span><br><span class="line"><span class="comment">// TypeError: Assignment to constant variable.</span></span><br></pre>
+<h2 id="数组API、对象API、参数结构"><a href="#数组API、对象API、参数结构" class="headerlink" title="数组API、对象API、参数结构"></a>数组API、对象API、参数结构</h2><pre class="highlight"><span class="line"><span class="meta">&lt;!DOCTYPE <span class="meta-keyword">html</span>&gt;</span></span><br><span class="line"><span class="tag">&lt;<span class="name">html</span> <span class="attr">lang</span>=<span class="string">&quot;en&quot;</span>&gt;</span></span><br><span class="line"></span><br><span class="line"><span class="tag">&lt;<span class="name">head</span>&gt;</span></span><br><span class="line">  <span class="tag">&lt;<span class="name">meta</span> <span class="attr">charset</span>=<span class="string">&quot;UTF-8&quot;</span>&gt;</span></span><br><span class="line">  <span class="tag">&lt;<span class="name">meta</span> <span class="attr">name</span>=<span class="string">&quot;viewport&quot;</span> <span class="attr">content</span>=<span class="string">&quot;width=device-width, initial-scale=1.0&quot;</span>&gt;</span></span><br><span class="line">  <span class="tag">&lt;<span class="name">title</span>&gt;</span>ES6<span class="tag">&lt;/<span class="name">title</span>&gt;</span></span><br><span class="line"><span class="tag">&lt;/<span class="name">head</span>&gt;</span></span><br><span class="line"></span><br><span class="line"><span class="tag">&lt;<span class="name">body</span>&gt;</span></span><br><span class="line">  <span class="tag">&lt;<span class="name">script</span>&gt;</span><span class="javascript"></span></span><br><span class="line"><span class="javascript">    <span class="comment">// 剩余函数</span></span></span><br><span class="line"><span class="javascript">    <span class="comment">// 打散数组</span></span></span><br><span class="line"><span class="javascript">    <span class="keyword">let</span> arr = [<span class="number">1</span>, <span class="number">2</span>, <span class="number">3</span>, <span class="number">4</span>, <span class="number">5</span>, <span class="number">5</span>, <span class="number">6</span>]</span></span><br><span class="line"><span class="javascript">    <span class="built_in">console</span>.log(...arr)</span></span><br><span class="line"><span class="javascript">    <span class="built_in">console</span>.log(<span class="built_in">Math</span>.max.apply(<span class="literal">null</span>, arr))</span></span><br><span class="line"><span class="javascript">    <span class="comment">// 添加元素</span></span></span><br><span class="line"><span class="javascript">    <span class="function"><span class="keyword">function</span> <span class="title">add</span>(<span class="params">...arr</span>)</span>&#123;</span></span><br><span class="line"><span class="javascript">      <span class="keyword">let</span> result=arr.reduce(</span></span><br><span class="line"><span class="javascript">        <span class="function">(<span class="params">prev,elem</span>)=&gt;</span>prev+elem,<span class="number">0</span></span></span><br><span class="line"><span class="javascript">      )</span></span><br><span class="line"><span class="javascript">      <span class="built_in">console</span>.log(<span class="string">`和为<span class="subst">$&#123;result&#125;</span>`</span>)</span></span><br><span class="line"><span class="javascript">    &#125;</span></span><br><span class="line"><span class="javascript">    add(<span class="number">1</span>,<span class="number">2</span>,<span class="number">3</span>)</span></span><br><span class="line"><span class="javascript">    <span class="comment">// 拼接数组</span></span></span><br><span class="line"><span class="javascript">    <span class="keyword">let</span> arr1=[<span class="number">0</span>,<span class="number">1</span>,<span class="number">2</span>,<span class="number">3</span>]</span></span><br><span class="line"><span class="javascript">    <span class="keyword">let</span> arr2=[<span class="number">4</span>,<span class="number">5</span>,<span class="number">6</span>,<span class="number">7</span>]</span></span><br><span class="line"><span class="javascript">    <span class="comment">// let arr3=[...arr1,...arr2,8,9,10,11]</span></span></span><br><span class="line"><span class="javascript">    <span class="keyword">let</span> arr3=arr1.concat(arr2,<span class="number">8</span>,<span class="number">9</span>,<span class="number">10</span>,<span class="number">11</span>)</span></span><br><span class="line"><span class="javascript">    <span class="built_in">console</span>.log(arr3)</span></span><br><span class="line"><span class="javascript"></span></span><br><span class="line"><span class="javascript">    <span class="comment">// 拼接对象</span></span></span><br><span class="line"><span class="javascript">    <span class="keyword">let</span> obj1=&#123;<span class="attr">a</span>:<span class="number">1</span>,<span class="attr">b</span>:<span class="number">2</span>&#125;</span></span><br><span class="line"><span class="javascript">    <span class="keyword">let</span> obj2=&#123;<span class="attr">x</span>:<span class="number">3</span>,<span class="attr">y</span>:<span class="number">4</span>&#125;</span></span><br><span class="line"><span class="javascript">    <span class="comment">// let obj3=&#123;...obj1,...obj2&#125;</span></span></span><br><span class="line"><span class="javascript">    <span class="keyword">let</span> obj3=<span class="built_in">Object</span>.assign(obj1,obj2)</span></span><br><span class="line"><span class="javascript">    <span class="built_in">console</span>.log(obj3)</span></span><br><span class="line"><span class="javascript"></span></span><br><span class="line"><span class="javascript">    <span class="comment">// 参数解构</span></span></span><br><span class="line"><span class="javascript">    <span class="function"><span class="keyword">function</span> <span class="title">order</span>(<span class="params">&#123;zs=<span class="string">&quot;鸡腿&quot;</span>,xc=<span class="string">&quot;薯条&quot;</span>,yl=<span class="string">&quot;可乐&quot;</span>&#125;</span>)</span>&#123;</span></span><br><span class="line"><span class="javascript">      <span class="built_in">console</span>.log(<span class="string">`您的订单：主食：<span class="subst">$&#123;zs&#125;</span>，小吃：<span class="subst">$&#123;xc&#125;</span>，饮料：<span class="subst">$&#123;yl&#125;</span>`</span>)</span></span><br><span class="line"><span class="javascript">    &#125;</span></span><br><span class="line"><span class="javascript">    order(&#123;<span class="attr">yl</span>:<span class="string">&quot;橙汁&quot;</span>&#125;)</span></span><br><span class="line"><span class="javascript">    order(&#123;<span class="attr">zs</span>:<span class="string">&quot;汉堡包&quot;</span>&#125;)</span></span><br><span class="line"><span class="javascript">  </span><span class="tag">&lt;/<span class="name">script</span>&gt;</span></span><br><span class="line"><span class="tag">&lt;/<span class="name">body</span>&gt;</span></span><br><span class="line"><span class="tag">&lt;/<span class="name">html</span>&gt;</span></span><br></pre>
+<h2 id="Class"><a href="#Class" class="headerlink" title="Class"></a>Class</h2><pre class="highlight"><span class="line"><span class="class"><span class="keyword">class</span> <span class="title">Student</span> </span>&#123;</span><br><span class="line">    className=<span class="string">&quot;初一二班&quot;</span></span><br><span class="line"><span class="comment">//构造函数</span></span><br><span class="line"><span class="function"><span class="title">constructor</span>(<span class="params">sname, age</span>)</span> &#123;</span><br><span class="line">    <span class="built_in">this</span>.sname = sname;</span><br><span class="line">    <span class="built_in">this</span>.age = age;</span><br><span class="line">&#125;</span><br><span class="line"><span class="function"><span class="title">intr</span>(<span class="params"></span>)</span> &#123;</span><br><span class="line">    <span class="built_in">console</span>.log(<span class="string">`I&#x27;m <span class="subst">$&#123;<span class="built_in">this</span>.sname&#125;</span>,I&#x27;m <span class="subst">$&#123;<span class="built_in">this</span>.age&#125;</span>`</span>)</span><br><span class="line">&#125;</span><br><span class="line">&#125;</span><br><span class="line"><span class="keyword">var</span> lilei = <span class="keyword">new</span> Student(<span class="string">&quot;Li Lei&quot;</span>, <span class="number">11</span>)</span><br><span class="line"><span class="built_in">console</span>.log(lilei)</span><br><span class="line">lilei.intr()</span><br></pre>
+<p>构造函数的prototype属性，在 ES6 的“类”上面继续存在。事实上，类的所有方法都定义在类的prototype属性上面。</p>
+<pre class="highlight"><span class="line"><span class="class"><span class="keyword">class</span> <span class="title">Point</span> </span>&#123;</span><br><span class="line">  <span class="function"><span class="title">constructor</span>(<span class="params"></span>)</span> &#123;</span><br><span class="line">    <span class="comment">// ...</span></span><br><span class="line">  &#125;</span><br><span class="line">  <span class="function"><span class="title">toString</span>(<span class="params"></span>)</span> &#123;</span><br><span class="line">    <span class="comment">// ...</span></span><br><span class="line">  &#125;</span><br><span class="line">  <span class="function"><span class="title">toValue</span>(<span class="params"></span>)</span> &#123;</span><br><span class="line">    <span class="comment">// ...</span></span><br><span class="line">  &#125;</span><br><span class="line">&#125;</span><br><span class="line"><span class="comment">// 等同于</span></span><br><span class="line">Point.prototype = &#123;</span><br><span class="line">  <span class="function"><span class="title">constructor</span>(<span class="params"></span>)</span> &#123;&#125;,</span><br><span class="line">  <span class="function"><span class="title">toString</span>(<span class="params"></span>)</span> &#123;&#125;,</span><br><span class="line">  <span class="function"><span class="title">toValue</span>(<span class="params"></span>)</span> &#123;&#125;,</span><br><span class="line">&#125;;</span><br></pre>
+<p>在类的实例上面调用方法，其实就是调用原型上的方法。</p>
+<pre class="highlight"><span class="line"><span class="class"><span class="keyword">class</span> <span class="title">B</span> </span>&#123;&#125;</span><br><span class="line"><span class="keyword">let</span> b = <span class="keyword">new</span> B();</span><br><span class="line">b.constructor === B.prototype.constructor <span class="comment">// true</span></span><br></pre>
+<h3 id="严格模式"><a href="#严格模式" class="headerlink" title="严格模式"></a>严格模式</h3><p>类和模块的内部，默认就是严格模式，所以不需要使用use strict指定运行模式。只要你的代码写在类或模块之中，就只有严格模式可用。考虑到未来所有的代码，其实都是运行在模块之中，所以 ES6 实际上把整个语言升级到了严格模式。</p>
+<h3 id="constructor-方法"><a href="#constructor-方法" class="headerlink" title="constructor 方法"></a>constructor 方法</h3><p>constructor方法是类的默认方法，通过new命令生成对象实例时，自动调用该方法。一个类必须有constructor方法，如果没有显式定义，一个空的constructor方法会被默认添加。</p>
+<pre class="highlight"><span class="line"><span class="class"><span class="keyword">class</span> <span class="title">Point</span> </span>&#123;</span><br><span class="line">&#125;</span><br><span class="line"><span class="comment">// 等同于</span></span><br><span class="line"><span class="class"><span class="keyword">class</span> <span class="title">Point</span> </span>&#123;</span><br><span class="line">  <span class="function"><span class="title">constructor</span>(<span class="params"></span>)</span> &#123;&#125;</span><br><span class="line">&#125;</span><br></pre>
+<h2 id="promise"><a href="#promise" class="headerlink" title="promise"></a>promise</h2><pre class="highlight"><span class="line"><span class="meta">&lt;!DOCTYPE <span class="meta-keyword">html</span>&gt;</span></span><br><span class="line"><span class="tag">&lt;<span class="name">html</span> <span class="attr">lang</span>=<span class="string">&quot;en&quot;</span>&gt;</span></span><br><span class="line"></span><br><span class="line"><span class="tag">&lt;<span class="name">head</span>&gt;</span></span><br><span class="line">  <span class="tag">&lt;<span class="name">meta</span> <span class="attr">charset</span>=<span class="string">&quot;UTF-8&quot;</span>&gt;</span></span><br><span class="line">  <span class="tag">&lt;<span class="name">meta</span> <span class="attr">name</span>=<span class="string">&quot;viewport&quot;</span> <span class="attr">content</span>=<span class="string">&quot;width=device-width, initial-scale=1.0&quot;</span>&gt;</span></span><br><span class="line">  <span class="tag">&lt;<span class="name">title</span>&gt;</span>Document<span class="tag">&lt;/<span class="name">title</span>&gt;</span></span><br><span class="line"><span class="tag">&lt;/<span class="name">head</span>&gt;</span></span><br><span class="line"></span><br><span class="line"><span class="tag">&lt;<span class="name">body</span>&gt;</span></span><br><span class="line">  <span class="tag">&lt;<span class="name">script</span>&gt;</span><span class="javascript"></span></span><br><span class="line"><span class="javascript">    <span class="comment">// liang = function (next) &#123;</span></span></span><br><span class="line"><span class="javascript">    <span class="comment">//   console.log(&quot;东跑起來了&quot;)</span></span></span><br><span class="line"><span class="javascript">    <span class="comment">//   setTimeout(function () &#123;</span></span></span><br><span class="line"><span class="javascript">    <span class="comment">//     console.log(&quot;东东到了&quot;)</span></span></span><br><span class="line"><span class="javascript">    <span class="comment">//     next();</span></span></span><br><span class="line"><span class="javascript">    <span class="comment">//   &#125;, Math.random() * 1000)</span></span></span><br><span class="line"><span class="javascript">    <span class="comment">// &#125;</span></span></span><br><span class="line"><span class="javascript">    <span class="comment">// aa = function (next) &#123;</span></span></span><br><span class="line"><span class="javascript">    <span class="comment">//   console.log(&quot;aa跑起來了&quot;)</span></span></span><br><span class="line"><span class="javascript">    <span class="comment">//   setTimeout(function () &#123;</span></span></span><br><span class="line"><span class="javascript">    <span class="comment">//     console.log(&quot;aa到了&quot;)</span></span></span><br><span class="line"><span class="javascript">    <span class="comment">//     next();</span></span></span><br><span class="line"><span class="javascript">    <span class="comment">//   &#125;, Math.random() * 1000)</span></span></span><br><span class="line"><span class="javascript">    <span class="comment">// &#125;</span></span></span><br><span class="line"><span class="javascript">    <span class="comment">// bb = function (next) &#123;</span></span></span><br><span class="line"><span class="javascript">    <span class="comment">//   console.log(&quot;bb跑起來了&quot;)</span></span></span><br><span class="line"><span class="javascript">    <span class="comment">//   setTimeout(function () &#123;</span></span></span><br><span class="line"><span class="javascript">    <span class="comment">//     console.log(&quot;bb到了&quot;)</span></span></span><br><span class="line"><span class="javascript">    <span class="comment">//     next();</span></span></span><br><span class="line"><span class="javascript">    <span class="comment">//   &#125;, Math.random() * 1000)</span></span></span><br><span class="line"><span class="javascript">    <span class="comment">// &#125;</span></span></span><br><span class="line"><span class="javascript">    <span class="comment">// cc = function (next) &#123;</span></span></span><br><span class="line"><span class="javascript">    <span class="comment">//   console.log(&quot;cc跑起來了&quot;)</span></span></span><br><span class="line"><span class="javascript">    <span class="comment">//   setTimeout(function () &#123;</span></span></span><br><span class="line"><span class="javascript">    <span class="comment">//     console.log(&quot;cc到了&quot;)</span></span></span><br><span class="line"><span class="javascript">    <span class="comment">//     next();</span></span></span><br><span class="line"><span class="javascript">    <span class="comment">//   &#125;, Math.random() * 1000)</span></span></span><br><span class="line"><span class="javascript">    <span class="comment">// &#125;</span></span></span><br><span class="line"><span class="javascript">    <span class="comment">// dd = function () &#123;</span></span></span><br><span class="line"><span class="javascript">    <span class="comment">//   console.log(&quot;dd跑起來了&quot;)</span></span></span><br><span class="line"><span class="javascript">    <span class="comment">//   setTimeout(function () &#123;</span></span></span><br><span class="line"><span class="javascript">    <span class="comment">//     console.log(&quot;dd到了&quot;)</span></span></span><br><span class="line"><span class="javascript">    <span class="comment">//   &#125;, Math.random() * 1000)</span></span></span><br><span class="line"><span class="javascript">    <span class="comment">// &#125;</span></span></span><br><span class="line"><span class="javascript">    <span class="comment">// liang(</span></span></span><br><span class="line"><span class="javascript">    <span class="comment">//   function () &#123;</span></span></span><br><span class="line"><span class="javascript">    <span class="comment">//     aa(</span></span></span><br><span class="line"><span class="javascript">    <span class="comment">//       function () &#123;</span></span></span><br><span class="line"><span class="javascript">    <span class="comment">//         bb(</span></span></span><br><span class="line"><span class="javascript">    <span class="comment">//           function () &#123;</span></span></span><br><span class="line"><span class="javascript">    <span class="comment">//             cc(</span></span></span><br><span class="line"><span class="javascript">    <span class="comment">//               function () &#123;</span></span></span><br><span class="line"><span class="javascript">    <span class="comment">//                 dd()</span></span></span><br><span class="line"><span class="javascript">    <span class="comment">//               &#125;</span></span></span><br><span class="line"><span class="javascript">    <span class="comment">//             )</span></span></span><br><span class="line"><span class="javascript">    <span class="comment">//           &#125;</span></span></span><br><span class="line"><span class="javascript">    <span class="comment">//         )</span></span></span><br><span class="line"><span class="javascript">    <span class="comment">//       &#125;</span></span></span><br><span class="line"><span class="javascript">    <span class="comment">//     )</span></span></span><br><span class="line"><span class="javascript">    <span class="comment">//   &#125;</span></span></span><br><span class="line"><span class="javascript">    <span class="comment">// );</span></span></span><br><span class="line"><span class="javascript">    <span class="comment">// promise解决回调地狱</span></span></span><br><span class="line"><span class="javascript">    <span class="comment">// 两个异步任务，不能使用回调函数！！！</span></span></span><br><span class="line"><span class="javascript">    <span class="function"><span class="keyword">function</span> <span class="title">aa</span>(<span class="params"></span>) </span>&#123;</span></span><br><span class="line"><span class="javascript">      <span class="comment">// return 提供一个钩子给外面</span></span></span><br><span class="line"><span class="javascript">      <span class="keyword">return</span> <span class="keyword">new</span> <span class="built_in">Promise</span>(</span></span><br><span class="line"><span class="javascript">        <span class="function"><span class="keyword">function</span> (<span class="params">door</span>) </span>&#123;</span></span><br><span class="line"><span class="javascript">          <span class="built_in">console</span>.log(<span class="string">`a起跑...`</span>);</span></span><br><span class="line"><span class="javascript">          <span class="built_in">setTimeout</span>(<span class="function"><span class="keyword">function</span> (<span class="params"></span>) </span>&#123; <span class="comment">//异步</span></span></span><br><span class="line"><span class="javascript">            <span class="built_in">console</span>.log(<span class="string">`a到达终点`</span>)</span></span><br><span class="line"><span class="javascript">            <span class="comment">// 开门</span></span></span><br><span class="line"><span class="javascript">            door();</span></span><br><span class="line"><span class="javascript">          &#125;, <span class="built_in">Math</span>.random() * <span class="number">1000</span> + <span class="number">10</span>)</span></span><br><span class="line"><span class="javascript">        &#125;</span></span><br><span class="line"><span class="javascript">      )</span></span><br><span class="line"><span class="javascript">    &#125;</span></span><br><span class="line"><span class="javascript"></span></span><br><span class="line"><span class="javascript">    <span class="function"><span class="keyword">function</span> <span class="title">bb</span>(<span class="params"></span>) </span>&#123;</span></span><br><span class="line"><span class="javascript">      <span class="keyword">return</span> <span class="keyword">new</span> <span class="built_in">Promise</span>(</span></span><br><span class="line"><span class="javascript">        <span class="function"><span class="keyword">function</span> (<span class="params">door</span>) </span>&#123;</span></span><br><span class="line"><span class="javascript">          <span class="built_in">console</span>.log(<span class="string">`b起跑了`</span>);</span></span><br><span class="line"><span class="javascript">          <span class="built_in">setTimeout</span>(<span class="function"><span class="keyword">function</span> (<span class="params"></span>) </span>&#123;</span></span><br><span class="line"><span class="javascript">            <span class="built_in">console</span>.log(<span class="string">`b到达终点`</span>)</span></span><br><span class="line"><span class="javascript">            door();</span></span><br><span class="line"><span class="javascript">          &#125;, <span class="built_in">Math</span>.random() * <span class="number">1000</span> + <span class="number">10</span>)</span></span><br><span class="line"><span class="javascript">        &#125;</span></span><br><span class="line"><span class="javascript">      )</span></span><br><span class="line"><span class="javascript">    &#125;</span></span><br><span class="line"><span class="javascript">    <span class="function"><span class="keyword">function</span> <span class="title">cc</span>(<span class="params"></span>) </span>&#123;</span></span><br><span class="line"><span class="javascript">      <span class="keyword">return</span> <span class="keyword">new</span> <span class="built_in">Promise</span>(</span></span><br><span class="line"><span class="javascript">        <span class="function"><span class="keyword">function</span> (<span class="params">door</span>) </span>&#123;</span></span><br><span class="line"><span class="javascript">          <span class="built_in">console</span>.log(<span class="string">`c起跑了`</span>);</span></span><br><span class="line"><span class="javascript">          <span class="built_in">setTimeout</span>(<span class="function"><span class="keyword">function</span> (<span class="params"></span>) </span>&#123;</span></span><br><span class="line"><span class="javascript">            <span class="built_in">console</span>.log(<span class="string">`c到达终点`</span>)</span></span><br><span class="line"><span class="javascript">            door();</span></span><br><span class="line"><span class="javascript">          &#125;, <span class="built_in">Math</span>.random() * <span class="number">1000</span> + <span class="number">10</span>)</span></span><br><span class="line"><span class="javascript">        &#125;</span></span><br><span class="line"><span class="javascript">      )</span></span><br><span class="line"><span class="javascript">    &#125;</span></span><br><span class="line"><span class="javascript">    <span class="function"><span class="keyword">function</span> <span class="title">dd</span>(<span class="params"></span>) </span>&#123;</span></span><br><span class="line"><span class="javascript">      <span class="keyword">return</span> <span class="keyword">new</span> <span class="built_in">Promise</span>(</span></span><br><span class="line"><span class="javascript">        <span class="function"><span class="keyword">function</span> (<span class="params">door</span>) </span>&#123;</span></span><br><span class="line"><span class="javascript">          <span class="built_in">console</span>.log(<span class="string">`d起跑了`</span>);</span></span><br><span class="line"><span class="javascript">          <span class="built_in">setTimeout</span>(<span class="function"><span class="keyword">function</span> (<span class="params"></span>) </span>&#123;</span></span><br><span class="line"><span class="javascript">            <span class="built_in">console</span>.log(<span class="string">`d到达终点`</span>)</span></span><br><span class="line"><span class="javascript">            door();</span></span><br><span class="line"><span class="javascript">          &#125;, <span class="built_in">Math</span>.random() * <span class="number">1000</span> + <span class="number">10</span>)</span></span><br><span class="line"><span class="javascript">        &#125;</span></span><br><span class="line"><span class="javascript">      )</span></span><br><span class="line"><span class="javascript">    &#125;</span></span><br><span class="line"><span class="javascript">    <span class="comment">// 调用的时候：return new Promise()提供.then勾住后面的任务</span></span></span><br><span class="line"><span class="javascript">    aa().then(bb).then(cc).then(dd).then(<span class="function">()=&gt;</span><span class="built_in">console</span>.log(<span class="string">&quot;结束&quot;</span>))</span></span><br><span class="line"><span class="javascript">  </span><span class="tag">&lt;/<span class="name">script</span>&gt;</span></span><br><span class="line"><span class="tag">&lt;/<span class="name">body</span>&gt;</span></span><br><span class="line"></span><br><span class="line"><span class="tag">&lt;/<span class="name">html</span>&gt;</span></span><br></pre>
+
+
+  </div>
+  <div>
+  
+  <div class="post-note note-warning copyright" style="margin-top: 42px">
+    <p><span style="font-weight: bold;">作者：</span><a target="_blank" rel="nofollow noopener noreferrer" href="http://example.com/about">小白&amp;马</a></p>
+    <p><span style="font-weight: bold;">文章链接：</span><a target="_blank" rel="nofollow noopener noreferrer" href="http://example.com/2020/06/15/ES6/">http://example.com/2020/06/15/ES6/</a></p>
+    <p><span style="font-weight: bold;">版权声明：</span>本博客所有文章除特别声明外，均采用<a target="_blank" rel="noopener" href="https://creativecommons.org/licenses/by-nc-sa/4.0/deed.zh">CC BY-NC-SA 4.0 协议</a>。转载请注明出处！</p>
+  </div>
+  
+  </div>
+</article>
+<div class="nav">
+  
+  <div class="nav-item-prev">
+    <a href="/2020/06/15/CSS版tab栏/" class="nav-link">
+      <i class="iconfont icon-left nav-prev-icon"></i>
+      <div>
+        <div class="nav-label">上一篇</div>
+        
+        <div class="nav-title">css版tab栏 </div>
+        
+      </div>
+    </a>
+  </div>
+  
+  
+  <div class="nav-item-next">
+    <a href="/2020/06/08/HTML5-3/" class="nav-link">
+      <div>
+        <div class="nav-label">下一篇</div>
+        
+        <div class="nav-title">HTML5-3 </div>
+        
+      </div>
+      <i class="iconfont icon-right nav-next-icon"></i>
+    </a>
+  </div>
+  
+</div>
+
+<div class="card card-content toc-card" id="mobiletoc">
+  <div class="toc-header"><i class="iconfont icon-menu" style="padding-right: 2px;"></i>目录</div>
+<ol class="toc"><li class="toc-item toc-level-2"><a class="toc-link" href="#let"><span class="toc-text">let</span></a><ol class="toc-child"><li class="toc-item toc-level-3"><a class="toc-link" href="#%E4%B8%8D%E5%AD%98%E5%9C%A8%E5%8F%98%E9%87%8F%E6%8F%90%E5%8D%87"><span class="toc-text">不存在变量提升</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#%E6%9A%82%E6%97%B6%E6%80%A7%E6%AD%BB%E5%8C%BA"><span class="toc-text">暂时性死区</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#%E4%B8%8D%E5%85%81%E8%AE%B8%E9%87%8D%E5%A4%8D%E5%A3%B0%E6%98%8E"><span class="toc-text">不允许重复声明</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#%E5%9D%97%E7%BA%A7%E4%BD%9C%E7%94%A8%E5%9F%9F"><span class="toc-text">块级作用域</span></a></li></ol></li><li class="toc-item toc-level-2"><a class="toc-link" href="#const"><span class="toc-text">const</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#%E6%95%B0%E7%BB%84API%E3%80%81%E5%AF%B9%E8%B1%A1API%E3%80%81%E5%8F%82%E6%95%B0%E7%BB%93%E6%9E%84"><span class="toc-text">数组API、对象API、参数结构</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#Class"><span class="toc-text">Class</span></a><ol class="toc-child"><li class="toc-item toc-level-3"><a class="toc-link" href="#%E4%B8%A5%E6%A0%BC%E6%A8%A1%E5%BC%8F"><span class="toc-text">严格模式</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#constructor-%E6%96%B9%E6%B3%95"><span class="toc-text">constructor 方法</span></a></li></ol></li><li class="toc-item toc-level-2"><a class="toc-link" href="#promise"><span class="toc-text">promise</span></a></li></ol>
+</div></main>
+          <aside class="left-column">
+            
+            <div class="card card-author">
+              
+<img src="https://s4.ax1x.com/2021/12/14/oxgQxg.jpg" class="author-img">
+
+<p class="author-name">小白&马</p>
+<p class="author-description">Fight !!</p>
+<div class="author-message">
+  <a class="author-posts-count" href="/archives">
+    <span>23</span>
+    <span>文章</span>
+  </a>
+  <a class="author-categories-count" href="/categories">
+    <span>12</span>
+    <span>分类</span>
+  </a>
+  <a class="author-tags-count" href="/tags">
+    <span>25</span>
+    <span>标签</span>
+  </a>
+</div>
+
+            </div>
+            
+            <div class="sticky-tablet">
+  
+  
+  <article class="display-when-two-columns spacer">
+    <div class="card card-content toc-card">
+      <div class="toc-header"><i class="iconfont icon-menu" style="padding-right: 2px;"></i>目录</div>
+<ol class="toc"><li class="toc-item toc-level-2"><a class="toc-link" href="#let"><span class="toc-text">let</span></a><ol class="toc-child"><li class="toc-item toc-level-3"><a class="toc-link" href="#%E4%B8%8D%E5%AD%98%E5%9C%A8%E5%8F%98%E9%87%8F%E6%8F%90%E5%8D%87"><span class="toc-text">不存在变量提升</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#%E6%9A%82%E6%97%B6%E6%80%A7%E6%AD%BB%E5%8C%BA"><span class="toc-text">暂时性死区</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#%E4%B8%8D%E5%85%81%E8%AE%B8%E9%87%8D%E5%A4%8D%E5%A3%B0%E6%98%8E"><span class="toc-text">不允许重复声明</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#%E5%9D%97%E7%BA%A7%E4%BD%9C%E7%94%A8%E5%9F%9F"><span class="toc-text">块级作用域</span></a></li></ol></li><li class="toc-item toc-level-2"><a class="toc-link" href="#const"><span class="toc-text">const</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#%E6%95%B0%E7%BB%84API%E3%80%81%E5%AF%B9%E8%B1%A1API%E3%80%81%E5%8F%82%E6%95%B0%E7%BB%93%E6%9E%84"><span class="toc-text">数组API、对象API、参数结构</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#Class"><span class="toc-text">Class</span></a><ol class="toc-child"><li class="toc-item toc-level-3"><a class="toc-link" href="#%E4%B8%A5%E6%A0%BC%E6%A8%A1%E5%BC%8F"><span class="toc-text">严格模式</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#constructor-%E6%96%B9%E6%B3%95"><span class="toc-text">constructor 方法</span></a></li></ol></li><li class="toc-item toc-level-2"><a class="toc-link" href="#promise"><span class="toc-text">promise</span></a></li></ol>
+    </div>
+  </article>
+  
+  
+  <article class="card card-content">
+    <div class="categories-card">
+  <div class="categories-header"><i class="iconfont icon-fenlei" style="padding-right: 2px;"></i>分类</div>
+  <div class="categories-list">
+    
+      <a href="/categories/ES6">
+        <div class="categories-list-item">
+          ES6
+          <span class="categories-list-item-badge">1</span>
+        </div>
+      </a>
+    
+      <a href="/categories/css">
+        <div class="categories-list-item">
+          css
+          <span class="categories-list-item-badge">1</span>
+        </div>
+      </a>
+    
+      <a href="/categories/git">
+        <div class="categories-list-item">
+          git
+          <span class="categories-list-item-badge">1</span>
+        </div>
+      </a>
+    
+      <a href="/categories/HTML5">
+        <div class="categories-list-item">
+          HTML5
+          <span class="categories-list-item-badge">4</span>
+        </div>
+      </a>
+    
+      <a href="/categories/nodejs">
+        <div class="categories-list-item">
+          nodejs
+          <span class="categories-list-item-badge">2</span>
+        </div>
+      </a>
+    
+      <a href="/categories/javascript">
+        <div class="categories-list-item">
+          javascript
+          <span class="categories-list-item-badge">8</span>
+        </div>
+      </a>
+    
+      <a href="/categories/Markdown">
+        <div class="categories-list-item">
+          Markdown
+          <span class="categories-list-item-badge">1</span>
+        </div>
+      </a>
+    
+      <a href="/categories/其他">
+        <div class="categories-list-item">
+          其他
+          <span class="categories-list-item-badge">1</span>
+        </div>
+      </a>
+    
+      <a href="/categories/HTML">
+        <div class="categories-list-item">
+          HTML
+          <span class="categories-list-item-badge">1</span>
+        </div>
+      </a>
+    
+      <a href="/categories/webpack">
+        <div class="categories-list-item">
+          webpack
+          <span class="categories-list-item-badge">1</span>
+        </div>
+      </a>
+    
+      <a href="/categories/Vue">
+        <div class="categories-list-item">
+          Vue
+          <span class="categories-list-item-badge">1</span>
+        </div>
+      </a>
+    
+      <a href="/categories/分类">
+        <div class="categories-list-item">
+          分类
+          <span class="categories-list-item-badge">1</span>
+        </div>
+      </a>
+    
+  </div>
+</div>
+  </article>
+  
+  <article class="card card-content">
+    <div class="tags-card">
+  <div class="tags-header"><i class="iconfont icon-biaoqian" style="padding-right: 2px;"></i>热门标签</div>
+  <div class="tags-list">
+    
+    <a href="\tags\前端" title="前端"><div class="tags-list-item">前端</div></a>
+    
+    <a href="\tags\html" title="html"><div class="tags-list-item">html</div></a>
+    
+    <a href="\tags\javascript" title="javascript"><div class="tags-list-item">javascript</div></a>
+    
+    <a href="\tags\笔记" title="笔记"><div class="tags-list-item">笔记</div></a>
+    
+    <a href="\tags\nodeJS" title="nodeJS"><div class="tags-list-item">nodeJS</div></a>
+    
+    <a href="\tags\标签2" title="标签2"><div class="tags-list-item">标签2</div></a>
+    
+    <a href="\tags\标签" title="标签"><div class="tags-list-item">标签</div></a>
+    
+    <a href="\tags\性能优化" title="性能优化"><div class="tags-list-item">性能优化</div></a>
+    
+    <a href="\tags\知识点" title="知识点"><div class="tags-list-item">知识点</div></a>
+    
+    <a href="\tags\作用域" title="作用域"><div class="tags-list-item">作用域</div></a>
+    
+    <a href="\tags\nodejs" title="nodejs"><div class="tags-list-item">nodejs</div></a>
+    
+    <a href="\tags\前端模块化" title="前端模块化"><div class="tags-list-item">前端模块化</div></a>
+    
+    <a href="\tags\webpack" title="webpack"><div class="tags-list-item">webpack</div></a>
+    
+    <a href="\tags\移动端" title="移动端"><div class="tags-list-item">移动端</div></a>
+    
+    <a href="\tags\基础" title="基础"><div class="tags-list-item">基础</div></a>
+    
+    <a href="\tags\规范" title="规范"><div class="tags-list-item">规范</div></a>
+    
+  </div>
+</div>
+  </article>
+  
+  
+</div>
+          </aside>
+          <aside class="right-column">
+            <div class="sticky-widescreen">
+  
+  
+  <article class="card card-content toc-card">
+    <div class="toc-header"><i class="iconfont icon-menu" style="padding-right: 2px;"></i>目录</div>
+<ol class="toc"><li class="toc-item toc-level-2"><a class="toc-link" href="#let"><span class="toc-text">let</span></a><ol class="toc-child"><li class="toc-item toc-level-3"><a class="toc-link" href="#%E4%B8%8D%E5%AD%98%E5%9C%A8%E5%8F%98%E9%87%8F%E6%8F%90%E5%8D%87"><span class="toc-text">不存在变量提升</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#%E6%9A%82%E6%97%B6%E6%80%A7%E6%AD%BB%E5%8C%BA"><span class="toc-text">暂时性死区</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#%E4%B8%8D%E5%85%81%E8%AE%B8%E9%87%8D%E5%A4%8D%E5%A3%B0%E6%98%8E"><span class="toc-text">不允许重复声明</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#%E5%9D%97%E7%BA%A7%E4%BD%9C%E7%94%A8%E5%9F%9F"><span class="toc-text">块级作用域</span></a></li></ol></li><li class="toc-item toc-level-2"><a class="toc-link" href="#const"><span class="toc-text">const</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#%E6%95%B0%E7%BB%84API%E3%80%81%E5%AF%B9%E8%B1%A1API%E3%80%81%E5%8F%82%E6%95%B0%E7%BB%93%E6%9E%84"><span class="toc-text">数组API、对象API、参数结构</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#Class"><span class="toc-text">Class</span></a><ol class="toc-child"><li class="toc-item toc-level-3"><a class="toc-link" href="#%E4%B8%A5%E6%A0%BC%E6%A8%A1%E5%BC%8F"><span class="toc-text">严格模式</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#constructor-%E6%96%B9%E6%B3%95"><span class="toc-text">constructor 方法</span></a></li></ol></li><li class="toc-item toc-level-2"><a class="toc-link" href="#promise"><span class="toc-text">promise</span></a></li></ol>
+  </article>
+  
+  
+  <article class="card card-content">
+    <div class="recent-posts-card">
+  <div class="recent-posts-header"><i class="iconfont icon-wenzhang_huaban" style="padding-right: 2px;"></i>最近文章</div>
+  <div class="recent-posts-list">
+    
+      <div class="recent-posts-item">
+        <div class="recent-posts-item-title">2021-12-11</div>
+        <a href="/2021/12/11/js基础巩固/"><div class="recent-posts-item-content">js基础巩固</div></a>
+      </div>
+    
+      <div class="recent-posts-item">
+        <div class="recent-posts-item-title">2021-09-24</div>
+        <a href="/2021/09/24/Git/"><div class="recent-posts-item-content">git</div></a>
+      </div>
+    
+      <div class="recent-posts-item">
+        <div class="recent-posts-item-title">2021-09-24</div>
+        <a href="/2021/09/24/hello-world/"><div class="recent-posts-item-content">Hello World</div></a>
+      </div>
+    
+      <div class="recent-posts-item">
+        <div class="recent-posts-item-title">2021-09-14</div>
+        <a href="/2021/09/14/pm2 安装以及windows开机自启动/"><div class="recent-posts-item-content">pm2开机自启服务</div></a>
+      </div>
+    
+  </div>
+</div>
+  </article>
+  
+  
+</div>
+          </aside>
+        </div>
+      </div>
+    </div>
+  </div>
+  
+  <footer class="footer">
+  <div class="footer-container">
+    <div>
+      <div class="footer-dsc">
+        <span>Copyright ©
+          
+          2020 -
+          
+          2021
+        </span>
+        <a href="/" class="footer-link">学习永不止步 </a>
+      </div>
+    </div>
+
+    
+    <div class="footer-dsc">
+      
+      
+      Powered by
+      <a href="https://hexo.io/" class="footer-link" target="_blank" rel="nofollow noopener noreferrer">&nbsp;Hexo </a>
+      
+      
+      <span>&nbsp;|&nbsp;</span>
+      
+      
+      
+      Theme -
+      <a href="https://github.com/theme-kaze" class="footer-link" target="_blank"
+        rel="nofollow noopener noreferrer">&nbsp;Kaze</a>
+      
+    </div>
+    
+    
+    
+    
+</footer>
+  <a role="button" id="scrollbutton" class="basebutton" >
+  <i class="iconfont icon-arrowleft button-icon"></i>
+</a>
+<a role="button" id="menubutton" class="basebutton">
+  <i class="iconfont icon-menu button-icon"></i>
+</a>
+<a role="button" id="popbutton" class="basebutton">
+  <i class="iconfont icon-expand button-icon"></i>
+</a>
+<a role="button" id="darkbutton" class="basebutton darkwidget">
+  <i class="iconfont icon-weather button-icon"></i>
+</a>
+
+  
+  
+  
+  <script>
+  var addImgLayout = function () {
+    var img = document.querySelectorAll('.post-content img');
+    var i;
+    for (i = 0; i < img.length; i++) {
+      var wrapper = document.createElement('a');
+      wrapper.setAttribute('data-fslightbox', 'gallery');
+      wrapper.setAttribute('href', img[i].getAttribute('data-src'));
+      wrapper.setAttribute('style', 'width: 100%; display: flex; justify-content: center;');
+      img[i].parentElement.insertBefore(wrapper, img[i]);
+      wrapper.appendChild(img[i]);
+    }
+    refreshFsLightbox();
+  }
+</script>
+<script>loadScript("//cdn.jsdelivr.net/npm/fslightbox@3.1.0/index.min.js", addImgLayout)</script>
+  
+  
+  
+<script src="/js/main.js"></script>
+
+  
+  
+  <script>
+    var addLazyload = function () {
+      var observer = lozad('.lozad', {
+        load: function (el) {
+          el.srcset = el.getAttribute('data-src');
+        },
+        loaded: function (el) {
+          el.classList.add('loaded');
+        }
+      });
+      observer.observe();
+    }
+  </script>
+  <script>loadScript("/js/lib/lozad.min.js", addLazyload)</script>
+  
+  
+</body>
+
+</html>

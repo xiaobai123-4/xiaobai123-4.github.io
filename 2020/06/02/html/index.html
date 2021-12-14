@@ -1,0 +1,686 @@
+<!DOCTYPE html>
+<html>
+<meta  lang="zh-CN" >
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport"
+    content="width=device-width, user-scalable=no, initial-scale=1.0, maximum-scale=1.0, minimum-scale=1.0">
+  <meta http-equiv="X-UA-Compatible" content="ie=edge">
+  <meta name="theme-color" content="#fff" id="theme-color">
+  <link rel="icon" href="https://s4.ax1x.com/2021/12/14/oxgQxg.jpg">
+  <title>学习永不止步</title>
+  <script>
+    // control reverse button
+    var reverseDarkList = {
+      dark: 'light',
+      light: 'dark'
+    };
+    var themeColor = {
+      dark: '#1c1c1e',
+      light: '#fff'
+    }
+    // get the data of css prefers-color-scheme
+    var getCssMediaQuery = function() {
+      return window.matchMedia('(prefers-color-scheme: dark)').matches ? 'dark' : 'light';
+    };
+    // reverse current darkmode setting function
+    var reverseDarkModeSetting = function() {
+      var setting = localStorage.getItem('user-color-scheme');
+      if(reverseDarkList[setting]) {
+        setting = reverseDarkList[setting];
+      } else if(setting === null) {
+        setting = reverseDarkList[getCssMediaQuery()];
+      } else {
+        return;
+      }
+      localStorage.setItem('user-color-scheme', setting);
+      return setting;
+    };
+    // apply current darkmode setting
+    var setDarkmode = function(mode) {
+      var setting = mode || localStorage.getItem('user-color-scheme');
+      if(setting === getCssMediaQuery()) {
+        document.documentElement.removeAttribute('data-user-color-scheme');
+        localStorage.removeItem('user-color-scheme');
+        document.getElementById('theme-color').content = themeColor[setting];
+      } else if(reverseDarkList[setting]) {
+        document.documentElement.setAttribute('data-user-color-scheme', setting);
+        document.getElementById('theme-color').content = themeColor[setting];
+      } else {
+        document.documentElement.removeAttribute('data-user-color-scheme');
+        localStorage.removeItem('user-color-scheme');
+        document.getElementById('theme-color').content = themeColor[getCssMediaQuery()];
+      }
+    };
+    setDarkmode();
+  </script>
+  <script>
+    function loadScript(url, cb) {
+      var script = document.createElement('script');
+      script.src = url;
+      if (cb) script.onload = cb;
+      script.async = true;
+      document.body.appendChild(script);
+    }
+  </script>
+  
+  <link rel="preload" href="//at.alicdn.com/t/font_1946621_vpj3dq9ceqa.css" as="style" >
+  <link rel="preload" href="//at.alicdn.com/t/font_1952792_89b4ac4k4up.css" as="style" >
+  
+  <link rel="preload" href="//cdn.jsdelivr.net/npm/fslightbox@3.1.0/index.min.js" as="script">
+  
+  
+  <link rel="preload" href="/js/lib/lozad.min.js" as="script">
+  
+  
+  
+  
+  
+  
+  
+  
+<link rel="stylesheet" href="/css/main.css">
+
+  
+  
+<link rel="stylesheet" href="//at.alicdn.com/t/font_1946621_vpj3dq9ceqa.css">
+
+  
+  
+<link rel="stylesheet" href="//at.alicdn.com/t/font_1952792_89b4ac4k4up.css">
+
+  
+  
+  
+<meta name="generator" content="Hexo 5.4.0"></head>
+
+
+<body>
+  <div class="wrapper">
+    
+    <nav class="navbar">
+  <div class="navbar-logo">
+    <span class="navbar-logo-main">
+      
+      <img class="navbar-logo-img" src="https://s4.ax1x.com/2021/12/14/oxgQxg.jpg">
+      
+      <span class="navbar-logo-dsc">学习永不止步</span>
+    </span>
+  </div>
+  <div class="navbar-menu">
+    
+    <a href="/" class="navbar-menu-item">首页 </a>
+    
+    <a href="/archives" class="navbar-menu-item">归档 </a>
+    
+    <a href="/tags" class="navbar-menu-item">标签 </a>
+    
+    <a href="/categories" class="navbar-menu-item">分类 </a>
+    
+    <a href="/links" class="navbar-menu-item">友链 </a>
+    
+    <a class="navbar-menu-item darknavbar" id="dark"><i class="iconfont icon-weather"></i></a>
+  </div>
+</nav>
+    
+    <div class="section-wrap">
+      <div class="container">
+        <div class="columns">
+          <main class="main-column">
+<article class="card card-content">
+  <header>
+    <h1 class="post-title">
+      html
+    </h1>
+  </header>
+  <div class="post-meta post-show-meta">
+    <time datetime="2020-06-02T02:20:34.000Z" style="display: flex; align-items: center;">
+      <i class="iconfont icon-calendar" style="margin-right: 2px;"></i>
+      <span>2020-06-02</span>
+    </time>
+    
+    <span class="dot"></span>
+    
+    <a href="/categories/HTML/" class="post-meta-link">HTML</a>
+    
+    
+    
+    <span class="dot"></span>
+    <span>4k 字</span>
+    
+  </div>
+  
+  <div class="post-meta post-show-meta" style="margin-top: -10px;">
+    <div style="display: flex; align-items: center;">
+      <i class="iconfont icon-biaoqian" style="margin-right: 2px; font-size: 1.15rem;"></i>
+      
+      
+        <a href="/tags/html/" class="post-meta-link">html</a>
+      
+      
+      <span class="dot"></span>
+      
+        <a href="/tags/规范/" class="post-meta-link">规范</a>
+      
+    </div>
+  </div>
+  
+  </header>
+  <div id="section" class="post-content">
+    <h2 id="HTML"><a href="#HTML" class="headerlink" title="HTML"></a>HTML</h2><h3 id="一、什么是HTML"><a href="#一、什么是HTML" class="headerlink" title="一、什么是HTML"></a>一、什么是HTML</h3><ul>
+<li>HTML指的是超文本标记语言：HyperText Markup Language</li>
+<li>HTML是一种描述网页的语言</li>
+<li>HTML是一种标记语言</li>
+</ul>
+<span id="more"></span>
+
+<h3 id="二、HTML基础语法"><a href="#二、HTML基础语法" class="headerlink" title="二、HTML基础语法"></a>二、HTML基础语法</h3><ol>
+<li>标记<br>单标记&lt;关键字&gt;<br>双标记&lt;关键字&gt;&lt;/关键字&gt;</li>
+<li>嵌套<pre class="highlight"><span class="line"><span class="tag">&lt;<span class="name">html</span>&gt;</span></span><br><span class="line">	<span class="tag">&lt;<span class="name">head</span>&gt;</span><span class="tag">&lt;/<span class="name">head</span>&gt;</span></span><br><span class="line">	<span class="tag">&lt;<span class="name">body</span>&gt;</span></span><br><span class="line">        <span class="tag">&lt;<span class="name">div</span>&gt;</span></span><br><span class="line">        <span class="tag">&lt;/<span class="name">div</span>&gt;</span></span><br><span class="line">	<span class="tag">&lt;/<span class="name">body</span>&gt;</span></span><br><span class="line"><span class="tag">&lt;/<span class="name">html</span>&gt;</span></span><br></pre></li>
+<li>属性和值<br>修饰标记&lt;关键字 属性=值 属性=值&gt;&lt;/关键字&gt;</li>
+<li>属性分类<ul>
+<li>通用属性<br>①id：一个元素的唯一的标识符<br>②title：鼠标悬停在元素上显示的文本<br>③style：css中定义元素的样式<br>④class：css中应用类选择器</li>
+<li>专有属性<br>各自独有的属性</li>
+<li>注释<br><code>&lt;!--注释--&gt;</code></li>
+</ul>
+</li>
+</ol>
+<h3 id="三、HTML基础格式"><a href="#三、HTML基础格式" class="headerlink" title="三、HTML基础格式"></a>三、HTML基础格式</h3><pre class="highlight"><span class="line"><span class="meta">&lt;!DOCTYPE <span class="meta-keyword">html</span>&gt;</span></span><br><span class="line"><span class="tag">&lt;<span class="name">html</span>&gt;</span></span><br><span class="line"><span class="tag">&lt;<span class="name">head</span>&gt;</span></span><br><span class="line"><span class="tag">&lt;<span class="name">meta</span> <span class="attr">charset</span>=<span class="string">&quot;utf-8&quot;</span>&gt;</span></span><br><span class="line"><span class="tag">&lt;<span class="name">title</span>&gt;</span>测试<span class="tag">&lt;/<span class="name">title</span>&gt;</span></span><br><span class="line"><span class="tag">&lt;/<span class="name">head</span>&gt;</span></span><br><span class="line"><span class="tag">&lt;<span class="name">body</span> <span class="attr">bgcolor</span>=<span class="string">&quot;pink&quot;</span> <span class="attr">text</span>=<span class="string">&quot;purple&quot;</span>&gt;</span></span><br><span class="line"><span class="comment">&lt;!--各种元素--&gt;</span></span><br><span class="line"><span class="tag">&lt;/<span class="name">body</span>&gt;</span></span><br><span class="line"><span class="tag">&lt;/<span class="name">html</span>&gt;</span></span><br></pre>
+<p>解析：</p>
+<ul>
+<li><code>&lt;!DOCTYPE html&gt;</code>声明HTML5文档</li>
+<li><code>&lt;html&gt;</code>元素是HTML页面的根元素</li>
+<li><code>&lt;head&gt;</code>文档的元数据</li>
+<li><code>&lt;meta charset=&quot;utf-8&quot;&gt;</code>定义网页编码格式utf-8</li>
+<li><code>&lt;title&gt;</code>元素描述了文档的标题</li>
+<li><code>&lt;body&gt;</code>元素包含可见内容（所有的元素都要包含在body里面）<br><em>注：浏览器中使用F12来查看页面组成标签</em></li>
+</ul>
+<h3 id="四、HTML的文档结构"><a href="#四、HTML的文档结构" class="headerlink" title="四、HTML的文档结构"></a>四、HTML的文档结构</h3><ol>
+<li>HTML文档的构成<br>①文档类型的声明<br> <code>&lt;!doctype  html&gt;</code>告诉浏览器,当前页面使用h5方式编码<br>②网页的结构<br>  代表网页的开始和结束,有且只有一套<br>  <code>&lt;html&gt;&lt;/html&gt;</code> 在html中嵌套两个标签<br>  <code>&lt;head&gt;&lt;/head&gt;</code> 网页的头部,定义网页的全局信息<br>  <code>&lt;body&gt;&lt;/body&gt;</code> 网页的主体,展示的内容</li>
+<li>head元素 是其他头部元素的容器<br>① <code>&lt;title&gt;&lt;/title&gt;</code> 页面标题<br>② <code>&lt;meta/&gt;</code> 定义网页的全局信息<pre class="highlight"><span class="line"><span class="tag">&lt;<span class="name">meta</span> <span class="attr">charset</span>=<span class="string">&quot;utf-8&quot;</span>/&gt;</span></span><br><span class="line"><span class="tag">&lt;<span class="name">meta</span> <span class="attr">name</span>=<span class="string">&quot;description&quot;</span>  <span class="attr">content</span>=<span class="string">&quot;&quot;</span>/&gt;</span></span><br><span class="line"><span class="tag">&lt;<span class="name">meta</span> <span class="attr">name</span>=<span class="string">&quot;Keywords&quot;</span> <span class="attr">content</span>=<span class="string">&quot;&quot;</span>/&gt;</span></span><br></pre>
+   ③ <code>&lt;script&gt;&lt;/script&gt;</code>定义或者引用js<br>   ④ <code>&lt;link/&gt;</code>css中引用外部样式<br>   ⑤ <code>&lt;style&gt;&lt;/style&gt;</code>css中定义内部样式</li>
+<li>body<br>定义网页主体,可视区域内容<br><strong>属性:</strong><br>①背景颜色<br><code>bgcolor=&quot;pink&quot;</code><br>②文本颜色<br><code>text=&quot;purple&quot;</code></li>
+</ol>
+<h3 id="五、HTML文本标记"><a href="#五、HTML文本标记" class="headerlink" title="五、HTML文本标记"></a>五、HTML文本标记</h3><ol>
+<li>标题<br>在页面中以醒目的方式显示文本<pre class="highlight"><span class="line"><span class="tag">&lt;<span class="name">h1</span>&gt;</span><span class="tag">&lt;/<span class="name">h1</span>&gt;</span></span><br><span class="line"><span class="tag">&lt;<span class="name">h2</span>&gt;</span><span class="tag">&lt;/<span class="name">h2</span>&gt;</span></span><br><span class="line"><span class="tag">&lt;<span class="name">h3</span>&gt;</span><span class="tag">&lt;/<span class="name">h3</span>&gt;</span></span><br><span class="line"><span class="tag">&lt;<span class="name">h4</span>&gt;</span><span class="tag">&lt;/<span class="name">h4</span>&gt;</span></span><br><span class="line"><span class="tag">&lt;<span class="name">h5</span>&gt;</span><span class="tag">&lt;/<span class="name">h5</span>&gt;</span></span><br><span class="line"><span class="tag">&lt;<span class="name">h6</span>&gt;</span><span class="tag">&lt;/<span class="name">h6</span>&gt;</span></span><br></pre>
+<strong>功能:</strong><br>字号有变化 1最大,6最小<br><strong>特点:</strong><br>字体加粗、单独成行、有垂直间距<br><strong>属性:</strong><br>①设置文本水平对齐方式<br><code>align  left/center/right</code></li>
+<li>段落标记 paragraph<br><code>&lt;p&gt;&lt;/p&gt;</code><br><strong>特点:</strong><br>单独成行,上下游垂直间距<br><strong>属性:</strong><br>①设置文本水平对齐方式<br><code>align  left/center/right</code></li>
+<li>换行标记<br><code>&lt;br&gt;</code>或者<code>&lt;/br&gt;</code></li>
+<li>水平线<br><code>&lt;hr&gt;</code><br><strong>属性:</strong><br>①水平对齐方式<br><code>align=&quot;right&quot;</code><br>②分割线的尺寸(粗细),px为单位的数字<br><code>size=&quot;10px&quot;</code><br>③水平分割线的颜色<br><code>color=&quot;pink&quot;</code><br>④宽度,px为单位的数字,% 父元素的百分比<br><code>width=&quot;50%&quot;</code></li>
+<li>预格式化标签<br><code>&lt;pre&gt;&lt;/pre&gt;</code><br><strong>功能:</strong><br>保留html中的回车和空格</li>
+<li>特殊字符(实体符号)<table>
+<thead>
+<tr>
+<th align="center">代码</th>
+<th align="center">含义</th>
+</tr>
+</thead>
+<tbody><tr>
+<td align="center"><code>&amp;nbsp;</code></td>
+<td align="center">空格</td>
+</tr>
+<tr>
+<td align="center"><code>&amp;lt;</code></td>
+<td align="center">&lt;</td>
+</tr>
+<tr>
+<td align="center"><code>&amp;gt;</code></td>
+<td align="center">&gt;</td>
+</tr>
+<tr>
+<td align="center"><code>&amp;times;</code></td>
+<td align="center">X</td>
+</tr>
+<tr>
+<td align="center"><code>&amp;yen;</code></td>
+<td align="center">￥</td>
+</tr>
+<tr>
+<td align="center"><code>&amp;copy;</code></td>
+<td align="center">©</td>
+</tr>
+<tr>
+<td align="center"><code>&amp;reg;</code></td>
+<td align="center">®</td>
+</tr>
+</tbody></table>
+</li>
+<li>文本样式标记<br>①加粗<br><code>&lt;b&gt;&lt;/b&gt;&amp;&amp;&lt;strong&gt;&lt;/strong&gt;</code><br>②斜体<br><code>&lt;i&gt;&lt;/i&gt;&amp;&amp;&lt;em&gt;&lt;/em&gt;</code><br>③删除线<br><code>&lt;s&gt;&lt;/s&gt;&amp;&amp;&lt;del&gt;&lt;/del&gt;</code><br>④下划线<br><code>&lt;u&gt;&lt;/u&gt;</code><pre class="highlight"><span class="line"><span class="comment">&lt;!--h5推荐使用有语义的标签--&gt;</span></span><br><span class="line">⑤下标</span><br><span class="line">`<span class="tag">&lt;<span class="name">sub</span>&gt;</span><span class="tag">&lt;/<span class="name">sub</span>&gt;</span>`</span><br><span class="line">⑥上标</span><br><span class="line">`<span class="tag">&lt;<span class="name">sup</span>&gt;</span><span class="tag">&lt;/<span class="name">sup</span>&gt;</span>`</span><br></pre></li>
+<li>分区元素<br>①块分区<br><code>&lt;div&gt;&lt;/div&gt;</code><br><strong>特点:</strong><br>用于页面布局、单独成行<br>②行分区<br><code>&lt;span&gt;&lt;/span&gt;</code><br><strong>特点:</strong><br>同一行文本,不同样式</li>
+<li>块级元素和行内元素<br>①块级元素<br><strong>特点:</strong><br>在网页中独占一行的,绝大多数都是块级元素<br>从上往下排列<br>ex:<code>h1~h6  p  div  pre  hr</code><br>②行内元素<br><strong>特点:</strong><br>网页中,多个行内元素在一行中显示<br>从左往右排列<br>ex:<code>span u i b strong em sub sup</code><br>③行内块<code>input</code><br>④table 只有<code>&lt;table&gt;&lt;/table&gt;</code></li>
+</ol>
+<h3 id="六、图像和链接"><a href="#六、图像和链接" class="headerlink" title="六、图像和链接"></a>六、图像和链接</h3><ol>
+<li>图像<br><code>&lt;img src=&quot;url&quot;/&gt;</code><br><strong>属性:</strong><br>①设置资源路径<br><code>src=&quot;&quot;</code><br>②图片加载失败时，显示的文本<br><code>alt=&quot;&quot;</code><br>③宽度<br><code>width=&quot;500px&quot;</code><br>④长度<br><code>height=&quot;500px&quot;</code><br><em>注：我们设置的宽高比和原始图宽高比不同，会发生图片的失真</em><br><strong>解决方案：</strong><br>宽高只设置一个，另外一个自动匹配</li>
+<li>链接<br><code>&lt;a href=&quot;url&quot;&gt;&lt;/a&gt;</code><ul>
+<li>url的表现形式<br>①绝对路径<br>使用网络资源的时候使用绝对路径<br>完整的路径：通信协议+主机名称+文件目录结构+文件名称<br>a. 使用网络资源，优点：不占用服务器本地存储空间；缺点：不稳定<br>b. 本地资源使用绝对路径，从盘符开始找<br><code>&lt;img src=&quot;D:/3.jpg&quot;&gt;</code>但是项目中不允许使用<br>②相对路径<br>相对路径的参照物，就是要调用图片的html文件<br>兄弟关系，直接写文件名称<code>src=&quot;09.png&quot;</code><br>子级关系，先进入兄弟文件夹 <code>src=&quot;img/09.png&quot;</code><br>父级关系，先进入上级 <code>src=&quot;../09.png&quot;</code></li>
+</ul>
+</li>
+<li>超链接<br>①语法<br><code>&lt;a&gt;&lt;/a&gt;</code><br><strong>属性:</strong><br>①链接的路径<br><code>href=&quot;http://www.tmooc.cn/&quot;</code><br>②指定链接的打开方式<br><code>target=&quot;&quot;</code><br>a. <code>_self</code>  默认缺省值,在当前页面打开<br>b. <code>_blank</code> 在新页面打开链接</li>
+<li><strong>拓展：</strong><br>a标签的其它表现形式<br>①下载  <code>&lt;a href=&quot;1.zip&quot;&gt;下载&lt;/a&gt;</code><br>②发送邮件 <code>&lt;a href=&quot;mailto:cheng@140.com&quot;&gt;发送邮件&lt;/a&gt;</code><br>③调用js     <code>&lt;a href=&quot;javascript:show()&quot;&gt;调用js&lt;/a&gt;</code><br>④回到页面顶部 <code>&lt;a href=&quot;#&quot;&gt;返回顶部&lt;/a&gt;</code>  无意义a标签<code>&lt;a herf=&quot;javascript:;&quot;&gt;</code><br>⑤锚点<ul>
+<li>什么是锚点<br>锚点,就是页面中的一个记号，可以通过超链接,跳转回这个记号的位置处</li>
+<li>使用锚点—-定义锚点<br>①h4的方式 <code>&lt;a name=&quot;锚点名称&quot;&gt;&lt;/a&gt;</code><br>②h5的方式 <code>&lt;any id=&quot;锚点名称&quot;&gt;&lt;/any&gt;</code> any:任意元素<br>使用锚点—-跳转锚点<br><code>&lt;a href=&quot;#锚点名称&quot;&gt;&lt;/a&gt;</code></li>
+</ul>
+</li>
+</ol>
+<h3 id="七、表格"><a href="#七、表格" class="headerlink" title="七、表格"></a>七、表格</h3><p>table的特殊渲染方式,把表格的所有内容一次性读取进内存;之后在一次性渲染到页面;某一列变宽,影响每一行的这一列的宽度;某一列变高,影响当前行每一列的高度<br><strong>表格语法:</strong></p>
+<pre class="highlight"><span class="line"><span class="tag">&lt;<span class="name">table</span>&gt;</span></span><br><span class="line">   <span class="comment">&lt;!--row--&gt;</span></span><br><span class="line">   <span class="tag">&lt;<span class="name">tr</span>&gt;</span></span><br><span class="line">     <span class="comment">&lt;!--column--&gt;</span></span><br><span class="line">     <span class="tag">&lt;<span class="name">td</span>&gt;</span><span class="tag">&lt;/<span class="name">td</span>&gt;</span></span><br><span class="line">     <span class="tag">&lt;<span class="name">td</span>&gt;</span><span class="tag">&lt;/<span class="name">td</span>&gt;</span></span><br><span class="line">   <span class="tag">&lt;/<span class="name">tr</span>&gt;</span></span><br><span class="line">   <span class="tag">&lt;<span class="name">tr</span>&gt;</span></span><br><span class="line">     <span class="tag">&lt;<span class="name">td</span>&gt;</span><span class="tag">&lt;/<span class="name">td</span>&gt;</span></span><br><span class="line">     <span class="tag">&lt;<span class="name">td</span>&gt;</span><span class="tag">&lt;/<span class="name">td</span>&gt;</span></span><br><span class="line">   <span class="tag">&lt;/<span class="name">tr</span>&gt;</span></span><br><span class="line"><span class="tag">&lt;/<span class="name">table</span>&gt;</span></span><br></pre>
+<p><strong>属性:</strong></p>
+<ol>
+<li>table<br>①设置边框  <code>border=&quot;1&quot;</code><br>②设置宽度 <code>width=&quot;400&quot;</code><br>③设置高度 <code>height=&quot;400&quot;</code><br>④边框颜色 <code> bordercolor=&quot;red&quot;</code><br>⑤背景颜色 <code>bgcolor=&quot;pink&quot;</code><br>⑥表格本身的水平对齐 <code>align=&quot;center&quot;</code><br>⑦单元格内边(内容到边框的距离)  <code>cellpadding=&quot;50&quot;</code><br>⑧单元格外边距(变框与边框之间的距离) <code>cellspacing=&quot;30&quot;</code></li>
+<li>tr<br>①当前行文本的水平对齐方式 <code>align=&quot;right&quot;</code><br>②当前行文本的垂直对齐方式 <code>valign=&quot;bottom&quot;</code>   top/middle/bottom<br>③当前行背景色 <code>bgcolor=&quot;gray&quot;</code></li>
+<li>td/th<br>①设置当前列的宽度 <code>width=&quot;150&quot;</code><br>②设置当前列的高度 <code>height=&quot;150&quot;</code><br>③设置当前列内容的水平对齐 <code>align=&quot;left&quot;</code><br>④设置当前列内容的垂直对齐 <code>valign=&quot;top&quot;</code><br>⑤设置当前列的背景颜色 <code>bgcolor=&quot;orange&quot;</code><br>⑥跨行 <code>rowspan</code><br>⑦跨列 <code>colspan</code></li>
+<li>不规则的表格<br>①跨列<br>colspan=”n”<br>从指定单元格位置处开始<br>横向向右合并n个单元格(n包含自己)<br>被合并的单元格要删除<br>②跨行<br>rowspan=”n”<br>从指定单元格位置处开始<br>纵向向下合并n个单元格(n包含自己)<br>被合并的单元格要删除</li>
+<li>表格的可选标记<br>①行/列的标题,替代td <code>&lt;th&gt;&lt;/th&gt;</code><br>②表格的标题 <code>&lt;caption&gt;&lt;/caption&gt;</code>  此标签,必须紧紧挨着<code>&lt;table&gt;</code>标签</li>
+<li>表格复杂应用<br>①表格行分组<pre class="highlight"><span class="line"><span class="tag">&lt;<span class="name">table</span>&gt;</span></span><br><span class="line">  <span class="tag">&lt;<span class="name">thead</span>&gt;</span></span><br><span class="line">    <span class="tag">&lt;<span class="name">tr</span>&gt;</span><span class="tag">&lt;/<span class="name">tr</span>&gt;</span></span><br><span class="line">  <span class="tag">&lt;/<span class="name">thead</span>&gt;</span></span><br><span class="line">  <span class="tag">&lt;<span class="name">tbody</span>&gt;</span></span><br><span class="line">    <span class="tag">&lt;<span class="name">tr</span>&gt;</span><span class="tag">&lt;/<span class="name">tr</span>&gt;</span></span><br><span class="line">  <span class="tag">&lt;/<span class="name">tbody</span>&gt;</span></span><br><span class="line">  <span class="tag">&lt;<span class="name">tfoot</span>&gt;</span></span><br><span class="line">    <span class="tag">&lt;<span class="name">tr</span>&gt;</span><span class="tag">&lt;/<span class="name">tr</span>&gt;</span></span><br><span class="line">  <span class="tag">&lt;/<span class="name">tfoot</span>&gt;</span></span><br><span class="line"><span class="tag">&lt;/<span class="name">table</span>&gt;</span></span><br></pre>
+不做行分组,浏览器默认添加<code>tbody</code><br>②表格嵌套<br>任何的嵌套内容,都要放在<code>td/th</code>中<br>③table的特殊显示方式<br><code>table</code>需要全部下载完毕,存入内存<br>再一次性渲染,渲染效率低<br><code>table</code>的尺寸,当内容少,设置的宽大,以设置的为准;当内容多,设置的宽小,以内容为准</li>
+</ol>
+<h3 id="八、列表"><a href="#八、列表" class="headerlink" title="八、列表"></a>八、列表</h3><ol>
+<li>列表的组成<br>列表类型+列表项<br>①列表类型<br>  有序列表 <code>&lt;ol&gt;&lt;/ol&gt;</code>   order list<br>  无序列表 <code>&lt;ul&gt;&lt;/ul&gt;</code>   unorder list<br>②列表项<br>  <code>&lt;li&gt;&lt;/li&gt;</code>    list item</li>
+<li>属性<ul>
+<li>ol<br><code>type=&quot;I&quot;</code>   列表项的类型  1  a  A  i  I<br><code>start=&quot;999&quot;</code> 指定起始编号位置</li>
+<li>ul<br><code>type=&quot;none&quot;</code><br><code>disc</code> 默认值,实心圆<br><code>circle</code> 空心圆<br><code>square</code> 实心方块<br><code>none</code>  去点</li>
+</ul>
+</li>
+<li>列表的嵌套<br>列表的嵌套,被嵌套的内容只能放在li中<pre class="highlight"><span class="line"><span class="tag">&lt;<span class="name">ul</span>&gt;</span></span><br><span class="line">  <span class="tag">&lt;<span class="name">li</span>&gt;</span><span class="tag">&lt;<span class="name">img</span>&gt;</span><span class="tag">&lt;/<span class="name">li</span>&gt;</span></span><br><span class="line"><span class="tag">&lt;/<span class="name">ul</span>&gt;</span></span><br></pre></li>
+<li>定义列表<br>常用于给出一类事物或者对名词的解释说明<pre class="highlight"><span class="line"><span class="tag">&lt;<span class="name">dl</span>&gt;</span></span><br><span class="line">  <span class="tag">&lt;<span class="name">dt</span>&gt;</span>名称 <span class="tag">&lt;/<span class="name">dt</span>&gt;</span></span><br><span class="line">  <span class="tag">&lt;<span class="name">dd</span>&gt;</span>名词解释 <span class="tag">&lt;/<span class="name">dd</span>&gt;</span></span><br><span class="line"><span class="tag">&lt;/<span class="name">dl</span>&gt;</span></span><br></pre></li>
+</ol>
+<h3 id="九、结构标记"><a href="#九、结构标记" class="headerlink" title="九、结构标记"></a>九、结构标记</h3><p>用于描述整个网页结构,取代div做布局一套标签;使用div做布局,代码可读性非常差;使用结构标记,可以增强代码的可读性;百度搜索,结构标签比div排名高</p>
+<ul>
+<li>常用的结构标记<br><code>&lt;header&gt;&lt;/header&gt;</code><br>定义网页头部,或者某个区域的头部<br><code>&lt;footer&gt;&lt;/footer&gt;</code><br>定义网页的脚部,或者某个区域的底部<br><code>&lt;nav&gt;&lt;/nav&gt;</code><br>定义网页导航部分<br><code>&lt;section&gt;&lt;/section&gt;</code><br>定义网页主体<br><code>&lt;aside&gt;&lt;/aside&gt;</code><br>定义侧边栏<br><code>&lt;article&gt;&lt;/article&gt;</code><br>定义与文本相关的内容 ex:回帖,评论</li>
+</ul>
+<h3 id="十、表单"><a href="#十、表单" class="headerlink" title="十、表单"></a>十、表单</h3><ol>
+<li>作用<br>①提供可视化的输入控件<br>②收集整理用户输入的数据,并提交给服务器<br>注意:使用ajax,就不使用form标签;form自带收集数据的功能<br><strong>ajax需要手动收集数据(js–dom操作)</strong></li>
+<li>表单的组成<br>前端部分—提供表单控件,与用户交互的可视化控件<br>后端部分—后台接口对提交的数据进行处理</li>
+<li>表单 <code>&lt;form&gt;&lt;/form&gt;</code><br>①<code>action=&quot;&quot;</code><br>  定义表单提交时发生的动作(后台接口)<br>  缺省,默认提交给当前页<br>②<code>method=&quot;&quot;</code><br>  设置请求的提交方法<br>  缺省值(默认值):get<br>  http原生提交方法:  <ul>
+<li>get:明文提交<pre><code>`router.get(..,function(req,res)&#123;req.query.XXX&#125;`
+提交的内容会在地址栏显示
+向服务器要数据的时候,用get
+提交的数据有大小限制 ,上限2kb
+</code></pre>
+</li>
+<li>post:隐式提交<pre><code>`router.post(..,function(req,res)&#123;req.body.XXX&#125;`
+提交的内容不会再地址栏显示
+给服务器数据的时候用post
+提交的数据没有大小限制
+</code></pre>
+<code>delete</code> 删除服务器上数据的方法<br><code>put</code>   往服务器上传递数据<br><code>option</code> 预请求<br>③<code>enctype=&quot;&quot;</code><br>指定表单数据的编码方式<br>允许将什么样数据传递给服务器<br>取值:<br>a.缺省默认值 <code>application/x-www-form-urlencoded</code> 允许上传除了文件以外的所有字符<br>b.<code>text/plain</code> 允许提交普通字符(不能有= &amp; 等特殊符号)<br>c.<code>multipart/form-data</code> 允许提交文件给服务器</li>
+</ul>
+</li>
+<li>表单控件<br><code>form</code>标签中,能够与用户做数据交互的可视化元素<br>①分类<br><code>input</code> 文本框<br><code>textarea</code> 多行文本域<br><code>select&gt;option</code> 下拉选择框<br>其它元素<br>②input的公共属性<br><code>&lt;input type=&quot;&quot;&gt;</code><br><code>type</code>  指定input的类型,不写type,或者单词拼错,默认是text<br><code>name</code> 为控件定义名称,提供给服务器端使用,如果没有name数据提交不了;ajax,input,除了单选和复选框,其它不需要使用name<br><code>value</code> 用户输入的数据,传递给服务器的值<br>例外:所有按钮的value是不提交,按钮的value是改变按钮的显示内容<br><code>disabled</code> 禁用,只能看不能改,不能提交<br>无值属性,设置的时候,没有值,写上属性名就生效</li>
+<li><code>input</code>元素详解<br>①文本框和密码框<br>文本框 <code>type=&quot;text&quot;</code><br>密码框 <code>type=&quot;password&quot;</code><br><strong>属性</strong><br><code>maxlength</code>  指定输入字符的最大长度<br><code>readonly</code>  无值属性 只读,只能读不能改,可以提交<br><code>placeholder</code> 占位提示符<br>②按钮<br><code>type=&quot;submit&quot;</code> 提交按钮,将表单中的数据收集整理并提交<br><code>type=&quot;reset&quot;</code> 重置按钮,让表单恢复到最原始状态<br><code>type=&quot;button&quot;</code> 没有功能,配合事件,调用js方法<br>h5新出的元素<code>&lt;button onclick=&quot;fn()&quot;&gt;登录&lt;/button&gt;</code><br>代替了<code>submit</code>的功能,可以提交.<br><code>value</code>属性,修改显示的文本<br>③单选框/复选框<br>单选按钮 <code>type=&quot;radio&quot;</code><br>多选按钮 <code>type=&quot;checkbox&quot;</code><br><strong>属性</strong><br><code>name</code>除了给元素命名以外,还起到分组的作用<br><code>value</code> 提交的值,如果不设置<code>value</code>,永远是<code>on</code><br><code>checked</code> 无值属性 默认选中<br>④隐藏域<br>数据不想暴露给用户,但是还需要提交,使用隐藏域<br><code>type=&quot;hidden&quot;</code><br>⑤文件选择框<br><code>type=&quot;file&quot;</code><br><strong>前提:</strong><br><code>enctype=&quot;multipart/form-data&quot;</code>可以传文件<br><code>method=&quot;post&quot;</code>            上传大小无限值<br><strong>属性:</strong><br><code>multiple</code> 无值属性,选择多个文件</li>
+<li>textarea多行文本域<br><code>&lt;textarea name=&quot;txt&quot; cols=&quot;5&quot; rows=&quot;3&quot;&gt;&lt;/textarea&gt;</code><br><code>cols=&quot;5&quot;</code><br><code>rows=&quot;3&quot;</code> 根据计算硬件的不同,不准确</li>
+<li>下拉选择框<br><code>select&gt;option</code><br>提交的时候<br>如果<code>option</code>没有<code>value</code>属性,<br>选中的<code>option</code>的内容,当做<code>select</code>的<code>value</code>被提交<br>如果<code>option</code>有<code>value</code>属性,<br>选中的<code>option</code>的<code>value</code>,当做<code>select</code>的<code>value</code>被提交<br><strong>属性:</strong><br><code>select</code>—<code>name value</code><br><code>size</code> 如果&gt;1 变成滚动选择框<br><code>multiple</code> 多选<br><code>option</code>—<code>value</code><br><code>selected</code> 无值属性,默认选中   </li>
+<li>其它元素<br>①<code>label</code><br><strong>功能:</strong><br>1.如果<code>form</code>中以后<code>span</code>,可用<code>label</code>代替<code>span</code><br>2.关联文本与表单控件<br><code>&lt;input id=&quot;auto&quot; type=&quot;checkbox&quot;&gt;</code><br><code>&lt;label for=&quot;auto&quot;&gt;自动登录&lt;/label&gt;</code><br>③浮动框架<br>在一个html 中,引用其他的html<br><code>&lt;iframe&gt;&lt;/iframe&gt;</code><br><code>width=&quot;100%&quot;</code>   设置宽度<br><code>height=&quot;200&quot;</code>    设置高度<br><code>src=&quot;../day03/03_ex.html&quot;</code>  引用的html路径<br><code>frameborder=&quot;5&quot;</code> 设置边框<br><code>scrolling=&quot;no&quot;</code>   设置滚动条  yes/no/auto</li>
+</ol>
+<h3 id="新表单元素-input"><a href="#新表单元素-input" class="headerlink" title="新表单元素 input"></a>新表单元素 <code>input</code></h3><p>H5新提出的控件</p>
+<ol>
+<li>邮箱,提交时验证@,以及@前后有内容<br><code>&lt;input type=&quot;email&quot; name=&quot;em&quot;&gt;</code></li>
+<li>搜索类型,自带快速清除的功能<br><code>&lt;input type=&quot;search&quot; name=&quot;search&quot;&gt;</code></li>
+<li>url类型 验证内容以http:开头<br><code>&lt;input type=&quot;url&quot; name=&quot;url&quot;&gt;</code></li>
+<li>电话号码类型  移动设备,打开虚拟键盘<br><code>&lt;input type=&quot;tel&quot; name=&quot;tel&quot;&gt;</code></li>
+<li>数字类型<br><code>&lt;input max=&quot;20&quot; min=&quot;10&quot; step=&quot;3&quot; type=&quot;number&quot; name=&quot;num&quot;&gt;</code><br>max=”20”   最大值<br>min=”10”   最小值<br>step=”3”    步长</li>
+<li>范围类型<br><code>&lt;input max=&quot;20&quot; min=&quot;10&quot; step=&quot;3&quot; type=&quot;range&quot; name=&quot;range&quot;&gt;</code></li>
+<li>颜色类型<br><code>&lt;input type=&quot;color&quot;&gt;</code></li>
+<li>日期类型<br><code>&lt;input type=&quot;date&quot;&gt;</code></li>
+<li>月份类型<br><code>&lt;input type=&quot;month&quot;&gt;</code></li>
+<li>星期类型<br><code>&lt;input type=&quot;week&quot;&gt;</code></li>
+</ol>
+
+  </div>
+  <div>
+  
+  <div class="post-note note-warning copyright" style="margin-top: 42px">
+    <p><span style="font-weight: bold;">作者：</span><a target="_blank" rel="nofollow noopener noreferrer" href="http://example.com/about">小白&amp;马</a></p>
+    <p><span style="font-weight: bold;">文章链接：</span><a target="_blank" rel="nofollow noopener noreferrer" href="http://example.com/2020/06/02/html/">http://example.com/2020/06/02/html/</a></p>
+    <p><span style="font-weight: bold;">版权声明：</span>本博客所有文章除特别声明外，均采用<a target="_blank" rel="noopener" href="https://creativecommons.org/licenses/by-nc-sa/4.0/deed.zh">CC BY-NC-SA 4.0 协议</a>。转载请注明出处！</p>
+  </div>
+  
+  </div>
+</article>
+<div class="nav">
+  
+  <div class="nav-item-prev">
+    <a href="/2020/06/08/HTML5-1/" class="nav-link">
+      <i class="iconfont icon-left nav-prev-icon"></i>
+      <div>
+        <div class="nav-label">上一篇</div>
+        
+        <div class="nav-title">HTML5-1 </div>
+        
+      </div>
+    </a>
+  </div>
+  
+  
+  <div class="nav-item-next">
+    <a href="/2020/06/01/Markdown帮助文档/" class="nav-link">
+      <div>
+        <div class="nav-label">下一篇</div>
+        
+        <div class="nav-title">Markdown笔记 </div>
+        
+      </div>
+      <i class="iconfont icon-right nav-next-icon"></i>
+    </a>
+  </div>
+  
+</div>
+
+<div class="card card-content toc-card" id="mobiletoc">
+  <div class="toc-header"><i class="iconfont icon-menu" style="padding-right: 2px;"></i>目录</div>
+<ol class="toc"><li class="toc-item toc-level-2"><a class="toc-link" href="#HTML"><span class="toc-text">HTML</span></a><ol class="toc-child"><li class="toc-item toc-level-3"><a class="toc-link" href="#%E4%B8%80%E3%80%81%E4%BB%80%E4%B9%88%E6%98%AFHTML"><span class="toc-text">一、什么是HTML</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#%E4%BA%8C%E3%80%81HTML%E5%9F%BA%E7%A1%80%E8%AF%AD%E6%B3%95"><span class="toc-text">二、HTML基础语法</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#%E4%B8%89%E3%80%81HTML%E5%9F%BA%E7%A1%80%E6%A0%BC%E5%BC%8F"><span class="toc-text">三、HTML基础格式</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#%E5%9B%9B%E3%80%81HTML%E7%9A%84%E6%96%87%E6%A1%A3%E7%BB%93%E6%9E%84"><span class="toc-text">四、HTML的文档结构</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#%E4%BA%94%E3%80%81HTML%E6%96%87%E6%9C%AC%E6%A0%87%E8%AE%B0"><span class="toc-text">五、HTML文本标记</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#%E5%85%AD%E3%80%81%E5%9B%BE%E5%83%8F%E5%92%8C%E9%93%BE%E6%8E%A5"><span class="toc-text">六、图像和链接</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#%E4%B8%83%E3%80%81%E8%A1%A8%E6%A0%BC"><span class="toc-text">七、表格</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#%E5%85%AB%E3%80%81%E5%88%97%E8%A1%A8"><span class="toc-text">八、列表</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#%E4%B9%9D%E3%80%81%E7%BB%93%E6%9E%84%E6%A0%87%E8%AE%B0"><span class="toc-text">九、结构标记</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#%E5%8D%81%E3%80%81%E8%A1%A8%E5%8D%95"><span class="toc-text">十、表单</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#%E6%96%B0%E8%A1%A8%E5%8D%95%E5%85%83%E7%B4%A0-input"><span class="toc-text">新表单元素 input</span></a></li></ol></li></ol>
+</div></main>
+          <aside class="left-column">
+            
+            <div class="card card-author">
+              
+<img src="https://s4.ax1x.com/2021/12/14/oxgQxg.jpg" class="author-img">
+
+<p class="author-name">小白&马</p>
+<p class="author-description">Fight !!</p>
+<div class="author-message">
+  <a class="author-posts-count" href="/archives">
+    <span>23</span>
+    <span>文章</span>
+  </a>
+  <a class="author-categories-count" href="/categories">
+    <span>12</span>
+    <span>分类</span>
+  </a>
+  <a class="author-tags-count" href="/tags">
+    <span>25</span>
+    <span>标签</span>
+  </a>
+</div>
+
+            </div>
+            
+            <div class="sticky-tablet">
+  
+  
+  <article class="display-when-two-columns spacer">
+    <div class="card card-content toc-card">
+      <div class="toc-header"><i class="iconfont icon-menu" style="padding-right: 2px;"></i>目录</div>
+<ol class="toc"><li class="toc-item toc-level-2"><a class="toc-link" href="#HTML"><span class="toc-text">HTML</span></a><ol class="toc-child"><li class="toc-item toc-level-3"><a class="toc-link" href="#%E4%B8%80%E3%80%81%E4%BB%80%E4%B9%88%E6%98%AFHTML"><span class="toc-text">一、什么是HTML</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#%E4%BA%8C%E3%80%81HTML%E5%9F%BA%E7%A1%80%E8%AF%AD%E6%B3%95"><span class="toc-text">二、HTML基础语法</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#%E4%B8%89%E3%80%81HTML%E5%9F%BA%E7%A1%80%E6%A0%BC%E5%BC%8F"><span class="toc-text">三、HTML基础格式</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#%E5%9B%9B%E3%80%81HTML%E7%9A%84%E6%96%87%E6%A1%A3%E7%BB%93%E6%9E%84"><span class="toc-text">四、HTML的文档结构</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#%E4%BA%94%E3%80%81HTML%E6%96%87%E6%9C%AC%E6%A0%87%E8%AE%B0"><span class="toc-text">五、HTML文本标记</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#%E5%85%AD%E3%80%81%E5%9B%BE%E5%83%8F%E5%92%8C%E9%93%BE%E6%8E%A5"><span class="toc-text">六、图像和链接</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#%E4%B8%83%E3%80%81%E8%A1%A8%E6%A0%BC"><span class="toc-text">七、表格</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#%E5%85%AB%E3%80%81%E5%88%97%E8%A1%A8"><span class="toc-text">八、列表</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#%E4%B9%9D%E3%80%81%E7%BB%93%E6%9E%84%E6%A0%87%E8%AE%B0"><span class="toc-text">九、结构标记</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#%E5%8D%81%E3%80%81%E8%A1%A8%E5%8D%95"><span class="toc-text">十、表单</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#%E6%96%B0%E8%A1%A8%E5%8D%95%E5%85%83%E7%B4%A0-input"><span class="toc-text">新表单元素 input</span></a></li></ol></li></ol>
+    </div>
+  </article>
+  
+  
+  <article class="card card-content">
+    <div class="categories-card">
+  <div class="categories-header"><i class="iconfont icon-fenlei" style="padding-right: 2px;"></i>分类</div>
+  <div class="categories-list">
+    
+      <a href="/categories/ES6">
+        <div class="categories-list-item">
+          ES6
+          <span class="categories-list-item-badge">1</span>
+        </div>
+      </a>
+    
+      <a href="/categories/css">
+        <div class="categories-list-item">
+          css
+          <span class="categories-list-item-badge">1</span>
+        </div>
+      </a>
+    
+      <a href="/categories/git">
+        <div class="categories-list-item">
+          git
+          <span class="categories-list-item-badge">1</span>
+        </div>
+      </a>
+    
+      <a href="/categories/HTML5">
+        <div class="categories-list-item">
+          HTML5
+          <span class="categories-list-item-badge">4</span>
+        </div>
+      </a>
+    
+      <a href="/categories/nodejs">
+        <div class="categories-list-item">
+          nodejs
+          <span class="categories-list-item-badge">2</span>
+        </div>
+      </a>
+    
+      <a href="/categories/javascript">
+        <div class="categories-list-item">
+          javascript
+          <span class="categories-list-item-badge">8</span>
+        </div>
+      </a>
+    
+      <a href="/categories/Markdown">
+        <div class="categories-list-item">
+          Markdown
+          <span class="categories-list-item-badge">1</span>
+        </div>
+      </a>
+    
+      <a href="/categories/其他">
+        <div class="categories-list-item">
+          其他
+          <span class="categories-list-item-badge">1</span>
+        </div>
+      </a>
+    
+      <a href="/categories/HTML">
+        <div class="categories-list-item">
+          HTML
+          <span class="categories-list-item-badge">1</span>
+        </div>
+      </a>
+    
+      <a href="/categories/webpack">
+        <div class="categories-list-item">
+          webpack
+          <span class="categories-list-item-badge">1</span>
+        </div>
+      </a>
+    
+      <a href="/categories/Vue">
+        <div class="categories-list-item">
+          Vue
+          <span class="categories-list-item-badge">1</span>
+        </div>
+      </a>
+    
+      <a href="/categories/分类">
+        <div class="categories-list-item">
+          分类
+          <span class="categories-list-item-badge">1</span>
+        </div>
+      </a>
+    
+  </div>
+</div>
+  </article>
+  
+  <article class="card card-content">
+    <div class="tags-card">
+  <div class="tags-header"><i class="iconfont icon-biaoqian" style="padding-right: 2px;"></i>热门标签</div>
+  <div class="tags-list">
+    
+    <a href="\tags\前端" title="前端"><div class="tags-list-item">前端</div></a>
+    
+    <a href="\tags\html" title="html"><div class="tags-list-item">html</div></a>
+    
+    <a href="\tags\javascript" title="javascript"><div class="tags-list-item">javascript</div></a>
+    
+    <a href="\tags\笔记" title="笔记"><div class="tags-list-item">笔记</div></a>
+    
+    <a href="\tags\nodeJS" title="nodeJS"><div class="tags-list-item">nodeJS</div></a>
+    
+    <a href="\tags\标签2" title="标签2"><div class="tags-list-item">标签2</div></a>
+    
+    <a href="\tags\标签" title="标签"><div class="tags-list-item">标签</div></a>
+    
+    <a href="\tags\性能优化" title="性能优化"><div class="tags-list-item">性能优化</div></a>
+    
+    <a href="\tags\知识点" title="知识点"><div class="tags-list-item">知识点</div></a>
+    
+    <a href="\tags\作用域" title="作用域"><div class="tags-list-item">作用域</div></a>
+    
+    <a href="\tags\nodejs" title="nodejs"><div class="tags-list-item">nodejs</div></a>
+    
+    <a href="\tags\前端模块化" title="前端模块化"><div class="tags-list-item">前端模块化</div></a>
+    
+    <a href="\tags\webpack" title="webpack"><div class="tags-list-item">webpack</div></a>
+    
+    <a href="\tags\移动端" title="移动端"><div class="tags-list-item">移动端</div></a>
+    
+    <a href="\tags\基础" title="基础"><div class="tags-list-item">基础</div></a>
+    
+    <a href="\tags\规范" title="规范"><div class="tags-list-item">规范</div></a>
+    
+  </div>
+</div>
+  </article>
+  
+  
+</div>
+          </aside>
+          <aside class="right-column">
+            <div class="sticky-widescreen">
+  
+  
+  <article class="card card-content toc-card">
+    <div class="toc-header"><i class="iconfont icon-menu" style="padding-right: 2px;"></i>目录</div>
+<ol class="toc"><li class="toc-item toc-level-2"><a class="toc-link" href="#HTML"><span class="toc-text">HTML</span></a><ol class="toc-child"><li class="toc-item toc-level-3"><a class="toc-link" href="#%E4%B8%80%E3%80%81%E4%BB%80%E4%B9%88%E6%98%AFHTML"><span class="toc-text">一、什么是HTML</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#%E4%BA%8C%E3%80%81HTML%E5%9F%BA%E7%A1%80%E8%AF%AD%E6%B3%95"><span class="toc-text">二、HTML基础语法</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#%E4%B8%89%E3%80%81HTML%E5%9F%BA%E7%A1%80%E6%A0%BC%E5%BC%8F"><span class="toc-text">三、HTML基础格式</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#%E5%9B%9B%E3%80%81HTML%E7%9A%84%E6%96%87%E6%A1%A3%E7%BB%93%E6%9E%84"><span class="toc-text">四、HTML的文档结构</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#%E4%BA%94%E3%80%81HTML%E6%96%87%E6%9C%AC%E6%A0%87%E8%AE%B0"><span class="toc-text">五、HTML文本标记</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#%E5%85%AD%E3%80%81%E5%9B%BE%E5%83%8F%E5%92%8C%E9%93%BE%E6%8E%A5"><span class="toc-text">六、图像和链接</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#%E4%B8%83%E3%80%81%E8%A1%A8%E6%A0%BC"><span class="toc-text">七、表格</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#%E5%85%AB%E3%80%81%E5%88%97%E8%A1%A8"><span class="toc-text">八、列表</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#%E4%B9%9D%E3%80%81%E7%BB%93%E6%9E%84%E6%A0%87%E8%AE%B0"><span class="toc-text">九、结构标记</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#%E5%8D%81%E3%80%81%E8%A1%A8%E5%8D%95"><span class="toc-text">十、表单</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#%E6%96%B0%E8%A1%A8%E5%8D%95%E5%85%83%E7%B4%A0-input"><span class="toc-text">新表单元素 input</span></a></li></ol></li></ol>
+  </article>
+  
+  
+  <article class="card card-content">
+    <div class="recent-posts-card">
+  <div class="recent-posts-header"><i class="iconfont icon-wenzhang_huaban" style="padding-right: 2px;"></i>最近文章</div>
+  <div class="recent-posts-list">
+    
+      <div class="recent-posts-item">
+        <div class="recent-posts-item-title">2021-12-11</div>
+        <a href="/2021/12/11/js基础巩固/"><div class="recent-posts-item-content">js基础巩固</div></a>
+      </div>
+    
+      <div class="recent-posts-item">
+        <div class="recent-posts-item-title">2021-09-24</div>
+        <a href="/2021/09/24/Git/"><div class="recent-posts-item-content">git</div></a>
+      </div>
+    
+      <div class="recent-posts-item">
+        <div class="recent-posts-item-title">2021-09-24</div>
+        <a href="/2021/09/24/hello-world/"><div class="recent-posts-item-content">Hello World</div></a>
+      </div>
+    
+      <div class="recent-posts-item">
+        <div class="recent-posts-item-title">2021-09-14</div>
+        <a href="/2021/09/14/pm2 安装以及windows开机自启动/"><div class="recent-posts-item-content">pm2开机自启服务</div></a>
+      </div>
+    
+  </div>
+</div>
+  </article>
+  
+  
+</div>
+          </aside>
+        </div>
+      </div>
+    </div>
+  </div>
+  
+  <footer class="footer">
+  <div class="footer-container">
+    <div>
+      <div class="footer-dsc">
+        <span>Copyright ©
+          
+          2020 -
+          
+          2021
+        </span>
+        <a href="/" class="footer-link">学习永不止步 </a>
+      </div>
+    </div>
+
+    
+    <div class="footer-dsc">
+      
+      
+      Powered by
+      <a href="https://hexo.io/" class="footer-link" target="_blank" rel="nofollow noopener noreferrer">&nbsp;Hexo </a>
+      
+      
+      <span>&nbsp;|&nbsp;</span>
+      
+      
+      
+      Theme -
+      <a href="https://github.com/theme-kaze" class="footer-link" target="_blank"
+        rel="nofollow noopener noreferrer">&nbsp;Kaze</a>
+      
+    </div>
+    
+    
+    
+    
+</footer>
+  <a role="button" id="scrollbutton" class="basebutton" >
+  <i class="iconfont icon-arrowleft button-icon"></i>
+</a>
+<a role="button" id="menubutton" class="basebutton">
+  <i class="iconfont icon-menu button-icon"></i>
+</a>
+<a role="button" id="popbutton" class="basebutton">
+  <i class="iconfont icon-expand button-icon"></i>
+</a>
+<a role="button" id="darkbutton" class="basebutton darkwidget">
+  <i class="iconfont icon-weather button-icon"></i>
+</a>
+
+  
+  
+  
+  <script>
+  var addImgLayout = function () {
+    var img = document.querySelectorAll('.post-content img');
+    var i;
+    for (i = 0; i < img.length; i++) {
+      var wrapper = document.createElement('a');
+      wrapper.setAttribute('data-fslightbox', 'gallery');
+      wrapper.setAttribute('href', img[i].getAttribute('data-src'));
+      wrapper.setAttribute('style', 'width: 100%; display: flex; justify-content: center;');
+      img[i].parentElement.insertBefore(wrapper, img[i]);
+      wrapper.appendChild(img[i]);
+    }
+    refreshFsLightbox();
+  }
+</script>
+<script>loadScript("//cdn.jsdelivr.net/npm/fslightbox@3.1.0/index.min.js", addImgLayout)</script>
+  
+  
+  
+<script src="/js/main.js"></script>
+
+  
+  
+  <script>
+    var addLazyload = function () {
+      var observer = lozad('.lozad', {
+        load: function (el) {
+          el.srcset = el.getAttribute('data-src');
+        },
+        loaded: function (el) {
+          el.classList.add('loaded');
+        }
+      });
+      observer.observe();
+    }
+  </script>
+  <script>loadScript("/js/lib/lozad.min.js", addLazyload)</script>
+  
+  
+</body>
+
+</html>

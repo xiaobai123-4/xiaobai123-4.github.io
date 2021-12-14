@@ -1,0 +1,546 @@
+<!DOCTYPE html>
+<html>
+<meta  lang="zh-CN" >
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport"
+    content="width=device-width, user-scalable=no, initial-scale=1.0, maximum-scale=1.0, minimum-scale=1.0">
+  <meta http-equiv="X-UA-Compatible" content="ie=edge">
+  <meta name="theme-color" content="#fff" id="theme-color">
+  <link rel="icon" href="https://s4.ax1x.com/2021/12/14/oxgQxg.jpg">
+  <title>学习永不止步</title>
+  <script>
+    // control reverse button
+    var reverseDarkList = {
+      dark: 'light',
+      light: 'dark'
+    };
+    var themeColor = {
+      dark: '#1c1c1e',
+      light: '#fff'
+    }
+    // get the data of css prefers-color-scheme
+    var getCssMediaQuery = function() {
+      return window.matchMedia('(prefers-color-scheme: dark)').matches ? 'dark' : 'light';
+    };
+    // reverse current darkmode setting function
+    var reverseDarkModeSetting = function() {
+      var setting = localStorage.getItem('user-color-scheme');
+      if(reverseDarkList[setting]) {
+        setting = reverseDarkList[setting];
+      } else if(setting === null) {
+        setting = reverseDarkList[getCssMediaQuery()];
+      } else {
+        return;
+      }
+      localStorage.setItem('user-color-scheme', setting);
+      return setting;
+    };
+    // apply current darkmode setting
+    var setDarkmode = function(mode) {
+      var setting = mode || localStorage.getItem('user-color-scheme');
+      if(setting === getCssMediaQuery()) {
+        document.documentElement.removeAttribute('data-user-color-scheme');
+        localStorage.removeItem('user-color-scheme');
+        document.getElementById('theme-color').content = themeColor[setting];
+      } else if(reverseDarkList[setting]) {
+        document.documentElement.setAttribute('data-user-color-scheme', setting);
+        document.getElementById('theme-color').content = themeColor[setting];
+      } else {
+        document.documentElement.removeAttribute('data-user-color-scheme');
+        localStorage.removeItem('user-color-scheme');
+        document.getElementById('theme-color').content = themeColor[getCssMediaQuery()];
+      }
+    };
+    setDarkmode();
+  </script>
+  <script>
+    function loadScript(url, cb) {
+      var script = document.createElement('script');
+      script.src = url;
+      if (cb) script.onload = cb;
+      script.async = true;
+      document.body.appendChild(script);
+    }
+  </script>
+  
+  <link rel="preload" href="//at.alicdn.com/t/font_1946621_vpj3dq9ceqa.css" as="style" >
+  <link rel="preload" href="//at.alicdn.com/t/font_1952792_89b4ac4k4up.css" as="style" >
+  
+  <link rel="preload" href="//cdn.jsdelivr.net/npm/fslightbox@3.1.0/index.min.js" as="script">
+  
+  
+  <link rel="preload" href="/js/lib/lozad.min.js" as="script">
+  
+  
+  
+  
+  
+  
+  
+  
+<link rel="stylesheet" href="/css/main.css">
+
+  
+  
+<link rel="stylesheet" href="//at.alicdn.com/t/font_1946621_vpj3dq9ceqa.css">
+
+  
+  
+<link rel="stylesheet" href="//at.alicdn.com/t/font_1952792_89b4ac4k4up.css">
+
+  
+  
+  
+<meta name="generator" content="Hexo 5.4.0"></head>
+
+
+<body>
+  <div class="wrapper">
+    
+    <nav class="navbar">
+  <div class="navbar-logo">
+    <span class="navbar-logo-main">
+      
+      <img class="navbar-logo-img" src="https://s4.ax1x.com/2021/12/14/oxgQxg.jpg">
+      
+      <span class="navbar-logo-dsc">学习永不止步</span>
+    </span>
+  </div>
+  <div class="navbar-menu">
+    
+    <a href="/" class="navbar-menu-item">首页 </a>
+    
+    <a href="/archives" class="navbar-menu-item">归档 </a>
+    
+    <a href="/tags" class="navbar-menu-item">标签 </a>
+    
+    <a href="/categories" class="navbar-menu-item">分类 </a>
+    
+    <a href="/links" class="navbar-menu-item">友链 </a>
+    
+    <a class="navbar-menu-item darknavbar" id="dark"><i class="iconfont icon-weather"></i></a>
+  </div>
+</nav>
+    
+    <div class="section-wrap">
+      <div class="container">
+        <div class="columns">
+          <main class="main-column">
+<article class="card card-content">
+  <header>
+    <h1 class="post-title">
+      Mockjs使用
+    </h1>
+  </header>
+  <div class="post-meta post-show-meta">
+    <time datetime="2020-11-30T02:24:01.000Z" style="display: flex; align-items: center;">
+      <i class="iconfont icon-calendar" style="margin-right: 2px;"></i>
+      <span>2020-11-30</span>
+    </time>
+    
+    <span class="dot"></span>
+    
+    <a href="/categories/javascript/" class="post-meta-link">javascript</a>
+    
+    <a href="/categories/javascript/Vue/" class="post-meta-link">Vue</a>
+    
+    
+    
+    <span class="dot"></span>
+    <span>1.2k 字</span>
+    
+  </div>
+  
+  <div class="post-meta post-show-meta" style="margin-top: -10px;">
+    <div style="display: flex; align-items: center;">
+      <i class="iconfont icon-biaoqian" style="margin-right: 2px; font-size: 1.15rem;"></i>
+      
+      
+        <a href="/tags/javascript/" class="post-meta-link">javascript</a>
+      
+      
+      <span class="dot"></span>
+      
+        <a href="/tags/Vue/" class="post-meta-link">Vue</a>
+      
+      
+      <span class="dot"></span>
+      
+        <a href="/tags/组件/" class="post-meta-link">组件</a>
+      
+    </div>
+  </div>
+  
+  </header>
+  <div id="section" class="post-content">
+    <h1 id="Mockjs使用"><a href="#Mockjs使用" class="headerlink" title="Mockjs使用"></a>Mockjs使用</h1><p>Vue中Mockjs的使用</p>
+<p><a target="_blank" rel="noopener" href="http://mockjs.com/examples.html">mockjs模板</a></p>
+<pre class="highlight"><span class="line"># 安装</span><br><span class="line">npm install mockjs</span><br><span class="line"># 全局安装</span><br><span class="line">$ npm install mockjs -g</span><br></pre>
+
+<pre class="highlight"><span class="line"><span class="comment">// 使用 Mock</span></span><br><span class="line"><span class="keyword">var</span> Mock = <span class="built_in">require</span>(<span class="string">&#x27;mockjs&#x27;</span>)</span><br><span class="line"><span class="keyword">var</span> data = Mock.mock(&#123;</span><br><span class="line">    <span class="comment">// 属性 list 的值是一个数组，其中含有 1 到 10 个元素</span></span><br><span class="line">    <span class="string">&#x27;list|1-10&#x27;</span>: [&#123;</span><br><span class="line">        <span class="comment">// 属性 id 是一个自增数，起始值为 1，每次增 1</span></span><br><span class="line">        <span class="string">&#x27;id|+1&#x27;</span>: <span class="number">1</span></span><br><span class="line">    &#125;]</span><br><span class="line">&#125;)</span><br><span class="line"><span class="comment">// 输出结果</span></span><br><span class="line"><span class="built_in">console</span>.log(<span class="built_in">JSON</span>.stringify(data, <span class="literal">null</span>, <span class="number">4</span>))</span><br></pre>
+
+<h3 id="实例"><a href="#实例" class="headerlink" title="实例:"></a>实例:</h3><h4 id="第一步"><a href="#第一步" class="headerlink" title="第一步:"></a>第一步:</h4><pre class="highlight"><span class="line"><span class="keyword">var</span> Mock = <span class="built_in">require</span>(<span class="string">&quot;mockjs&quot;</span>);</span><br><span class="line"><span class="keyword">let</span> MockList=&#123;&#125;</span><br><span class="line">MockList.orderlist=Mock.mock(<span class="string">&quot;/get_orderlist&quot;</span>, &#123;</span><br><span class="line">  <span class="string">&#x27;data|90&#x27;</span>:[&#123;</span><br><span class="line">      <span class="string">&#x27;date&#x27;</span>: <span class="string">&#x27;@date()&#x27;</span>,</span><br><span class="line">      <span class="string">&#x27;name&#x27;</span>:<span class="string">&#x27;@cname()&#x27;</span>,</span><br><span class="line">      <span class="string">&#x27;province|1&#x27;</span>: [<span class="string">&quot;上海&quot;</span>,<span class="string">&quot;重庆&quot;</span>,<span class="string">&quot;山东&quot;</span>],</span><br><span class="line">      <span class="string">&#x27;city&#x27;</span>: <span class="string">&#x27;@county()&#x27;</span>,</span><br><span class="line">      <span class="string">&#x27;address&#x27;</span>: <span class="string">&#x27;@county()&#x27;</span>,</span><br><span class="line">      <span class="string">&#x27;zip&#x27;</span>:<span class="regexp">/\d&#123;6&#125;/</span> </span><br><span class="line">  &#125;]</span><br><span class="line">&#125;)</span><br><span class="line"></span><br><span class="line">MockList.productList = Mock.mock(<span class="string">&#x27;/get_productlist&#x27;</span>, &#123;</span><br><span class="line">  <span class="string">&#x27;data|50&#x27;</span>: [&#123;</span><br><span class="line">    <span class="string">&#x27;id&#x27;</span>: <span class="string">&#x27;@id()&#x27;</span>,</span><br><span class="line">    <span class="string">&#x27;number|+1&#x27;</span>: <span class="number">1</span>,</span><br><span class="line">    <span class="string">&#x27;author|1&#x27;</span>: [<span class="string">&#x27;柳州螺狮粉&#x27;</span>, <span class="string">&#x27;长沙臭豆腐&#x27;</span>, <span class="string">&#x27;旺旺碎冰冰&#x27;</span>, <span class="string">&#x27;喜之郎果冻&#x27;</span>, <span class="string">&#x27;铁板嫩豆腐&#x27;</span>, <span class="string">&#x27;潮味花甲粉&#x27;</span>, <span class="string">&#x27;蒸羊羔&#x27;</span>, <span class="string">&#x27;蒸熊掌&#x27;</span>, <span class="string">&#x27;蒸鹿尾儿&#x27;</span>, <span class="string">&#x27;烧花鸭&#x27;</span>, <span class="string">&#x27;烧雏鸡儿&#x27;</span>, <span class="string">&#x27; 烧子鹅&#x27;</span>, <span class="string">&#x27;卤煮咸鸭&#x27;</span>, <span class="string">&#x27;酱鸡&#x27;</span>, <span class="string">&#x27;腊肉&#x27;</span>, <span class="string">&#x27;松花&#x27;</span>, <span class="string">&#x27;小肚儿&#x27;</span>, <span class="string">&#x27;晾肉&#x27;</span>, <span class="string">&#x27;香肠&#x27;</span>, <span class="string">&#x27;什锦苏盘&#x27;</span>, <span class="string">&#x27;熏鸡&#x27;</span>, <span class="string">&#x27;白肚儿&#x27;</span>, <span class="string">&#x27;清蒸八宝猪&#x27;</span>, <span class="string">&#x27;江米酿鸭子&#x27;</span>, <span class="string">&#x27;罐儿野鸡&#x27;</span>, <span class="string">&#x27;罐儿鹌鹑&#x27;</span>, <span class="string">&#x27;卤什锦&#x27;</span>, <span class="string">&#x27;卤子鹅&#x27;</span>, <span class="string">&#x27;卤虾&#x27;</span>, <span class="string">&#x27;烩虾&#x27;</span>, <span class="string">&#x27;炝虾仁儿&#x27;</span>, <span class="string">&#x27;山鸡&#x27;</span>, <span class="string">&#x27;兔脯&#x27;</span>, <span class="string">&#x27;菜蟒&#x27;</span>, <span class="string">&#x27;银鱼&#x27;</span>, <span class="string">&#x27;清蒸哈什蚂&#x27;</span>, <span class="string">&#x27;烩鸭腰儿&#x27;</span>, <span class="string">&#x27;烩鸭条儿&#x27;</span>, <span class="string">&#x27;清拌鸭丝儿&#x27;</span>, <span class="string">&#x27;黄心管儿&#x27;</span>, <span class="string">&#x27;焖白鳝&#x27;</span>, <span class="string">&#x27;焖黄鳝&#x27;</span>, <span class="string">&#x27;豆鼓鲇鱼&#x27;</span>, <span class="string">&#x27;锅烧鲇鱼&#x27;</span>, <span class="string">&#x27;烀皮甲鱼&#x27;</span>, <span class="string">&#x27;锅烧鲤鱼&#x27;</span>, <span class="string">&#x27;抓炒鲤鱼&#x27;</span>, <span class="string">&#x27;软炸里脊&#x27;</span>, <span class="string">&#x27;软炸鸡&#x27;</span>, <span class="string">&#x27;什锦套肠&#x27;</span>, <span class="string">&#x27;麻酥油卷儿&#x27;</span>, <span class="string">&#x27;熘鲜蘑&#x27;</span>, <span class="string">&#x27;熘鱼脯儿&#x27;</span>, <span class="string">&#x27;熘鱼片儿&#x27;</span>, <span class="string">&#x27;熘鱼肚儿&#x27;</span>, <span class="string">&#x27;醋熘肉片儿&#x27;</span>, <span class="string">&#x27;熘白蘑&#x27;</span>, <span class="string">&#x27;烩三鲜&#x27;</span>, <span class="string">&#x27;炒银鱼&#x27;</span>, <span class="string">&#x27;烩鳗鱼&#x27;</span>, <span class="string">&#x27;清蒸火腿&#x27;</span>, <span class="string">&#x27;炒白虾&#x27;</span>, <span class="string">&#x27;炝青蛤&#x27;</span>, <span class="string">&#x27;炒面鱼&#x27;</span>, <span class="string">&#x27;炝芦笋&#x27;</span>, <span class="string">&#x27;芙蓉燕菜&#x27;</span>, <span class="string">&#x27;炒肝尖儿&#x27;</span>, <span class="string">&#x27;南炒肝关儿&#x27;</span>, <span class="string">&#x27;油爆肚仁儿&#x27;</span>, <span class="string">&#x27;汤爆肚领儿&#x27;</span>, <span class="string">&#x27;炒金丝&#x27;</span>, <span class="string">&#x27;烩银丝&#x27;</span>, <span class="string">&#x27;糖熘饹炸儿&#x27;</span>, <span class="string">&#x27;糖熘荸荠&#x27;</span>, <span class="string">&#x27;蜜丝山药&#x27;</span>, <span class="string">&#x27;拔丝鲜桃&#x27;</span>, <span class="string">&#x27;熘南贝&#x27;</span>, <span class="string">&#x27;炒南贝&#x27;</span>, <span class="string">&#x27;烩鸭丝&#x27;</span>, <span class="string">&#x27;烩散丹&#x27;</span>, <span class="string">&#x27;清蒸鸡&#x27;</span>, <span class="string">&#x27;黄焖鸡&#x27;</span>, <span class="string">&#x27;大炒鸡&#x27;</span>, <span class="string">&#x27;熘碎鸡&#x27;</span>, <span class="string">&#x27;香酥鸡&#x27;</span>, <span class="string">&#x27;炒鸡丁儿， 熘鸡块儿&#x27;</span>, <span class="string">&#x27;&#x27;</span>, <span class="string">&#x27;三鲜丁儿&#x27;</span>, <span class="string">&#x27;八宝丁儿&#x27;</span>, <span class="string">&#x27;清蒸玉兰片&#x27;</span>, <span class="string">&#x27;炒虾仁儿&#x27;</span>, <span class="string">&#x27;炒腰花儿&#x27;</span>, <span class="string">&#x27;炒蹄筋儿&#x27;</span>, <span class="string">&#x27;锅烧海参&#x27;</span>, <span class="string">&#x27;锅烧白菜&#x27;</span>, <span class="string">&#x27;炸海耳&#x27;</span>, <span class="string">&#x27;浇田鸡&#x27;</span>, <span class="string">&#x27;桂花翅子&#x27;</span>, <span class="string">&#x27;清蒸翅子&#x27;</span>, <span class="string">&#x27;炸飞禽&#x27;</span>, <span class="string">&#x27;炸葱&#x27;</span>, <span class="string">&#x27;炸排骨&#x27;</span>, <span class="string">&#x27;烩鸡肠肚儿&#x27;</span>, <span class="string">&#x27;烩南荠&#x27;</span>, <span class="string">&#x27;盐水肘花儿&#x27;</span>, <span class="string">&#x27;拌瓤子&#x27;</span>],</span><br><span class="line">    <span class="string">&#x27;brand&#x27;</span>: <span class="string">&#x27;@ctitle(3, 6)&#x27;</span>, <span class="comment">// 品牌</span></span><br><span class="line">    <span class="string">&#x27;date&#x27;</span>: <span class="string">&#x27;@date()&#x27;</span>, <span class="comment">// 随机生成年月日加时间 日期</span></span><br><span class="line">    <span class="string">&#x27;price|1-100.1-1&#x27;</span>: <span class="number">1</span>,</span><br><span class="line">    <span class="string">&#x27;title&#x27;</span>: <span class="string">&#x27;@csentence(8, 12)&#x27;</span>, <span class="comment">// 随机生成长度为10-25的商品简介</span></span><br><span class="line">    <span class="string">&#x27;sales|1-100&#x27;</span>: <span class="number">1</span> <span class="comment">// 销量</span></span><br><span class="line">  &#125;]</span><br><span class="line">&#125;)</span><br><span class="line"><span class="built_in">module</span>.exports = MockList</span><br></pre>
+
+<h4 id="第二步"><a href="#第二步" class="headerlink" title="第二步"></a>第二步</h4><p>请求触发</p>
+<pre class="highlight"><span class="line">&lt;template&gt;</span><br><span class="line">  &lt;div&gt;</span><br><span class="line">    &lt;ol&gt;</span><br><span class="line">      &lt;li v-for=&quot;item in list&quot; :key=&quot;item.key&quot;&gt;</span><br><span class="line">        标题:&lt;span&gt;&#123;&#123; item.Title &#125;&#125;&lt;/span</span><br><span class="line">        &gt;&lt;br /&gt;</span><br><span class="line">        下载方式:&lt;span&gt;&#123;&#123; item.Action &#125;&#125;&lt;/span</span><br><span class="line">        &gt;&lt;br /&gt;</span><br><span class="line">        备注:&lt;span&gt;&#123;&#123; item.Content &#125;&#125;&lt;/span&gt;</span><br><span class="line">      &lt;/li&gt;</span><br><span class="line">    &lt;/ol&gt;</span><br><span class="line">    &lt;ol&gt;</span><br><span class="line">      &lt;li v-for=&quot;item in msg&quot; :key=&quot;item.key&quot;&gt;</span><br><span class="line">        名字:&lt;span&gt;&#123;&#123; item.name &#125;&#125;&lt;/span</span><br><span class="line">        &gt;</span><br><span class="line">      &lt;/li&gt;</span><br><span class="line">    &lt;/ol&gt;</span><br><span class="line">    &lt;span&gt;&#123;&#123; msg &#125;&#125;&lt;/span&gt;</span><br><span class="line">  &lt;/div&gt;</span><br><span class="line">&lt;/template&gt;</span><br><span class="line"></span><br><span class="line">&lt;script&gt;</span><br><span class="line">import axios from &quot;axios&quot;;</span><br><span class="line">import &quot;../mock/api.js&quot;;</span><br><span class="line"></span><br><span class="line">export default &#123;</span><br><span class="line">  name: &quot;MockDemo&quot;,</span><br><span class="line">  data() &#123;</span><br><span class="line">    return &#123;</span><br><span class="line">      list: [],</span><br><span class="line">      msg: &quot;&quot;,</span><br><span class="line">    &#125;;</span><br><span class="line">  &#125;,</span><br><span class="line">  methods: &#123;</span><br><span class="line">    get_list()&#123;</span><br><span class="line">      axios</span><br><span class="line">      .get(&quot;/get_music&quot;)</span><br><span class="line">      .then((res) =&gt; &#123;</span><br><span class="line">        this.list = res.data.data;</span><br><span class="line">        console.log(&quot;data:&quot;, res.data, &quot;status:&quot; + res.status);</span><br><span class="line">      &#125;)</span><br><span class="line">      .catch((err) =&gt; &#123;</span><br><span class="line">        console.log(&quot;错误&quot; + err);</span><br><span class="line">      &#125;);</span><br><span class="line">    &#125;</span><br><span class="line">  &#125;,</span><br><span class="line">  mounted() &#123;</span><br><span class="line">    // 使用 Mock</span><br><span class="line">    // var Mock = require(&quot;mockjs&quot;);</span><br><span class="line">    // var data = Mock.mock(&quot;https:cdn.liyanhui.com&quot;, &#123;</span><br><span class="line">    //     &#x27;data|5&#x27;:[&#123;</span><br><span class="line">    //         &#x27;key|+1&#x27;: 1,</span><br><span class="line">    //         &#x27;mockTitle|1&#x27;:[&#x27;哑巴&#x27;, &#x27;Butter-fly&#x27;, &#x27;肆无忌惮&#x27;, &#x27;摩天大楼&#x27;, &#x27;初学者&#x27;],</span><br><span class="line">    //         &#x27;mockContent|1&#x27;: [&#x27;你翻译不了我的声响&#x27;, &#x27;数码宝贝主题曲&#x27;, &#x27;摩天大楼太稀有&#x27;, &#x27;像海浪撞破了山丘&#x27;],</span><br><span class="line">    //         &#x27;mockAction|1&#x27;: [&#x27;下载&#x27;, &#x27;试听&#x27;, &#x27;喜欢&#x27;]</span><br><span class="line">    //     &#125;]</span><br><span class="line">    // &#125;)</span><br><span class="line">    // 输出结果</span><br><span class="line">    // console.log(JSON.stringify(data.data, null, 4));</span><br><span class="line">    this.get_list()</span><br><span class="line">  &#125;,</span><br><span class="line">&#125;;</span><br><span class="line">&lt;/script&gt;</span><br><span class="line"></span><br><span class="line">&lt;style scoped&gt;</span><br><span class="line">li &gt; span &#123;</span><br><span class="line">  background-color: aquamarine;</span><br><span class="line">&#125;</span><br><span class="line">&lt;/style&gt;</span><br></pre>
+
+
+  </div>
+  <div>
+  
+  <div class="post-note note-warning copyright" style="margin-top: 42px">
+    <p><span style="font-weight: bold;">作者：</span><a target="_blank" rel="nofollow noopener noreferrer" href="http://example.com/about">小白&amp;马</a></p>
+    <p><span style="font-weight: bold;">文章链接：</span><a target="_blank" rel="nofollow noopener noreferrer" href="http://example.com/2020/11/30/Mockjs%E4%BD%BF%E7%94%A8/">http://example.com/2020/11/30/Mockjs%E4%BD%BF%E7%94%A8/</a></p>
+    <p><span style="font-weight: bold;">版权声明：</span>本博客所有文章除特别声明外，均采用<a target="_blank" rel="noopener" href="https://creativecommons.org/licenses/by-nc-sa/4.0/deed.zh">CC BY-NC-SA 4.0 协议</a>。转载请注明出处！</p>
+  </div>
+  
+  </div>
+</article>
+<div class="nav">
+  
+  <div class="nav-item-prev">
+    <a href="/2021/03/04/服务器搭建/" class="nav-link">
+      <i class="iconfont icon-left nav-prev-icon"></i>
+      <div>
+        <div class="nav-label">上一篇</div>
+        
+        <div class="nav-title">template </div>
+        
+      </div>
+    </a>
+  </div>
+  
+  
+  <div class="nav-item-next">
+    <a href="/2020/08/17/回调函数/" class="nav-link">
+      <div>
+        <div class="nav-label">下一篇</div>
+        
+        <div class="nav-title">callback回调函数 </div>
+        
+      </div>
+      <i class="iconfont icon-right nav-next-icon"></i>
+    </a>
+  </div>
+  
+</div>
+
+<div class="card card-content toc-card" id="mobiletoc">
+  <div class="toc-header"><i class="iconfont icon-menu" style="padding-right: 2px;"></i>目录</div>
+<ol class="toc"><li class="toc-item toc-level-1"><a class="toc-link" href="#Mockjs%E4%BD%BF%E7%94%A8"><span class="toc-text">Mockjs使用</span></a><ol class="toc-child"><li class="toc-item toc-level-3"><a class="toc-link" href="#%E5%AE%9E%E4%BE%8B"><span class="toc-text">实例:</span></a><ol class="toc-child"><li class="toc-item toc-level-4"><a class="toc-link" href="#%E7%AC%AC%E4%B8%80%E6%AD%A5"><span class="toc-text">第一步:</span></a></li><li class="toc-item toc-level-4"><a class="toc-link" href="#%E7%AC%AC%E4%BA%8C%E6%AD%A5"><span class="toc-text">第二步</span></a></li></ol></li></ol></li></ol></li></ol>
+</div></main>
+          <aside class="left-column">
+            
+            <div class="card card-author">
+              
+<img src="https://s4.ax1x.com/2021/12/14/oxgQxg.jpg" class="author-img">
+
+<p class="author-name">小白&马</p>
+<p class="author-description">Fight !!</p>
+<div class="author-message">
+  <a class="author-posts-count" href="/archives">
+    <span>23</span>
+    <span>文章</span>
+  </a>
+  <a class="author-categories-count" href="/categories">
+    <span>12</span>
+    <span>分类</span>
+  </a>
+  <a class="author-tags-count" href="/tags">
+    <span>25</span>
+    <span>标签</span>
+  </a>
+</div>
+
+            </div>
+            
+            <div class="sticky-tablet">
+  
+  
+  <article class="display-when-two-columns spacer">
+    <div class="card card-content toc-card">
+      <div class="toc-header"><i class="iconfont icon-menu" style="padding-right: 2px;"></i>目录</div>
+<ol class="toc"><li class="toc-item toc-level-1"><a class="toc-link" href="#Mockjs%E4%BD%BF%E7%94%A8"><span class="toc-text">Mockjs使用</span></a><ol class="toc-child"><li class="toc-item toc-level-3"><a class="toc-link" href="#%E5%AE%9E%E4%BE%8B"><span class="toc-text">实例:</span></a><ol class="toc-child"><li class="toc-item toc-level-4"><a class="toc-link" href="#%E7%AC%AC%E4%B8%80%E6%AD%A5"><span class="toc-text">第一步:</span></a></li><li class="toc-item toc-level-4"><a class="toc-link" href="#%E7%AC%AC%E4%BA%8C%E6%AD%A5"><span class="toc-text">第二步</span></a></li></ol></li></ol></li></ol></li></ol>
+    </div>
+  </article>
+  
+  
+  <article class="card card-content">
+    <div class="categories-card">
+  <div class="categories-header"><i class="iconfont icon-fenlei" style="padding-right: 2px;"></i>分类</div>
+  <div class="categories-list">
+    
+      <a href="/categories/ES6">
+        <div class="categories-list-item">
+          ES6
+          <span class="categories-list-item-badge">1</span>
+        </div>
+      </a>
+    
+      <a href="/categories/css">
+        <div class="categories-list-item">
+          css
+          <span class="categories-list-item-badge">1</span>
+        </div>
+      </a>
+    
+      <a href="/categories/git">
+        <div class="categories-list-item">
+          git
+          <span class="categories-list-item-badge">1</span>
+        </div>
+      </a>
+    
+      <a href="/categories/HTML5">
+        <div class="categories-list-item">
+          HTML5
+          <span class="categories-list-item-badge">4</span>
+        </div>
+      </a>
+    
+      <a href="/categories/nodejs">
+        <div class="categories-list-item">
+          nodejs
+          <span class="categories-list-item-badge">2</span>
+        </div>
+      </a>
+    
+      <a href="/categories/javascript">
+        <div class="categories-list-item">
+          javascript
+          <span class="categories-list-item-badge">8</span>
+        </div>
+      </a>
+    
+      <a href="/categories/Markdown">
+        <div class="categories-list-item">
+          Markdown
+          <span class="categories-list-item-badge">1</span>
+        </div>
+      </a>
+    
+      <a href="/categories/其他">
+        <div class="categories-list-item">
+          其他
+          <span class="categories-list-item-badge">1</span>
+        </div>
+      </a>
+    
+      <a href="/categories/HTML">
+        <div class="categories-list-item">
+          HTML
+          <span class="categories-list-item-badge">1</span>
+        </div>
+      </a>
+    
+      <a href="/categories/webpack">
+        <div class="categories-list-item">
+          webpack
+          <span class="categories-list-item-badge">1</span>
+        </div>
+      </a>
+    
+      <a href="/categories/Vue">
+        <div class="categories-list-item">
+          Vue
+          <span class="categories-list-item-badge">1</span>
+        </div>
+      </a>
+    
+      <a href="/categories/分类">
+        <div class="categories-list-item">
+          分类
+          <span class="categories-list-item-badge">1</span>
+        </div>
+      </a>
+    
+  </div>
+</div>
+  </article>
+  
+  <article class="card card-content">
+    <div class="tags-card">
+  <div class="tags-header"><i class="iconfont icon-biaoqian" style="padding-right: 2px;"></i>热门标签</div>
+  <div class="tags-list">
+    
+    <a href="\tags\前端" title="前端"><div class="tags-list-item">前端</div></a>
+    
+    <a href="\tags\html" title="html"><div class="tags-list-item">html</div></a>
+    
+    <a href="\tags\javascript" title="javascript"><div class="tags-list-item">javascript</div></a>
+    
+    <a href="\tags\笔记" title="笔记"><div class="tags-list-item">笔记</div></a>
+    
+    <a href="\tags\nodeJS" title="nodeJS"><div class="tags-list-item">nodeJS</div></a>
+    
+    <a href="\tags\标签2" title="标签2"><div class="tags-list-item">标签2</div></a>
+    
+    <a href="\tags\标签" title="标签"><div class="tags-list-item">标签</div></a>
+    
+    <a href="\tags\性能优化" title="性能优化"><div class="tags-list-item">性能优化</div></a>
+    
+    <a href="\tags\知识点" title="知识点"><div class="tags-list-item">知识点</div></a>
+    
+    <a href="\tags\作用域" title="作用域"><div class="tags-list-item">作用域</div></a>
+    
+    <a href="\tags\nodejs" title="nodejs"><div class="tags-list-item">nodejs</div></a>
+    
+    <a href="\tags\前端模块化" title="前端模块化"><div class="tags-list-item">前端模块化</div></a>
+    
+    <a href="\tags\webpack" title="webpack"><div class="tags-list-item">webpack</div></a>
+    
+    <a href="\tags\移动端" title="移动端"><div class="tags-list-item">移动端</div></a>
+    
+    <a href="\tags\基础" title="基础"><div class="tags-list-item">基础</div></a>
+    
+    <a href="\tags\规范" title="规范"><div class="tags-list-item">规范</div></a>
+    
+  </div>
+</div>
+  </article>
+  
+  
+</div>
+          </aside>
+          <aside class="right-column">
+            <div class="sticky-widescreen">
+  
+  
+  <article class="card card-content toc-card">
+    <div class="toc-header"><i class="iconfont icon-menu" style="padding-right: 2px;"></i>目录</div>
+<ol class="toc"><li class="toc-item toc-level-1"><a class="toc-link" href="#Mockjs%E4%BD%BF%E7%94%A8"><span class="toc-text">Mockjs使用</span></a><ol class="toc-child"><li class="toc-item toc-level-3"><a class="toc-link" href="#%E5%AE%9E%E4%BE%8B"><span class="toc-text">实例:</span></a><ol class="toc-child"><li class="toc-item toc-level-4"><a class="toc-link" href="#%E7%AC%AC%E4%B8%80%E6%AD%A5"><span class="toc-text">第一步:</span></a></li><li class="toc-item toc-level-4"><a class="toc-link" href="#%E7%AC%AC%E4%BA%8C%E6%AD%A5"><span class="toc-text">第二步</span></a></li></ol></li></ol></li></ol></li></ol>
+  </article>
+  
+  
+  <article class="card card-content">
+    <div class="recent-posts-card">
+  <div class="recent-posts-header"><i class="iconfont icon-wenzhang_huaban" style="padding-right: 2px;"></i>最近文章</div>
+  <div class="recent-posts-list">
+    
+      <div class="recent-posts-item">
+        <div class="recent-posts-item-title">2021-12-11</div>
+        <a href="/2021/12/11/js基础巩固/"><div class="recent-posts-item-content">js基础巩固</div></a>
+      </div>
+    
+      <div class="recent-posts-item">
+        <div class="recent-posts-item-title">2021-09-24</div>
+        <a href="/2021/09/24/Git/"><div class="recent-posts-item-content">git</div></a>
+      </div>
+    
+      <div class="recent-posts-item">
+        <div class="recent-posts-item-title">2021-09-24</div>
+        <a href="/2021/09/24/hello-world/"><div class="recent-posts-item-content">Hello World</div></a>
+      </div>
+    
+      <div class="recent-posts-item">
+        <div class="recent-posts-item-title">2021-09-14</div>
+        <a href="/2021/09/14/pm2 安装以及windows开机自启动/"><div class="recent-posts-item-content">pm2开机自启服务</div></a>
+      </div>
+    
+  </div>
+</div>
+  </article>
+  
+  
+</div>
+          </aside>
+        </div>
+      </div>
+    </div>
+  </div>
+  
+  <footer class="footer">
+  <div class="footer-container">
+    <div>
+      <div class="footer-dsc">
+        <span>Copyright ©
+          
+          2020 -
+          
+          2021
+        </span>
+        <a href="/" class="footer-link">学习永不止步 </a>
+      </div>
+    </div>
+
+    
+    <div class="footer-dsc">
+      
+      
+      Powered by
+      <a href="https://hexo.io/" class="footer-link" target="_blank" rel="nofollow noopener noreferrer">&nbsp;Hexo </a>
+      
+      
+      <span>&nbsp;|&nbsp;</span>
+      
+      
+      
+      Theme -
+      <a href="https://github.com/theme-kaze" class="footer-link" target="_blank"
+        rel="nofollow noopener noreferrer">&nbsp;Kaze</a>
+      
+    </div>
+    
+    
+    
+    
+</footer>
+  <a role="button" id="scrollbutton" class="basebutton" >
+  <i class="iconfont icon-arrowleft button-icon"></i>
+</a>
+<a role="button" id="menubutton" class="basebutton">
+  <i class="iconfont icon-menu button-icon"></i>
+</a>
+<a role="button" id="popbutton" class="basebutton">
+  <i class="iconfont icon-expand button-icon"></i>
+</a>
+<a role="button" id="darkbutton" class="basebutton darkwidget">
+  <i class="iconfont icon-weather button-icon"></i>
+</a>
+
+  
+  
+  
+  <script>
+  var addImgLayout = function () {
+    var img = document.querySelectorAll('.post-content img');
+    var i;
+    for (i = 0; i < img.length; i++) {
+      var wrapper = document.createElement('a');
+      wrapper.setAttribute('data-fslightbox', 'gallery');
+      wrapper.setAttribute('href', img[i].getAttribute('data-src'));
+      wrapper.setAttribute('style', 'width: 100%; display: flex; justify-content: center;');
+      img[i].parentElement.insertBefore(wrapper, img[i]);
+      wrapper.appendChild(img[i]);
+    }
+    refreshFsLightbox();
+  }
+</script>
+<script>loadScript("//cdn.jsdelivr.net/npm/fslightbox@3.1.0/index.min.js", addImgLayout)</script>
+  
+  
+  
+<script src="/js/main.js"></script>
+
+  
+  
+  <script>
+    var addLazyload = function () {
+      var observer = lozad('.lozad', {
+        load: function (el) {
+          el.srcset = el.getAttribute('data-src');
+        },
+        loaded: function (el) {
+          el.classList.add('loaded');
+        }
+      });
+      observer.observe();
+    }
+  </script>
+  <script>loadScript("/js/lib/lozad.min.js", addLazyload)</script>
+  
+  
+</body>
+
+</html>
