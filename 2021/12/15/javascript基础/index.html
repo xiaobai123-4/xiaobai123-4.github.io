@@ -128,7 +128,7 @@
         <div class="columns">
           <main class="main-column">
 <div class="image-wrapper">
-  <img src="https://img.songhn.com/img/latex.jpg?imageslim" data-src="https://img.songhn.com/img/latex.jpg?imageslim"
+  <img src="https://s4.ax1x.com/2021/12/14/oxowzq.jpg" data-src="https://s4.ax1x.com/2021/12/14/oxowzq.jpg"
     srcset="data:image/svg+xml,%3Csvg%20xmlns=&#39;http://www.w3.org/2000/svg&#39;%20viewBox=&#39;0%200%20300%20300&#39;%3E%3C/svg%3E"
     class="image lozad">
 </div>
@@ -136,23 +136,23 @@
 <article class="card card-content">
   <header>
     <h1 class="post-title">
-      template
+      javascript基础001
     </h1>
   </header>
   <div class="post-meta post-show-meta">
-    <time datetime="2021-03-04T04:08:25.000Z" style="display: flex; align-items: center;">
+    <time datetime="2021-12-15T15:07:00.000Z" style="display: flex; align-items: center;">
       <i class="iconfont icon-calendar" style="margin-right: 2px;"></i>
-      <span>2021-03-04</span>
+      <span>2021-12-15</span>
     </time>
     
     <span class="dot"></span>
     
-    <a href="/categories/分类/" class="post-meta-link">分类</a>
+    <a href="/categories/前端/" class="post-meta-link">前端</a>
     
     
     
     <span class="dot"></span>
-    <span>35 字</span>
+    <span>386 字</span>
     
   </div>
   
@@ -161,25 +161,57 @@
       <i class="iconfont icon-biaoqian" style="margin-right: 2px; font-size: 1.15rem;"></i>
       
       
-        <a href="/tags/标签/" class="post-meta-link">标签</a>
+        <a href="/tags/javascript/" class="post-meta-link">javascript</a>
       
       
       <span class="dot"></span>
       
-        <a href="/tags/标签2/" class="post-meta-link">标签2</a>
+        <a href="/tags/ES6/" class="post-meta-link">ES6</a>
       
     </div>
   </div>
   
   </header>
   <div id="section" class="post-content">
-    <pre class="highlight"><span class="line">---</span><br><span class="line">title: 模板名称</span><br><span class="line">tags:</span><br><span class="line"><span class="bullet">  -</span> 标签</span><br><span class="line"><span class="bullet">  -</span> 标签2</span><br><span class="line">categories:</span><br><span class="line"><span class="bullet">  -</span> 分类</span><br><span class="line">excerpt: 副标题</span><br><span class="line">banner<span class="emphasis">_img: &#x27;https://img.songhn.com/img/latex.jpg?imageslim&#x27;</span></span><br><span class="line"><span class="emphasis">date: 2021-03-04 12:08:25</span></span><br><span class="line"><span class="emphasis">---</span></span><br></pre>
+    <h2 id="js数据类型"><a href="#js数据类型" class="headerlink" title="js数据类型"></a>js数据类型</h2><h3 id="原始类型"><a href="#原始类型" class="headerlink" title="原始类型"></a>原始类型</h3><pre class="highlight"><span class="line">null 空值</span><br><span class="line">undefind 未定义(类型和值都是他自己)</span><br><span class="line">String 字符串</span><br><span class="line">Number 数值</span><br><span class="line">symbol 符号</span><br><span class="line">boolean 布尔 true/false</span><br></pre>
+
+<h3 id="对象类型"><a href="#对象类型" class="headerlink" title="对象类型"></a>对象类型</h3><pre class="highlight"><span class="line">object</span><br></pre>
+
+<h3 id="判断类型的方法"><a href="#判断类型的方法" class="headerlink" title="判断类型的方法"></a>判断类型的方法</h3><pre class="highlight"><span class="line">typeof // 判断一个值属于哪种基本类型。其中特殊的有null==&gt;object,function==&gt;function</span><br><span class="line">instanceof //构造函数的 prototype 是否出现在被检测对象的原型链上</span><br></pre>
+
+
+
+
+
+<h2 id="Array-from"><a href="#Array-from" class="headerlink" title="Array.from"></a>Array.from</h2><p>​    将一个类数组对象或者可遍历对象转换成一个真正的数组。最基本的要求是有length,按数组下表排列好,没有的地方会填充undefined</p>
+<p>​    举例：</p>
+<pre class="highlight"><span class="line">let obj=&#123;0:1,1:2,2:3,3:4,length:4&#125;</span><br><span class="line">// 将这个类数组转成==》[ &#123;No:1,id:1&#125;,... ]</span><br><span class="line">console.log(</span><br><span class="line">	// 大多数数组的方法都可遍历，以及改变this的奇效  第三个参数用于拓展</span><br><span class="line">    Array.from(obj,(item,key)=&gt;&#123;</span><br><span class="line">        return &#123;No:this.prefix+item,order:key&#125;</span><br><span class="line">    &#125;,&#123;prefix:&quot;No.&quot;&#125;)</span><br><span class="line"></span><br><span class="line">)</span><br></pre>
+
+
+
+<h2 id="new-Object"><a href="#new-Object" class="headerlink" title="new Object"></a>new Object</h2><pre class="highlight"><span class="line">let obj=&#123;0:1&#125;</span><br><span class="line">var newObj=new Object(obj)</span><br><span class="line">console.log(newObj)</span><br><span class="line">console.log(newObj===obj) //true 引用类型</span><br><span class="line"></span><br><span class="line">let arr=[1,2,3]</span><br><span class="line">var newArr=new Array(arr)</span><br><span class="line">console.log(newArr==arr) //false</span><br><span class="line"></span><br><span class="line">原始类型都是继承来的,方法来自于他的原型</span><br></pre>
+
+<h2 id="Object-keys-Object-getOwnPropertyNames"><a href="#Object-keys-Object-getOwnPropertyNames" class="headerlink" title="Object.keys / Object.getOwnPropertyNames"></a>Object.keys / Object.getOwnPropertyNames</h2><p>抽取对象的键值</p>
+<p><code>Object.keys</code>抽取可枚举属性</p>
+<p><code>Object.getOwnPropertyNames</code> 忽略属性描述符(descriptor)</p>
+<blockquote>
+<p>属性描述符(descriptor) </p>
+<ul>
+<li><code>configurable</code>: <strong>是否可删除</strong></li>
+<li><code>enumerable</code>: <strong>是否可枚举(遍历)</strong></li>
+<li><code>value</code>: <strong>属性值</strong></li>
+<li><code>writable</code>: <strong>是否可修改</strong></li>
+</ul>
+</blockquote>
+<h2 id="稀疏数组"><a href="#稀疏数组" class="headerlink" title="稀疏数组"></a>稀疏数组</h2><pre class="highlight"><span class="line">const arr=[1,2,,,,3,,,,,4,,,5]</span><br><span class="line"></span><br><span class="line">arr.find(item=&gt;&#123;console.log(item)&#125;)</span><br><span class="line">console.log(&quot;--------&quot;)</span><br><span class="line">arr.forEach(item=&gt;&#123;console.log(item)&#125;)</span><br></pre>
+
+
   </div>
   <div>
   
   <div class="post-note note-warning copyright" style="margin-top: 42px">
-    <p><span style="font-weight: bold;">作者：</span><a target="_blank" rel="nofollow noopener noreferrer" href="http://example.com/about">小白&amp;马</a></p>
-    <p><span style="font-weight: bold;">文章链接：</span><a target="_blank" rel="nofollow noopener noreferrer" href="http://example.com/2021/03/04/%E6%9C%8D%E5%8A%A1%E5%99%A8%E6%90%AD%E5%BB%BA/">http://example.com/2021/03/04/%E6%9C%8D%E5%8A%A1%E5%99%A8%E6%90%AD%E5%BB%BA/</a></p>
+    <p><span style="font-weight: bold;">作者：</span><a target="_blank" rel="nofollow noopener noreferrer" href="https://xiaobai123-4.github.io/about">小白&amp;马</a></p>
+    <p><span style="font-weight: bold;">文章链接：</span><a target="_blank" rel="nofollow noopener noreferrer" href="https://xiaobai123-4.github.io/2021/12/15/javascript%E5%9F%BA%E7%A1%80/">https://xiaobai123-4.github.io/2021/12/15/javascript%E5%9F%BA%E7%A1%80/</a></p>
     <p><span style="font-weight: bold;">版权声明：</span>本博客所有文章除特别声明外，均采用<a target="_blank" rel="noopener" href="https://creativecommons.org/licenses/by-nc-sa/4.0/deed.zh">CC BY-NC-SA 4.0 协议</a>。转载请注明出处！</p>
   </div>
   
@@ -187,25 +219,13 @@
 </article>
 <div class="nav">
   
-  <div class="nav-item-prev">
-    <a href="/2021/04/28/Koa记录1/" class="nav-link">
-      <i class="iconfont icon-left nav-prev-icon"></i>
-      <div>
-        <div class="nav-label">上一篇</div>
-        
-        <div class="nav-title">Koa记录1 </div>
-        
-      </div>
-    </a>
-  </div>
-  
   
   <div class="nav-item-next">
-    <a href="/2020/11/30/Mockjs使用/" class="nav-link">
+    <a href="/2021/12/15/pm2 安装以及windows开机自启动/" class="nav-link">
       <div>
         <div class="nav-label">下一篇</div>
         
-        <div class="nav-title">Mockjs使用 </div>
+        <div class="nav-title">pm2开机自启服务 </div>
         
       </div>
       <i class="iconfont icon-right nav-next-icon"></i>
@@ -216,7 +236,7 @@
 
 <div class="card card-content toc-card" id="mobiletoc">
   <div class="toc-header"><i class="iconfont icon-menu" style="padding-right: 2px;"></i>目录</div>
-
+<ol class="toc"><li class="toc-item toc-level-2"><a class="toc-link" href="#js%E6%95%B0%E6%8D%AE%E7%B1%BB%E5%9E%8B"><span class="toc-text">js数据类型</span></a><ol class="toc-child"><li class="toc-item toc-level-3"><a class="toc-link" href="#%E5%8E%9F%E5%A7%8B%E7%B1%BB%E5%9E%8B"><span class="toc-text">原始类型</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#%E5%AF%B9%E8%B1%A1%E7%B1%BB%E5%9E%8B"><span class="toc-text">对象类型</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#%E5%88%A4%E6%96%AD%E7%B1%BB%E5%9E%8B%E7%9A%84%E6%96%B9%E6%B3%95"><span class="toc-text">判断类型的方法</span></a></li></ol></li><li class="toc-item toc-level-2"><a class="toc-link" href="#Array-from"><span class="toc-text">Array.from</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#new-Object"><span class="toc-text">new Object</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#Object-keys-Object-getOwnPropertyNames"><span class="toc-text">Object.keys &#x2F; Object.getOwnPropertyNames</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#%E7%A8%80%E7%96%8F%E6%95%B0%E7%BB%84"><span class="toc-text">稀疏数组</span></a></li></ol>
 </div></main>
           <aside class="left-column">
             
@@ -228,15 +248,15 @@
 <p class="author-description">Fight !!</p>
 <div class="author-message">
   <a class="author-posts-count" href="/archives">
-    <span>23</span>
+    <span>9</span>
     <span>文章</span>
   </a>
   <a class="author-categories-count" href="/categories">
-    <span>12</span>
+    <span>4</span>
     <span>分类</span>
   </a>
   <a class="author-tags-count" href="/tags">
-    <span>25</span>
+    <span>14</span>
     <span>标签</span>
   </a>
 </div>
@@ -249,7 +269,7 @@
   <article class="display-when-two-columns spacer">
     <div class="card card-content toc-card">
       <div class="toc-header"><i class="iconfont icon-menu" style="padding-right: 2px;"></i>目录</div>
-
+<ol class="toc"><li class="toc-item toc-level-2"><a class="toc-link" href="#js%E6%95%B0%E6%8D%AE%E7%B1%BB%E5%9E%8B"><span class="toc-text">js数据类型</span></a><ol class="toc-child"><li class="toc-item toc-level-3"><a class="toc-link" href="#%E5%8E%9F%E5%A7%8B%E7%B1%BB%E5%9E%8B"><span class="toc-text">原始类型</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#%E5%AF%B9%E8%B1%A1%E7%B1%BB%E5%9E%8B"><span class="toc-text">对象类型</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#%E5%88%A4%E6%96%AD%E7%B1%BB%E5%9E%8B%E7%9A%84%E6%96%B9%E6%B3%95"><span class="toc-text">判断类型的方法</span></a></li></ol></li><li class="toc-item toc-level-2"><a class="toc-link" href="#Array-from"><span class="toc-text">Array.from</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#new-Object"><span class="toc-text">new Object</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#Object-keys-Object-getOwnPropertyNames"><span class="toc-text">Object.keys &#x2F; Object.getOwnPropertyNames</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#%E7%A8%80%E7%96%8F%E6%95%B0%E7%BB%84"><span class="toc-text">稀疏数组</span></a></li></ol>
     </div>
   </article>
   
@@ -259,31 +279,10 @@
   <div class="categories-header"><i class="iconfont icon-fenlei" style="padding-right: 2px;"></i>分类</div>
   <div class="categories-list">
     
-      <a href="/categories/ES6">
+      <a href="/categories/前端">
         <div class="categories-list-item">
-          ES6
-          <span class="categories-list-item-badge">1</span>
-        </div>
-      </a>
-    
-      <a href="/categories/css">
-        <div class="categories-list-item">
-          css
-          <span class="categories-list-item-badge">1</span>
-        </div>
-      </a>
-    
-      <a href="/categories/HTML5">
-        <div class="categories-list-item">
-          HTML5
-          <span class="categories-list-item-badge">4</span>
-        </div>
-      </a>
-    
-      <a href="/categories/git">
-        <div class="categories-list-item">
-          git
-          <span class="categories-list-item-badge">1</span>
+          前端
+          <span class="categories-list-item-badge">5</span>
         </div>
       </a>
     
@@ -301,44 +300,9 @@
         </div>
       </a>
     
-      <a href="/categories/javascript">
+      <a href="/categories/hexo">
         <div class="categories-list-item">
-          javascript
-          <span class="categories-list-item-badge">8</span>
-        </div>
-      </a>
-    
-      <a href="/categories/其他">
-        <div class="categories-list-item">
-          其他
-          <span class="categories-list-item-badge">1</span>
-        </div>
-      </a>
-    
-      <a href="/categories/HTML">
-        <div class="categories-list-item">
-          HTML
-          <span class="categories-list-item-badge">1</span>
-        </div>
-      </a>
-    
-      <a href="/categories/webpack">
-        <div class="categories-list-item">
-          webpack
-          <span class="categories-list-item-badge">1</span>
-        </div>
-      </a>
-    
-      <a href="/categories/分类">
-        <div class="categories-list-item">
-          分类
-          <span class="categories-list-item-badge">1</span>
-        </div>
-      </a>
-    
-      <a href="/categories/Vue">
-        <div class="categories-list-item">
-          Vue
+          hexo
           <span class="categories-list-item-badge">1</span>
         </div>
       </a>
@@ -352,37 +316,33 @@
   <div class="tags-header"><i class="iconfont icon-biaoqian" style="padding-right: 2px;"></i>热门标签</div>
   <div class="tags-list">
     
-    <a href="\tags\前端" title="前端"><div class="tags-list-item">前端</div></a>
-    
-    <a href="\tags\html" title="html"><div class="tags-list-item">html</div></a>
-    
     <a href="\tags\javascript" title="javascript"><div class="tags-list-item">javascript</div></a>
-    
-    <a href="\tags\笔记" title="笔记"><div class="tags-list-item">笔记</div></a>
-    
-    <a href="\tags\nodeJS" title="nodeJS"><div class="tags-list-item">nodeJS</div></a>
-    
-    <a href="\tags\性能优化" title="性能优化"><div class="tags-list-item">性能优化</div></a>
-    
-    <a href="\tags\标签2" title="标签2"><div class="tags-list-item">标签2</div></a>
-    
-    <a href="\tags\标签" title="标签"><div class="tags-list-item">标签</div></a>
-    
-    <a href="\tags\知识点" title="知识点"><div class="tags-list-item">知识点</div></a>
-    
-    <a href="\tags\作用域" title="作用域"><div class="tags-list-item">作用域</div></a>
-    
-    <a href="\tags\前端模块化" title="前端模块化"><div class="tags-list-item">前端模块化</div></a>
-    
-    <a href="\tags\webpack" title="webpack"><div class="tags-list-item">webpack</div></a>
     
     <a href="\tags\nodejs" title="nodejs"><div class="tags-list-item">nodejs</div></a>
     
-    <a href="\tags\移动端" title="移动端"><div class="tags-list-item">移动端</div></a>
+    <a href="\tags\ES6" title="ES6"><div class="tags-list-item">ES6</div></a>
     
-    <a href="\tags\基础" title="基础"><div class="tags-list-item">基础</div></a>
+    <a href="\tags\html" title="html"><div class="tags-list-item">html</div></a>
     
-    <a href="\tags\规范" title="规范"><div class="tags-list-item">规范</div></a>
+    <a href="\tags\博客" title="博客"><div class="tags-list-item">博客</div></a>
+    
+    <a href="\tags\next" title="next"><div class="tags-list-item">next</div></a>
+    
+    <a href="\tags\hexo" title="hexo"><div class="tags-list-item">hexo</div></a>
+    
+    <a href="\tags\mockjs" title="mockjs"><div class="tags-list-item">mockjs</div></a>
+    
+    <a href="\tags\笔记" title="笔记"><div class="tags-list-item">笔记</div></a>
+    
+    <a href="\tags\markdown" title="markdown"><div class="tags-list-item">markdown</div></a>
+    
+    <a href="\tags\koa" title="koa"><div class="tags-list-item">koa</div></a>
+    
+    <a href="\tags\Koa" title="Koa"><div class="tags-list-item">Koa</div></a>
+    
+    <a href="\tags\svn" title="svn"><div class="tags-list-item">svn</div></a>
+    
+    <a href="\tags\git" title="git"><div class="tags-list-item">git</div></a>
     
   </div>
 </div>
@@ -397,7 +357,7 @@
   
   <article class="card card-content toc-card">
     <div class="toc-header"><i class="iconfont icon-menu" style="padding-right: 2px;"></i>目录</div>
-
+<ol class="toc"><li class="toc-item toc-level-2"><a class="toc-link" href="#js%E6%95%B0%E6%8D%AE%E7%B1%BB%E5%9E%8B"><span class="toc-text">js数据类型</span></a><ol class="toc-child"><li class="toc-item toc-level-3"><a class="toc-link" href="#%E5%8E%9F%E5%A7%8B%E7%B1%BB%E5%9E%8B"><span class="toc-text">原始类型</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#%E5%AF%B9%E8%B1%A1%E7%B1%BB%E5%9E%8B"><span class="toc-text">对象类型</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#%E5%88%A4%E6%96%AD%E7%B1%BB%E5%9E%8B%E7%9A%84%E6%96%B9%E6%B3%95"><span class="toc-text">判断类型的方法</span></a></li></ol></li><li class="toc-item toc-level-2"><a class="toc-link" href="#Array-from"><span class="toc-text">Array.from</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#new-Object"><span class="toc-text">new Object</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#Object-keys-Object-getOwnPropertyNames"><span class="toc-text">Object.keys &#x2F; Object.getOwnPropertyNames</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#%E7%A8%80%E7%96%8F%E6%95%B0%E7%BB%84"><span class="toc-text">稀疏数组</span></a></li></ol>
   </article>
   
   
@@ -407,23 +367,23 @@
   <div class="recent-posts-list">
     
       <div class="recent-posts-item">
-        <div class="recent-posts-item-title">2021-12-11</div>
-        <a href="/2021/12/11/js基础巩固/"><div class="recent-posts-item-content">js基础巩固</div></a>
+        <div class="recent-posts-item-title">2021-12-15</div>
+        <a href="/2021/12/15/javascript基础/"><div class="recent-posts-item-content">javascript基础001</div></a>
       </div>
     
       <div class="recent-posts-item">
-        <div class="recent-posts-item-title">2021-09-24</div>
-        <a href="/2021/09/24/Git/"><div class="recent-posts-item-content">git</div></a>
+        <div class="recent-posts-item-title">2021-12-15</div>
+        <a href="/2021/12/15/pm2 安装以及windows开机自启动/"><div class="recent-posts-item-content">pm2开机自启服务</div></a>
       </div>
     
       <div class="recent-posts-item">
-        <div class="recent-posts-item-title">2021-09-24</div>
-        <a href="/2021/09/24/hello-world/"><div class="recent-posts-item-content">Hello World</div></a>
+        <div class="recent-posts-item-title">2021-12-15</div>
+        <a href="/2021/12/15/innerHTML/"><div class="recent-posts-item-content">innerHTML</div></a>
       </div>
     
       <div class="recent-posts-item">
-        <div class="recent-posts-item-title">2021-09-14</div>
-        <a href="/2021/09/14/pm2 安装以及windows开机自启动/"><div class="recent-posts-item-content">pm2开机自启服务</div></a>
+        <div class="recent-posts-item-title">2021-12-14</div>
+        <a href="/2021/12/14/Mockjs使用/"><div class="recent-posts-item-content">Mockjs使用</div></a>
       </div>
     
   </div>
