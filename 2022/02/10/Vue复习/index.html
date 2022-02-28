@@ -152,7 +152,7 @@
     
     
     <span class="dot"></span>
-    <span>2.8k 字</span>
+    <span>2.9k 字</span>
     
   </div>
   
@@ -225,8 +225,7 @@
 <blockquote>
 <p>动态添加路由：router.addRoutes(routes)动态配置</p>
 <p>将路由剪切出去，当我们需要访问时调用</p>
-<pre class="highlight"><span class="line">&gt;this.$router.addRoutes([</span><br><span class="line">&gt;&#123;</span><br><span class="line">   path: &quot;/about&quot;,</span><br><span class="line">   name: &quot;About&quot;,</span><br><span class="line">   component: () =&gt;</span><br><span class="line">       import(/* webpackChunkName: &quot;about&quot; */ &quot;../views/About.vue&quot;),</span><br><span class="line">meta: &#123;</span><br><span class="line">       auth: true,</span><br><span class="line">   &#125;,</span><br><span class="line">&gt;&#125;</span><br><span class="line">&gt;])</span><br></pre>
-
+<pre class="highlight"><span class="line">this.$router.addRoutes([</span><br><span class="line">&#123;</span><br><span class="line">   path: &quot;/about&quot;,</span><br><span class="line">   name: &quot;About&quot;,</span><br><span class="line">   component: () =&gt;</span><br><span class="line">       import(/* webpackChunkName: &quot;about&quot; */ &quot;../views/About.vue&quot;),</span><br><span class="line">meta: &#123;</span><br><span class="line">       auth: true,</span><br><span class="line">   &#125;,</span><br><span class="line">&#125;</span><br><span class="line">])</span><br></pre>
 
 </blockquote>
 <p>嵌套路由</p>
@@ -248,7 +247,9 @@
 <p>导航完成以后<code>created</code>并且<code>watch</code>监听<code>$route</code>路由变化更新值</p>
 <h3 id="组件缓存keep-alive"><a href="#组件缓存keep-alive" class="headerlink" title="组件缓存keep-alive"></a>组件缓存<code>keep-alive</code></h3><pre class="highlight"><span class="line">// include 指定</span><br><span class="line">// max最大</span><br><span class="line">// exclude 排除</span><br><span class="line">&lt;kepp-alive include=&#x27;admin&#x27;&gt;&lt;/keep-alive&gt;</span><br><span class="line">// 被 keep-alive 缓存的组件激活时调用activated 和 被 keep-alive 缓存的组件失活时调用deactivated</span><br></pre>
 
-<h3 id="统一状态管理Vuex"><a href="#统一状态管理Vuex" class="headerlink" title="统一状态管理Vuex"></a>统一状态管理Vuex</h3><p>关键字：可预测，集中管理状态</p>
+<h3 id="统一状态管理Vuex"><a href="#统一状态管理Vuex" class="headerlink" title="统一状态管理Vuex"></a>统一状态管理Vuex</h3><pre class="highlight"><span class="line">state: &#123;&#125;, //储存vuex中的数据跟Vue实例中的data一样</span><br><span class="line">mutations: &#123;&#125;, // 储存一些方法</span><br><span class="line">actions: &#123;&#125;, // 也可以储存一些方法，也可以直接提交actions中的方法</span><br><span class="line">modules: &#123;&#125; // 模块化，将 store 分割成模块（module）。每个模块拥有自己的 state、mutation、action、getter、甚至是嵌套子模块——从上至下进行同样方式的分割</span><br></pre>
+
+<p>关键字：可预测，集中管理状态</p>
 <blockquote>
 <p>页面刷新状态丢失</p>
 </blockquote>
@@ -287,12 +288,12 @@
 <div class="nav">
   
   <div class="nav-item-prev">
-    <a href="/2022/02/16/uni-app/" class="nav-link">
+    <a href="/2022/02/10/面试题复习/" class="nav-link">
       <i class="iconfont icon-left nav-prev-icon"></i>
       <div>
         <div class="nav-label">上一篇</div>
         
-        <div class="nav-title">uni-app </div>
+        <div class="nav-title">前端面试题 </div>
         
       </div>
     </a>
@@ -327,7 +328,7 @@
 <p class="author-description">Fight !!</p>
 <div class="author-message">
   <a class="author-posts-count" href="/archives">
-    <span>15</span>
+    <span>14</span>
     <span>文章</span>
   </a>
   <a class="author-categories-count" href="/categories">
@@ -335,7 +336,7 @@
     <span>分类</span>
   </a>
   <a class="author-tags-count" href="/tags">
-    <span>17</span>
+    <span>15</span>
     <span>标签</span>
   </a>
 </div>
@@ -358,13 +359,6 @@
   <div class="categories-header"><i class="iconfont icon-fenlei" style="padding-right: 2px;"></i>分类</div>
   <div class="categories-list">
     
-      <a href="/categories/前端">
-        <div class="categories-list-item">
-          前端
-          <span class="categories-list-item-badge">9</span>
-        </div>
-      </a>
-    
       <a href="/categories/nodejs">
         <div class="categories-list-item">
           nodejs
@@ -376,6 +370,13 @@
         <div class="categories-list-item">
           Markdown
           <span class="categories-list-item-badge">1</span>
+        </div>
+      </a>
+    
+      <a href="/categories/前端">
+        <div class="categories-list-item">
+          前端
+          <span class="categories-list-item-badge">8</span>
         </div>
       </a>
     
@@ -419,15 +420,15 @@
     
     <a href="\tags\微信小程序" title="微信小程序"><div class="tags-list-item">微信小程序</div></a>
     
+    <a href="\tags\ES6" title="ES6"><div class="tags-list-item">ES6</div></a>
+    
+    <a href="\tags\nodejs" title="nodejs"><div class="tags-list-item">nodejs</div></a>
+    
     <a href="\tags\博客" title="博客"><div class="tags-list-item">博客</div></a>
     
     <a href="\tags\next" title="next"><div class="tags-list-item">next</div></a>
     
     <a href="\tags\hexo" title="hexo"><div class="tags-list-item">hexo</div></a>
-    
-    <a href="\tags\ES6" title="ES6"><div class="tags-list-item">ES6</div></a>
-    
-    <a href="\tags\nodejs" title="nodejs"><div class="tags-list-item">nodejs</div></a>
     
     <a href="\tags\mockjs" title="mockjs"><div class="tags-list-item">mockjs</div></a>
     
@@ -435,11 +436,9 @@
     
     <a href="\tags\markdown" title="markdown"><div class="tags-list-item">markdown</div></a>
     
-    <a href="\tags\Koa" title="Koa"><div class="tags-list-item">Koa</div></a>
-    
     <a href="\tags\koa" title="koa"><div class="tags-list-item">koa</div></a>
     
-    <a href="\tags\svn" title="svn"><div class="tags-list-item">svn</div></a>
+    <a href="\tags\Koa" title="Koa"><div class="tags-list-item">Koa</div></a>
     
   </div>
 </div>
@@ -470,17 +469,17 @@
     
       <div class="recent-posts-item">
         <div class="recent-posts-item-title">2022-02-10</div>
+        <a href="/2022/02/10/面试题复习/"><div class="recent-posts-item-content">前端面试题</div></a>
+      </div>
+    
+      <div class="recent-posts-item">
+        <div class="recent-posts-item-title">2022-02-10</div>
         <a href="/2022/02/10/Vue复习/"><div class="recent-posts-item-content">Vue</div></a>
       </div>
     
       <div class="recent-posts-item">
         <div class="recent-posts-item-title">2021-12-23</div>
         <a href="/2021/12/23/常见面试题/"><div class="recent-posts-item-content">前端面试题</div></a>
-      </div>
-    
-      <div class="recent-posts-item">
-        <div class="recent-posts-item-title">2021-12-15</div>
-        <a href="/2021/12/15/javascript复习/"><div class="recent-posts-item-content">javascript基础</div></a>
       </div>
     
   </div>
