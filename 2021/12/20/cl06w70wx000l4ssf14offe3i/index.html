@@ -126,54 +126,252 @@
     <div class="section-wrap">
       <div class="container">
         <div class="columns">
-          <main class="main-column"><div class="card card-content">
-  <h1 class="widget-title">归档</h1>
-</div>
-<div class="archive-timeline">
-  
-  
-  
-  <div class="archive-timeline-tag"><span>2021</span></div>
-  
-  
-  <div class="archive-timeline-item">
-    <div class="archive-timeline-post">
-      <div class="card card-content">
-        <div class="archive-timeline-post-date">2021-12-10</div>
-        <div class="archive-timeline-post-content"><a href="/2021/12/10/cl06w70wr00054ssf6g9zeorz/"
-            class="archive-timeline-post-item">使用hexo-next搭建个人博客</a></div>
-      </div>
-    </div>
-  </div>
-  
-  
-  <div class="archive-timeline-item">
-    <div class="archive-timeline-post">
-      <div class="card card-content">
-        <div class="archive-timeline-post-date">2021-12-10</div>
-        <div class="archive-timeline-post-content"><a href="/2021/12/10/cl06w70wk00004ssfcoi69ql5/"
-            class="archive-timeline-post-item">Markdown笔记</a></div>
-      </div>
-    </div>
-  </div>
-  
+          <main class="main-column">
+<div class="image-wrapper">
+  <img src="https://vkceyugu.cdn.bspapp.com/VKCEYUGU-a90b5f95-90ba-4d30-a6a7-cd4d057327db/423744c0-5673-4a14-adca-14bd986c3f05.jpg" data-src="https://vkceyugu.cdn.bspapp.com/VKCEYUGU-a90b5f95-90ba-4d30-a6a7-cd4d057327db/423744c0-5673-4a14-adca-14bd986c3f05.jpg"
+    srcset="data:image/svg+xml,%3Csvg%20xmlns=&#39;http://www.w3.org/2000/svg&#39;%20viewBox=&#39;0%200%20300%20300&#39;%3E%3C/svg%3E"
+    class="image lozad">
 </div>
 
+<article class="card card-content">
+  <header>
+    <h1 class="post-title">
+      uni-app
+    </h1>
+  </header>
+  <div class="post-meta post-show-meta">
+    <time datetime="2021-12-20T00:07:00.000Z" style="display: flex; align-items: center;">
+      <i class="iconfont icon-calendar" style="margin-right: 2px;"></i>
+      <span>2021-12-20</span>
+    </time>
+    
+    <span class="dot"></span>
+    
+    <a href="/categories/前端/" class="post-meta-link">前端</a>
+    
+    
+    
+    <span class="dot"></span>
+    <span>736 字</span>
+    
+  </div>
+  
+  <div class="post-meta post-show-meta" style="margin-top: -10px;">
+    <div style="display: flex; align-items: center;">
+      <i class="iconfont icon-biaoqian" style="margin-right: 2px; font-size: 1.15rem;"></i>
+      
+      
+        <a href="/tags/javascript/" class="post-meta-link">javascript</a>
+      
+    </div>
+  </div>
+  
+  </header>
+  <div id="section" class="post-content">
+    <h2 id="Uni-app"><a href="#Uni-app" class="headerlink" title="Uni-app"></a>Uni-app</h2><h3 id="应用生命周期"><a href="#应用生命周期" class="headerlink" title="应用生命周期"></a><a target="_blank" rel="noopener" href="https://uniapp.dcloud.io/collocation/frame/lifecycle?id=app">应用生命周期</a></h3><p><code>uni-app</code> 支持如下应用生命周期函数：</p>
+<table>
+<thead>
+<tr>
+<th align="left">函数名</th>
+<th align="left">说明</th>
+</tr>
+</thead>
+<tbody><tr>
+<td align="left">onLaunch</td>
+<td align="left">当<code>uni-app</code> 初始化完成时触发（全局只触发一次）</td>
+</tr>
+<tr>
+<td align="left">onShow</td>
+<td align="left">当 <code>uni-app</code> 启动，或从后台进入前台显示</td>
+</tr>
+<tr>
+<td align="left">onHide</td>
+<td align="left">当 <code>uni-app</code> 从前台进入后台</td>
+</tr>
+<tr>
+<td align="left">onError</td>
+<td align="left">当 <code>uni-app</code> 报错时触发</td>
+</tr>
+<tr>
+<td align="left">onUniNViewMessage</td>
+<td align="left">对 <code>nvue</code> 页面发送的数据进行监听，可参考 <a target="_blank" rel="noopener" href="https://uniapp.dcloud.io/nvue-api?id=communication">nvue 向 vue 通讯</a></td>
+</tr>
+<tr>
+<td align="left">onUnhandledRejection</td>
+<td align="left">对未处理的 Promise 拒绝事件监听函数（2.8.1+）</td>
+</tr>
+<tr>
+<td align="left">onPageNotFound</td>
+<td align="left">页面不存在监听函数</td>
+</tr>
+<tr>
+<td align="left">onThemeChange</td>
+<td align="left">监听系统主题变化</td>
+</tr>
+</tbody></table>
+<table>
+<thead>
+<tr>
+<th>onInit</th>
+<th>监听页面初始化，其参数同 onLoad 参数，为上个页面传递的数据，参数类型为 Object（用于页面传参），触发时机早于 onLoad</th>
+<th>百度小程序</th>
+<th>3.1.0+</th>
+</tr>
+</thead>
+<tbody><tr>
+<td>onLoad</td>
+<td>监听页面加载，其参数为上个页面传递的数据，参数类型为 Object（用于页面传参），参考<a target="_blank" rel="noopener" href="https://uniapp.dcloud.io/api/router?id=navigateto">示例</a></td>
+<td></td>
+<td></td>
+</tr>
+<tr>
+<td>onShow</td>
+<td>监听页面显示。页面每次出现在屏幕上都触发，包括从下级页面点返回露出当前页面</td>
+<td></td>
+<td></td>
+</tr>
+<tr>
+<td>onReady</td>
+<td>监听页面初次渲染完成。注意如果渲染速度快，会在页面进入动画完成前触发</td>
+<td></td>
+<td></td>
+</tr>
+<tr>
+<td>onHide</td>
+<td>监听页面隐藏</td>
+<td></td>
+<td></td>
+</tr>
+<tr>
+<td>onUnload</td>
+<td>监听页面卸载</td>
+<td></td>
+<td></td>
+</tr>
+<tr>
+<td>onResize</td>
+<td>监听窗口尺寸变化</td>
+<td>App、微信小程序</td>
+<td></td>
+</tr>
+<tr>
+<td>onPullDownRefresh</td>
+<td>监听用户下拉动作，一般用于下拉刷新，参考<a target="_blank" rel="noopener" href="https://uniapp.dcloud.io/api/ui/pulldown">示例</a></td>
+<td></td>
+<td></td>
+</tr>
+<tr>
+<td>onReachBottom</td>
+<td>页面滚动到底部的事件（不是scroll-view滚到底），常用于下拉下一页数据。具体见下方注意事项</td>
+<td></td>
+<td></td>
+</tr>
+<tr>
+<td>onTabItemTap</td>
+<td>点击 tab 时触发，参数为Object，具体见下方注意事项</td>
+<td>微信小程序、QQ小程序、支付宝小程序、百度小程序、H5、App</td>
+<td></td>
+</tr>
+<tr>
+<td>onShareAppMessage</td>
+<td>用户点击右上角分享</td>
+<td>微信小程序、QQ小程序、支付宝小程序、字节小程序、飞书小程序、快手小程序</td>
+<td></td>
+</tr>
+<tr>
+<td>onPageScroll</td>
+<td>监听页面滚动，参数为Object</td>
+<td>nvue暂不支持</td>
+<td></td>
+</tr>
+<tr>
+<td>onNavigationBarButtonTap</td>
+<td>监听原生标题栏按钮点击事件，参数为Object</td>
+<td>App、H5</td>
+<td></td>
+</tr>
+<tr>
+<td>onBackPress</td>
+<td>监听页面返回，返回 event = {from:backbutton、 navigateBack} ，backbutton 表示来源是左上角返回按钮或 android 返回键；navigateBack表示来源是 uni.navigateBack ；详细说明及使用：<a target="_blank" rel="noopener" href="http://ask.dcloud.net.cn/article/35120">onBackPress 详解</a>。支付宝小程序只有真机能触发，只能监听非navigateBack引起的返回，不可阻止默认行为。</td>
+<td>app、H5、支付宝小程序</td>
+<td></td>
+</tr>
+<tr>
+<td>onNavigationBarSearchInputChanged</td>
+<td>监听原生标题栏搜索输入框输入内容变化事件</td>
+<td>App、H5</td>
+<td>1.6.0</td>
+</tr>
+<tr>
+<td>onNavigationBarSearchInputConfirmed</td>
+<td>监听原生标题栏搜索输入框搜索事件，用户点击软键盘上的“搜索”按钮时触发。</td>
+<td>App、H5</td>
+<td>1.6.0</td>
+</tr>
+<tr>
+<td>onNavigationBarSearchInputClicked</td>
+<td>监听原生标题栏搜索输入框点击事件（pages.json 中的 searchInput 配置 disabled 为 true 时才会触发）</td>
+<td>App、H5</td>
+<td>1.6.0</td>
+</tr>
+<tr>
+<td>onShareTimeline</td>
+<td>监听用户点击右上角转发到朋友圈</td>
+<td>微信小程序</td>
+<td>2.8.1+</td>
+</tr>
+<tr>
+<td>onAddToFavorites</td>
+<td>监听用户点击右上角收藏</td>
+<td>微信小程序</td>
+<td>2.8.1+</td>
+</tr>
+</tbody></table>
+
+  </div>
+  <div>
+  
+  <div class="post-note note-warning copyright" style="margin-top: 42px">
+    <p><span style="font-weight: bold;">作者：</span><a target="_blank" rel="nofollow noopener noreferrer" href="https://xiaobai123-4.github.io/about">小白&amp;马</a></p>
+    <p><span style="font-weight: bold;">文章链接：</span><a target="_blank" rel="nofollow noopener noreferrer" href="https://xiaobai123-4.github.io/2021/12/20/cl06w70wx000l4ssf14offe3i/">https://xiaobai123-4.github.io/2021/12/20/cl06w70wx000l4ssf14offe3i/</a></p>
+    <p><span style="font-weight: bold;">版权声明：</span>本博客所有文章除特别声明外，均采用<a target="_blank" rel="noopener" href="https://creativecommons.org/licenses/by-nc-sa/4.0/deed.zh">CC BY-NC-SA 4.0 协议</a>。转载请注明出处！</p>
+  </div>
+  
+  </div>
+</article>
 <div class="nav">
   
   <div class="nav-item-prev">
-    <a href="/archives/2021/12/" class="nav-link">
+    <a href="/2021/12/22/cl06w70xl00214ssfd3ap5vh8/" class="nav-link">
       <i class="iconfont icon-left nav-prev-icon"></i>
       <div>
-        <div class="nav-label">上一页</div>
+        <div class="nav-label">上一篇</div>
+        
+        <div class="nav-title">CSS常见问题 </div>
         
       </div>
     </a>
   </div>
   
   
+  <div class="nav-item-next">
+    <a href="/2021/12/18/cl06w70wr00064ssf8gtla824/" class="nav-link">
+      <div>
+        <div class="nav-label">下一篇</div>
+        
+        <div class="nav-title">javascript基础 </div>
+        
+      </div>
+      <i class="iconfont icon-right nav-next-icon"></i>
+    </a>
+  </div>
+  
 </div>
-</main>
+
+<div class="card card-content toc-card" id="mobiletoc">
+  <div class="toc-header"><i class="iconfont icon-menu" style="padding-right: 2px;"></i>目录</div>
+<ol class="toc"><li class="toc-item toc-level-2"><a class="toc-link" href="#Uni-app"><span class="toc-text">Uni-app</span></a><ol class="toc-child"><li class="toc-item toc-level-3"><a class="toc-link" href="#%E5%BA%94%E7%94%A8%E7%94%9F%E5%91%BD%E5%91%A8%E6%9C%9F"><span class="toc-text">应用生命周期</span></a></li></ol></li></ol>
+</div></main>
           <aside class="left-column">
             
             <div class="card card-author">
@@ -201,6 +399,13 @@
             
             <div class="sticky-tablet">
   
+  
+  <article class="display-when-two-columns spacer">
+    <div class="card card-content toc-card">
+      <div class="toc-header"><i class="iconfont icon-menu" style="padding-right: 2px;"></i>目录</div>
+<ol class="toc"><li class="toc-item toc-level-2"><a class="toc-link" href="#Uni-app"><span class="toc-text">Uni-app</span></a><ol class="toc-child"><li class="toc-item toc-level-3"><a class="toc-link" href="#%E5%BA%94%E7%94%A8%E7%94%9F%E5%91%BD%E5%91%A8%E6%9C%9F"><span class="toc-text">应用生命周期</span></a></li></ol></li></ol>
+    </div>
+  </article>
   
   
   <article class="card card-content">
@@ -294,93 +499,16 @@
   </article>
   
   
-  <article class="card card-content widescreen-archive">
-    <div class="archive-card">
-  <div class="archive-card-header"><i class="iconfont icon-wodebaobiao" style="padding-right: 2px;"></i>归档</div>
-  <div class="archive-card-list">
-    
-    
-    
-      
-        
-        
-        
-      
-    
-      
-        
-      
-    
-      
-        
-          <a href="/archives/2022" class="archive-card-list-item">
-              2022
-              <span class="archive-card-list-item-badge">2</span>
-          </a>
-        
-        
-        
-      
-    
-      
-        
-      
-    
-      
-        
-      
-    
-      
-        
-      
-    
-      
-        
-      
-    
-      
-        
-      
-    
-      
-        
-      
-    
-      
-        
-      
-    
-      
-        
-      
-    
-      
-        
-      
-    
-      
-        
-      
-    
-      
-        
-      
-    
-    
-      <a href="/archives/2021" class="archive-card-list-item">
-          2021
-          <span class="archive-card-list-item-badge">12</span>
-      </a>
-    
-  </div>
-</div>
-  </article>
-  
 </div>
           </aside>
           <aside class="right-column">
             <div class="sticky-widescreen">
   
+  
+  <article class="card card-content toc-card">
+    <div class="toc-header"><i class="iconfont icon-menu" style="padding-right: 2px;"></i>目录</div>
+<ol class="toc"><li class="toc-item toc-level-2"><a class="toc-link" href="#Uni-app"><span class="toc-text">Uni-app</span></a><ol class="toc-child"><li class="toc-item toc-level-3"><a class="toc-link" href="#%E5%BA%94%E7%94%A8%E7%94%9F%E5%91%BD%E5%91%A8%E6%9C%9F"><span class="toc-text">应用生命周期</span></a></li></ol></li></ol>
+  </article>
   
   
   <article class="card card-content">
@@ -412,88 +540,6 @@
 </div>
   </article>
   
-  
-  <article class="card card-content">
-    <div class="archive-card">
-  <div class="archive-card-header"><i class="iconfont icon-wodebaobiao" style="padding-right: 2px;"></i>归档</div>
-  <div class="archive-card-list">
-    
-    
-    
-      
-        
-        
-        
-      
-    
-      
-        
-      
-    
-      
-        
-          <a href="/archives/2022" class="archive-card-list-item">
-              2022
-              <span class="archive-card-list-item-badge">2</span>
-          </a>
-        
-        
-        
-      
-    
-      
-        
-      
-    
-      
-        
-      
-    
-      
-        
-      
-    
-      
-        
-      
-    
-      
-        
-      
-    
-      
-        
-      
-    
-      
-        
-      
-    
-      
-        
-      
-    
-      
-        
-      
-    
-      
-        
-      
-    
-      
-        
-      
-    
-    
-      <a href="/archives/2021" class="archive-card-list-item">
-          2021
-          <span class="archive-card-list-item-badge">12</span>
-      </a>
-    
-  </div>
-</div>
-  </article>
   
 </div>
           </aside>

@@ -1,0 +1,590 @@
+<!DOCTYPE html>
+<html>
+<meta  lang="zh-CN" >
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport"
+    content="width=device-width, user-scalable=no, initial-scale=1.0, maximum-scale=1.0, minimum-scale=1.0">
+  <meta http-equiv="X-UA-Compatible" content="ie=edge">
+  <meta name="theme-color" content="#fff" id="theme-color">
+  <link rel="icon" href="https://xiaobai123-4.github.io/image/admin.jpg">
+  <title>学习永不止步</title>
+  <script>
+    // control reverse button
+    var reverseDarkList = {
+      dark: 'light',
+      light: 'dark'
+    };
+    var themeColor = {
+      dark: '#1c1c1e',
+      light: '#fff'
+    }
+    // get the data of css prefers-color-scheme
+    var getCssMediaQuery = function() {
+      return window.matchMedia('(prefers-color-scheme: dark)').matches ? 'dark' : 'light';
+    };
+    // reverse current darkmode setting function
+    var reverseDarkModeSetting = function() {
+      var setting = localStorage.getItem('user-color-scheme');
+      if(reverseDarkList[setting]) {
+        setting = reverseDarkList[setting];
+      } else if(setting === null) {
+        setting = reverseDarkList[getCssMediaQuery()];
+      } else {
+        return;
+      }
+      localStorage.setItem('user-color-scheme', setting);
+      return setting;
+    };
+    // apply current darkmode setting
+    var setDarkmode = function(mode) {
+      var setting = mode || localStorage.getItem('user-color-scheme');
+      if(setting === getCssMediaQuery()) {
+        document.documentElement.removeAttribute('data-user-color-scheme');
+        localStorage.removeItem('user-color-scheme');
+        document.getElementById('theme-color').content = themeColor[setting];
+      } else if(reverseDarkList[setting]) {
+        document.documentElement.setAttribute('data-user-color-scheme', setting);
+        document.getElementById('theme-color').content = themeColor[setting];
+      } else {
+        document.documentElement.removeAttribute('data-user-color-scheme');
+        localStorage.removeItem('user-color-scheme');
+        document.getElementById('theme-color').content = themeColor[getCssMediaQuery()];
+      }
+    };
+    setDarkmode();
+  </script>
+  <script>
+    function loadScript(url, cb) {
+      var script = document.createElement('script');
+      script.src = url;
+      if (cb) script.onload = cb;
+      script.async = true;
+      document.body.appendChild(script);
+    }
+  </script>
+  
+  <link rel="preload" href="//at.alicdn.com/t/font_1946621_vpj3dq9ceqa.css" as="style" >
+  <link rel="preload" href="//at.alicdn.com/t/font_1952792_89b4ac4k4up.css" as="style" >
+  
+  <link rel="preload" href="//cdn.jsdelivr.net/npm/fslightbox@3.1.0/index.min.js" as="script">
+  
+  
+  <link rel="preload" href="/js/lib/lozad.min.js" as="script">
+  
+  
+  
+  
+  
+  
+  
+  
+<link rel="stylesheet" href="/css/main.css">
+
+  
+  
+<link rel="stylesheet" href="//at.alicdn.com/t/font_1946621_vpj3dq9ceqa.css">
+
+  
+  
+<link rel="stylesheet" href="//at.alicdn.com/t/font_1952792_89b4ac4k4up.css">
+
+  
+  
+  
+<meta name="generator" content="Hexo 5.4.0"></head>
+
+
+<body>
+  <div class="wrapper">
+    
+    <nav class="navbar">
+  <div class="navbar-logo">
+    <span class="navbar-logo-main">
+      
+      <img class="navbar-logo-img" src="https://xiaobai123-4.github.io/image/admin.jpg">
+      
+      <span class="navbar-logo-dsc">学习永不止步</span>
+    </span>
+  </div>
+  <div class="navbar-menu">
+    
+    <a href="/" class="navbar-menu-item">首页 </a>
+    
+    <a href="/archives" class="navbar-menu-item">归档 </a>
+    
+    <a href="/tags" class="navbar-menu-item">标签 </a>
+    
+    <a href="/categories" class="navbar-menu-item">分类 </a>
+    
+    <a href="/links" class="navbar-menu-item">友链 </a>
+    
+    <a class="navbar-menu-item darknavbar" id="dark"><i class="iconfont icon-weather"></i></a>
+  </div>
+</nav>
+    
+    <div class="section-wrap">
+      <div class="container">
+        <div class="columns">
+          <main class="main-column">
+<div class="image-wrapper">
+  <img src="https://s4.ax1x.com/2022/02/28/bMcJ91.jpg" data-src="https://s4.ax1x.com/2022/02/28/bMcJ91.jpg"
+    srcset="data:image/svg+xml,%3Csvg%20xmlns=&#39;http://www.w3.org/2000/svg&#39;%20viewBox=&#39;0%200%20300%20300&#39;%3E%3C/svg%3E"
+    class="image lozad">
+</div>
+
+<article class="card card-content">
+  <header>
+    <h1 class="post-title">
+      Vue
+    </h1>
+  </header>
+  <div class="post-meta post-show-meta">
+    <time datetime="2022-02-10T00:20:38.000Z" style="display: flex; align-items: center;">
+      <i class="iconfont icon-calendar" style="margin-right: 2px;"></i>
+      <span>2022-02-10</span>
+    </time>
+    
+    <span class="dot"></span>
+    
+    <a href="/categories/前端/" class="post-meta-link">前端</a>
+    
+    
+    
+    <span class="dot"></span>
+    <span>2.9k 字</span>
+    
+  </div>
+  
+  <div class="post-meta post-show-meta" style="margin-top: -10px;">
+    <div style="display: flex; align-items: center;">
+      <i class="iconfont icon-biaoqian" style="margin-right: 2px; font-size: 1.15rem;"></i>
+      
+      
+        <a href="/tags/javascript/" class="post-meta-link">javascript</a>
+      
+    </div>
+  </div>
+  
+  </header>
+  <div id="section" class="post-content">
+    <h3 id="Vue"><a href="#Vue" class="headerlink" title="Vue"></a>Vue</h3><p>Vue是一个数据驱动框架, MVVM模式数据响应式，模板引擎，渲染</p>
+<h3 id="Vue生命周期"><a href="#Vue生命周期" class="headerlink" title="Vue生命周期"></a>Vue生命周期</h3><pre class="highlight"><span class="line">beforeCreate() <span class="comment">//执行时组件实例还未创建，通常用于插件开发中执行一些初始化任务</span></span><br><span class="line">created() <span class="comment">//组件初始化完成各种数据可以使用，常用于异步数据获取</span></span><br><span class="line">beforeMount()<span class="comment">//未执行渲染，更新，DOM未创建</span></span><br><span class="line">mounted()<span class="comment">//初始化完成,dom创建，用于访问数据和DOM元素</span></span><br><span class="line"><span class="comment">//更新数据之前</span></span><br><span class="line">beforeUpdate()</span><br><span class="line"><span class="comment">//更新之后</span></span><br><span class="line">updated()</span><br><span class="line"><span class="comment">//销毁组件之前</span></span><br><span class="line">beforeDestroy()</span><br><span class="line"><span class="comment">//销毁完毕</span></span><br><span class="line">destroyed()</span><br><span class="line"><span class="comment">// keep-alive组件触发</span></span><br><span class="line">activated()</span><br><span class="line">deactivated()</span><br><span class="line"><span class="comment">//2.5.0新增 子孙组件错误调用时</span></span><br><span class="line">errorCaptured()</span><br></pre>
+
+
+<h3 id="监听、计算属性"><a href="#监听、计算属性" class="headerlink" title="监听、计算属性"></a>监听、计算属性</h3><pre class="highlight"><span class="line">// 计算属性 多个值改变影响一个值的情形</span><br><span class="line">computed: &#123;</span><br><span class="line">    total() &#123;</span><br><span class="line">        // 计算属性有缓存性，如果值不发生变化，就不会渲染</span><br><span class="line">        return this.detail.length</span><br><span class="line">    &#125;</span><br><span class="line">&#125;,</span><br><span class="line">// 监听器 一个值变化影响多个值的情形</span><br><span class="line">watch: &#123;</span><br><span class="line">    // 初始化默认不执行</span><br><span class="line">    // detail(now,old)&#123;</span><br><span class="line">    //     this.wtotal=now.length</span><br><span class="line">    // &#125;</span><br><span class="line">    detail: &#123;</span><br><span class="line">        immediate: true,//只执行一次</span><br><span class="line">        // deep:true,//深层嵌套数组变化时也触发</span><br><span class="line">        handler(now, old) &#123;</span><br><span class="line">            this.wtotal = now.length</span><br><span class="line">        &#125;</span><br><span class="line">    &#125;</span><br><span class="line">&#125;,</span><br></pre>
+
+
+<h3 id="组件化"><a href="#组件化" class="headerlink" title="组件化"></a>组件化</h3><blockquote>
+<p>组件化命名法通常使用羊肉串命名法 aa-bb-cc</p>
+</blockquote>
+<p><code>sync</code> 事件缩写 <code>@update：show</code> 变量重新赋值</p>
+<p>场景：需要修改子组件中某个值时，我们可以使用<code>sync</code>修饰符简化事件处理</p>
+<p>组件配置–&gt;VueComponent实例—&gt;render()–&gt;Virtual DOM–&gt;DOM   组件的本质是产生虚拟DOM</p>
+<h3 id="插槽"><a href="#插槽" class="headerlink" title="插槽"></a>插槽</h3><pre class="highlight"><span class="line">// header.vue</span><br><span class="line"><span class="tag">&lt;<span class="name">div</span>&gt;</span></span><br><span class="line">    <span class="comment">&lt;!-- 具名插槽 --&gt;</span></span><br><span class="line">    <span class="tag">&lt;<span class="name">slot</span> <span class="attr">name</span>=<span class="string">&quot;msg&quot;</span>&gt;</span>MSG<span class="tag">&lt;/<span class="name">slot</span>&gt;</span></span><br><span class="line">    <span class="tag">&lt;<span class="name">slot</span> <span class="attr">name</span>=<span class="string">&quot;title&quot;</span> <span class="attr">title</span>=<span class="string">&quot;临时&quot;</span>&gt;</span>title<span class="tag">&lt;/<span class="name">slot</span>&gt;</span></span><br><span class="line">    <span class="comment">&lt;!-- 默认插槽 不写或者default --&gt;</span></span><br><span class="line">    <span class="comment">&lt;!-- &lt;slot name=&quot;default&quot;&gt;12312312&lt;/slot&gt; --&gt;</span></span><br><span class="line"><span class="tag">&lt;/<span class="name">div</span>&gt;</span></span><br><span class="line"></span><br><span class="line"><span class="tag">&lt;<span class="name">header</span>&gt;</span></span><br><span class="line">    <span class="tag">&lt;<span class="name">template</span> <span class="attr">v-slot:msg</span>&gt;</span><span class="tag">&lt;/<span class="name">template</span>&gt;</span></span><br><span class="line">    <span class="tag">&lt;<span class="name">template</span> <span class="attr">v-slot:title</span>=<span class="string">&quot;tempTitle&quot;</span>&gt;</span></span><br><span class="line">        <span class="comment">&lt;!-- 默认 --&gt;</span></span><br><span class="line">        &#123;&#123;title&#125;&#125;</span><br><span class="line">        <span class="comment">&lt;!-- 作用域插槽 --&gt;</span></span><br><span class="line">        &#123;&#123;tempTitle.title&#125;&#125;</span><br><span class="line">    <span class="tag">&lt;/<span class="name">template</span>&gt;</span></span><br><span class="line"><span class="tag">&lt;/<span class="name">header</span>&gt;</span></span><br></pre>
+
+
+
+<h3 id="API"><a href="#API" class="headerlink" title="API"></a>API</h3><h4 id="数据API"><a href="#数据API" class="headerlink" title="数据API"></a>数据API</h4><pre class="highlight"><span class="line"><span class="comment">// 给对象添加一个属性，并确保这个属性是双向绑定的，确保视图更新</span></span><br><span class="line">Vue.set(target,propertyName/index,value)</span><br><span class="line"><span class="built_in">this</span>.$set(target,propertyName/index,value)</span><br><span class="line"><span class="comment">// 给对象添加一个属性，并确保这个属性是响应式的，确保视图更新</span></span><br><span class="line">Vue.delete(target,propertyName/index)</span><br><span class="line"><span class="built_in">this</span>.$delete(target,propertyName/index)</span><br></pre>
+
+<h4 id="事件API"><a href="#事件API" class="headerlink" title="事件API"></a>事件API</h4><p><strong>事件总线</strong></p>
+<p>通过在Vue原型上添加一个Vue实例作为事件总线，实现组件间的互相通信，而且不受组件关系的影响</p>
+<blockquote>
+<p>发布订阅</p>
+</blockquote>
+<pre class="highlight"><span class="line">// 创建事件总线</span><br><span class="line">Vue.prototype.$bus=new Vue()</span><br><span class="line">// 监听</span><br><span class="line">this.$bus.$emit(&#x27;change-count&#x27;, index)</span><br><span class="line">// 触发</span><br><span class="line">this.$bus.$on(&#x27;change-count&#x27;, this.open)</span><br><span class="line">//方法</span><br><span class="line">open(index) &#123;</span><br><span class="line">    console.log(&quot;=======&quot;, index)</span><br><span class="line">&#125;,</span><br></pre>
+
+<p><strong>其他事件API</strong></p>
+<pre class="highlight"><span class="line">//只触发一次</span><br><span class="line">Vue.$once() //@click.once=&quot;test(index)&quot;</span><br><span class="line">//移除</span><br><span class="line">Vue.$off() //</span><br><span class="line">Vue.$off(&#x27;test&#x27;) //test事件所有的监听器</span><br><span class="line">Vue.$off(&#x27;test&#x27;,callback) //test事件中某一个</span><br></pre>
+
+<h3 id="元素、组件引用"><a href="#元素、组件引用" class="headerlink" title="元素、组件引用"></a>元素、组件引用</h3><pre class="highlight"><span class="line">&lt;h3 ref=<span class="string">&quot;ref_h3&quot;</span>&gt;计算属性&lt;/h3&gt;</span><br><span class="line"><span class="xml"><span class="tag">&lt;<span class="name">own-list</span> <span class="attr">ref</span>=<span class="string">&quot;ref_ownList&quot;</span>&gt;</span><span class="tag">&lt;/<span class="name">own-list</span>&gt;</span></span></span><br><span class="line"><span class="comment">//通过ref获取标签事件  不是响应式的</span></span><br><span class="line"><span class="built_in">this</span>.$refs.ref_h3.innerHTML</span><br><span class="line"><span class="built_in">this</span>.$refs.ref_ownList</span><br></pre>
+
+<h3 id="动画"><a href="#动画" class="headerlink" title="动画"></a>动画</h3><p><a target="_blank" rel="noopener" href="https://cn.vuejs.org/v2/api/#transition">Vue动画文档</a></p>
+<p><a target="_blank" rel="noopener" href="https://cn.vuejs.org/v2/api/#transition-group">列表过渡</a></p>
+<h3 id="过滤"><a href="#过滤" class="headerlink" title="过滤"></a>过滤</h3><pre class="highlight"><span class="line"><span class="comment">// 全局</span></span><br><span class="line"><span class="comment">// 注册</span></span><br><span class="line">Vue.filter(<span class="string">&#x27;my-filter&#x27;</span>, <span class="function"><span class="keyword">function</span> (<span class="params">value</span>) </span>&#123;</span><br><span class="line">  	<span class="comment">// 返回处理后的值</span></span><br><span class="line">    <span class="keyword">return</span> value+<span class="number">1</span></span><br><span class="line">&#125;)</span><br><span class="line"><span class="comment">// getter，返回已注册的过滤器</span></span><br><span class="line"><span class="keyword">var</span> myFilter = Vue.filter(<span class="string">&#x27;my-filter&#x27;</span>)</span><br><span class="line"><span class="comment">// 局部</span></span><br><span class="line"><span class="attr">filters</span>:&#123;</span><br><span class="line">    my-<span class="function"><span class="title">filter</span>(<span class="params">value,symbol=<span class="string">&#x27;￥&#x27;</span></span>)</span>&#123;</span><br><span class="line">        <span class="keyword">return</span> symbol + value</span><br><span class="line">    &#125;</span><br><span class="line">&#125;</span><br></pre>
+
+<h3 id="插件"><a href="#插件" class="headerlink" title="插件"></a>插件</h3><pre class="highlight"><span class="line">MyPlugin.install = function (Vue, options) &#123;</span><br><span class="line">  // 1. 添加全局方法或 property</span><br><span class="line">  Vue.myGlobalMethod = function () &#123;</span><br><span class="line">    // 逻辑...</span><br><span class="line">  &#125;</span><br><span class="line"></span><br><span class="line">  // 2. 添加全局资源</span><br><span class="line">  Vue.directive(&#x27;my-directive&#x27;, &#123;</span><br><span class="line">    bind (el, binding, vnode, oldVnode) &#123;</span><br><span class="line">      // 逻辑...</span><br><span class="line">    &#125;</span><br><span class="line">    ...</span><br><span class="line">  &#125;)</span><br><span class="line"></span><br><span class="line">  // 3. 注入组件选项</span><br><span class="line">  Vue.mixin(&#123;</span><br><span class="line">    created: function () &#123;</span><br><span class="line">      // 逻辑...</span><br><span class="line">    &#125;</span><br><span class="line">    ...</span><br><span class="line">  &#125;)</span><br><span class="line"></span><br><span class="line">  // 4. 添加实例方法</span><br><span class="line">  Vue.prototype.$myMethod = function (methodOptions) &#123;</span><br><span class="line">    // 逻辑...</span><br><span class="line">  &#125;</span><br><span class="line">&#125;</span><br></pre>
+
+<p>使用</p>
+<pre class="highlight"><span class="line">Vue.use(MyPlugin)</span><br></pre>
+
+
+
+<h3 id="自定义指令"><a href="#自定义指令" class="headerlink" title="自定义指令"></a>自定义指令</h3><p>在标签上通过<code>v-***</code>访问自定义指令</p>
+<pre class="highlight"><span class="line">Vue.directive(&#x27;focus&#x27;,&#123;</span><br><span class="line">	inserted(el,binding)&#123;</span><br><span class="line">		el.focus()</span><br><span class="line">	&#125;</span><br><span class="line">&#125;)</span><br><span class="line">Vue.directive(&#x27;oermission&#x27;,&#123;</span><br><span class="line">	inserted(el,binding)&#123;</span><br><span class="line">		console.log(el,binding)</span><br><span class="line">		if(binding.value!=&#x27;admin&#x27;)&#123;</span><br><span class="line">			如果传过来的值不是admin就删除当前节点</span><br><span class="line">			el.parentElement.removeChild(el)</span><br><span class="line">		&#125;</span><br><span class="line">	&#125;</span><br><span class="line">&#125;)</span><br></pre>
+
+<h3 id="css局部作用域"><a href="#css局部作用域" class="headerlink" title="css局部作用域"></a>css局部作用域</h3><pre class="highlight"><span class="line">// 元素上加特殊标签</span><br><span class="line">&lt;div data-v-fae5bece class=&quot;home red&quot;&gt;</span><br><span class="line">&lt;style scoped&gt;</span><br><span class="line">// 影响类名  Home_red_2M_ML</span><br><span class="line">&lt;div :class=&quot;[&#x27;home&#x27;,$style.red]&quot;&gt;</span><br><span class="line">&lt;style module&gt;</span><br></pre>
+
+<h3 id="数据模拟"><a href="#数据模拟" class="headerlink" title="数据模拟"></a>数据模拟</h3><pre class="highlight"><span class="line">// vue.config.js</span><br><span class="line">module.exports = &#123;</span><br><span class="line">    publicPath: process.env.NODE_ENV === &#x27;production&#x27;</span><br><span class="line">        ? &#x27;/production-sub-path/&#x27;</span><br><span class="line">        : &#x27;/&#x27;,</span><br><span class="line">    devServer: &#123;</span><br><span class="line">        before(app) &#123;</span><br><span class="line">            // app是一个express实例</span><br><span class="line">            // app.get(&#x27;/api/getList&#x27;, (req, res) =&gt; &#123;</span><br><span class="line">            //     console.log(req, res,&quot;++++++&quot;)</span><br><span class="line">            //     setTimeout(() =&gt; &#123;</span><br><span class="line">            //         res.json([&#123; name: &#x27;xiaoma&#x27;, age: 23 &#125;])</span><br><span class="line">            //     &#125;, 2000)</span><br><span class="line">            // &#125;)</span><br><span class="line">        &#125;,</span><br><span class="line">        // 代理</span><br><span class="line">        proxy:&#x27;http://localhost:3000&#x27;</span><br><span class="line">    &#125;</span><br><span class="line">&#125;</span><br></pre>
+
+<h3 id="vue-router"><a href="#vue-router" class="headerlink" title="vue-router"></a>vue-router</h3><pre class="highlight"><span class="line">// ------------ router/index.js</span><br><span class="line">import Vue from &#x27;vue&#x27;</span><br><span class="line">import VueRouter from &#x27;vue-router&#x27;</span><br><span class="line">// 引入home页面</span><br><span class="line">Vue.use(VueRouter)</span><br><span class="line">const routes=[</span><br><span class="line">	&#123;</span><br><span class="line">		path:&#x27;/&#x27;,</span><br><span class="line">		name:&#x27;Home&#x27;,</span><br><span class="line">		component: Home</span><br><span class="line">	&#125;,</span><br><span class="line">  &#123;</span><br><span class="line">    path: &#x27;/about&#x27;,</span><br><span class="line">    name: &#x27;About&#x27;,</span><br><span class="line">    // 懒加载 代码单独打包出去、优化体验</span><br><span class="line">    component: () =&gt; import(&#x27;../views/About.vue&#x27;)</span><br><span class="line">  &#125;</span><br><span class="line">]</span><br><span class="line"></span><br><span class="line">// -------------- App.vue</span><br><span class="line">&lt;router-link to=&#x27;/&#x27;&gt;前往home&lt;/router-link&gt;</span><br><span class="line">// 路由出口</span><br><span class="line">&lt;router-view&gt;&lt;/router-view&gt;</span><br></pre>
+
+<p>动态路由</p>
+<pre class="highlight"><span class="line">// --------- router/index.js</span><br><span class="line">const routes=[</span><br><span class="line">	&#123;</span><br><span class="line">		path:&#x27;/detail/:id&#x27;,</span><br><span class="line">		name:&#x27;Detail&#x27;,</span><br><span class="line">		component:Detail</span><br><span class="line">	&#125;</span><br><span class="line">]</span><br><span class="line">// ----------App.vue</span><br><span class="line">&lt;router-link :to=&quot;/detail/$&#123;index&#125;&quot;&gt;&lt;router-link&gt;</span><br><span class="line">&lt;router-view&gt;&lt;/router-view&gt;</span><br><span class="line"></span><br><span class="line">// ----------Detail.vue</span><br><span class="line">&lt;div&gt;&#123;&#123;$route.params.id&#125;&#125;&lt;/div&gt;</span><br></pre>
+
+<blockquote>
+<p>动态添加路由：router.addRoutes(routes)动态配置</p>
+<p>将路由剪切出去，当我们需要访问时调用</p>
+<pre class="highlight"><span class="line">this.$router.addRoutes([</span><br><span class="line">&#123;</span><br><span class="line">   path: &quot;/about&quot;,</span><br><span class="line">   name: &quot;About&quot;,</span><br><span class="line">   component: () =&gt;</span><br><span class="line">       import(/* webpackChunkName: &quot;about&quot; */ &quot;../views/About.vue&quot;),</span><br><span class="line">meta: &#123;</span><br><span class="line">       auth: true,</span><br><span class="line">   &#125;,</span><br><span class="line">&#125;</span><br><span class="line">])</span><br></pre>
+
+</blockquote>
+<p>嵌套路由</p>
+<pre class="highlight"><span class="line">// --------- router/index.js</span><br><span class="line">const routes=[</span><br><span class="line">	&#123;</span><br><span class="line">		path:&#x27;/detail/:id&#x27;,</span><br><span class="line">		name:&#x27;Detail&#x27;,</span><br><span class="line">		component:Detail,</span><br><span class="line">		children:[</span><br><span class="line">			&#123;</span><br><span class="line">				path:&#x27;/detail/content&#x27;,</span><br><span class="line">				name:&#x27;content&#x27;</span><br><span class="line">			&#125;</span><br><span class="line">		]</span><br><span class="line">	&#125;</span><br><span class="line">]</span><br><span class="line">// ----------App.vue</span><br><span class="line">&lt;router-link :to=&quot;/detail/content&quot;&gt;&lt;router-link&gt;</span><br><span class="line"></span><br><span class="line">// ----------Detail.vue</span><br><span class="line">&lt;router-link :to=&quot;/detail/content&quot;&gt;&lt;router-link&gt;</span><br><span class="line">&lt;router-view&gt;&lt;/router-view&gt;</span><br></pre>
+
+<p>编程式导航</p>
+<pre class="highlight"><span class="line">// 字符串路径</span><br><span class="line">router.push(&#x27;/users/eduardo&#x27;)</span><br><span class="line"></span><br><span class="line">// 带有路径的对象</span><br><span class="line">router.push(&#123; path: &#x27;/users/eduardo&#x27; &#125;)</span><br><span class="line"></span><br><span class="line">// 命名的路由，并加上参数，让路由建立 url</span><br><span class="line">router.push(&#123; name: &#x27;user&#x27;, params: &#123; username: &#x27;eduardo&#x27; &#125; &#125;)</span><br><span class="line"></span><br><span class="line">// 带查询参数，结果是 /register?plan=private</span><br><span class="line">router.push(&#123; path: &#x27;/register&#x27;, query: &#123; plan: &#x27;private&#x27; &#125; &#125;)</span><br><span class="line"></span><br><span class="line">// 带 hash，结果是 /about#team</span><br><span class="line">router.push(&#123; path: &#x27;/about&#x27;, hash: &#x27;#team&#x27; &#125;)</span><br></pre>
+
+<blockquote>
+<p>注：组件复用：首次使用时就已经创建好了，后面不会再创建而只是使用，所以要设置watch监听</p>
+<pre class="highlight"><span class="line">// ***.vue</span><br><span class="line">watch: &#123;</span><br><span class="line">    $route: &#123;</span><br><span class="line">      immediate: true,</span><br><span class="line">      deep: true,</span><br><span class="line">      handler() &#123;</span><br><span class="line">          console.log(console.log(&#x27;组件复用,首次使用时就已经创建好了，后面不会再创建而只是使用，所以要设置监听&#x27;))</span><br><span class="line">      &#125;</span><br><span class="line">    &#125;</span><br><span class="line">&#125;,</span><br></pre>
+</blockquote>
+<h3 id="路由守卫"><a href="#路由守卫" class="headerlink" title="路由守卫"></a>路由守卫</h3><p> <code>vue-router</code> 提供的导航守卫主要用来通过跳转或取消的方式守卫导航。这里有很多方式植入路由导航中：全局的，单个路由独享的，或者组件级的。 </p>
+<pre class="highlight"><span class="line">// route/index.js</span><br><span class="line">// 全局</span><br><span class="line">router.beforeEach((to,from,next)=&gt;&#123;</span><br><span class="line">	// 判断路由是否需要守卫，通常根据路由中的meta来判断</span><br><span class="line">	if(to.meta.auth)&#123;</span><br><span class="line">		// 判断权限，比如登录权限</span><br><span class="line">		if(isLogin)&#123;</span><br><span class="line">			next()</span><br><span class="line">		&#125;else&#123;</span><br><span class="line">			// 跳转到登录页面，并且携带目标url地址</span><br><span class="line">			next(&#x27;/login?redirect=&#x27;+to.fullPath)</span><br><span class="line">		&#125;</span><br><span class="line">	&#125;else&#123;</span><br><span class="line">		next()</span><br><span class="line">	&#125;</span><br><span class="line">&#125;)</span><br><span class="line">// 单个路由</span><br><span class="line">const routes = [</span><br><span class="line">  &#123;</span><br><span class="line">    path: &#x27;/&#x27;,</span><br><span class="line">    name: &#x27;Home&#x27;,</span><br><span class="line">    component: Home,</span><br><span class="line">    meta: &#123;</span><br><span class="line">      auth: true</span><br><span class="line">    &#125;,</span><br><span class="line">    beforeEnter(to, from, next) &#123;</span><br><span class="line">      console.table(to, from, next)</span><br><span class="line">      // 判断是否已经登录</span><br><span class="line">      if (window.isLogin) &#123;</span><br><span class="line">        next()</span><br><span class="line">      &#125; else &#123;</span><br><span class="line">        console.log(&quot;未登录&quot;,to.fullPath,)</span><br><span class="line">        next(&#x27;/login?redirect=&#x27; + to.fullPath)</span><br><span class="line">      &#125;</span><br><span class="line">    &#125;,</span><br><span class="line">  &#125;</span><br><span class="line">]</span><br><span class="line"></span><br><span class="line">// 组件 about.vue</span><br><span class="line">methods:&#123;</span><br><span class="line">  beforeRouteEnter(to, from) &#123;</span><br><span class="line">    // 在渲染该组件的对应路由被验证前调用</span><br><span class="line">    // 不能获取组件实例 `this` ！</span><br><span class="line">    // 因为当守卫执行时，组件实例还没被创建！</span><br><span class="line">    next((vm) =&gt; &#123;</span><br><span class="line">      console.log(vm.data);</span><br><span class="line">    &#125;);</span><br><span class="line">  &#125;,</span><br><span class="line">  beforeRouteUpdate(to, from) &#123;</span><br><span class="line">    // 在当前路由改变，但是该组件被复用时调用</span><br><span class="line">    // 举例来说，对于一个带有动态参数的路径 `/users/:id`，在 `/users/1` 和 `/users/2` 之间跳转的时候，</span><br><span class="line">    // 由于会渲染同样的 `UserDetails` 组件，因此组件实例会被复用。而这个钩子就会在这个情况下被调用。</span><br><span class="line">    // 因为在这种情况发生的时候，组件已经挂载好了，导航守卫可以访问组件实例 `this`</span><br><span class="line">    console.log(this.data)</span><br><span class="line">  &#125;,</span><br><span class="line">  beforeRouteLeave(to, from) &#123;</span><br><span class="line">    // 在导航离开渲染该组件的对应路由时调用</span><br><span class="line">    // 与 `beforeRouteUpdate` 一样，它可以访问组件实例 `this`</span><br><span class="line">  &#125;,</span><br><span class="line">&#125;</span><br></pre>
+
+<p>获取数据的时机</p>
+<p><code>beforeRouteEnter</code> 该组件被调用前，ajax请求数据等等</p>
+<p><code>beforeRouteUpdate</code>该组件被更新时对数据进行更新</p>
+<p>导航完成以后<code>created</code>并且<code>watch</code>监听<code>$route</code>路由变化更新值</p>
+<h3 id="组件缓存keep-alive"><a href="#组件缓存keep-alive" class="headerlink" title="组件缓存keep-alive"></a>组件缓存<code>keep-alive</code></h3><pre class="highlight"><span class="line">// include 指定</span><br><span class="line">// max最大</span><br><span class="line">// exclude 排除</span><br><span class="line">&lt;kepp-alive include=&#x27;admin&#x27;&gt;&lt;/keep-alive&gt;</span><br><span class="line">// 被 keep-alive 缓存的组件激活时调用activated 和 被 keep-alive 缓存的组件失活时调用deactivated</span><br></pre>
+
+<h3 id="统一状态管理Vuex"><a href="#统一状态管理Vuex" class="headerlink" title="统一状态管理Vuex"></a>统一状态管理Vuex</h3><pre class="highlight"><span class="line">state: &#123;&#125;, //储存vuex中的数据跟Vue实例中的data一样</span><br><span class="line">mutations: &#123;&#125;, // 储存一些方法</span><br><span class="line">actions: &#123;&#125;, // 也可以储存一些方法，也可以直接提交actions中的方法</span><br><span class="line">modules: &#123;&#125; // 模块化，将 store 分割成模块（module）。每个模块拥有自己的 state、mutation、action、getter、甚至是嵌套子模块——从上至下进行同样方式的分割</span><br></pre>
+
+<p>关键字：可预测，集中管理状态</p>
+<blockquote>
+<p>页面刷新状态丢失</p>
+</blockquote>
+<p>安装<code>vuex</code></p>
+<pre class="highlight"><span class="line">// store/index.js</span><br><span class="line">import Vue from &#x27;vue&#x27;</span><br><span class="line">import Vuex from &#x27;vuex&#x27;</span><br><span class="line"></span><br><span class="line">Vue.use(Vuex)</span><br><span class="line"></span><br><span class="line">export default new Vuex.Store(&#123;</span><br><span class="line">  state: &#123;</span><br><span class="line">    isLogin:false</span><br><span class="line">  &#125;,</span><br><span class="line">  mutations: &#123;</span><br><span class="line">    login(state)&#123;</span><br><span class="line">      console.log(&quot;调用&quot;)</span><br><span class="line">      state.isLogin=true</span><br><span class="line">    &#125;,</span><br><span class="line">    logout(state)&#123;</span><br><span class="line">      state.isLogin=false</span><br><span class="line">    &#125;</span><br><span class="line">  &#125;,</span><br><span class="line">  actions: &#123;</span><br><span class="line">    loginAsync(&#123;commit&#125;,username)&#123;</span><br><span class="line">      return new Promise((resolve,reject)=&gt;&#123;</span><br><span class="line">        setTimeout(()=&gt;&#123;</span><br><span class="line">          if(username===&quot;admin&quot;)&#123;</span><br><span class="line">            commit(&#x27;login&#x27;)</span><br><span class="line">            resolve(true)</span><br><span class="line">          &#125;else&#123;</span><br><span class="line">            reject()</span><br><span class="line">          &#125;</span><br><span class="line">        &#125;,1000)</span><br><span class="line">      &#125;)</span><br><span class="line">    &#125;</span><br><span class="line">  &#125;,</span><br><span class="line">  // 严格模式，直接修改Vuex中的值会抛出异常</span><br><span class="line">  strict: true</span><br><span class="line">&#125;)</span><br><span class="line"></span><br><span class="line">// 访问</span><br><span class="line">// 值 this.$store.state</span><br><span class="line">// 方法 mutations中的方法名 this.$store.commit(&#x27;login&#x27;)</span><br><span class="line">// 异步方法 actions中的方法名 this.$store.dispatch(&#x27;loginAsync&#x27;,username)</span><br></pre>
+
+<h4 id="模块化"><a href="#模块化" class="headerlink" title="模块化"></a>模块化</h4><pre class="highlight"><span class="line">// store/index.js</span><br><span class="line">import Vue from &#x27;vue&#x27;</span><br><span class="line">import Vuex from &#x27;vuex&#x27;</span><br><span class="line">// 引入相应的JS</span><br><span class="line">import own from &#x27;./own&#x27;</span><br><span class="line"></span><br><span class="line">Vue.use(Vuex)</span><br><span class="line"></span><br><span class="line">export default new Vuex.Store(&#123;</span><br><span class="line">    modules: &#123;</span><br><span class="line">    	own</span><br><span class="line">    &#125;</span><br><span class="line">&#125;)</span><br><span class="line">提取一个模块中的状态及方法</span><br><span class="line">// own.js</span><br><span class="line">export default&#123;</span><br><span class="line">    namespaced:true, //设置独立命名空间</span><br><span class="line">    //状态及方法</span><br><span class="line">    state: &#123;&#125;,</span><br><span class="line">    mutations: &#123;&#125;,</span><br><span class="line">    actions: &#123;&#125;</span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line">// 访问</span><br><span class="line">// 值 this.$store.state.own</span><br><span class="line">// 方法 mutations中的方法名 this.$store.commit(&#x27;own/login&#x27;)</span><br><span class="line">// 异步方法 actions中的方法名 this.$store.dispatch(&#x27;own/loginAsync&#x27;,username)</span><br></pre>
+
+<h4 id="派生"><a href="#派生" class="headerlink" title="派生"></a>派生</h4><blockquote>
+<p>计算属性的迁移</p>
+</blockquote>
+<pre class="highlight"><span class="line">store/index.js</span><br><span class="line">getters:&#123;</span><br><span class="line">	ownself:state=&gt;&quot;我是“+state.name</span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line">// 访问</span><br><span class="line">store.getters.ownself</span><br><span class="line">// 模块访问</span><br><span class="line">store.getters.own.ownself</span><br><span class="line">// 映射访问</span><br><span class="line">own.ownself</span><br><span class="line"></span><br></pre>
+
+<h4 id="映射"><a href="#映射" class="headerlink" title="映射"></a>映射</h4><pre class="highlight"><span class="line">// mapState()/mapMutations()/mapActions()/mapGetters()</span><br><span class="line"></span><br><span class="line">import &#123;mapState,mapMutations,mapActions&#125; from &#x27;vuex&#x27;</span><br><span class="line">//在计算属性中编写</span><br><span class="line">computed：&#123;</span><br><span class="line">	...mapState(&#x27;own&#x27;,[&#x27;isLogin&#x27;])</span><br><span class="line">&#125;,</span><br><span class="line">methods:&#123;</span><br><span class="line">    ...mapMutations([&#x27;own/login&#x27;]&#x27;),</span><br><span class="line">    ...mapActions([&#x27;own/loginAsync&#x27;]),</span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line">// 访问</span><br><span class="line">// 值 own</span><br><span class="line">// 方法 mutations中的方法名 this[&#x27;own/login&#x27;]</span><br><span class="line">// 异步方法 actions中的方法名 this[&#x27;own/loginAsync&#x27;](username)</span><br></pre>
+
+<h4 id="插件-1"><a href="#插件-1" class="headerlink" title="插件"></a>插件</h4><blockquote>
+<p>我们可以使用localStorage实现状态持久化，解决页面刷新状态丢失 我们使用Vuex插件，它接收store作为唯一参数，store.subscribe当store调用时就会调用</p>
+</blockquote>
+<pre class="highlight"><span class="line">//初始化store中的值</span><br><span class="line">export default (store)=&gt;&#123;</span><br><span class="line">    // store 初始化，将储存在localStoreage中的状态还原</span><br><span class="line">    if(localStorage)&#123;</span><br><span class="line">        const user = JSON.parse(localStorage.getItem(&#x27;user&#x27;)).own</span><br><span class="line">        if(user)&#123;</span><br><span class="line">            store.commit(&#x27;own/login&#x27;,user.username)</span><br><span class="line">        &#125;</span><br><span class="line">    &#125;</span><br><span class="line">    //监听变化,储存在localStoreage中</span><br><span class="line">    store.subscribe((mutation,state)=&gt;&#123;</span><br><span class="line">        console.log(mutation,state)</span><br><span class="line">        if(mutation.type===&#x27;own/login&#x27;)&#123;</span><br><span class="line">            const user=JSON.stringify(state)</span><br><span class="line">            console.log(user)</span><br><span class="line">            localStorage.setItem(&#x27;user&#x27;,user)</span><br><span class="line">        &#125;else&#123;</span><br><span class="line">            localStorage.removeItem(&#x27;user&#x27;)</span><br><span class="line">        &#125;</span><br><span class="line">    &#125;)</span><br><span class="line">&#125;</span><br></pre>
+<h3 id="nextTick"><a href="#nextTick" class="headerlink" title="nextTick"></a>nextTick</h3><p>vue中DOM更新是异步、批量渲染的</p>
+<pre class="highlight"><span class="line">this.$nextTick(()=&gt;&#123;</span><br><span class="line">	</span><br><span class="line">&#125;)</span><br></pre>
+
+<h3 id="虚拟DOM的好处"><a href="#虚拟DOM的好处" class="headerlink" title="虚拟DOM的好处"></a>虚拟DOM的好处</h3><p>初始化时，将（虚拟DOM节点）vnode塞入一个容器中，当页面发生变化时，与原来进行比较，计算变更进行更新</p>
+
+  </div>
+  <div>
+  
+  <div class="post-note note-warning copyright" style="margin-top: 42px">
+    <p><span style="font-weight: bold;">作者：</span><a target="_blank" rel="nofollow noopener noreferrer" href="https://xiaobai123-4.github.io/about">小白&amp;马</a></p>
+    <p><span style="font-weight: bold;">文章链接：</span><a target="_blank" rel="nofollow noopener noreferrer" href="https://xiaobai123-4.github.io/2022/02/10/cl06w70wt000a4ssfgj2l8q8h/">https://xiaobai123-4.github.io/2022/02/10/cl06w70wt000a4ssfgj2l8q8h/</a></p>
+    <p><span style="font-weight: bold;">版权声明：</span>本博客所有文章除特别声明外，均采用<a target="_blank" rel="noopener" href="https://creativecommons.org/licenses/by-nc-sa/4.0/deed.zh">CC BY-NC-SA 4.0 协议</a>。转载请注明出处！</p>
+  </div>
+  
+  </div>
+</article>
+<div class="nav">
+  
+  <div class="nav-item-prev">
+    <a href="/2022/02/12/cl06w70x0000v4ssffzwy7xsd/" class="nav-link">
+      <i class="iconfont icon-left nav-prev-icon"></i>
+      <div>
+        <div class="nav-label">上一篇</div>
+        
+        <div class="nav-title">面试题复习 </div>
+        
+      </div>
+    </a>
+  </div>
+  
+  
+  <div class="nav-item-next">
+    <a href="/2021/12/28/cl06w70wx000o4ssf8c6x0u7w/" class="nav-link">
+      <div>
+        <div class="nav-label">下一篇</div>
+        
+        <div class="nav-title">常见面试题 </div>
+        
+      </div>
+      <i class="iconfont icon-right nav-next-icon"></i>
+    </a>
+  </div>
+  
+</div>
+
+<div class="card card-content toc-card" id="mobiletoc">
+  <div class="toc-header"><i class="iconfont icon-menu" style="padding-right: 2px;"></i>目录</div>
+<ol class="toc"><li class="toc-item toc-level-3"><a class="toc-link" href="#Vue"><span class="toc-text">Vue</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#Vue%E7%94%9F%E5%91%BD%E5%91%A8%E6%9C%9F"><span class="toc-text">Vue生命周期</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#%E7%9B%91%E5%90%AC%E3%80%81%E8%AE%A1%E7%AE%97%E5%B1%9E%E6%80%A7"><span class="toc-text">监听、计算属性</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#%E7%BB%84%E4%BB%B6%E5%8C%96"><span class="toc-text">组件化</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#%E6%8F%92%E6%A7%BD"><span class="toc-text">插槽</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#API"><span class="toc-text">API</span></a><ol class="toc-child"><li class="toc-item toc-level-4"><a class="toc-link" href="#%E6%95%B0%E6%8D%AEAPI"><span class="toc-text">数据API</span></a></li><li class="toc-item toc-level-4"><a class="toc-link" href="#%E4%BA%8B%E4%BB%B6API"><span class="toc-text">事件API</span></a></li></ol></li><li class="toc-item toc-level-3"><a class="toc-link" href="#%E5%85%83%E7%B4%A0%E3%80%81%E7%BB%84%E4%BB%B6%E5%BC%95%E7%94%A8"><span class="toc-text">元素、组件引用</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#%E5%8A%A8%E7%94%BB"><span class="toc-text">动画</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#%E8%BF%87%E6%BB%A4"><span class="toc-text">过滤</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#%E6%8F%92%E4%BB%B6"><span class="toc-text">插件</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#%E8%87%AA%E5%AE%9A%E4%B9%89%E6%8C%87%E4%BB%A4"><span class="toc-text">自定义指令</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#css%E5%B1%80%E9%83%A8%E4%BD%9C%E7%94%A8%E5%9F%9F"><span class="toc-text">css局部作用域</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#%E6%95%B0%E6%8D%AE%E6%A8%A1%E6%8B%9F"><span class="toc-text">数据模拟</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#vue-router"><span class="toc-text">vue-router</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#%E8%B7%AF%E7%94%B1%E5%AE%88%E5%8D%AB"><span class="toc-text">路由守卫</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#%E7%BB%84%E4%BB%B6%E7%BC%93%E5%AD%98keep-alive"><span class="toc-text">组件缓存keep-alive</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#%E7%BB%9F%E4%B8%80%E7%8A%B6%E6%80%81%E7%AE%A1%E7%90%86Vuex"><span class="toc-text">统一状态管理Vuex</span></a><ol class="toc-child"><li class="toc-item toc-level-4"><a class="toc-link" href="#%E6%A8%A1%E5%9D%97%E5%8C%96"><span class="toc-text">模块化</span></a></li><li class="toc-item toc-level-4"><a class="toc-link" href="#%E6%B4%BE%E7%94%9F"><span class="toc-text">派生</span></a></li><li class="toc-item toc-level-4"><a class="toc-link" href="#%E6%98%A0%E5%B0%84"><span class="toc-text">映射</span></a></li><li class="toc-item toc-level-4"><a class="toc-link" href="#%E6%8F%92%E4%BB%B6-1"><span class="toc-text">插件</span></a></li></ol></li><li class="toc-item toc-level-3"><a class="toc-link" href="#nextTick"><span class="toc-text">nextTick</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#%E8%99%9A%E6%8B%9FDOM%E7%9A%84%E5%A5%BD%E5%A4%84"><span class="toc-text">虚拟DOM的好处</span></a></li></ol>
+</div></main>
+          <aside class="left-column">
+            
+            <div class="card card-author">
+              
+<img src="https://xiaobai123-4.github.io/image/admin.jpg" class="author-img">
+
+<p class="author-name">小白&马</p>
+<p class="author-description">Fight !!</p>
+<div class="author-message">
+  <a class="author-posts-count" href="/archives">
+    <span>14</span>
+    <span>文章</span>
+  </a>
+  <a class="author-categories-count" href="/categories">
+    <span>6</span>
+    <span>分类</span>
+  </a>
+  <a class="author-tags-count" href="/tags">
+    <span>15</span>
+    <span>标签</span>
+  </a>
+</div>
+
+            </div>
+            
+            <div class="sticky-tablet">
+  
+  
+  <article class="display-when-two-columns spacer">
+    <div class="card card-content toc-card">
+      <div class="toc-header"><i class="iconfont icon-menu" style="padding-right: 2px;"></i>目录</div>
+<ol class="toc"><li class="toc-item toc-level-3"><a class="toc-link" href="#Vue"><span class="toc-text">Vue</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#Vue%E7%94%9F%E5%91%BD%E5%91%A8%E6%9C%9F"><span class="toc-text">Vue生命周期</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#%E7%9B%91%E5%90%AC%E3%80%81%E8%AE%A1%E7%AE%97%E5%B1%9E%E6%80%A7"><span class="toc-text">监听、计算属性</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#%E7%BB%84%E4%BB%B6%E5%8C%96"><span class="toc-text">组件化</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#%E6%8F%92%E6%A7%BD"><span class="toc-text">插槽</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#API"><span class="toc-text">API</span></a><ol class="toc-child"><li class="toc-item toc-level-4"><a class="toc-link" href="#%E6%95%B0%E6%8D%AEAPI"><span class="toc-text">数据API</span></a></li><li class="toc-item toc-level-4"><a class="toc-link" href="#%E4%BA%8B%E4%BB%B6API"><span class="toc-text">事件API</span></a></li></ol></li><li class="toc-item toc-level-3"><a class="toc-link" href="#%E5%85%83%E7%B4%A0%E3%80%81%E7%BB%84%E4%BB%B6%E5%BC%95%E7%94%A8"><span class="toc-text">元素、组件引用</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#%E5%8A%A8%E7%94%BB"><span class="toc-text">动画</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#%E8%BF%87%E6%BB%A4"><span class="toc-text">过滤</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#%E6%8F%92%E4%BB%B6"><span class="toc-text">插件</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#%E8%87%AA%E5%AE%9A%E4%B9%89%E6%8C%87%E4%BB%A4"><span class="toc-text">自定义指令</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#css%E5%B1%80%E9%83%A8%E4%BD%9C%E7%94%A8%E5%9F%9F"><span class="toc-text">css局部作用域</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#%E6%95%B0%E6%8D%AE%E6%A8%A1%E6%8B%9F"><span class="toc-text">数据模拟</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#vue-router"><span class="toc-text">vue-router</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#%E8%B7%AF%E7%94%B1%E5%AE%88%E5%8D%AB"><span class="toc-text">路由守卫</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#%E7%BB%84%E4%BB%B6%E7%BC%93%E5%AD%98keep-alive"><span class="toc-text">组件缓存keep-alive</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#%E7%BB%9F%E4%B8%80%E7%8A%B6%E6%80%81%E7%AE%A1%E7%90%86Vuex"><span class="toc-text">统一状态管理Vuex</span></a><ol class="toc-child"><li class="toc-item toc-level-4"><a class="toc-link" href="#%E6%A8%A1%E5%9D%97%E5%8C%96"><span class="toc-text">模块化</span></a></li><li class="toc-item toc-level-4"><a class="toc-link" href="#%E6%B4%BE%E7%94%9F"><span class="toc-text">派生</span></a></li><li class="toc-item toc-level-4"><a class="toc-link" href="#%E6%98%A0%E5%B0%84"><span class="toc-text">映射</span></a></li><li class="toc-item toc-level-4"><a class="toc-link" href="#%E6%8F%92%E4%BB%B6-1"><span class="toc-text">插件</span></a></li></ol></li><li class="toc-item toc-level-3"><a class="toc-link" href="#nextTick"><span class="toc-text">nextTick</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#%E8%99%9A%E6%8B%9FDOM%E7%9A%84%E5%A5%BD%E5%A4%84"><span class="toc-text">虚拟DOM的好处</span></a></li></ol>
+    </div>
+  </article>
+  
+  
+  <article class="card card-content">
+    <div class="categories-card">
+  <div class="categories-header"><i class="iconfont icon-fenlei" style="padding-right: 2px;"></i>分类</div>
+  <div class="categories-list">
+    
+      <a href="/categories/Markdown">
+        <div class="categories-list-item">
+          Markdown
+          <span class="categories-list-item-badge">1</span>
+        </div>
+      </a>
+    
+      <a href="/categories/nodejs">
+        <div class="categories-list-item">
+          nodejs
+          <span class="categories-list-item-badge">2</span>
+        </div>
+      </a>
+    
+      <a href="/categories/前端">
+        <div class="categories-list-item">
+          前端
+          <span class="categories-list-item-badge">8</span>
+        </div>
+      </a>
+    
+      <a href="/categories/hexo">
+        <div class="categories-list-item">
+          hexo
+          <span class="categories-list-item-badge">1</span>
+        </div>
+      </a>
+    
+      <a href="/categories/微信小程序">
+        <div class="categories-list-item">
+          微信小程序
+          <span class="categories-list-item-badge">1</span>
+        </div>
+      </a>
+    
+      <a href="/categories/CSS">
+        <div class="categories-list-item">
+          CSS
+          <span class="categories-list-item-badge">1</span>
+        </div>
+      </a>
+    
+  </div>
+</div>
+  </article>
+  
+  <article class="card card-content">
+    <div class="tags-card">
+  <div class="tags-header"><i class="iconfont icon-biaoqian" style="padding-right: 2px;"></i>热门标签</div>
+  <div class="tags-list">
+    
+    <a href="\tags\javascript" title="javascript"><div class="tags-list-item">javascript</div></a>
+    
+    <a href="\tags\html" title="html"><div class="tags-list-item">html</div></a>
+    
+    <a href="\tags\常见问题" title="常见问题"><div class="tags-list-item">常见问题</div></a>
+    
+    <a href="\tags\css" title="css"><div class="tags-list-item">css</div></a>
+    
+    <a href="\tags\微信小程序" title="微信小程序"><div class="tags-list-item">微信小程序</div></a>
+    
+    <a href="\tags\nodejs" title="nodejs"><div class="tags-list-item">nodejs</div></a>
+    
+    <a href="\tags\koa" title="koa"><div class="tags-list-item">koa</div></a>
+    
+    <a href="\tags\ES6" title="ES6"><div class="tags-list-item">ES6</div></a>
+    
+    <a href="\tags\博客" title="博客"><div class="tags-list-item">博客</div></a>
+    
+    <a href="\tags\next" title="next"><div class="tags-list-item">next</div></a>
+    
+    <a href="\tags\hexo" title="hexo"><div class="tags-list-item">hexo</div></a>
+    
+    <a href="\tags\mockjs" title="mockjs"><div class="tags-list-item">mockjs</div></a>
+    
+    <a href="\tags\Koa" title="Koa"><div class="tags-list-item">Koa</div></a>
+    
+    <a href="\tags\笔记" title="笔记"><div class="tags-list-item">笔记</div></a>
+    
+    <a href="\tags\markdown" title="markdown"><div class="tags-list-item">markdown</div></a>
+    
+  </div>
+</div>
+  </article>
+  
+  
+</div>
+          </aside>
+          <aside class="right-column">
+            <div class="sticky-widescreen">
+  
+  
+  <article class="card card-content toc-card">
+    <div class="toc-header"><i class="iconfont icon-menu" style="padding-right: 2px;"></i>目录</div>
+<ol class="toc"><li class="toc-item toc-level-3"><a class="toc-link" href="#Vue"><span class="toc-text">Vue</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#Vue%E7%94%9F%E5%91%BD%E5%91%A8%E6%9C%9F"><span class="toc-text">Vue生命周期</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#%E7%9B%91%E5%90%AC%E3%80%81%E8%AE%A1%E7%AE%97%E5%B1%9E%E6%80%A7"><span class="toc-text">监听、计算属性</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#%E7%BB%84%E4%BB%B6%E5%8C%96"><span class="toc-text">组件化</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#%E6%8F%92%E6%A7%BD"><span class="toc-text">插槽</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#API"><span class="toc-text">API</span></a><ol class="toc-child"><li class="toc-item toc-level-4"><a class="toc-link" href="#%E6%95%B0%E6%8D%AEAPI"><span class="toc-text">数据API</span></a></li><li class="toc-item toc-level-4"><a class="toc-link" href="#%E4%BA%8B%E4%BB%B6API"><span class="toc-text">事件API</span></a></li></ol></li><li class="toc-item toc-level-3"><a class="toc-link" href="#%E5%85%83%E7%B4%A0%E3%80%81%E7%BB%84%E4%BB%B6%E5%BC%95%E7%94%A8"><span class="toc-text">元素、组件引用</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#%E5%8A%A8%E7%94%BB"><span class="toc-text">动画</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#%E8%BF%87%E6%BB%A4"><span class="toc-text">过滤</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#%E6%8F%92%E4%BB%B6"><span class="toc-text">插件</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#%E8%87%AA%E5%AE%9A%E4%B9%89%E6%8C%87%E4%BB%A4"><span class="toc-text">自定义指令</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#css%E5%B1%80%E9%83%A8%E4%BD%9C%E7%94%A8%E5%9F%9F"><span class="toc-text">css局部作用域</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#%E6%95%B0%E6%8D%AE%E6%A8%A1%E6%8B%9F"><span class="toc-text">数据模拟</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#vue-router"><span class="toc-text">vue-router</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#%E8%B7%AF%E7%94%B1%E5%AE%88%E5%8D%AB"><span class="toc-text">路由守卫</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#%E7%BB%84%E4%BB%B6%E7%BC%93%E5%AD%98keep-alive"><span class="toc-text">组件缓存keep-alive</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#%E7%BB%9F%E4%B8%80%E7%8A%B6%E6%80%81%E7%AE%A1%E7%90%86Vuex"><span class="toc-text">统一状态管理Vuex</span></a><ol class="toc-child"><li class="toc-item toc-level-4"><a class="toc-link" href="#%E6%A8%A1%E5%9D%97%E5%8C%96"><span class="toc-text">模块化</span></a></li><li class="toc-item toc-level-4"><a class="toc-link" href="#%E6%B4%BE%E7%94%9F"><span class="toc-text">派生</span></a></li><li class="toc-item toc-level-4"><a class="toc-link" href="#%E6%98%A0%E5%B0%84"><span class="toc-text">映射</span></a></li><li class="toc-item toc-level-4"><a class="toc-link" href="#%E6%8F%92%E4%BB%B6-1"><span class="toc-text">插件</span></a></li></ol></li><li class="toc-item toc-level-3"><a class="toc-link" href="#nextTick"><span class="toc-text">nextTick</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#%E8%99%9A%E6%8B%9FDOM%E7%9A%84%E5%A5%BD%E5%A4%84"><span class="toc-text">虚拟DOM的好处</span></a></li></ol>
+  </article>
+  
+  
+  <article class="card card-content">
+    <div class="recent-posts-card">
+  <div class="recent-posts-header"><i class="iconfont icon-wenzhang_huaban" style="padding-right: 2px;"></i>最近文章</div>
+  <div class="recent-posts-list">
+    
+      <div class="recent-posts-item">
+        <div class="recent-posts-item-title">2022-02-12</div>
+        <a href="/2022/02/12/cl06w70x0000v4ssffzwy7xsd/"><div class="recent-posts-item-content">面试题复习</div></a>
+      </div>
+    
+      <div class="recent-posts-item">
+        <div class="recent-posts-item-title">2022-02-10</div>
+        <a href="/2022/02/10/cl06w70wt000a4ssfgj2l8q8h/"><div class="recent-posts-item-content">Vue</div></a>
+      </div>
+    
+      <div class="recent-posts-item">
+        <div class="recent-posts-item-title">2021-12-28</div>
+        <a href="/2021/12/28/cl06w70wx000o4ssf8c6x0u7w/"><div class="recent-posts-item-content">常见面试题</div></a>
+      </div>
+    
+      <div class="recent-posts-item">
+        <div class="recent-posts-item-title">2021-12-23</div>
+        <a href="/2021/12/23/cl06w70wy000s4ssf8b0u42jl/"><div class="recent-posts-item-content">Demo_01</div></a>
+      </div>
+    
+  </div>
+</div>
+  </article>
+  
+  
+</div>
+          </aside>
+        </div>
+      </div>
+    </div>
+  </div>
+  
+  <footer class="footer">
+  <div class="footer-container">
+    <div>
+      <div class="footer-dsc">
+        <span>Copyright ©
+          
+          2020 -
+          
+          2022
+        </span>
+        <a href="/" class="footer-link">学习永不止步 </a>
+      </div>
+    </div>
+
+    
+    <div class="footer-dsc">
+      
+      
+      Powered by
+      <a href="https://hexo.io/" class="footer-link" target="_blank" rel="nofollow noopener noreferrer">&nbsp;Hexo </a>
+      
+      
+      <span>&nbsp;|&nbsp;</span>
+      
+      
+      
+      Theme -
+      <a href="https://github.com/theme-kaze" class="footer-link" target="_blank"
+        rel="nofollow noopener noreferrer">&nbsp;Kaze</a>
+      
+    </div>
+    
+    
+    
+    
+</footer>
+  <a role="button" id="scrollbutton" class="basebutton" >
+  <i class="iconfont icon-arrowleft button-icon"></i>
+</a>
+<a role="button" id="menubutton" class="basebutton">
+  <i class="iconfont icon-menu button-icon"></i>
+</a>
+<a role="button" id="popbutton" class="basebutton">
+  <i class="iconfont icon-expand button-icon"></i>
+</a>
+<a role="button" id="darkbutton" class="basebutton darkwidget">
+  <i class="iconfont icon-weather button-icon"></i>
+</a>
+
+  
+  
+  
+  <script>
+  var addImgLayout = function () {
+    var img = document.querySelectorAll('.post-content img');
+    var i;
+    for (i = 0; i < img.length; i++) {
+      var wrapper = document.createElement('a');
+      wrapper.setAttribute('data-fslightbox', 'gallery');
+      wrapper.setAttribute('href', img[i].getAttribute('data-src'));
+      wrapper.setAttribute('style', 'width: 100%; display: flex; justify-content: center;');
+      img[i].parentElement.insertBefore(wrapper, img[i]);
+      wrapper.appendChild(img[i]);
+    }
+    refreshFsLightbox();
+  }
+</script>
+<script>loadScript("//cdn.jsdelivr.net/npm/fslightbox@3.1.0/index.min.js", addImgLayout)</script>
+  
+  
+  
+<script src="/js/main.js"></script>
+
+  
+  
+  <script>
+    var addLazyload = function () {
+      var observer = lozad('.lozad', {
+        load: function (el) {
+          el.srcset = el.getAttribute('data-src');
+        },
+        loaded: function (el) {
+          el.classList.add('loaded');
+        }
+      });
+      observer.observe();
+    }
+  </script>
+  <script>loadScript("/js/lib/lozad.min.js", addLazyload)</script>
+  
+  
+</body>
+
+</html>
