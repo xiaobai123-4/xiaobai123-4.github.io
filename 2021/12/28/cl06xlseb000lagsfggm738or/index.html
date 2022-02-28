@@ -1,0 +1,528 @@
+<!DOCTYPE html>
+<html>
+<meta  lang="zh-CN" >
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport"
+    content="width=device-width, user-scalable=no, initial-scale=1.0, maximum-scale=1.0, minimum-scale=1.0">
+  <meta http-equiv="X-UA-Compatible" content="ie=edge">
+  <meta name="theme-color" content="#fff" id="theme-color">
+  <link rel="icon" href="https://xiaobai123-4.github.io/image/admin.jpg">
+  <title>学习永不止步</title>
+  <script>
+    // control reverse button
+    var reverseDarkList = {
+      dark: 'light',
+      light: 'dark'
+    };
+    var themeColor = {
+      dark: '#1c1c1e',
+      light: '#fff'
+    }
+    // get the data of css prefers-color-scheme
+    var getCssMediaQuery = function() {
+      return window.matchMedia('(prefers-color-scheme: dark)').matches ? 'dark' : 'light';
+    };
+    // reverse current darkmode setting function
+    var reverseDarkModeSetting = function() {
+      var setting = localStorage.getItem('user-color-scheme');
+      if(reverseDarkList[setting]) {
+        setting = reverseDarkList[setting];
+      } else if(setting === null) {
+        setting = reverseDarkList[getCssMediaQuery()];
+      } else {
+        return;
+      }
+      localStorage.setItem('user-color-scheme', setting);
+      return setting;
+    };
+    // apply current darkmode setting
+    var setDarkmode = function(mode) {
+      var setting = mode || localStorage.getItem('user-color-scheme');
+      if(setting === getCssMediaQuery()) {
+        document.documentElement.removeAttribute('data-user-color-scheme');
+        localStorage.removeItem('user-color-scheme');
+        document.getElementById('theme-color').content = themeColor[setting];
+      } else if(reverseDarkList[setting]) {
+        document.documentElement.setAttribute('data-user-color-scheme', setting);
+        document.getElementById('theme-color').content = themeColor[setting];
+      } else {
+        document.documentElement.removeAttribute('data-user-color-scheme');
+        localStorage.removeItem('user-color-scheme');
+        document.getElementById('theme-color').content = themeColor[getCssMediaQuery()];
+      }
+    };
+    setDarkmode();
+  </script>
+  <script>
+    function loadScript(url, cb) {
+      var script = document.createElement('script');
+      script.src = url;
+      if (cb) script.onload = cb;
+      script.async = true;
+      document.body.appendChild(script);
+    }
+  </script>
+  
+  <link rel="preload" href="//at.alicdn.com/t/font_1946621_vpj3dq9ceqa.css" as="style" >
+  <link rel="preload" href="//at.alicdn.com/t/font_1952792_89b4ac4k4up.css" as="style" >
+  
+  <link rel="preload" href="//cdn.jsdelivr.net/npm/fslightbox@3.1.0/index.min.js" as="script">
+  
+  
+  <link rel="preload" href="/js/lib/lozad.min.js" as="script">
+  
+  
+  
+  
+  
+  
+  
+  
+<link rel="stylesheet" href="/css/main.css">
+
+  
+  
+<link rel="stylesheet" href="//at.alicdn.com/t/font_1946621_vpj3dq9ceqa.css">
+
+  
+  
+<link rel="stylesheet" href="//at.alicdn.com/t/font_1952792_89b4ac4k4up.css">
+
+  
+  
+  
+<meta name="generator" content="Hexo 5.4.0"></head>
+
+
+<body>
+  <div class="wrapper">
+    
+    <nav class="navbar">
+  <div class="navbar-logo">
+    <span class="navbar-logo-main">
+      
+      <img class="navbar-logo-img" src="https://xiaobai123-4.github.io/image/admin.jpg">
+      
+      <span class="navbar-logo-dsc">学习永不止步</span>
+    </span>
+  </div>
+  <div class="navbar-menu">
+    
+    <a href="/" class="navbar-menu-item">首页 </a>
+    
+    <a href="/archives" class="navbar-menu-item">归档 </a>
+    
+    <a href="/tags" class="navbar-menu-item">标签 </a>
+    
+    <a href="/categories" class="navbar-menu-item">分类 </a>
+    
+    <a href="/links" class="navbar-menu-item">友链 </a>
+    
+    <a class="navbar-menu-item darknavbar" id="dark"><i class="iconfont icon-weather"></i></a>
+  </div>
+</nav>
+    
+    <div class="section-wrap">
+      <div class="container">
+        <div class="columns">
+          <main class="main-column">
+<div class="image-wrapper">
+  <img src="https://s4.ax1x.com/2021/12/14/oxowzq.jpg" data-src="https://s4.ax1x.com/2021/12/14/oxowzq.jpg"
+    srcset="data:image/svg+xml,%3Csvg%20xmlns=&#39;http://www.w3.org/2000/svg&#39;%20viewBox=&#39;0%200%20300%20300&#39;%3E%3C/svg%3E"
+    class="image lozad">
+</div>
+
+<article class="card card-content">
+  <header>
+    <h1 class="post-title">
+      常见面试题
+    </h1>
+  </header>
+  <div class="post-meta post-show-meta">
+    <time datetime="2021-12-28T11:01:34.000Z" style="display: flex; align-items: center;">
+      <i class="iconfont icon-calendar" style="margin-right: 2px;"></i>
+      <span>2021-12-28</span>
+    </time>
+    
+    <span class="dot"></span>
+    
+    <a href="/categories/前端/" class="post-meta-link">前端</a>
+    
+    
+    
+    <span class="dot"></span>
+    <span>1.1k 字</span>
+    
+  </div>
+  
+  <div class="post-meta post-show-meta" style="margin-top: -10px;">
+    <div style="display: flex; align-items: center;">
+      <i class="iconfont icon-biaoqian" style="margin-right: 2px; font-size: 1.15rem;"></i>
+      
+      
+        <a href="/tags/javascript/" class="post-meta-link">javascript</a>
+      
+      
+      <span class="dot"></span>
+      
+        <a href="/tags/html/" class="post-meta-link">html</a>
+      
+    </div>
+  </div>
+  
+  </header>
+  <div id="section" class="post-content">
+    <h2 id="浏览器渲染的过程"><a href="#浏览器渲染的过程" class="headerlink" title="浏览器渲染的过程"></a>浏览器渲染的过程</h2><p>请求页面,请求的同时构建DOM,请求HTML,服务器响应返回HTML,浏览器解析HTML构建DOM,解析的同时请求CSS以及相关的JS,服务器返回CSS构建CSSOM,服务器返回JS,JS会修改操作DOM,会再次渲染DOM,形成渲染树布局并绘制页面.</p>
+<blockquote>
+<p><strong>等CSSDOM构建完成以后才会执行JS构建DOM,JS会阻塞DOM树构建,等JS解析完成以后再构建DOM</strong></p>
+<p><strong>DOM可以部分解析CSSOM全部解析</strong></p>
+<p><strong>css和js的请求顺序根据实际情况发生变化</strong></p>
+</blockquote>
+<h2 id="在浏览器输入URL回车后发生了什么"><a href="#在浏览器输入URL回车后发生了什么" class="headerlink" title="在浏览器输入URL回车后发生了什么?"></a>在浏览器输入URL回车后发生了什么?</h2><p><a target="_blank" rel="noopener" href="http://www.123.com/">www.123.com</a> —-DNS解析—-123.23.104—&gt;与服务器建立TCP连接—&gt;发送HTTP请求获取服务器返回的数据,浏览器进行渲染</p>
+<p>三次握手   客户端–ASY–服务端–ASY+ACK–客户端–ACK–服务端</p>
+<p>四次挥手   客户端–FIN+ACK–服务端–ACK—客户端</p>
+<p>​                                                  服务端–FIN+ACK—客户端–ACK–服务端</p>
+<h2 id="跨域"><a href="#跨域" class="headerlink" title="跨域"></a>跨域</h2><p>协议 域名 端口 路径</p>
+<h3 id="JSONP-JSON-with-Padding-只支持get请求"><a href="#JSONP-JSON-with-Padding-只支持get请求" class="headerlink" title="JSONP( JSON with Padding )只支持get请求"></a>JSONP( JSON with Padding )只支持get请求</h3><p>服务器将数据放在一个指定函数名的回调函数里传回来 ,客户端执行提前定义好的函数</p>
+<pre class="highlight"><span class="line">&lt;script&gt;</span><br><span class="line">	function bb()&#123;</span><br><span class="line">		console.log(&quot;成功&quot;)</span><br><span class="line">	&#125;</span><br><span class="line">&lt;/script&gt;</span><br><span class="line">&lt;script src=&quot;http://localhost:8080/index?callback=bb&quot; type=&quot;text/javascript&quot;&gt;&lt;/script&gt;</span><br></pre>
+
+<h3 id="cors"><a href="#cors" class="headerlink" title="cors"></a>cors</h3><p>设置头部 <code>Access-Control-Allow-Origin</code> 注意兼容性问题,允许同源的地址,所有可以直接用<code>*</code></p>
+<h3 id="反向代理"><a href="#反向代理" class="headerlink" title="反向代理"></a>反向代理</h3><p>常见的Nginx.服务器设置反向代理.代理访问服务器,服务器之间进行数据请求,前端不直接访问浏览器</p>
+<h2 id="cookie-localStorage-sessionStorage的区别"><a href="#cookie-localStorage-sessionStorage的区别" class="headerlink" title="cookie,localStorage,sessionStorage的区别"></a><code>cookie,localStorage,sessionStorage</code>的区别</h2><pre class="highlight"><span class="line">// cookie不超过4kb</span><br><span class="line">// 设置cookie的方式</span><br><span class="line"> let key1 = &#x27;admin&#x27;, pwd1 = &#x27;abcd1234@&#x27;</span><br><span class="line"> let value1 = encodeURIComponent(pwd1);</span><br><span class="line"> //max-age 失效(单位/秒)</span><br><span class="line"> document.cookie = `$&#123;key1&#125;=$&#123;value1&#125;;max-age=60`</span><br><span class="line"> let cookie = &#123;&#125;</span><br><span class="line"> let webCookie = document.cookie.split(&quot;;&quot;).map(v =&gt; &#123; return v.split(&#x27;=&#x27;) &#125;)</span><br><span class="line"> if (webCookie) &#123;</span><br><span class="line">    webCookie.forEach((v) =&gt; &#123;</span><br><span class="line">        let name = v[0].trim();</span><br><span class="line">        let value = v[1].trim();</span><br><span class="line">        cookie[name] = decodeURIComponent(value);</span><br><span class="line">    &#125;)</span><br><span class="line">    document.write(JSON.stringify(cookie))</span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line">//localStorage不会自动销毁,可手动删除</span><br><span class="line">//sessionStorage网页关闭即销毁,仅在当前窗口起作用</span><br></pre>
+
+<h2 id="手写promise"><a href="#手写promise" class="headerlink" title="手写promise"></a>手写promise</h2><pre class="highlight"><span class="line">class Commitment &#123;</span><br><span class="line">    static PENDING = &quot;待定&quot;; static FULFILLD = &quot;成功&quot;; static REJECTED = &quot;拒绝&quot;;</span><br><span class="line">    constructor(func) &#123;</span><br><span class="line">        this.status = Commitment.PENDING</span><br><span class="line">        this.result = null;</span><br><span class="line">        //数组先入先出</span><br><span class="line">        this.resolveCallbacks = [];</span><br><span class="line">        this.rejectCallbacks = []</span><br><span class="line">        try &#123;</span><br><span class="line">            func(this.resolve.bind(this), this.reject.bind(this))</span><br><span class="line">        &#125; catch (error) &#123;</span><br><span class="line">            this.reject(error)</span><br><span class="line">        &#125;</span><br><span class="line">    &#125;</span><br><span class="line">    resolve(result) &#123;</span><br><span class="line">        setTimeout(() =&gt; &#123;</span><br><span class="line">            if (this.status == Commitment.PENDING) &#123;</span><br><span class="line">                this.status = Commitment.FULFILLD</span><br><span class="line">                this.result = result</span><br><span class="line">                this.resolveCallbacks.forEach(callback =&gt; &#123;</span><br><span class="line">                    callback(result)</span><br><span class="line">                &#125;)</span><br><span class="line">            &#125;</span><br><span class="line">        &#125;)</span><br><span class="line">    &#125;</span><br><span class="line">    reject(result) &#123;</span><br><span class="line">        setTimeout(() =&gt; &#123;</span><br><span class="line">            if (this.status == Commitment.PENDING) &#123;</span><br><span class="line">                this.status = Commitment.REJECTED</span><br><span class="line">                this.result = result</span><br><span class="line">                this.rejectCallbacks.forEach(callback =&gt; &#123;</span><br><span class="line">                    callback(result)</span><br><span class="line">                &#125;)</span><br><span class="line">            &#125;</span><br><span class="line">        &#125;)</span><br><span class="line">    &#125;</span><br><span class="line">    then(onFULFILLD, onREJECTED) &#123;</span><br><span class="line">        return new Commitment((resolve, reject) =&gt; &#123;</span><br><span class="line">            //判断传入是否是一个方法</span><br><span class="line">            onFULFILLD = typeof onFULFILLD === &#x27;function&#x27; ? onFULFILLD : () =&gt; &#123; &#125;;</span><br><span class="line">            onREJECTED = typeof onREJECTED === &#x27;function&#x27; ? onREJECTED : () =&gt; &#123; &#125;;</span><br><span class="line">            if (this.status == Commitment.PENDING) &#123;</span><br><span class="line">                this.resolveCallbacks.push(onFULFILLD);</span><br><span class="line">                this.rejectCallbacks.push(onREJECTED);</span><br><span class="line">            &#125;</span><br><span class="line">            if (this.status == Commitment.FULFILLD) &#123;</span><br><span class="line">                setTimeout(() =&gt; &#123;</span><br><span class="line">                    onFULFILLD(this.result)</span><br><span class="line">                &#125;)</span><br><span class="line">            &#125;</span><br><span class="line">            if (this.status == Commitment.onREJECTED) &#123;</span><br><span class="line">                setTimeout(() =&gt; &#123;</span><br><span class="line">                    onREJECTED(this.result)</span><br><span class="line">                &#125;)</span><br><span class="line">            &#125;</span><br><span class="line">        &#125;)</span><br><span class="line">    &#125;</span><br><span class="line">&#125;</span><br></pre>
+
+<h3 id="闭包"><a href="#闭包" class="headerlink" title="闭包"></a>闭包</h3><p> 有权访问另外一个函数作用域中的变量的函数 </p>
+<blockquote>
+<p>作用: 保护函数的私有变量不受外部的干扰。形成不销毁的栈内存。 保存，把一些函数内的值保存下来。闭包可以实现方法和属性的私有化 </p>
+</blockquote>
+<h3 id="Git-与-SVN-区别点"><a href="#Git-与-SVN-区别点" class="headerlink" title="Git 与 SVN 区别点"></a>Git 与 SVN 区别点</h3><ol>
+<li><p>GIT是分布式的，SVN不是：这是GIT和其它非分布式的版本控制系统，例如SVN，CVS等，最核心的区别。</p>
+</li>
+<li><p>Git下载下来后，在本地不必联网就可以看到所有的log，很方便学习，SVN却需要联网</p>
+</li>
+<li><p>GIT把内容按元数据方式存储，而SVN是按文件：所有的资源控制系统都是把文件的元信息隐藏在一个类似.svn,.cvs等的文件夹里。</p>
+</li>
+<li><p>GIT分支和SVN的分支不同：分支在SVN中一点不特别，就是版本库中的另外的一个目录。</p>
+</li>
+<li><p>GIT没有一个全局的版本号，而SVN有：目前为止这是跟SVN相比GIT缺少的最大的一个特征。</p>
+</li>
+<li><p>GIT的内容完整性要优于SVN：GIT的内容存储使用的是SHA-1哈希算法。这能确保代码内容的完整性，确保在遇到磁盘故障和网络问题时降低对版本库的破坏。</p>
+</li>
+</ol>
+
+  </div>
+  <div>
+  
+  <div class="post-note note-warning copyright" style="margin-top: 42px">
+    <p><span style="font-weight: bold;">作者：</span><a target="_blank" rel="nofollow noopener noreferrer" href="https://xiaobai123-4.github.io/about">小白&amp;马</a></p>
+    <p><span style="font-weight: bold;">文章链接：</span><a target="_blank" rel="nofollow noopener noreferrer" href="https://xiaobai123-4.github.io/2021/12/28/cl06xlseb000lagsfggm738or/">https://xiaobai123-4.github.io/2021/12/28/cl06xlseb000lagsfggm738or/</a></p>
+    <p><span style="font-weight: bold;">版权声明：</span>本博客所有文章除特别声明外，均采用<a target="_blank" rel="noopener" href="https://creativecommons.org/licenses/by-nc-sa/4.0/deed.zh">CC BY-NC-SA 4.0 协议</a>。转载请注明出处！</p>
+  </div>
+  
+  </div>
+</article>
+<div class="nav">
+  
+  <div class="nav-item-prev">
+    <a href="/2022/02/10/cl06xlse50006agsf71txbzdk/" class="nav-link">
+      <i class="iconfont icon-left nav-prev-icon"></i>
+      <div>
+        <div class="nav-label">上一篇</div>
+        
+        <div class="nav-title">Vue </div>
+        
+      </div>
+    </a>
+  </div>
+  
+  
+  <div class="nav-item-next">
+    <a href="/2021/12/23/cl06xlsed000qagsfajuffzlu/" class="nav-link">
+      <div>
+        <div class="nav-label">下一篇</div>
+        
+        <div class="nav-title">Demo_01 </div>
+        
+      </div>
+      <i class="iconfont icon-right nav-next-icon"></i>
+    </a>
+  </div>
+  
+</div>
+
+<div class="card card-content toc-card" id="mobiletoc">
+  <div class="toc-header"><i class="iconfont icon-menu" style="padding-right: 2px;"></i>目录</div>
+<ol class="toc"><li class="toc-item toc-level-2"><a class="toc-link" href="#%E6%B5%8F%E8%A7%88%E5%99%A8%E6%B8%B2%E6%9F%93%E7%9A%84%E8%BF%87%E7%A8%8B"><span class="toc-text">浏览器渲染的过程</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#%E5%9C%A8%E6%B5%8F%E8%A7%88%E5%99%A8%E8%BE%93%E5%85%A5URL%E5%9B%9E%E8%BD%A6%E5%90%8E%E5%8F%91%E7%94%9F%E4%BA%86%E4%BB%80%E4%B9%88"><span class="toc-text">在浏览器输入URL回车后发生了什么?</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#%E8%B7%A8%E5%9F%9F"><span class="toc-text">跨域</span></a><ol class="toc-child"><li class="toc-item toc-level-3"><a class="toc-link" href="#JSONP-JSON-with-Padding-%E5%8F%AA%E6%94%AF%E6%8C%81get%E8%AF%B7%E6%B1%82"><span class="toc-text">JSONP( JSON with Padding )只支持get请求</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#cors"><span class="toc-text">cors</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#%E5%8F%8D%E5%90%91%E4%BB%A3%E7%90%86"><span class="toc-text">反向代理</span></a></li></ol></li><li class="toc-item toc-level-2"><a class="toc-link" href="#cookie-localStorage-sessionStorage%E7%9A%84%E5%8C%BA%E5%88%AB"><span class="toc-text">cookie,localStorage,sessionStorage的区别</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#%E6%89%8B%E5%86%99promise"><span class="toc-text">手写promise</span></a><ol class="toc-child"><li class="toc-item toc-level-3"><a class="toc-link" href="#%E9%97%AD%E5%8C%85"><span class="toc-text">闭包</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#Git-%E4%B8%8E-SVN-%E5%8C%BA%E5%88%AB%E7%82%B9"><span class="toc-text">Git 与 SVN 区别点</span></a></li></ol></li></ol>
+</div></main>
+          <aside class="left-column">
+            
+            <div class="card card-author">
+              
+<img src="https://xiaobai123-4.github.io/image/admin.jpg" class="author-img">
+
+<p class="author-name">小白&马</p>
+<p class="author-description">Fight !!</p>
+<div class="author-message">
+  <a class="author-posts-count" href="/archives">
+    <span>14</span>
+    <span>文章</span>
+  </a>
+  <a class="author-categories-count" href="/categories">
+    <span>6</span>
+    <span>分类</span>
+  </a>
+  <a class="author-tags-count" href="/tags">
+    <span>15</span>
+    <span>标签</span>
+  </a>
+</div>
+
+            </div>
+            
+            <div class="sticky-tablet">
+  
+  
+  <article class="display-when-two-columns spacer">
+    <div class="card card-content toc-card">
+      <div class="toc-header"><i class="iconfont icon-menu" style="padding-right: 2px;"></i>目录</div>
+<ol class="toc"><li class="toc-item toc-level-2"><a class="toc-link" href="#%E6%B5%8F%E8%A7%88%E5%99%A8%E6%B8%B2%E6%9F%93%E7%9A%84%E8%BF%87%E7%A8%8B"><span class="toc-text">浏览器渲染的过程</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#%E5%9C%A8%E6%B5%8F%E8%A7%88%E5%99%A8%E8%BE%93%E5%85%A5URL%E5%9B%9E%E8%BD%A6%E5%90%8E%E5%8F%91%E7%94%9F%E4%BA%86%E4%BB%80%E4%B9%88"><span class="toc-text">在浏览器输入URL回车后发生了什么?</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#%E8%B7%A8%E5%9F%9F"><span class="toc-text">跨域</span></a><ol class="toc-child"><li class="toc-item toc-level-3"><a class="toc-link" href="#JSONP-JSON-with-Padding-%E5%8F%AA%E6%94%AF%E6%8C%81get%E8%AF%B7%E6%B1%82"><span class="toc-text">JSONP( JSON with Padding )只支持get请求</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#cors"><span class="toc-text">cors</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#%E5%8F%8D%E5%90%91%E4%BB%A3%E7%90%86"><span class="toc-text">反向代理</span></a></li></ol></li><li class="toc-item toc-level-2"><a class="toc-link" href="#cookie-localStorage-sessionStorage%E7%9A%84%E5%8C%BA%E5%88%AB"><span class="toc-text">cookie,localStorage,sessionStorage的区别</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#%E6%89%8B%E5%86%99promise"><span class="toc-text">手写promise</span></a><ol class="toc-child"><li class="toc-item toc-level-3"><a class="toc-link" href="#%E9%97%AD%E5%8C%85"><span class="toc-text">闭包</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#Git-%E4%B8%8E-SVN-%E5%8C%BA%E5%88%AB%E7%82%B9"><span class="toc-text">Git 与 SVN 区别点</span></a></li></ol></li></ol>
+    </div>
+  </article>
+  
+  
+  <article class="card card-content">
+    <div class="categories-card">
+  <div class="categories-header"><i class="iconfont icon-fenlei" style="padding-right: 2px;"></i>分类</div>
+  <div class="categories-list">
+    
+      <a href="/categories/nodejs">
+        <div class="categories-list-item">
+          nodejs
+          <span class="categories-list-item-badge">2</span>
+        </div>
+      </a>
+    
+      <a href="/categories/Markdown">
+        <div class="categories-list-item">
+          Markdown
+          <span class="categories-list-item-badge">1</span>
+        </div>
+      </a>
+    
+      <a href="/categories/前端">
+        <div class="categories-list-item">
+          前端
+          <span class="categories-list-item-badge">8</span>
+        </div>
+      </a>
+    
+      <a href="/categories/hexo">
+        <div class="categories-list-item">
+          hexo
+          <span class="categories-list-item-badge">1</span>
+        </div>
+      </a>
+    
+      <a href="/categories/微信小程序">
+        <div class="categories-list-item">
+          微信小程序
+          <span class="categories-list-item-badge">1</span>
+        </div>
+      </a>
+    
+      <a href="/categories/CSS">
+        <div class="categories-list-item">
+          CSS
+          <span class="categories-list-item-badge">1</span>
+        </div>
+      </a>
+    
+  </div>
+</div>
+  </article>
+  
+  <article class="card card-content">
+    <div class="tags-card">
+  <div class="tags-header"><i class="iconfont icon-biaoqian" style="padding-right: 2px;"></i>热门标签</div>
+  <div class="tags-list">
+    
+    <a href="\tags\javascript" title="javascript"><div class="tags-list-item">javascript</div></a>
+    
+    <a href="\tags\html" title="html"><div class="tags-list-item">html</div></a>
+    
+    <a href="\tags\常见问题" title="常见问题"><div class="tags-list-item">常见问题</div></a>
+    
+    <a href="\tags\css" title="css"><div class="tags-list-item">css</div></a>
+    
+    <a href="\tags\微信小程序" title="微信小程序"><div class="tags-list-item">微信小程序</div></a>
+    
+    <a href="\tags\nodejs" title="nodejs"><div class="tags-list-item">nodejs</div></a>
+    
+    <a href="\tags\ES6" title="ES6"><div class="tags-list-item">ES6</div></a>
+    
+    <a href="\tags\博客" title="博客"><div class="tags-list-item">博客</div></a>
+    
+    <a href="\tags\next" title="next"><div class="tags-list-item">next</div></a>
+    
+    <a href="\tags\hexo" title="hexo"><div class="tags-list-item">hexo</div></a>
+    
+    <a href="\tags\mockjs" title="mockjs"><div class="tags-list-item">mockjs</div></a>
+    
+    <a href="\tags\笔记" title="笔记"><div class="tags-list-item">笔记</div></a>
+    
+    <a href="\tags\markdown" title="markdown"><div class="tags-list-item">markdown</div></a>
+    
+    <a href="\tags\koa" title="koa"><div class="tags-list-item">koa</div></a>
+    
+    <a href="\tags\Koa" title="Koa"><div class="tags-list-item">Koa</div></a>
+    
+  </div>
+</div>
+  </article>
+  
+  
+</div>
+          </aside>
+          <aside class="right-column">
+            <div class="sticky-widescreen">
+  
+  
+  <article class="card card-content toc-card">
+    <div class="toc-header"><i class="iconfont icon-menu" style="padding-right: 2px;"></i>目录</div>
+<ol class="toc"><li class="toc-item toc-level-2"><a class="toc-link" href="#%E6%B5%8F%E8%A7%88%E5%99%A8%E6%B8%B2%E6%9F%93%E7%9A%84%E8%BF%87%E7%A8%8B"><span class="toc-text">浏览器渲染的过程</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#%E5%9C%A8%E6%B5%8F%E8%A7%88%E5%99%A8%E8%BE%93%E5%85%A5URL%E5%9B%9E%E8%BD%A6%E5%90%8E%E5%8F%91%E7%94%9F%E4%BA%86%E4%BB%80%E4%B9%88"><span class="toc-text">在浏览器输入URL回车后发生了什么?</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#%E8%B7%A8%E5%9F%9F"><span class="toc-text">跨域</span></a><ol class="toc-child"><li class="toc-item toc-level-3"><a class="toc-link" href="#JSONP-JSON-with-Padding-%E5%8F%AA%E6%94%AF%E6%8C%81get%E8%AF%B7%E6%B1%82"><span class="toc-text">JSONP( JSON with Padding )只支持get请求</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#cors"><span class="toc-text">cors</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#%E5%8F%8D%E5%90%91%E4%BB%A3%E7%90%86"><span class="toc-text">反向代理</span></a></li></ol></li><li class="toc-item toc-level-2"><a class="toc-link" href="#cookie-localStorage-sessionStorage%E7%9A%84%E5%8C%BA%E5%88%AB"><span class="toc-text">cookie,localStorage,sessionStorage的区别</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#%E6%89%8B%E5%86%99promise"><span class="toc-text">手写promise</span></a><ol class="toc-child"><li class="toc-item toc-level-3"><a class="toc-link" href="#%E9%97%AD%E5%8C%85"><span class="toc-text">闭包</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#Git-%E4%B8%8E-SVN-%E5%8C%BA%E5%88%AB%E7%82%B9"><span class="toc-text">Git 与 SVN 区别点</span></a></li></ol></li></ol>
+  </article>
+  
+  
+  <article class="card card-content">
+    <div class="recent-posts-card">
+  <div class="recent-posts-header"><i class="iconfont icon-wenzhang_huaban" style="padding-right: 2px;"></i>最近文章</div>
+  <div class="recent-posts-list">
+    
+      <div class="recent-posts-item">
+        <div class="recent-posts-item-title">2022-02-12</div>
+        <a href="/2022/02/12/cl06xlsee000sagsf0tyrh025/"><div class="recent-posts-item-content">面试题复习</div></a>
+      </div>
+    
+      <div class="recent-posts-item">
+        <div class="recent-posts-item-title">2022-02-10</div>
+        <a href="/2022/02/10/cl06xlse50006agsf71txbzdk/"><div class="recent-posts-item-content">Vue</div></a>
+      </div>
+    
+      <div class="recent-posts-item">
+        <div class="recent-posts-item-title">2021-12-28</div>
+        <a href="/2021/12/28/cl06xlseb000lagsfggm738or/"><div class="recent-posts-item-content">常见面试题</div></a>
+      </div>
+    
+      <div class="recent-posts-item">
+        <div class="recent-posts-item-title">2021-12-23</div>
+        <a href="/2021/12/23/cl06xlsed000qagsfajuffzlu/"><div class="recent-posts-item-content">Demo_01</div></a>
+      </div>
+    
+  </div>
+</div>
+  </article>
+  
+  
+</div>
+          </aside>
+        </div>
+      </div>
+    </div>
+  </div>
+  
+  <footer class="footer">
+  <div class="footer-container">
+    <div>
+      <div class="footer-dsc">
+        <span>Copyright ©
+          
+          2020 -
+          
+          2022
+        </span>
+        <a href="/" class="footer-link">学习永不止步 </a>
+      </div>
+    </div>
+
+    
+    <div class="footer-dsc">
+      
+      
+      Powered by
+      <a href="https://hexo.io/" class="footer-link" target="_blank" rel="nofollow noopener noreferrer">&nbsp;Hexo </a>
+      
+      
+      <span>&nbsp;|&nbsp;</span>
+      
+      
+      
+      Theme -
+      <a href="https://github.com/theme-kaze" class="footer-link" target="_blank"
+        rel="nofollow noopener noreferrer">&nbsp;Kaze</a>
+      
+    </div>
+    
+    
+    
+    
+</footer>
+  <a role="button" id="scrollbutton" class="basebutton" >
+  <i class="iconfont icon-arrowleft button-icon"></i>
+</a>
+<a role="button" id="menubutton" class="basebutton">
+  <i class="iconfont icon-menu button-icon"></i>
+</a>
+<a role="button" id="popbutton" class="basebutton">
+  <i class="iconfont icon-expand button-icon"></i>
+</a>
+<a role="button" id="darkbutton" class="basebutton darkwidget">
+  <i class="iconfont icon-weather button-icon"></i>
+</a>
+
+  
+  
+  
+  <script>
+  var addImgLayout = function () {
+    var img = document.querySelectorAll('.post-content img');
+    var i;
+    for (i = 0; i < img.length; i++) {
+      var wrapper = document.createElement('a');
+      wrapper.setAttribute('data-fslightbox', 'gallery');
+      wrapper.setAttribute('href', img[i].getAttribute('data-src'));
+      wrapper.setAttribute('style', 'width: 100%; display: flex; justify-content: center;');
+      img[i].parentElement.insertBefore(wrapper, img[i]);
+      wrapper.appendChild(img[i]);
+    }
+    refreshFsLightbox();
+  }
+</script>
+<script>loadScript("//cdn.jsdelivr.net/npm/fslightbox@3.1.0/index.min.js", addImgLayout)</script>
+  
+  
+  
+<script src="/js/main.js"></script>
+
+  
+  
+  <script>
+    var addLazyload = function () {
+      var observer = lozad('.lozad', {
+        load: function (el) {
+          el.srcset = el.getAttribute('data-src');
+        },
+        loaded: function (el) {
+          el.classList.add('loaded');
+        }
+      });
+      observer.observe();
+    }
+  </script>
+  <script>loadScript("/js/lib/lozad.min.js", addLazyload)</script>
+  
+  
+</body>
+
+</html>

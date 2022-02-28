@@ -1,0 +1,599 @@
+<!DOCTYPE html>
+<html>
+<meta  lang="zh-CN" >
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport"
+    content="width=device-width, user-scalable=no, initial-scale=1.0, maximum-scale=1.0, minimum-scale=1.0">
+  <meta http-equiv="X-UA-Compatible" content="ie=edge">
+  <meta name="theme-color" content="#fff" id="theme-color">
+  <link rel="icon" href="https://xiaobai123-4.github.io/image/admin.jpg">
+  <title>学习永不止步</title>
+  <script>
+    // control reverse button
+    var reverseDarkList = {
+      dark: 'light',
+      light: 'dark'
+    };
+    var themeColor = {
+      dark: '#1c1c1e',
+      light: '#fff'
+    }
+    // get the data of css prefers-color-scheme
+    var getCssMediaQuery = function() {
+      return window.matchMedia('(prefers-color-scheme: dark)').matches ? 'dark' : 'light';
+    };
+    // reverse current darkmode setting function
+    var reverseDarkModeSetting = function() {
+      var setting = localStorage.getItem('user-color-scheme');
+      if(reverseDarkList[setting]) {
+        setting = reverseDarkList[setting];
+      } else if(setting === null) {
+        setting = reverseDarkList[getCssMediaQuery()];
+      } else {
+        return;
+      }
+      localStorage.setItem('user-color-scheme', setting);
+      return setting;
+    };
+    // apply current darkmode setting
+    var setDarkmode = function(mode) {
+      var setting = mode || localStorage.getItem('user-color-scheme');
+      if(setting === getCssMediaQuery()) {
+        document.documentElement.removeAttribute('data-user-color-scheme');
+        localStorage.removeItem('user-color-scheme');
+        document.getElementById('theme-color').content = themeColor[setting];
+      } else if(reverseDarkList[setting]) {
+        document.documentElement.setAttribute('data-user-color-scheme', setting);
+        document.getElementById('theme-color').content = themeColor[setting];
+      } else {
+        document.documentElement.removeAttribute('data-user-color-scheme');
+        localStorage.removeItem('user-color-scheme');
+        document.getElementById('theme-color').content = themeColor[getCssMediaQuery()];
+      }
+    };
+    setDarkmode();
+  </script>
+  <script>
+    function loadScript(url, cb) {
+      var script = document.createElement('script');
+      script.src = url;
+      if (cb) script.onload = cb;
+      script.async = true;
+      document.body.appendChild(script);
+    }
+  </script>
+  
+  <link rel="preload" href="//at.alicdn.com/t/font_1946621_vpj3dq9ceqa.css" as="style" >
+  <link rel="preload" href="//at.alicdn.com/t/font_1952792_89b4ac4k4up.css" as="style" >
+  
+  <link rel="preload" href="//cdn.jsdelivr.net/npm/fslightbox@3.1.0/index.min.js" as="script">
+  
+  
+  <link rel="preload" href="/js/lib/lozad.min.js" as="script">
+  
+  
+  
+  
+  
+  
+  
+  
+<link rel="stylesheet" href="/css/main.css">
+
+  
+  
+<link rel="stylesheet" href="//at.alicdn.com/t/font_1946621_vpj3dq9ceqa.css">
+
+  
+  
+<link rel="stylesheet" href="//at.alicdn.com/t/font_1952792_89b4ac4k4up.css">
+
+  
+  
+  
+<meta name="generator" content="Hexo 5.4.0"></head>
+
+
+<body>
+  <div class="wrapper">
+    
+    <nav class="navbar">
+  <div class="navbar-logo">
+    <span class="navbar-logo-main">
+      
+      <img class="navbar-logo-img" src="https://xiaobai123-4.github.io/image/admin.jpg">
+      
+      <span class="navbar-logo-dsc">学习永不止步</span>
+    </span>
+  </div>
+  <div class="navbar-menu">
+    
+    <a href="/" class="navbar-menu-item">首页 </a>
+    
+    <a href="/archives" class="navbar-menu-item">归档 </a>
+    
+    <a href="/tags" class="navbar-menu-item">标签 </a>
+    
+    <a href="/categories" class="navbar-menu-item">分类 </a>
+    
+    <a href="/links" class="navbar-menu-item">友链 </a>
+    
+    <a class="navbar-menu-item darknavbar" id="dark"><i class="iconfont icon-weather"></i></a>
+  </div>
+</nav>
+    
+    <div class="section-wrap">
+      <div class="container">
+        <div class="columns">
+          <main class="main-column">
+<div class="image-wrapper">
+  <img src="https://s4.ax1x.com/2021/12/14/oxowzq.jpg" data-src="https://s4.ax1x.com/2021/12/14/oxowzq.jpg"
+    srcset="data:image/svg+xml,%3Csvg%20xmlns=&#39;http://www.w3.org/2000/svg&#39;%20viewBox=&#39;0%200%20300%20300&#39;%3E%3C/svg%3E"
+    class="image lozad">
+</div>
+
+<article class="card card-content">
+  <header>
+    <h1 class="post-title">
+      面试题复习
+    </h1>
+  </header>
+  <div class="post-meta post-show-meta">
+    <time datetime="2022-02-12T10:01:34.000Z" style="display: flex; align-items: center;">
+      <i class="iconfont icon-calendar" style="margin-right: 2px;"></i>
+      <span>2022-02-12</span>
+    </time>
+    
+    <span class="dot"></span>
+    
+    <a href="/categories/前端/" class="post-meta-link">前端</a>
+    
+    
+    
+    <span class="dot"></span>
+    <span>2.4k 字</span>
+    
+  </div>
+  
+  <div class="post-meta post-show-meta" style="margin-top: -10px;">
+    <div style="display: flex; align-items: center;">
+      <i class="iconfont icon-biaoqian" style="margin-right: 2px; font-size: 1.15rem;"></i>
+      
+      
+        <a href="/tags/javascript/" class="post-meta-link">javascript</a>
+      
+      
+      <span class="dot"></span>
+      
+        <a href="/tags/html/" class="post-meta-link">html</a>
+      
+    </div>
+  </div>
+  
+  </header>
+  <div id="section" class="post-content">
+    <h3 id="Vue-数据驱动框架"><a href="#Vue-数据驱动框架" class="headerlink" title="Vue 数据驱动框架"></a>Vue 数据驱动框架</h3><p>Vue是一个数据驱动框架, MVVM模式数据响应式，模板引擎，渲染</p>
+<h3 id="生命周期"><a href="#生命周期" class="headerlink" title="生命周期"></a>生命周期</h3><pre class="highlight"><span class="line">beforeCreate()</span><br><span class="line">created()</span><br><span class="line">beforeMount()</span><br><span class="line">mounted()</span><br><span class="line">beforeUpdate()</span><br><span class="line">updated()</span><br><span class="line">beforeDestroy()</span><br><span class="line">destroyed()</span><br><span class="line">//keep-live触发</span><br><span class="line">activated</span><br><span class="line">deactivated</span><br><span class="line">子孙组件调用错误时触发</span><br><span class="line">errorCaptured()</span><br></pre>
+
+<h3 id="页面、组件加载会执行那些生命周期"><a href="#页面、组件加载会执行那些生命周期" class="headerlink" title="页面、组件加载会执行那些生命周期"></a>页面、组件加载会执行那些生命周期</h3><pre class="highlight"><span class="line">beforecreate 啥也没有</span><br><span class="line">created 没有节点没有数据</span><br><span class="line">beforemount 没有节点有数据</span><br><span class="line">mounted 有节点有数据</span><br></pre>
+
+<h3 id="生命周期的使用"><a href="#生命周期的使用" class="headerlink" title="生命周期的使用"></a>生命周期的使用</h3><pre class="highlight"><span class="line">beforecreate</span><br><span class="line">created 发送请求</span><br><span class="line">beforemount</span><br><span class="line">mounted 操作DOM的插件、swiper</span><br></pre>
+
+
+
+<h3 id="路由"><a href="#路由" class="headerlink" title="路由"></a>路由</h3><h4 id="路由传值（显式、隐式）"><a href="#路由传值（显式、隐式）" class="headerlink" title="- 路由传值（显式、隐式）"></a>- 路由传值（显式、隐式）</h4><pre class="highlight"><span class="line">this.$router.push(&#123;</span><br><span class="line">	path:&#x27;/about&#x27;,</span><br><span class="line">	// 显式</span><br><span class="line">	query:&#123;name:&quot;123&quot;&#125;,</span><br><span class="line">	// 隐式 加上路由名称</span><br><span class="line">	name:&#x27;About&#x27;</span><br><span class="line">	params:&#123;pwd:&quot;12345&quot;&#125;</span><br><span class="line">&#125;)</span><br><span class="line"></span><br><span class="line">// about.vue</span><br><span class="line">this.$route.query</span><br><span class="line">this.$route.params</span><br></pre>
+
+<h4 id="路由的模式和区别"><a href="#路由的模式和区别" class="headerlink" title="- 路由的模式和区别"></a>- 路由的模式和区别</h4><pre class="highlight"><span class="line">// hash [默认]</span><br><span class="line">url/#/about</span><br><span class="line">// history</span><br><span class="line">url/about</span><br></pre>
+
+<h4 id="路由导航守卫（拦截）"><a href="#路由导航守卫（拦截）" class="headerlink" title="- 路由导航守卫（拦截）"></a>- 路由导航守卫（拦截）</h4><pre class="highlight"><span class="line">//全局</span><br><span class="line">beforeEach((to,from,next)=&gt;&#123;&#125;)</span><br><span class="line">//组件</span><br><span class="line">beforeEnter((to,from,next)=&gt;&#123;&#125;)</span><br><span class="line">//单个</span><br><span class="line">beforeRouteEnter((to,from,next)=&gt;&#123;&#125;)</span><br><span class="line">beforeRouteUpdate((to,from,next)=&gt;&#123;&#125;)</span><br><span class="line">beforeRouteLeave((to,from,next)=&gt;&#123;&#125;)</span><br></pre>
+
+<h4 id="动态路由和子路由"><a href="#动态路由和子路由" class="headerlink" title="- 动态路由和子路由"></a>- 动态路由和子路由</h4><pre class="highlight"><span class="line">user/:id</span><br><span class="line">动态路由可以使用监听器watch监听路由变化</span><br><span class="line">watch:&#123;</span><br><span class="line">	$route()&#123;</span><br><span class="line">		this.$route</span><br><span class="line">	&#125;</span><br><span class="line">&#125;</span><br></pre>
+
+<h3 id="keep-alive"><a href="#keep-alive" class="headerlink" title="keep-alive"></a>keep-alive</h3><pre class="highlight"><span class="line">抽象组件,缓存组件，性能优化</span><br><span class="line">&lt;keep-alive&gt;&lt;/keep-alive&gt;</span><br><span class="line">触发生命周期</span><br><span class="line">created/mounted/activated/deactivated</span><br></pre>
+
+<h3 id="axios"><a href="#axios" class="headerlink" title="axios"></a>axios</h3><pre class="highlight"><span class="line">每次请求数据时都有一个过程，例如请求时开启一个加载动画，有数据后就关闭加载动画</span><br><span class="line">验证token，没有token就$router.push(&#x27;login&#x27;)</span><br></pre>
+
+<h3 id="vuex"><a href="#vuex" class="headerlink" title="vuex"></a>vuex</h3><p>关键字： 保证状态以一种可预测的方式发生变化 ，集中管理状态，单向数据流</p>
+<pre class="highlight"><span class="line">state 存放数据类似于实例中data</span><br><span class="line">getters 计算属性类似于实例中computed</span><br><span class="line">mutations 方法类似于实例中methods</span><br><span class="line">actions 异步方法以及commit提交mutations中的方法</span><br><span class="line">modules 模块化，将 store 分割成模块（module）。每个模块拥有自己的 state、mutation、action、getter、甚至是嵌套子模块——从上至下进行同样方式的分割</span><br><span class="line">strict 严格模式下直接修改state里面的值会报错，</span><br></pre>
+
+<h4 id="mutations和actions"><a href="#mutations和actions" class="headerlink" title="mutations和actions"></a>mutations和actions</h4><pre class="highlight"><span class="line">mutations:必须是同步函数，可以直接修改state数据</span><br><span class="line">actions:可以包含任何异步操作，actions也可以直接修改state数据，但是建议通过commit提交mutations去修改state数据，actions调试方便</span><br><span class="line">strict:true 严格模式下直接修改state里面的值会报错，</span><br></pre>
+
+<blockquote>
+<p> <strong>主要是为了状态能够很好的跟踪，开发者工具更好的处理状态变化，更好的调试体验</strong> </p>
+</blockquote>
+<h2 id="vuex持久化"><a href="#vuex持久化" class="headerlink" title="vuex持久化"></a>vuex持久化</h2><pre class="highlight"><span class="line">// 监听store.subscribe((mutation,state)=&gt;&#123;&#125;)</span><br></pre>
+
+<h3 id="computed、watch，methods"><a href="#computed、watch，methods" class="headerlink" title="computed、watch，methods"></a>computed、watch，methods</h3><pre class="highlight"><span class="line">computed: 数据有缓存，进入组件时会执行，当值发生变化时会执行</span><br><span class="line">watch: 监听数据当值发生变化时可以获取原始值和变更的值，例如监听路由的变化，只有当值发生变化时会执行</span><br><span class="line">methods： template改变时执行</span><br></pre>
+
+<blockquote>
+<pre class="highlight"><span class="line">watch 深度监听</span><br><span class="line"><span class="attr">watch</span>:&#123;</span><br><span class="line">	<span class="attr">num</span>:&#123;</span><br><span class="line">		<span class="attr">immediate</span>:<span class="literal">true</span>,</span><br><span class="line">		<span class="attr">deep</span>:<span class="literal">true</span>,</span><br><span class="line">		<span class="function"><span class="title">handler</span>(<span class="params">now,old</span>)</span>&#123;</span><br><span class="line">			<span class="comment">// new,old</span></span><br><span class="line">		&#125;</span><br><span class="line">	&#125;</span><br><span class="line">&#125;</span><br></pre>
+</blockquote>
+<h3 id="插槽slot"><a href="#插槽slot" class="headerlink" title="插槽slot"></a>插槽<code>slot</code></h3><pre class="highlight"><span class="line"><span class="tag">&lt;<span class="name">header</span>&gt;</span></span><br><span class="line">    <span class="tag">&lt;<span class="name">div</span>&gt;</span>替换内容<span class="tag">&lt;/<span class="name">div</span>&gt;</span></span><br><span class="line"><span class="tag">&lt;/<span class="name">header</span>&gt;</span></span><br><span class="line">// header组件</span><br><span class="line"><span class="tag">&lt;<span class="name">div</span>&gt;</span></span><br><span class="line">    <span class="tag">&lt;<span class="name">slot</span>&gt;</span></span><br><span class="line">        <span class="tag">&lt;<span class="name">div</span>&gt;</span>原始内容<span class="tag">&lt;/<span class="name">div</span>&gt;</span></span><br><span class="line">    <span class="tag">&lt;/<span class="name">slot</span>&gt;</span></span><br><span class="line"><span class="tag">&lt;/<span class="name">div</span>&gt;</span></span><br></pre>
+
+<h3 id="ref"><a href="#ref" class="headerlink" title="ref"></a>ref</h3><pre class="highlight"><span class="line">&lt;div ref=&quot;ref_div&quot;&gt;&lt;/div&gt;</span><br><span class="line">this.$refs.ref_div</span><br></pre>
+
+<h3 id="组件传值"><a href="#组件传值" class="headerlink" title="组件传值"></a>组件传值</h3><pre class="highlight"><span class="line">父传子 props</span><br><span class="line">子传父 emit</span><br><span class="line">兄弟  $bus</span><br></pre>
+
+<h3 id="nextTick"><a href="#nextTick" class="headerlink" title="nextTick"></a>nextTick</h3><pre class="highlight"><span class="line">当DOM都加载完毕执行内部代码</span><br></pre>
+
+<h3 id="v-if-v-show"><a href="#v-if-v-show" class="headerlink" title="v-if/v-show"></a>v-if/v-show</h3><pre class="highlight"><span class="line">v-if DOM元素</span><br><span class="line">v-show display：none</span><br><span class="line">正常使用时v-if性能好，频繁切换时v-show性能好</span><br></pre>
+
+<h3 id="v-if-v-for"><a href="#v-if-v-for" class="headerlink" title="v-if/v-for"></a>v-if/v-for</h3><pre class="highlight"><span class="line">v-for优先级优于v-if</span><br></pre>
+
+<h3 id="v-model双向绑定原理"><a href="#v-model双向绑定原理" class="headerlink" title="v-model双向绑定原理"></a>v-model双向绑定原理</h3><p>由三类构成：访问器属性+观察者模式+虚拟DOM树</p>
+<p>Object.defineProperty中get()负责把受保护的属性值传给外部，set()负责修改属性值</p>
+<pre class="highlight"><span class="line"><span class="keyword">let</span> obj = &#123;&#125;</span><br><span class="line"><span class="keyword">let</span> num = <span class="number">12</span></span><br><span class="line"><span class="comment">// 在对象中添加一个属性与数据描述符的示例</span></span><br><span class="line"><span class="built_in">Object</span>.defineProperty(obj, <span class="string">&quot;num&quot;</span>, &#123;</span><br><span class="line">    <span class="function"><span class="title">get</span>(<span class="params"></span>)</span> &#123;</span><br><span class="line">        <span class="keyword">return</span> num</span><br><span class="line">    &#125;,</span><br><span class="line">    <span class="function"><span class="title">set</span>(<span class="params">newVal</span>)</span> &#123;</span><br><span class="line">        <span class="built_in">console</span>.log(<span class="string">&quot;===&quot;</span>)</span><br><span class="line">        num = newVal</span><br><span class="line">    &#125;,</span><br><span class="line">    <span class="comment">// writable: true,</span></span><br><span class="line">    <span class="comment">// enumerable: true,</span></span><br><span class="line">    <span class="comment">// configurable: true</span></span><br><span class="line">&#125;);</span><br></pre>
+<p>观察者模式(observer)：一个变量被修改时，可以自动通知所关注这个变量的对象，让他们自动重新获得这个变量的新值</p>
+<p>虚拟DOM树：仅保存可能发生变化的少量元素的精简版DOM树<br><strong>优点：</strong>小，遍历快；只更新受影响的元素；封装了DOM操作，无需重复编码</p>
+<h3 id="Vue"><a href="#Vue" class="headerlink" title="Vue"></a>Vue</h3><p>Vue是一个数据驱动框架, MVVM模式数据响应式，模板引擎，渲染</p>
+<h3 id="MVVM"><a href="#MVVM" class="headerlink" title="MVVM"></a>MVVM</h3><pre class="highlight"><span class="line">MVVVM是一种设计模式</span><br><span class="line">M：（模块层，data,methods...）,通过模块来定义内容，让视图层获得数据用于展示</span><br><span class="line">V：（视图层，渲染DOM）结合HTML/css+数据展示效果</span><br><span class="line">VM：（vue.js的逻辑实现，例如v-model）</span><br></pre>
+
+<h3 id="css盒子模型"><a href="#css盒子模型" class="headerlink" title="css盒子模型"></a>css盒子模型</h3><pre class="highlight"><span class="line">// 标准盒子模型</span><br><span class="line"><span class="attribute">margin</span>*<span class="number">2</span>+<span class="attribute">padding</span>*<span class="number">2</span>+<span class="attribute">border</span>*<span class="number">2</span>+<span class="attribute">content</span></span><br><span class="line">// IE盒子模型</span><br><span class="line"><span class="attribute">margin</span>*<span class="number">2</span>+<span class="attribute">content</span>（<span class="attribute">padding</span>*<span class="number">2</span>+<span class="attribute">border</span>*<span class="number">2</span>+<span class="attribute">content</span>）</span><br><span class="line"><span class="attribute">box-sizing</span>:content-box  // 标准盒子模型</span><br><span class="line">box-sizing:border-box  // IE盒子模型</span><br><span class="line"></span><br></pre>
+
+<h3 id="line-heihgt和height"><a href="#line-heihgt和height" class="headerlink" title="line-heihgt和height"></a>line-heihgt和height</h3><pre class="highlight"><span class="line">line-height //每一行的行高换行盒子高度增大</span><br><span class="line">height 盒子高度</span><br></pre>
+
+<h3 id="css选择符？那些可以继承"><a href="#css选择符？那些可以继承" class="headerlink" title="css选择符？那些可以继承?"></a>css选择符？那些可以继承?</h3><pre class="highlight"><span class="line">选择器  * #  .  +  div/p  &gt; a[herf]</span><br><span class="line">继承 font-size color line-height text-align</span><br></pre>
+
+<h3 id="css优先级"><a href="#css优先级" class="headerlink" title="css优先级"></a>css优先级</h3><pre class="highlight"><span class="line">!important &gt; 内联样式 &gt; # &gt; . &gt; 标签、伪类 &gt; 通配符</span><br></pre>
+
+<h3 id="css三角形"><a href="#css三角形" class="headerlink" title="css三角形"></a>css三角形</h3><pre class="highlight"><span class="line">border-top:1px solid black;</span><br><span class="line">border-right:1px solid transparent;</span><br><span class="line">border-bottom:1px solid black;</span><br><span class="line">border-left:1px solid black;</span><br></pre>
+
+<h3 id="一个盒子不给宽高居中"><a href="#一个盒子不给宽高居中" class="headerlink" title="一个盒子不给宽高居中"></a>一个盒子不给宽高居中</h3><pre class="highlight"><span class="line">//父元素</span><br><span class="line">.container&#123;</span><br><span class="line">	display:flex;</span><br><span class="line">	justify-content:center;</span><br><span class="line">	align-items:center;</span><br><span class="line">	</span><br><span class="line">	position:relative;</span><br><span class="line">&#125;</span><br><span class="line">//子元素</span><br><span class="line">.box&#123;</span><br><span class="line">	position:absolute;</span><br><span class="line">	top:50%;</span><br><span class="line">	left:50%;</span><br><span class="line">	transform:translate(50%,50%)</span><br><span class="line">&#125;</span><br></pre>
+
+<h3 id="BFC"><a href="#BFC" class="headerlink" title="BFC"></a>BFC</h3><pre class="highlight"><span class="line">//块级格式化上下文</span><br><span class="line">触发BFC的条件 浮动，overflow非visible，position：fixed、absolute</span><br><span class="line">解决：清除浮动，父元素设置overflow：hidden</span><br></pre>
+
+<h3 id="清除浮动"><a href="#清除浮动" class="headerlink" title="清除浮动"></a>清除浮动</h3><pre class="highlight"><span class="line">overflow：hidden</span><br><span class="line"></span><br><span class="line">:after&#123;</span><br><span class="line">	content:&#x27;&#x27;;</span><br><span class="line">	display:block;</span><br><span class="line">	clear:both</span><br><span class="line">&#125;</span><br></pre>
+
+<h3 id="定位position"><a href="#定位position" class="headerlink" title="定位position"></a>定位position</h3><pre class="highlight"><span class="line">static(默认)</span><br><span class="line">relative(相对定位)</span><br><span class="line">absolute(绝对定位，相对于第一个有relative的父元素)</span><br><span class="line">fixed(固定定位：相对于窗口)</span><br></pre>
+
+<h3 id="左右固定宽，中间自适应，优先显示"><a href="#左右固定宽，中间自适应，优先显示" class="headerlink" title="左右固定宽，中间自适应，优先显示"></a>左右固定宽，中间自适应，优先显示</h3><pre class="highlight"><span class="line"><span class="tag">&lt;<span class="name">head</span>&gt;</span></span><br><span class="line">    <span class="tag">&lt;<span class="name">style</span>&gt;</span><span class="css"></span></span><br><span class="line"><span class="css">        <span class="selector-tag">body</span> &#123;</span></span><br><span class="line"><span class="css">            <span class="attribute">width</span>: <span class="number">100vw</span>;</span></span><br><span class="line"><span class="css">            <span class="attribute">height</span>: <span class="number">100vh</span>;</span></span><br><span class="line"><span class="css">        &#125;</span></span><br><span class="line"><span class="css"></span></span><br><span class="line"><span class="css">        <span class="selector-class">.box</span> &#123;</span></span><br><span class="line"><span class="css">            <span class="attribute">overflow</span>: hidden;</span></span><br><span class="line"><span class="css">            <span class="attribute">width</span>: <span class="number">100%</span>;</span></span><br><span class="line"><span class="css">            <span class="attribute">height</span>: <span class="number">100%</span>;</span></span><br><span class="line"><span class="css">        &#125;</span></span><br><span class="line"><span class="css"></span></span><br><span class="line"><span class="css">        <span class="selector-class">.box</span> <span class="selector-tag">div</span> &#123;</span></span><br><span class="line"><span class="css">            <span class="attribute">float</span>: left;</span></span><br><span class="line"><span class="css">            <span class="attribute">height</span>: <span class="number">100%</span>;</span></span><br><span class="line"><span class="css">        &#125;</span></span><br><span class="line"><span class="css"></span></span><br><span class="line"><span class="css">        <span class="selector-class">.left</span> &#123;</span></span><br><span class="line"><span class="css">            <span class="attribute">width</span>: <span class="number">200px</span>;</span></span><br><span class="line"><span class="css">            <span class="attribute">background-color</span>: red;</span></span><br><span class="line"><span class="css">            <span class="attribute">margin-left</span>: -<span class="number">100vw</span>;</span></span><br><span class="line"><span class="css">        &#125;</span></span><br><span class="line"><span class="css"></span></span><br><span class="line"><span class="css">        <span class="selector-class">.center</span> &#123;</span></span><br><span class="line"><span class="css">            <span class="attribute">background-color</span>: gray;</span></span><br><span class="line"><span class="css">            <span class="attribute">width</span>: <span class="number">100%</span>;</span></span><br><span class="line"><span class="css">            <span class="attribute">box-sizing</span>: border-box;</span></span><br><span class="line"><span class="css">            <span class="attribute">padding</span>: <span class="number">0</span> <span class="number">200px</span>;</span></span><br><span class="line"><span class="css">        &#125;</span></span><br><span class="line"><span class="css"></span></span><br><span class="line"><span class="css">        <span class="selector-class">.right</span> &#123;</span></span><br><span class="line"><span class="css">            <span class="attribute">width</span>: <span class="number">200px</span>;</span></span><br><span class="line"><span class="css">            <span class="attribute">background-color</span>: blue;</span></span><br><span class="line"><span class="css">            <span class="attribute">margin-left</span>: -<span class="number">200px</span>;</span></span><br><span class="line"><span class="css">        &#125;</span></span><br><span class="line"><span class="css">    </span><span class="tag">&lt;/<span class="name">style</span>&gt;</span></span><br><span class="line"><span class="tag">&lt;/<span class="name">head</span>&gt;</span></span><br><span class="line"></span><br><span class="line"><span class="tag">&lt;<span class="name">body</span>&gt;</span></span><br><span class="line">    <span class="tag">&lt;<span class="name">div</span> <span class="attr">class</span>=<span class="string">&quot;box&quot;</span>&gt;</span></span><br><span class="line">        <span class="tag">&lt;<span class="name">div</span> <span class="attr">class</span>=<span class="string">&quot;center&quot;</span>&gt;</span>中<span class="tag">&lt;/<span class="name">div</span>&gt;</span></span><br><span class="line">        <span class="tag">&lt;<span class="name">div</span> <span class="attr">class</span>=<span class="string">&quot;left&quot;</span>&gt;</span>左<span class="tag">&lt;/<span class="name">div</span>&gt;</span></span><br><span class="line">        <span class="tag">&lt;<span class="name">div</span> <span class="attr">class</span>=<span class="string">&quot;right&quot;</span>&gt;</span>右<span class="tag">&lt;/<span class="name">div</span>&gt;</span></span><br><span class="line">    <span class="tag">&lt;/<span class="name">div</span>&gt;</span></span><br><span class="line"><span class="tag">&lt;/<span class="name">body</span>&gt;</span></span><br></pre>
+
+<h3 id="reset-初始化样式-Normalize-css"><a href="#reset-初始化样式-Normalize-css" class="headerlink" title="reset(初始化样式) Normalize.css"></a>reset(初始化样式) Normalize.css</h3><h3 id="精灵图-雪碧图"><a href="#精灵图-雪碧图" class="headerlink" title="精灵图/雪碧图"></a>精灵图/雪碧图</h3><p>多个小图标合成一张大图，可以优化性能，减少对资源的请求;但是不方便进行维护</p>
+<pre class="highlight"><span class="line">background-image:url(&#x27;./icon,png&#x27;) no-repeat;</span><br><span class="line">background-position:xpx ypx;</span><br></pre>
+
+<h3 id="HTML"><a href="#HTML" class="headerlink" title="HTML"></a>HTML</h3><pre class="highlight"><span class="line">// link与@import link是html标签、@import存在兼容性</span><br><span class="line"><span class="tag">&lt;<span class="name">link</span> <span class="attr">rel</span>=<span class="string">&quot;stylesheet&quot;</span> <span class="attr">href</span>=<span class="string">&quot;style.css&quot;</span>&gt;</span></span><br><span class="line"><span class="tag">&lt;<span class="name">style</span> <span class="attr">type</span>=<span class="string">&quot;text/css&quot;</span>&gt;</span><span class="css"></span></span><br><span class="line"><span class="css">  <span class="keyword">@import</span> url(<span class="string">&quot;css文件路径&quot;</span>);</span></span><br><span class="line"><span class="css"></span><span class="tag">&lt;/<span class="name">style</span>&gt;</span></span><br><span class="line"></span><br><span class="line">//title 网站信息主题内容，突出网页内容</span><br><span class="line">//h1~h5 内容标题，突出文章内容</span><br><span class="line"></span><br><span class="line">// b和strong</span><br><span class="line">b 实体标签文字加粗</span><br><span class="line">strong 逻辑标签，强调标签内字符</span><br><span class="line">// i和em</span><br><span class="line">i 实体标签文字倾斜</span><br><span class="line">em 逻辑标签，强调标签内字符</span><br><span class="line"></span><br><span class="line">// image title/alt</span><br><span class="line">title: 鼠标移入显示</span><br><span class="line">alt: 图片加载失败显示，通常描述图片内容利于SEO</span><br></pre>
+
+<h3 id="null-undefind"><a href="#null-undefind" class="headerlink" title="null/undefind"></a>null/undefind</h3><pre class="highlight"><span class="line">typeof(null) object</span><br><span class="line">typeof(undefind) undefind</span><br></pre>
+
+<h3 id="变量提升"><a href="#变量提升" class="headerlink" title="变量提升"></a>变量提升</h3><pre class="highlight"><span class="line">变量&gt;声明函数&gt;参数&gt;提升</span><br></pre>
+
+<h3 id="原型链"><a href="#原型链" class="headerlink" title="原型链"></a>原型链</h3><p>每个对象创建的时候都有自己的隐式原型和构造函数</p>
+<pre class="highlight"><span class="line">let obj=&#123;&#125;</span><br><span class="line">console.log(obj.constructor)  //ƒ Object() &#123; [native code] &#125;</span><br><span class="line">console.log(obj.__proto__)  //ƒ &#123;constructor: ƒ,__proto__: (...),…&#125;</span><br><span class="line">console.log(obj.__proto__ == Object.prototype) //true</span><br><span class="line">console.log(Object.prototype.__proto__) //null</span><br><span class="line">obj的constructor是Object那么obj的隐式原型__proto__就等于Object的显示原型prototype</span><br><span class="line">查找对象的属性时先在对象本身找然后在对象的原型找然后去对象的原型的原型上找，直到找到最顶端null</span><br></pre>
+
+<h3 id="闭包"><a href="#闭包" class="headerlink" title="闭包"></a>闭包</h3><pre class="highlight"><span class="line">// 产生闭包：作用域连接，内部函数需要使用外部函数的变量，外部函数的变量无法被释放</span><br><span class="line">function fun()&#123;</span><br><span class="line">	var a=10</span><br><span class="line">&#125;</span><br><span class="line">fun() // 执行以后函数中的a会从内存中销毁</span><br><span class="line"></span><br><span class="line">function fun()&#123;</span><br><span class="line">	var a=10</span><br><span class="line">	return function（）&#123;</span><br><span class="line">		console.log(a)</span><br><span class="line">	&#125;</span><br><span class="line">&#125;</span><br><span class="line">fun()</span><br></pre>
+
+<blockquote>
+<p>优点：内部访问外部局部变量</p>
+<p>缺点：内存中的变量无法被释放，设置变量为null</p>
+</blockquote>
+<h3 id="判断是否是Array"><a href="#判断是否是Array" class="headerlink" title="判断是否是Array"></a>判断是否是Array</h3><pre class="highlight"><span class="line">console.log(Array.isArray(array))</span><br><span class="line">console.log(array.constructor==Array)</span><br></pre>
+
+<h3 id="里面微任务、宏任务"><a href="#里面微任务、宏任务" class="headerlink" title="里面微任务、宏任务"></a>里面微任务、宏任务</h3><pre class="highlight"><span class="line">微任务 Promise.then() </span><br><span class="line">宏任务 定时器，事件</span><br><span class="line">先执行微任务、微任务执行完成以后执行宏任务</span><br></pre>
+
+<h3 id="new"><a href="#new" class="headerlink" title="new"></a>new</h3><pre class="highlight"><span class="line">创建一个新对象，构造函数的指向这个新对象，执行构造函数里面的方法，返回这个新对象</span><br></pre>
+
+<h3 id="继承-（people-instanceof-Home"><a href="#继承-（people-instanceof-Home" class="headerlink" title="继承 （people instanceof Home)"></a>继承 （people instanceof Home)</h3><pre class="highlight"><span class="line"><span class="comment">//原型继承</span></span><br><span class="line"></span><br><span class="line"><span class="comment">//①class里面的extends</span></span><br><span class="line"><span class="class"><span class="keyword">class</span> <span class="title">Home</span> </span>&#123;</span><br><span class="line">    <span class="function"><span class="title">constructor</span>(<span class="params">money</span>)</span> &#123;</span><br><span class="line">        <span class="built_in">this</span>.money = money</span><br><span class="line">    &#125;</span><br><span class="line">    <span class="keyword">get</span> <span class="title">money</span>() &#123;</span><br><span class="line">        <span class="keyword">return</span> <span class="built_in">this</span>._money;</span><br><span class="line">    &#125;</span><br><span class="line">    <span class="keyword">set</span> <span class="title">money</span>(<span class="params">value</span>) &#123;</span><br><span class="line">        <span class="built_in">this</span>._money = value;</span><br><span class="line">    &#125;</span><br><span class="line">    <span class="function"><span class="title">talk</span>(<span class="params"></span>)</span> &#123;</span><br><span class="line">        <span class="built_in">console</span>.log(<span class="string">`我是<span class="subst">$&#123;<span class="built_in">this</span>.username&#125;</span>,我有￥<span class="subst">$&#123;<span class="built_in">this</span>.money&#125;</span>`</span>)</span><br><span class="line">    &#125;</span><br><span class="line">&#125;</span><br><span class="line"><span class="class"><span class="keyword">class</span> <span class="title">People</span> <span class="keyword">extends</span> <span class="title">Home</span> </span>&#123;</span><br><span class="line">    <span class="function"><span class="title">constructor</span>(<span class="params">money</span>)</span> &#123;</span><br><span class="line">        <span class="built_in">super</span>(money)</span><br><span class="line">        <span class="built_in">this</span>.username = <span class="string">&quot;People&quot;</span></span><br><span class="line">    &#125;</span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line"><span class="comment">// ②构造函数</span></span><br><span class="line"><span class="function"><span class="keyword">function</span> <span class="title">Home</span>(<span class="params">money</span>) </span>&#123;</span><br><span class="line">    <span class="built_in">this</span>.money = money;</span><br><span class="line">    <span class="built_in">this</span>.talk = <span class="function"><span class="keyword">function</span> (<span class="params"></span>) </span>&#123;</span><br><span class="line">        <span class="built_in">console</span>.log(<span class="string">`我是<span class="subst">$&#123;<span class="built_in">this</span>.username&#125;</span>,我有￥<span class="subst">$&#123;<span class="built_in">this</span>.money&#125;</span>`</span>)</span><br><span class="line">    &#125;</span><br><span class="line">&#125;</span><br><span class="line"><span class="function"><span class="keyword">function</span> <span class="title">People</span>(<span class="params">money</span>) </span>&#123;</span><br><span class="line">    <span class="built_in">this</span>.username=<span class="string">&quot;people&quot;</span></span><br><span class="line">    Home.call(<span class="built_in">this</span>,money)</span><br><span class="line">&#125;</span><br><span class="line"><span class="keyword">let</span> people = <span class="keyword">new</span> People(<span class="number">12</span>)</span><br><span class="line">people.talk()</span><br></pre>
+
+<h3 id="去重"><a href="#去重" class="headerlink" title="去重"></a>去重</h3><pre class="highlight"><span class="line">/new Set()</span><br><span class="line">let arr=[1,1,1,2,2,3,44,55,66,66,111]</span><br><span class="line">console.log([...new Set(arr)])</span><br><span class="line">// 对象</span><br><span class="line">let temp=&#123;&#125;</span><br><span class="line">arr.map(v=&gt;&#123;</span><br><span class="line">    temp[v]=v</span><br><span class="line">&#125;)</span><br><span class="line">console.log(Object.keys(temp))</span><br></pre>
+
+<h3 id="call-apply-bind"><a href="#call-apply-bind" class="headerlink" title="call,apply,bind"></a>call,apply,bind</h3><pre class="highlight"><span class="line">call  function.call(thisArg, arg1, arg2, ...)</span><br><span class="line">apply function.apply(thisArg, [argsArray])</span><br><span class="line">bind  function.call(thisArg, arg1, arg2, ...) //返回一个新的函数</span><br></pre>
+
+<h2 id="箭头函数和普通函数的区别"><a href="#箭头函数和普通函数的区别" class="headerlink" title="箭头函数和普通函数的区别"></a>箭头函数和普通函数的区别</h2><pre class="highlight"><span class="line">箭头函数的this不可修改，内外this一致，指向它被定义地方</span><br><span class="line">普通函数的this指向window，闭包中的this指向window</span><br></pre>
+
+<h3 id="let-const"><a href="#let-const" class="headerlink" title="let,const"></a>let,const</h3><p>没有变量提升，不可再次赋值，const声明常量如果是对象的话对象内部修改是可以的</p>
+<h3 id="Object-assign"><a href="#Object-assign" class="headerlink" title="Object.assign"></a>Object.assign</h3><h3 id="promise"><a href="#promise" class="headerlink" title="promise"></a>promise</h3><pre class="highlight"><span class="line">async fun()&#123;</span><br><span class="line">	let a=await event</span><br><span class="line">&#125;</span><br><span class="line">状态 pending 进行中 fulfilled 成功 rejected 失败</span><br></pre>
+
+<h2 id="配置打包上线"><a href="#配置打包上线" class="headerlink" title="配置打包上线"></a>配置打包上线</h2><pre class="highlight"><span class="line">vue项目是spa单页面应用</span><br><span class="line">Nuxt.js可以转换成多页面</span><br><span class="line">webpack插件配置成多页面 prerender-spa-plugin</span><br></pre>
+
+<h3 id="webpack"><a href="#webpack" class="headerlink" title="webpack"></a>webpack</h3><pre class="highlight"><span class="line">cnpm i webpack -S</span><br><span class="line">cnpm i webpack-cli -S</span><br><span class="line">cnpm i webpack-dev-server -S</span><br></pre>
+
+
+
+
+
+
+
+
+  </div>
+  <div>
+  
+  <div class="post-note note-warning copyright" style="margin-top: 42px">
+    <p><span style="font-weight: bold;">作者：</span><a target="_blank" rel="nofollow noopener noreferrer" href="https://xiaobai123-4.github.io/about">小白&amp;马</a></p>
+    <p><span style="font-weight: bold;">文章链接：</span><a target="_blank" rel="nofollow noopener noreferrer" href="https://xiaobai123-4.github.io/2022/02/12/cl06xlsee000sagsf0tyrh025/">https://xiaobai123-4.github.io/2022/02/12/cl06xlsee000sagsf0tyrh025/</a></p>
+    <p><span style="font-weight: bold;">版权声明：</span>本博客所有文章除特别声明外，均采用<a target="_blank" rel="noopener" href="https://creativecommons.org/licenses/by-nc-sa/4.0/deed.zh">CC BY-NC-SA 4.0 协议</a>。转载请注明出处！</p>
+  </div>
+  
+  </div>
+</article>
+<div class="nav">
+  
+  
+  <div class="nav-item-next">
+    <a href="/2022/02/10/cl06xlse50006agsf71txbzdk/" class="nav-link">
+      <div>
+        <div class="nav-label">下一篇</div>
+        
+        <div class="nav-title">Vue </div>
+        
+      </div>
+      <i class="iconfont icon-right nav-next-icon"></i>
+    </a>
+  </div>
+  
+</div>
+
+<div class="card card-content toc-card" id="mobiletoc">
+  <div class="toc-header"><i class="iconfont icon-menu" style="padding-right: 2px;"></i>目录</div>
+<ol class="toc"><li class="toc-item toc-level-3"><a class="toc-link" href="#Vue-%E6%95%B0%E6%8D%AE%E9%A9%B1%E5%8A%A8%E6%A1%86%E6%9E%B6"><span class="toc-text">Vue 数据驱动框架</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#%E7%94%9F%E5%91%BD%E5%91%A8%E6%9C%9F"><span class="toc-text">生命周期</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#%E9%A1%B5%E9%9D%A2%E3%80%81%E7%BB%84%E4%BB%B6%E5%8A%A0%E8%BD%BD%E4%BC%9A%E6%89%A7%E8%A1%8C%E9%82%A3%E4%BA%9B%E7%94%9F%E5%91%BD%E5%91%A8%E6%9C%9F"><span class="toc-text">页面、组件加载会执行那些生命周期</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#%E7%94%9F%E5%91%BD%E5%91%A8%E6%9C%9F%E7%9A%84%E4%BD%BF%E7%94%A8"><span class="toc-text">生命周期的使用</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#%E8%B7%AF%E7%94%B1"><span class="toc-text">路由</span></a><ol class="toc-child"><li class="toc-item toc-level-4"><a class="toc-link" href="#%E8%B7%AF%E7%94%B1%E4%BC%A0%E5%80%BC%EF%BC%88%E6%98%BE%E5%BC%8F%E3%80%81%E9%9A%90%E5%BC%8F%EF%BC%89"><span class="toc-text">- 路由传值（显式、隐式）</span></a></li><li class="toc-item toc-level-4"><a class="toc-link" href="#%E8%B7%AF%E7%94%B1%E7%9A%84%E6%A8%A1%E5%BC%8F%E5%92%8C%E5%8C%BA%E5%88%AB"><span class="toc-text">- 路由的模式和区别</span></a></li><li class="toc-item toc-level-4"><a class="toc-link" href="#%E8%B7%AF%E7%94%B1%E5%AF%BC%E8%88%AA%E5%AE%88%E5%8D%AB%EF%BC%88%E6%8B%A6%E6%88%AA%EF%BC%89"><span class="toc-text">- 路由导航守卫（拦截）</span></a></li><li class="toc-item toc-level-4"><a class="toc-link" href="#%E5%8A%A8%E6%80%81%E8%B7%AF%E7%94%B1%E5%92%8C%E5%AD%90%E8%B7%AF%E7%94%B1"><span class="toc-text">- 动态路由和子路由</span></a></li></ol></li><li class="toc-item toc-level-3"><a class="toc-link" href="#keep-alive"><span class="toc-text">keep-alive</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#axios"><span class="toc-text">axios</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#vuex"><span class="toc-text">vuex</span></a><ol class="toc-child"><li class="toc-item toc-level-4"><a class="toc-link" href="#mutations%E5%92%8Cactions"><span class="toc-text">mutations和actions</span></a></li></ol></li></ol></li><li class="toc-item toc-level-2"><a class="toc-link" href="#vuex%E6%8C%81%E4%B9%85%E5%8C%96"><span class="toc-text">vuex持久化</span></a><ol class="toc-child"><li class="toc-item toc-level-3"><a class="toc-link" href="#computed%E3%80%81watch%EF%BC%8Cmethods"><span class="toc-text">computed、watch，methods</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#%E6%8F%92%E6%A7%BDslot"><span class="toc-text">插槽slot</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#ref"><span class="toc-text">ref</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#%E7%BB%84%E4%BB%B6%E4%BC%A0%E5%80%BC"><span class="toc-text">组件传值</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#nextTick"><span class="toc-text">nextTick</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#v-if-v-show"><span class="toc-text">v-if&#x2F;v-show</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#v-if-v-for"><span class="toc-text">v-if&#x2F;v-for</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#v-model%E5%8F%8C%E5%90%91%E7%BB%91%E5%AE%9A%E5%8E%9F%E7%90%86"><span class="toc-text">v-model双向绑定原理</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#Vue"><span class="toc-text">Vue</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#MVVM"><span class="toc-text">MVVM</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#css%E7%9B%92%E5%AD%90%E6%A8%A1%E5%9E%8B"><span class="toc-text">css盒子模型</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#line-heihgt%E5%92%8Cheight"><span class="toc-text">line-heihgt和height</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#css%E9%80%89%E6%8B%A9%E7%AC%A6%EF%BC%9F%E9%82%A3%E4%BA%9B%E5%8F%AF%E4%BB%A5%E7%BB%A7%E6%89%BF"><span class="toc-text">css选择符？那些可以继承?</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#css%E4%BC%98%E5%85%88%E7%BA%A7"><span class="toc-text">css优先级</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#css%E4%B8%89%E8%A7%92%E5%BD%A2"><span class="toc-text">css三角形</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#%E4%B8%80%E4%B8%AA%E7%9B%92%E5%AD%90%E4%B8%8D%E7%BB%99%E5%AE%BD%E9%AB%98%E5%B1%85%E4%B8%AD"><span class="toc-text">一个盒子不给宽高居中</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#BFC"><span class="toc-text">BFC</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#%E6%B8%85%E9%99%A4%E6%B5%AE%E5%8A%A8"><span class="toc-text">清除浮动</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#%E5%AE%9A%E4%BD%8Dposition"><span class="toc-text">定位position</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#%E5%B7%A6%E5%8F%B3%E5%9B%BA%E5%AE%9A%E5%AE%BD%EF%BC%8C%E4%B8%AD%E9%97%B4%E8%87%AA%E9%80%82%E5%BA%94%EF%BC%8C%E4%BC%98%E5%85%88%E6%98%BE%E7%A4%BA"><span class="toc-text">左右固定宽，中间自适应，优先显示</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#reset-%E5%88%9D%E5%A7%8B%E5%8C%96%E6%A0%B7%E5%BC%8F-Normalize-css"><span class="toc-text">reset(初始化样式) Normalize.css</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#%E7%B2%BE%E7%81%B5%E5%9B%BE-%E9%9B%AA%E7%A2%A7%E5%9B%BE"><span class="toc-text">精灵图&#x2F;雪碧图</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#HTML"><span class="toc-text">HTML</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#null-undefind"><span class="toc-text">null&#x2F;undefind</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#%E5%8F%98%E9%87%8F%E6%8F%90%E5%8D%87"><span class="toc-text">变量提升</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#%E5%8E%9F%E5%9E%8B%E9%93%BE"><span class="toc-text">原型链</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#%E9%97%AD%E5%8C%85"><span class="toc-text">闭包</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#%E5%88%A4%E6%96%AD%E6%98%AF%E5%90%A6%E6%98%AFArray"><span class="toc-text">判断是否是Array</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#%E9%87%8C%E9%9D%A2%E5%BE%AE%E4%BB%BB%E5%8A%A1%E3%80%81%E5%AE%8F%E4%BB%BB%E5%8A%A1"><span class="toc-text">里面微任务、宏任务</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#new"><span class="toc-text">new</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#%E7%BB%A7%E6%89%BF-%EF%BC%88people-instanceof-Home"><span class="toc-text">继承 （people instanceof Home)</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#%E5%8E%BB%E9%87%8D"><span class="toc-text">去重</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#call-apply-bind"><span class="toc-text">call,apply,bind</span></a></li></ol></li><li class="toc-item toc-level-2"><a class="toc-link" href="#%E7%AE%AD%E5%A4%B4%E5%87%BD%E6%95%B0%E5%92%8C%E6%99%AE%E9%80%9A%E5%87%BD%E6%95%B0%E7%9A%84%E5%8C%BA%E5%88%AB"><span class="toc-text">箭头函数和普通函数的区别</span></a><ol class="toc-child"><li class="toc-item toc-level-3"><a class="toc-link" href="#let-const"><span class="toc-text">let,const</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#Object-assign"><span class="toc-text">Object.assign</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#promise"><span class="toc-text">promise</span></a></li></ol></li><li class="toc-item toc-level-2"><a class="toc-link" href="#%E9%85%8D%E7%BD%AE%E6%89%93%E5%8C%85%E4%B8%8A%E7%BA%BF"><span class="toc-text">配置打包上线</span></a><ol class="toc-child"><li class="toc-item toc-level-3"><a class="toc-link" href="#webpack"><span class="toc-text">webpack</span></a></li></ol>
+</div></main>
+          <aside class="left-column">
+            
+            <div class="card card-author">
+              
+<img src="https://xiaobai123-4.github.io/image/admin.jpg" class="author-img">
+
+<p class="author-name">小白&马</p>
+<p class="author-description">Fight !!</p>
+<div class="author-message">
+  <a class="author-posts-count" href="/archives">
+    <span>14</span>
+    <span>文章</span>
+  </a>
+  <a class="author-categories-count" href="/categories">
+    <span>6</span>
+    <span>分类</span>
+  </a>
+  <a class="author-tags-count" href="/tags">
+    <span>15</span>
+    <span>标签</span>
+  </a>
+</div>
+
+            </div>
+            
+            <div class="sticky-tablet">
+  
+  
+  <article class="display-when-two-columns spacer">
+    <div class="card card-content toc-card">
+      <div class="toc-header"><i class="iconfont icon-menu" style="padding-right: 2px;"></i>目录</div>
+<ol class="toc"><li class="toc-item toc-level-3"><a class="toc-link" href="#Vue-%E6%95%B0%E6%8D%AE%E9%A9%B1%E5%8A%A8%E6%A1%86%E6%9E%B6"><span class="toc-text">Vue 数据驱动框架</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#%E7%94%9F%E5%91%BD%E5%91%A8%E6%9C%9F"><span class="toc-text">生命周期</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#%E9%A1%B5%E9%9D%A2%E3%80%81%E7%BB%84%E4%BB%B6%E5%8A%A0%E8%BD%BD%E4%BC%9A%E6%89%A7%E8%A1%8C%E9%82%A3%E4%BA%9B%E7%94%9F%E5%91%BD%E5%91%A8%E6%9C%9F"><span class="toc-text">页面、组件加载会执行那些生命周期</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#%E7%94%9F%E5%91%BD%E5%91%A8%E6%9C%9F%E7%9A%84%E4%BD%BF%E7%94%A8"><span class="toc-text">生命周期的使用</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#%E8%B7%AF%E7%94%B1"><span class="toc-text">路由</span></a><ol class="toc-child"><li class="toc-item toc-level-4"><a class="toc-link" href="#%E8%B7%AF%E7%94%B1%E4%BC%A0%E5%80%BC%EF%BC%88%E6%98%BE%E5%BC%8F%E3%80%81%E9%9A%90%E5%BC%8F%EF%BC%89"><span class="toc-text">- 路由传值（显式、隐式）</span></a></li><li class="toc-item toc-level-4"><a class="toc-link" href="#%E8%B7%AF%E7%94%B1%E7%9A%84%E6%A8%A1%E5%BC%8F%E5%92%8C%E5%8C%BA%E5%88%AB"><span class="toc-text">- 路由的模式和区别</span></a></li><li class="toc-item toc-level-4"><a class="toc-link" href="#%E8%B7%AF%E7%94%B1%E5%AF%BC%E8%88%AA%E5%AE%88%E5%8D%AB%EF%BC%88%E6%8B%A6%E6%88%AA%EF%BC%89"><span class="toc-text">- 路由导航守卫（拦截）</span></a></li><li class="toc-item toc-level-4"><a class="toc-link" href="#%E5%8A%A8%E6%80%81%E8%B7%AF%E7%94%B1%E5%92%8C%E5%AD%90%E8%B7%AF%E7%94%B1"><span class="toc-text">- 动态路由和子路由</span></a></li></ol></li><li class="toc-item toc-level-3"><a class="toc-link" href="#keep-alive"><span class="toc-text">keep-alive</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#axios"><span class="toc-text">axios</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#vuex"><span class="toc-text">vuex</span></a><ol class="toc-child"><li class="toc-item toc-level-4"><a class="toc-link" href="#mutations%E5%92%8Cactions"><span class="toc-text">mutations和actions</span></a></li></ol></li></ol></li><li class="toc-item toc-level-2"><a class="toc-link" href="#vuex%E6%8C%81%E4%B9%85%E5%8C%96"><span class="toc-text">vuex持久化</span></a><ol class="toc-child"><li class="toc-item toc-level-3"><a class="toc-link" href="#computed%E3%80%81watch%EF%BC%8Cmethods"><span class="toc-text">computed、watch，methods</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#%E6%8F%92%E6%A7%BDslot"><span class="toc-text">插槽slot</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#ref"><span class="toc-text">ref</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#%E7%BB%84%E4%BB%B6%E4%BC%A0%E5%80%BC"><span class="toc-text">组件传值</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#nextTick"><span class="toc-text">nextTick</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#v-if-v-show"><span class="toc-text">v-if&#x2F;v-show</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#v-if-v-for"><span class="toc-text">v-if&#x2F;v-for</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#v-model%E5%8F%8C%E5%90%91%E7%BB%91%E5%AE%9A%E5%8E%9F%E7%90%86"><span class="toc-text">v-model双向绑定原理</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#Vue"><span class="toc-text">Vue</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#MVVM"><span class="toc-text">MVVM</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#css%E7%9B%92%E5%AD%90%E6%A8%A1%E5%9E%8B"><span class="toc-text">css盒子模型</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#line-heihgt%E5%92%8Cheight"><span class="toc-text">line-heihgt和height</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#css%E9%80%89%E6%8B%A9%E7%AC%A6%EF%BC%9F%E9%82%A3%E4%BA%9B%E5%8F%AF%E4%BB%A5%E7%BB%A7%E6%89%BF"><span class="toc-text">css选择符？那些可以继承?</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#css%E4%BC%98%E5%85%88%E7%BA%A7"><span class="toc-text">css优先级</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#css%E4%B8%89%E8%A7%92%E5%BD%A2"><span class="toc-text">css三角形</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#%E4%B8%80%E4%B8%AA%E7%9B%92%E5%AD%90%E4%B8%8D%E7%BB%99%E5%AE%BD%E9%AB%98%E5%B1%85%E4%B8%AD"><span class="toc-text">一个盒子不给宽高居中</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#BFC"><span class="toc-text">BFC</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#%E6%B8%85%E9%99%A4%E6%B5%AE%E5%8A%A8"><span class="toc-text">清除浮动</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#%E5%AE%9A%E4%BD%8Dposition"><span class="toc-text">定位position</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#%E5%B7%A6%E5%8F%B3%E5%9B%BA%E5%AE%9A%E5%AE%BD%EF%BC%8C%E4%B8%AD%E9%97%B4%E8%87%AA%E9%80%82%E5%BA%94%EF%BC%8C%E4%BC%98%E5%85%88%E6%98%BE%E7%A4%BA"><span class="toc-text">左右固定宽，中间自适应，优先显示</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#reset-%E5%88%9D%E5%A7%8B%E5%8C%96%E6%A0%B7%E5%BC%8F-Normalize-css"><span class="toc-text">reset(初始化样式) Normalize.css</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#%E7%B2%BE%E7%81%B5%E5%9B%BE-%E9%9B%AA%E7%A2%A7%E5%9B%BE"><span class="toc-text">精灵图&#x2F;雪碧图</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#HTML"><span class="toc-text">HTML</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#null-undefind"><span class="toc-text">null&#x2F;undefind</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#%E5%8F%98%E9%87%8F%E6%8F%90%E5%8D%87"><span class="toc-text">变量提升</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#%E5%8E%9F%E5%9E%8B%E9%93%BE"><span class="toc-text">原型链</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#%E9%97%AD%E5%8C%85"><span class="toc-text">闭包</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#%E5%88%A4%E6%96%AD%E6%98%AF%E5%90%A6%E6%98%AFArray"><span class="toc-text">判断是否是Array</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#%E9%87%8C%E9%9D%A2%E5%BE%AE%E4%BB%BB%E5%8A%A1%E3%80%81%E5%AE%8F%E4%BB%BB%E5%8A%A1"><span class="toc-text">里面微任务、宏任务</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#new"><span class="toc-text">new</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#%E7%BB%A7%E6%89%BF-%EF%BC%88people-instanceof-Home"><span class="toc-text">继承 （people instanceof Home)</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#%E5%8E%BB%E9%87%8D"><span class="toc-text">去重</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#call-apply-bind"><span class="toc-text">call,apply,bind</span></a></li></ol></li><li class="toc-item toc-level-2"><a class="toc-link" href="#%E7%AE%AD%E5%A4%B4%E5%87%BD%E6%95%B0%E5%92%8C%E6%99%AE%E9%80%9A%E5%87%BD%E6%95%B0%E7%9A%84%E5%8C%BA%E5%88%AB"><span class="toc-text">箭头函数和普通函数的区别</span></a><ol class="toc-child"><li class="toc-item toc-level-3"><a class="toc-link" href="#let-const"><span class="toc-text">let,const</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#Object-assign"><span class="toc-text">Object.assign</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#promise"><span class="toc-text">promise</span></a></li></ol></li><li class="toc-item toc-level-2"><a class="toc-link" href="#%E9%85%8D%E7%BD%AE%E6%89%93%E5%8C%85%E4%B8%8A%E7%BA%BF"><span class="toc-text">配置打包上线</span></a><ol class="toc-child"><li class="toc-item toc-level-3"><a class="toc-link" href="#webpack"><span class="toc-text">webpack</span></a></li></ol>
+    </div>
+  </article>
+  
+  
+  <article class="card card-content">
+    <div class="categories-card">
+  <div class="categories-header"><i class="iconfont icon-fenlei" style="padding-right: 2px;"></i>分类</div>
+  <div class="categories-list">
+    
+      <a href="/categories/nodejs">
+        <div class="categories-list-item">
+          nodejs
+          <span class="categories-list-item-badge">2</span>
+        </div>
+      </a>
+    
+      <a href="/categories/Markdown">
+        <div class="categories-list-item">
+          Markdown
+          <span class="categories-list-item-badge">1</span>
+        </div>
+      </a>
+    
+      <a href="/categories/前端">
+        <div class="categories-list-item">
+          前端
+          <span class="categories-list-item-badge">8</span>
+        </div>
+      </a>
+    
+      <a href="/categories/hexo">
+        <div class="categories-list-item">
+          hexo
+          <span class="categories-list-item-badge">1</span>
+        </div>
+      </a>
+    
+      <a href="/categories/微信小程序">
+        <div class="categories-list-item">
+          微信小程序
+          <span class="categories-list-item-badge">1</span>
+        </div>
+      </a>
+    
+      <a href="/categories/CSS">
+        <div class="categories-list-item">
+          CSS
+          <span class="categories-list-item-badge">1</span>
+        </div>
+      </a>
+    
+  </div>
+</div>
+  </article>
+  
+  <article class="card card-content">
+    <div class="tags-card">
+  <div class="tags-header"><i class="iconfont icon-biaoqian" style="padding-right: 2px;"></i>热门标签</div>
+  <div class="tags-list">
+    
+    <a href="\tags\javascript" title="javascript"><div class="tags-list-item">javascript</div></a>
+    
+    <a href="\tags\html" title="html"><div class="tags-list-item">html</div></a>
+    
+    <a href="\tags\常见问题" title="常见问题"><div class="tags-list-item">常见问题</div></a>
+    
+    <a href="\tags\css" title="css"><div class="tags-list-item">css</div></a>
+    
+    <a href="\tags\微信小程序" title="微信小程序"><div class="tags-list-item">微信小程序</div></a>
+    
+    <a href="\tags\nodejs" title="nodejs"><div class="tags-list-item">nodejs</div></a>
+    
+    <a href="\tags\ES6" title="ES6"><div class="tags-list-item">ES6</div></a>
+    
+    <a href="\tags\博客" title="博客"><div class="tags-list-item">博客</div></a>
+    
+    <a href="\tags\next" title="next"><div class="tags-list-item">next</div></a>
+    
+    <a href="\tags\hexo" title="hexo"><div class="tags-list-item">hexo</div></a>
+    
+    <a href="\tags\mockjs" title="mockjs"><div class="tags-list-item">mockjs</div></a>
+    
+    <a href="\tags\笔记" title="笔记"><div class="tags-list-item">笔记</div></a>
+    
+    <a href="\tags\markdown" title="markdown"><div class="tags-list-item">markdown</div></a>
+    
+    <a href="\tags\koa" title="koa"><div class="tags-list-item">koa</div></a>
+    
+    <a href="\tags\Koa" title="Koa"><div class="tags-list-item">Koa</div></a>
+    
+  </div>
+</div>
+  </article>
+  
+  
+</div>
+          </aside>
+          <aside class="right-column">
+            <div class="sticky-widescreen">
+  
+  
+  <article class="card card-content toc-card">
+    <div class="toc-header"><i class="iconfont icon-menu" style="padding-right: 2px;"></i>目录</div>
+<ol class="toc"><li class="toc-item toc-level-3"><a class="toc-link" href="#Vue-%E6%95%B0%E6%8D%AE%E9%A9%B1%E5%8A%A8%E6%A1%86%E6%9E%B6"><span class="toc-text">Vue 数据驱动框架</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#%E7%94%9F%E5%91%BD%E5%91%A8%E6%9C%9F"><span class="toc-text">生命周期</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#%E9%A1%B5%E9%9D%A2%E3%80%81%E7%BB%84%E4%BB%B6%E5%8A%A0%E8%BD%BD%E4%BC%9A%E6%89%A7%E8%A1%8C%E9%82%A3%E4%BA%9B%E7%94%9F%E5%91%BD%E5%91%A8%E6%9C%9F"><span class="toc-text">页面、组件加载会执行那些生命周期</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#%E7%94%9F%E5%91%BD%E5%91%A8%E6%9C%9F%E7%9A%84%E4%BD%BF%E7%94%A8"><span class="toc-text">生命周期的使用</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#%E8%B7%AF%E7%94%B1"><span class="toc-text">路由</span></a><ol class="toc-child"><li class="toc-item toc-level-4"><a class="toc-link" href="#%E8%B7%AF%E7%94%B1%E4%BC%A0%E5%80%BC%EF%BC%88%E6%98%BE%E5%BC%8F%E3%80%81%E9%9A%90%E5%BC%8F%EF%BC%89"><span class="toc-text">- 路由传值（显式、隐式）</span></a></li><li class="toc-item toc-level-4"><a class="toc-link" href="#%E8%B7%AF%E7%94%B1%E7%9A%84%E6%A8%A1%E5%BC%8F%E5%92%8C%E5%8C%BA%E5%88%AB"><span class="toc-text">- 路由的模式和区别</span></a></li><li class="toc-item toc-level-4"><a class="toc-link" href="#%E8%B7%AF%E7%94%B1%E5%AF%BC%E8%88%AA%E5%AE%88%E5%8D%AB%EF%BC%88%E6%8B%A6%E6%88%AA%EF%BC%89"><span class="toc-text">- 路由导航守卫（拦截）</span></a></li><li class="toc-item toc-level-4"><a class="toc-link" href="#%E5%8A%A8%E6%80%81%E8%B7%AF%E7%94%B1%E5%92%8C%E5%AD%90%E8%B7%AF%E7%94%B1"><span class="toc-text">- 动态路由和子路由</span></a></li></ol></li><li class="toc-item toc-level-3"><a class="toc-link" href="#keep-alive"><span class="toc-text">keep-alive</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#axios"><span class="toc-text">axios</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#vuex"><span class="toc-text">vuex</span></a><ol class="toc-child"><li class="toc-item toc-level-4"><a class="toc-link" href="#mutations%E5%92%8Cactions"><span class="toc-text">mutations和actions</span></a></li></ol></li></ol></li><li class="toc-item toc-level-2"><a class="toc-link" href="#vuex%E6%8C%81%E4%B9%85%E5%8C%96"><span class="toc-text">vuex持久化</span></a><ol class="toc-child"><li class="toc-item toc-level-3"><a class="toc-link" href="#computed%E3%80%81watch%EF%BC%8Cmethods"><span class="toc-text">computed、watch，methods</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#%E6%8F%92%E6%A7%BDslot"><span class="toc-text">插槽slot</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#ref"><span class="toc-text">ref</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#%E7%BB%84%E4%BB%B6%E4%BC%A0%E5%80%BC"><span class="toc-text">组件传值</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#nextTick"><span class="toc-text">nextTick</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#v-if-v-show"><span class="toc-text">v-if&#x2F;v-show</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#v-if-v-for"><span class="toc-text">v-if&#x2F;v-for</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#v-model%E5%8F%8C%E5%90%91%E7%BB%91%E5%AE%9A%E5%8E%9F%E7%90%86"><span class="toc-text">v-model双向绑定原理</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#Vue"><span class="toc-text">Vue</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#MVVM"><span class="toc-text">MVVM</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#css%E7%9B%92%E5%AD%90%E6%A8%A1%E5%9E%8B"><span class="toc-text">css盒子模型</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#line-heihgt%E5%92%8Cheight"><span class="toc-text">line-heihgt和height</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#css%E9%80%89%E6%8B%A9%E7%AC%A6%EF%BC%9F%E9%82%A3%E4%BA%9B%E5%8F%AF%E4%BB%A5%E7%BB%A7%E6%89%BF"><span class="toc-text">css选择符？那些可以继承?</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#css%E4%BC%98%E5%85%88%E7%BA%A7"><span class="toc-text">css优先级</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#css%E4%B8%89%E8%A7%92%E5%BD%A2"><span class="toc-text">css三角形</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#%E4%B8%80%E4%B8%AA%E7%9B%92%E5%AD%90%E4%B8%8D%E7%BB%99%E5%AE%BD%E9%AB%98%E5%B1%85%E4%B8%AD"><span class="toc-text">一个盒子不给宽高居中</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#BFC"><span class="toc-text">BFC</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#%E6%B8%85%E9%99%A4%E6%B5%AE%E5%8A%A8"><span class="toc-text">清除浮动</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#%E5%AE%9A%E4%BD%8Dposition"><span class="toc-text">定位position</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#%E5%B7%A6%E5%8F%B3%E5%9B%BA%E5%AE%9A%E5%AE%BD%EF%BC%8C%E4%B8%AD%E9%97%B4%E8%87%AA%E9%80%82%E5%BA%94%EF%BC%8C%E4%BC%98%E5%85%88%E6%98%BE%E7%A4%BA"><span class="toc-text">左右固定宽，中间自适应，优先显示</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#reset-%E5%88%9D%E5%A7%8B%E5%8C%96%E6%A0%B7%E5%BC%8F-Normalize-css"><span class="toc-text">reset(初始化样式) Normalize.css</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#%E7%B2%BE%E7%81%B5%E5%9B%BE-%E9%9B%AA%E7%A2%A7%E5%9B%BE"><span class="toc-text">精灵图&#x2F;雪碧图</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#HTML"><span class="toc-text">HTML</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#null-undefind"><span class="toc-text">null&#x2F;undefind</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#%E5%8F%98%E9%87%8F%E6%8F%90%E5%8D%87"><span class="toc-text">变量提升</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#%E5%8E%9F%E5%9E%8B%E9%93%BE"><span class="toc-text">原型链</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#%E9%97%AD%E5%8C%85"><span class="toc-text">闭包</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#%E5%88%A4%E6%96%AD%E6%98%AF%E5%90%A6%E6%98%AFArray"><span class="toc-text">判断是否是Array</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#%E9%87%8C%E9%9D%A2%E5%BE%AE%E4%BB%BB%E5%8A%A1%E3%80%81%E5%AE%8F%E4%BB%BB%E5%8A%A1"><span class="toc-text">里面微任务、宏任务</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#new"><span class="toc-text">new</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#%E7%BB%A7%E6%89%BF-%EF%BC%88people-instanceof-Home"><span class="toc-text">继承 （people instanceof Home)</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#%E5%8E%BB%E9%87%8D"><span class="toc-text">去重</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#call-apply-bind"><span class="toc-text">call,apply,bind</span></a></li></ol></li><li class="toc-item toc-level-2"><a class="toc-link" href="#%E7%AE%AD%E5%A4%B4%E5%87%BD%E6%95%B0%E5%92%8C%E6%99%AE%E9%80%9A%E5%87%BD%E6%95%B0%E7%9A%84%E5%8C%BA%E5%88%AB"><span class="toc-text">箭头函数和普通函数的区别</span></a><ol class="toc-child"><li class="toc-item toc-level-3"><a class="toc-link" href="#let-const"><span class="toc-text">let,const</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#Object-assign"><span class="toc-text">Object.assign</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#promise"><span class="toc-text">promise</span></a></li></ol></li><li class="toc-item toc-level-2"><a class="toc-link" href="#%E9%85%8D%E7%BD%AE%E6%89%93%E5%8C%85%E4%B8%8A%E7%BA%BF"><span class="toc-text">配置打包上线</span></a><ol class="toc-child"><li class="toc-item toc-level-3"><a class="toc-link" href="#webpack"><span class="toc-text">webpack</span></a></li></ol>
+  </article>
+  
+  
+  <article class="card card-content">
+    <div class="recent-posts-card">
+  <div class="recent-posts-header"><i class="iconfont icon-wenzhang_huaban" style="padding-right: 2px;"></i>最近文章</div>
+  <div class="recent-posts-list">
+    
+      <div class="recent-posts-item">
+        <div class="recent-posts-item-title">2022-02-12</div>
+        <a href="/2022/02/12/cl06xlsee000sagsf0tyrh025/"><div class="recent-posts-item-content">面试题复习</div></a>
+      </div>
+    
+      <div class="recent-posts-item">
+        <div class="recent-posts-item-title">2022-02-10</div>
+        <a href="/2022/02/10/cl06xlse50006agsf71txbzdk/"><div class="recent-posts-item-content">Vue</div></a>
+      </div>
+    
+      <div class="recent-posts-item">
+        <div class="recent-posts-item-title">2021-12-28</div>
+        <a href="/2021/12/28/cl06xlseb000lagsfggm738or/"><div class="recent-posts-item-content">常见面试题</div></a>
+      </div>
+    
+      <div class="recent-posts-item">
+        <div class="recent-posts-item-title">2021-12-23</div>
+        <a href="/2021/12/23/cl06xlsed000qagsfajuffzlu/"><div class="recent-posts-item-content">Demo_01</div></a>
+      </div>
+    
+  </div>
+</div>
+  </article>
+  
+  
+</div>
+          </aside>
+        </div>
+      </div>
+    </div>
+  </div>
+  
+  <footer class="footer">
+  <div class="footer-container">
+    <div>
+      <div class="footer-dsc">
+        <span>Copyright ©
+          
+          2020 -
+          
+          2022
+        </span>
+        <a href="/" class="footer-link">学习永不止步 </a>
+      </div>
+    </div>
+
+    
+    <div class="footer-dsc">
+      
+      
+      Powered by
+      <a href="https://hexo.io/" class="footer-link" target="_blank" rel="nofollow noopener noreferrer">&nbsp;Hexo </a>
+      
+      
+      <span>&nbsp;|&nbsp;</span>
+      
+      
+      
+      Theme -
+      <a href="https://github.com/theme-kaze" class="footer-link" target="_blank"
+        rel="nofollow noopener noreferrer">&nbsp;Kaze</a>
+      
+    </div>
+    
+    
+    
+    
+</footer>
+  <a role="button" id="scrollbutton" class="basebutton" >
+  <i class="iconfont icon-arrowleft button-icon"></i>
+</a>
+<a role="button" id="menubutton" class="basebutton">
+  <i class="iconfont icon-menu button-icon"></i>
+</a>
+<a role="button" id="popbutton" class="basebutton">
+  <i class="iconfont icon-expand button-icon"></i>
+</a>
+<a role="button" id="darkbutton" class="basebutton darkwidget">
+  <i class="iconfont icon-weather button-icon"></i>
+</a>
+
+  
+  
+  
+  <script>
+  var addImgLayout = function () {
+    var img = document.querySelectorAll('.post-content img');
+    var i;
+    for (i = 0; i < img.length; i++) {
+      var wrapper = document.createElement('a');
+      wrapper.setAttribute('data-fslightbox', 'gallery');
+      wrapper.setAttribute('href', img[i].getAttribute('data-src'));
+      wrapper.setAttribute('style', 'width: 100%; display: flex; justify-content: center;');
+      img[i].parentElement.insertBefore(wrapper, img[i]);
+      wrapper.appendChild(img[i]);
+    }
+    refreshFsLightbox();
+  }
+</script>
+<script>loadScript("//cdn.jsdelivr.net/npm/fslightbox@3.1.0/index.min.js", addImgLayout)</script>
+  
+  
+  
+<script src="/js/main.js"></script>
+
+  
+  
+  <script>
+    var addLazyload = function () {
+      var observer = lozad('.lozad', {
+        load: function (el) {
+          el.srcset = el.getAttribute('data-src');
+        },
+        loaded: function (el) {
+          el.classList.add('loaded');
+        }
+      });
+      observer.observe();
+    }
+  </script>
+  <script>loadScript("/js/lib/lozad.min.js", addLazyload)</script>
+  
+  
+</body>
+
+</html>

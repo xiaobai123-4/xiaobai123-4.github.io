@@ -1438,3 +1438,8 @@ mjx-container svg:focus {
 .style .token.string {
   background: none !important;
 }
+.post-note p:nth-child(2) {
+  overflow: hidden;
+  white-space: nowrap;
+  text-overflow: ellipsis;
+}
