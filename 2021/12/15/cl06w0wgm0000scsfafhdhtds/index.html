@@ -1,0 +1,499 @@
+<!DOCTYPE html>
+<html>
+<meta  lang="zh-CN" >
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport"
+    content="width=device-width, user-scalable=no, initial-scale=1.0, maximum-scale=1.0, minimum-scale=1.0">
+  <meta http-equiv="X-UA-Compatible" content="ie=edge">
+  <meta name="theme-color" content="#fff" id="theme-color">
+  <link rel="icon" href="https://xiaobai123-4.github.io/image/admin.jpg">
+  <title>学习永不止步</title>
+  <script>
+    // control reverse button
+    var reverseDarkList = {
+      dark: 'light',
+      light: 'dark'
+    };
+    var themeColor = {
+      dark: '#1c1c1e',
+      light: '#fff'
+    }
+    // get the data of css prefers-color-scheme
+    var getCssMediaQuery = function() {
+      return window.matchMedia('(prefers-color-scheme: dark)').matches ? 'dark' : 'light';
+    };
+    // reverse current darkmode setting function
+    var reverseDarkModeSetting = function() {
+      var setting = localStorage.getItem('user-color-scheme');
+      if(reverseDarkList[setting]) {
+        setting = reverseDarkList[setting];
+      } else if(setting === null) {
+        setting = reverseDarkList[getCssMediaQuery()];
+      } else {
+        return;
+      }
+      localStorage.setItem('user-color-scheme', setting);
+      return setting;
+    };
+    // apply current darkmode setting
+    var setDarkmode = function(mode) {
+      var setting = mode || localStorage.getItem('user-color-scheme');
+      if(setting === getCssMediaQuery()) {
+        document.documentElement.removeAttribute('data-user-color-scheme');
+        localStorage.removeItem('user-color-scheme');
+        document.getElementById('theme-color').content = themeColor[setting];
+      } else if(reverseDarkList[setting]) {
+        document.documentElement.setAttribute('data-user-color-scheme', setting);
+        document.getElementById('theme-color').content = themeColor[setting];
+      } else {
+        document.documentElement.removeAttribute('data-user-color-scheme');
+        localStorage.removeItem('user-color-scheme');
+        document.getElementById('theme-color').content = themeColor[getCssMediaQuery()];
+      }
+    };
+    setDarkmode();
+  </script>
+  <script>
+    function loadScript(url, cb) {
+      var script = document.createElement('script');
+      script.src = url;
+      if (cb) script.onload = cb;
+      script.async = true;
+      document.body.appendChild(script);
+    }
+  </script>
+  
+  <link rel="preload" href="//at.alicdn.com/t/font_1946621_vpj3dq9ceqa.css" as="style" >
+  <link rel="preload" href="//at.alicdn.com/t/font_1952792_89b4ac4k4up.css" as="style" >
+  
+  <link rel="preload" href="//cdn.jsdelivr.net/npm/fslightbox@3.1.0/index.min.js" as="script">
+  
+  
+  <link rel="preload" href="/js/lib/lozad.min.js" as="script">
+  
+  
+  
+  
+  
+  
+  
+  
+<link rel="stylesheet" href="/css/main.css">
+
+  
+  
+<link rel="stylesheet" href="//at.alicdn.com/t/font_1946621_vpj3dq9ceqa.css">
+
+  
+  
+<link rel="stylesheet" href="//at.alicdn.com/t/font_1952792_89b4ac4k4up.css">
+
+  
+  
+  
+<meta name="generator" content="Hexo 5.4.0"></head>
+
+
+<body>
+  <div class="wrapper">
+    
+    <nav class="navbar">
+  <div class="navbar-logo">
+    <span class="navbar-logo-main">
+      
+      <img class="navbar-logo-img" src="https://xiaobai123-4.github.io/image/admin.jpg">
+      
+      <span class="navbar-logo-dsc">学习永不止步</span>
+    </span>
+  </div>
+  <div class="navbar-menu">
+    
+    <a href="/" class="navbar-menu-item">首页 </a>
+    
+    <a href="/archives" class="navbar-menu-item">归档 </a>
+    
+    <a href="/tags" class="navbar-menu-item">标签 </a>
+    
+    <a href="/categories" class="navbar-menu-item">分类 </a>
+    
+    <a href="/links" class="navbar-menu-item">友链 </a>
+    
+    <a class="navbar-menu-item darknavbar" id="dark"><i class="iconfont icon-weather"></i></a>
+  </div>
+</nav>
+    
+    <div class="section-wrap">
+      <div class="container">
+        <div class="columns">
+          <main class="main-column">
+<div class="image-wrapper">
+  <img src="https://z3.ax1x.com/2021/04/28/gikVbQ.jpg" data-src="https://z3.ax1x.com/2021/04/28/gikVbQ.jpg"
+    srcset="data:image/svg+xml,%3Csvg%20xmlns=&#39;http://www.w3.org/2000/svg&#39;%20viewBox=&#39;0%200%20300%20300&#39;%3E%3C/svg%3E"
+    class="image lozad">
+</div>
+
+<article class="card card-content">
+  <header>
+    <h1 class="post-title">
+      Koa记录1
+    </h1>
+  </header>
+  <div class="post-meta post-show-meta">
+    <time datetime="2021-12-15T14:45:38.000Z" style="display: flex; align-items: center;">
+      <i class="iconfont icon-calendar" style="margin-right: 2px;"></i>
+      <span>2021-12-15</span>
+    </time>
+    
+    <span class="dot"></span>
+    
+    <a href="/categories/nodejs/" class="post-meta-link">nodejs</a>
+    
+    
+    
+    <span class="dot"></span>
+    <span>617 字</span>
+    
+  </div>
+  
+  <div class="post-meta post-show-meta" style="margin-top: -10px;">
+    <div style="display: flex; align-items: center;">
+      <i class="iconfont icon-biaoqian" style="margin-right: 2px; font-size: 1.15rem;"></i>
+      
+      
+        <a href="/tags/Koa/" class="post-meta-link">Koa</a>
+      
+    </div>
+  </div>
+  
+  </header>
+  <div id="section" class="post-content">
+    <blockquote>
+<p>分享一个超有用的插件<code>nodemon</code>后台使用时引入<code>npm i nodemon --save</code>用<code>nodemon</code>代替<code>node</code>十分快捷无需刷新</p>
+</blockquote>
+<h3 id="常见的中间件"><a href="#常见的中间件" class="headerlink" title="常见的中间件"></a>常见的中间件</h3><blockquote>
+<p><a target="_blank" rel="noopener" href="https://imgtu.com/i/gimVbT"><img src="https://z3.ax1x.com/2021/04/28/gimVbT.png" alt="gimVbT.png" srcset="data:image/svg+xml,%3Csvg%20xmlns='http://www.w3.org/2000/svg'%20viewBox='0%200%20300%20300'%3E%3C/svg%3E" data-src="https://z3.ax1x.com/2021/04/28/gimVbT.png" class="lozad post-image"></a></p>
+</blockquote>
+<ol>
+<li>代码<pre class="highlight"><span class="line">const Koa = require(&#x27;koa&#x27;),</span><br><span class="line">  //路由</span><br><span class="line">  router = require(&#x27;koa-router&#x27;)(),</span><br><span class="line">  //路径模块</span><br><span class="line">  path = require(&#x27;path&#x27;)</span><br><span class="line">//应用模板中间件</span><br><span class="line">views = require(&#x27;koa-views&#x27;),</span><br><span class="line">  //静态资源中间件</span><br><span class="line">  static = require(&#x27;koa-static&#x27;),</span><br><span class="line">  common = require(&#x27;./module/common.js&#x27;),</span><br><span class="line">  // 配置中间件bodyParser</span><br><span class="line">  bodyParser = require(&#x27;koa-bodyparser&#x27;),</span><br><span class="line">  //模板引擎art-template</span><br><span class="line">  render = require(&#x27;koa-art-template&#x27;);</span><br><span class="line"></span><br><span class="line">const app = new Koa()</span><br><span class="line">//第三方中间件 托管静态资源</span><br><span class="line">app.use(static(&#x27;./static&#x27;</span><br><span class="line">  // path.join(__dirname,&#x27;public&#x27;)</span><br><span class="line">))</span><br><span class="line">// 配置中间件bodyParser</span><br><span class="line">app.use(bodyParser())</span><br><span class="line"></span><br><span class="line">//第三方中间件 配置模板引擎中间件</span><br><span class="line">// 第一种  html</span><br><span class="line">// app.use(views(&#x27;views&#x27;,&#123;map:&#123;html:&#x27;ejs&#x27;&#125;&#125;))</span><br><span class="line">// 第二种  ejs</span><br><span class="line">app.use(views(&#x27;views&#x27;, &#123;</span><br><span class="line">  // 应用模板引擎</span><br><span class="line">  extension: &#x27;ejs&#x27;</span><br><span class="line">&#125;))</span><br><span class="line"></span><br><span class="line">//art-template模板引擎</span><br><span class="line">render(app, &#123;</span><br><span class="line">  root: path.join(__dirname, &#x27;views&#x27;),//视图位置</span><br><span class="line">  extname: &#x27;.ejs&#x27;,//后缀名</span><br><span class="line">  debug: true//是否开启调试</span><br><span class="line">&#125;);</span><br><span class="line"></span><br><span class="line">app.use(async (ctx) =&gt; &#123;</span><br><span class="line">  let list = &#123;</span><br><span class="line">    title: &#x27;标题&#x27;,</span><br><span class="line">    info: [</span><br><span class="line">      &#123; name: &quot;Tony&quot;, age: 15 &#125;,</span><br><span class="line">      &#123; name: &quot;Mack&quot;, age: 19 &#125;,</span><br><span class="line">      &#123; name: &quot;Tom&quot;, age: 17 &#125;,]</span><br><span class="line">  &#125;</span><br><span class="line">  await ctx.render(&#x27;art-template&#x27;, &#123; list &#125;);</span><br><span class="line">&#125;);</span><br><span class="line"></span><br><span class="line"></span><br><span class="line">router.get(&#x27;/&#x27;, async (ctx) =&gt; &#123;</span><br><span class="line">  let title = &quot;你好&quot;</span><br><span class="line">  await ctx.render(&#x27;index&#x27;, &#123; title &#125;)</span><br><span class="line">&#125;)</span><br><span class="line"></span><br><span class="line">router.get(&#x27;/test1&#x27;, async (ctx) =&gt; &#123;</span><br><span class="line">  await ctx.render(&#x27;text-from&#x27;)</span><br><span class="line">&#125;)</span><br><span class="line"></span><br><span class="line">router.post(&#x27;/doAdd&#x27;, async (ctx) =&gt; &#123;</span><br><span class="line">  //koa中原生请求①</span><br><span class="line">  //var data=await common.getPostData(ctx);</span><br><span class="line">  //②使用配置中间件</span><br><span class="line">  var data = ctx.request.body</span><br><span class="line">  //返回页面</span><br><span class="line">  ctx.body = data</span><br><span class="line">&#125;)</span><br><span class="line"></span><br><span class="line"></span><br><span class="line">//应用级中间件 在访问所有路由之前都会调用</span><br><span class="line">// app.use(async (ctx,next)=&gt;&#123;</span><br><span class="line">//   ctx.body=&quot;应用级中间件&quot;;</span><br><span class="line">//   let time=new Date()</span><br><span class="line">//   console.log(time)</span><br><span class="line">//   await next()</span><br><span class="line">// &#125;)</span><br><span class="line"></span><br><span class="line">//错误处理中间件</span><br><span class="line">app.use(async (ctx, next) =&gt; &#123;</span><br><span class="line">  await next();</span><br><span class="line">  if (ctx.status == 404) &#123;</span><br><span class="line">    ctx.body = &quot;这是404页面&quot;</span><br><span class="line">  &#125; else &#123;</span><br><span class="line">    console.log(ctx.url)</span><br><span class="line">  &#125;</span><br><span class="line">&#125;)</span><br><span class="line"></span><br><span class="line">//路由级中间件 匹配路由时继续向下匹配</span><br><span class="line">router.get(&#x27;/news&#x27;, async (ctx, next) =&gt; &#123;</span><br><span class="line">  // ctx.body=&quot;新闻get1&quot;</span><br><span class="line">  console.log(&quot;新闻get1&quot;)</span><br><span class="line">  await next()</span><br><span class="line">&#125;);</span><br><span class="line"></span><br><span class="line">router.get(&#x27;/&#x27;, (ctx, next) =&gt; &#123;</span><br><span class="line">  ctx.body = &quot;Hello Koa&quot;</span><br><span class="line">&#125;);</span><br><span class="line"></span><br><span class="line">router.post(&#x27;/news&#x27;, (ctx, next) =&gt; &#123;</span><br><span class="line">  ctx.body = &quot;新闻post&quot;</span><br><span class="line">&#125;);</span><br><span class="line"></span><br><span class="line">router.get(&#x27;/user/:id&#x27;, (ctx, next) =&gt; &#123;</span><br><span class="line">  ctx.body = &quot;user&quot;</span><br><span class="line">  console.log(ctx.params)</span><br><span class="line">&#125;)</span><br><span class="line"></span><br><span class="line">router.get(&#x27;/news&#x27;, (ctx, next) =&gt; &#123;</span><br><span class="line">  ctx.body = &quot;新闻get&quot;</span><br><span class="line">  console.log(ctx.query)</span><br><span class="line">&#125;)</span><br><span class="line"></span><br><span class="line">app.use(router.routes())//启动路由</span><br><span class="line">app.use(router.allowedMethods())</span><br><span class="line"></span><br><span class="line">app.listen(3000, () =&gt; &#123;</span><br><span class="line">  console.log(&quot;post:3000 starting&quot;)</span><br><span class="line">&#125;)</span><br></pre>
+<blockquote>
+<p>均使用<code>npm i ** --save</code></p>
+</blockquote>
+</li>
+</ol>
+<h4 id="文档"><a href="#文档" class="headerlink" title="文档"></a>文档</h4><p><a target="_blank" rel="noopener" href="https://koa.bootcss.com/">koa</a><br><a target="_blank" rel="noopener" href="http://aui.github.io/art-template/zh-cn/docs/syntax.html">art-template</a></p>
+
+  </div>
+  <div>
+  
+  <div class="post-note note-warning copyright" style="margin-top: 42px">
+    <p><span style="font-weight: bold;">作者：</span><a target="_blank" rel="nofollow noopener noreferrer" href="https://xiaobai123-4.github.io/about">小白&amp;马</a></p>
+    <p><span style="font-weight: bold;">文章链接：</span><a target="_blank" rel="nofollow noopener noreferrer" href="https://xiaobai123-4.github.io/2021/12/15/cl06w0wgm0000scsfafhdhtds/">https://xiaobai123-4.github.io/2021/12/15/cl06w0wgm0000scsfafhdhtds/</a></p>
+    <p><span style="font-weight: bold;">版权声明：</span>本博客所有文章除特别声明外，均采用<a target="_blank" rel="noopener" href="https://creativecommons.org/licenses/by-nc-sa/4.0/deed.zh">CC BY-NC-SA 4.0 协议</a>。转载请注明出处！</p>
+  </div>
+  
+  </div>
+</article>
+<div class="nav">
+  
+  <div class="nav-item-prev">
+    <a href="/2021/12/16/cl06w0wgs0004scsf0b556nwy/" class="nav-link">
+      <i class="iconfont icon-left nav-prev-icon"></i>
+      <div>
+        <div class="nav-label">上一篇</div>
+        
+        <div class="nav-title">Koa记录2 </div>
+        
+      </div>
+    </a>
+  </div>
+  
+  
+  <div class="nav-item-next">
+    <a href="/2021/12/15/cl06w0wgv000bscsfc3dwdsak/" class="nav-link">
+      <div>
+        <div class="nav-label">下一篇</div>
+        
+        <div class="nav-title">innerHTML </div>
+        
+      </div>
+      <i class="iconfont icon-right nav-next-icon"></i>
+    </a>
+  </div>
+  
+</div>
+
+<div class="card card-content toc-card" id="mobiletoc">
+  <div class="toc-header"><i class="iconfont icon-menu" style="padding-right: 2px;"></i>目录</div>
+<ol class="toc"><li class="toc-item toc-level-3"><a class="toc-link" href="#%E5%B8%B8%E8%A7%81%E7%9A%84%E4%B8%AD%E9%97%B4%E4%BB%B6"><span class="toc-text">常见的中间件</span></a><ol class="toc-child"><li class="toc-item toc-level-4"><a class="toc-link" href="#%E6%96%87%E6%A1%A3"><span class="toc-text">文档</span></a></li></ol></li></ol>
+</div></main>
+          <aside class="left-column">
+            
+            <div class="card card-author">
+              
+<img src="https://xiaobai123-4.github.io/image/admin.jpg" class="author-img">
+
+<p class="author-name">小白&马</p>
+<p class="author-description">Fight !!</p>
+<div class="author-message">
+  <a class="author-posts-count" href="/archives">
+    <span>14</span>
+    <span>文章</span>
+  </a>
+  <a class="author-categories-count" href="/categories">
+    <span>6</span>
+    <span>分类</span>
+  </a>
+  <a class="author-tags-count" href="/tags">
+    <span>15</span>
+    <span>标签</span>
+  </a>
+</div>
+
+            </div>
+            
+            <div class="sticky-tablet">
+  
+  
+  <article class="display-when-two-columns spacer">
+    <div class="card card-content toc-card">
+      <div class="toc-header"><i class="iconfont icon-menu" style="padding-right: 2px;"></i>目录</div>
+<ol class="toc"><li class="toc-item toc-level-3"><a class="toc-link" href="#%E5%B8%B8%E8%A7%81%E7%9A%84%E4%B8%AD%E9%97%B4%E4%BB%B6"><span class="toc-text">常见的中间件</span></a><ol class="toc-child"><li class="toc-item toc-level-4"><a class="toc-link" href="#%E6%96%87%E6%A1%A3"><span class="toc-text">文档</span></a></li></ol></li></ol>
+    </div>
+  </article>
+  
+  
+  <article class="card card-content">
+    <div class="categories-card">
+  <div class="categories-header"><i class="iconfont icon-fenlei" style="padding-right: 2px;"></i>分类</div>
+  <div class="categories-list">
+    
+      <a href="/categories/nodejs">
+        <div class="categories-list-item">
+          nodejs
+          <span class="categories-list-item-badge">2</span>
+        </div>
+      </a>
+    
+      <a href="/categories/前端">
+        <div class="categories-list-item">
+          前端
+          <span class="categories-list-item-badge">8</span>
+        </div>
+      </a>
+    
+      <a href="/categories/Markdown">
+        <div class="categories-list-item">
+          Markdown
+          <span class="categories-list-item-badge">1</span>
+        </div>
+      </a>
+    
+      <a href="/categories/hexo">
+        <div class="categories-list-item">
+          hexo
+          <span class="categories-list-item-badge">1</span>
+        </div>
+      </a>
+    
+      <a href="/categories/微信小程序">
+        <div class="categories-list-item">
+          微信小程序
+          <span class="categories-list-item-badge">1</span>
+        </div>
+      </a>
+    
+      <a href="/categories/CSS">
+        <div class="categories-list-item">
+          CSS
+          <span class="categories-list-item-badge">1</span>
+        </div>
+      </a>
+    
+  </div>
+</div>
+  </article>
+  
+  <article class="card card-content">
+    <div class="tags-card">
+  <div class="tags-header"><i class="iconfont icon-biaoqian" style="padding-right: 2px;"></i>热门标签</div>
+  <div class="tags-list">
+    
+    <a href="\tags\javascript" title="javascript"><div class="tags-list-item">javascript</div></a>
+    
+    <a href="\tags\html" title="html"><div class="tags-list-item">html</div></a>
+    
+    <a href="\tags\常见问题" title="常见问题"><div class="tags-list-item">常见问题</div></a>
+    
+    <a href="\tags\css" title="css"><div class="tags-list-item">css</div></a>
+    
+    <a href="\tags\微信小程序" title="微信小程序"><div class="tags-list-item">微信小程序</div></a>
+    
+    <a href="\tags\nodejs" title="nodejs"><div class="tags-list-item">nodejs</div></a>
+    
+    <a href="\tags\ES6" title="ES6"><div class="tags-list-item">ES6</div></a>
+    
+    <a href="\tags\博客" title="博客"><div class="tags-list-item">博客</div></a>
+    
+    <a href="\tags\next" title="next"><div class="tags-list-item">next</div></a>
+    
+    <a href="\tags\hexo" title="hexo"><div class="tags-list-item">hexo</div></a>
+    
+    <a href="\tags\笔记" title="笔记"><div class="tags-list-item">笔记</div></a>
+    
+    <a href="\tags\markdown" title="markdown"><div class="tags-list-item">markdown</div></a>
+    
+    <a href="\tags\koa" title="koa"><div class="tags-list-item">koa</div></a>
+    
+    <a href="\tags\mockjs" title="mockjs"><div class="tags-list-item">mockjs</div></a>
+    
+    <a href="\tags\Koa" title="Koa"><div class="tags-list-item">Koa</div></a>
+    
+  </div>
+</div>
+  </article>
+  
+  
+</div>
+          </aside>
+          <aside class="right-column">
+            <div class="sticky-widescreen">
+  
+  
+  <article class="card card-content toc-card">
+    <div class="toc-header"><i class="iconfont icon-menu" style="padding-right: 2px;"></i>目录</div>
+<ol class="toc"><li class="toc-item toc-level-3"><a class="toc-link" href="#%E5%B8%B8%E8%A7%81%E7%9A%84%E4%B8%AD%E9%97%B4%E4%BB%B6"><span class="toc-text">常见的中间件</span></a><ol class="toc-child"><li class="toc-item toc-level-4"><a class="toc-link" href="#%E6%96%87%E6%A1%A3"><span class="toc-text">文档</span></a></li></ol></li></ol>
+  </article>
+  
+  
+  <article class="card card-content">
+    <div class="recent-posts-card">
+  <div class="recent-posts-header"><i class="iconfont icon-wenzhang_huaban" style="padding-right: 2px;"></i>最近文章</div>
+  <div class="recent-posts-list">
+    
+      <div class="recent-posts-item">
+        <div class="recent-posts-item-title">2022-02-12</div>
+        <a href="/2022/02/12/cl06w0wh2000vscsf6rp00ggj/"><div class="recent-posts-item-content">前端面试题</div></a>
+      </div>
+    
+      <div class="recent-posts-item">
+        <div class="recent-posts-item-title">2022-02-10</div>
+        <a href="/2022/02/10/cl06w0wgs0005scsf5itqf2th/"><div class="recent-posts-item-content">Vue</div></a>
+      </div>
+    
+      <div class="recent-posts-item">
+        <div class="recent-posts-item-title">2021-12-28</div>
+        <a href="/2021/12/28/cl06w0wgz000lscsf5pt8gj9g/"><div class="recent-posts-item-content">前端面试题</div></a>
+      </div>
+    
+      <div class="recent-posts-item">
+        <div class="recent-posts-item-title">2021-12-23</div>
+        <a href="/2021/12/23/cl06w0wh1000sscsfhq9kh6j8/"><div class="recent-posts-item-content">Demo_01</div></a>
+      </div>
+    
+  </div>
+</div>
+  </article>
+  
+  
+</div>
+          </aside>
+        </div>
+      </div>
+    </div>
+  </div>
+  
+  <footer class="footer">
+  <div class="footer-container">
+    <div>
+      <div class="footer-dsc">
+        <span>Copyright ©
+          
+          2020 -
+          
+          2022
+        </span>
+        <a href="/" class="footer-link">学习永不止步 </a>
+      </div>
+    </div>
+
+    
+    <div class="footer-dsc">
+      
+      
+      Powered by
+      <a href="https://hexo.io/" class="footer-link" target="_blank" rel="nofollow noopener noreferrer">&nbsp;Hexo </a>
+      
+      
+      <span>&nbsp;|&nbsp;</span>
+      
+      
+      
+      Theme -
+      <a href="https://github.com/theme-kaze" class="footer-link" target="_blank"
+        rel="nofollow noopener noreferrer">&nbsp;Kaze</a>
+      
+    </div>
+    
+    
+    
+    
+</footer>
+  <a role="button" id="scrollbutton" class="basebutton" >
+  <i class="iconfont icon-arrowleft button-icon"></i>
+</a>
+<a role="button" id="menubutton" class="basebutton">
+  <i class="iconfont icon-menu button-icon"></i>
+</a>
+<a role="button" id="popbutton" class="basebutton">
+  <i class="iconfont icon-expand button-icon"></i>
+</a>
+<a role="button" id="darkbutton" class="basebutton darkwidget">
+  <i class="iconfont icon-weather button-icon"></i>
+</a>
+
+  
+  
+  
+  <script>
+  var addImgLayout = function () {
+    var img = document.querySelectorAll('.post-content img');
+    var i;
+    for (i = 0; i < img.length; i++) {
+      var wrapper = document.createElement('a');
+      wrapper.setAttribute('data-fslightbox', 'gallery');
+      wrapper.setAttribute('href', img[i].getAttribute('data-src'));
+      wrapper.setAttribute('style', 'width: 100%; display: flex; justify-content: center;');
+      img[i].parentElement.insertBefore(wrapper, img[i]);
+      wrapper.appendChild(img[i]);
+    }
+    refreshFsLightbox();
+  }
+</script>
+<script>loadScript("//cdn.jsdelivr.net/npm/fslightbox@3.1.0/index.min.js", addImgLayout)</script>
+  
+  
+  
+<script src="/js/main.js"></script>
+
+  
+  
+  <script>
+    var addLazyload = function () {
+      var observer = lozad('.lozad', {
+        load: function (el) {
+          el.srcset = el.getAttribute('data-src');
+        },
+        loaded: function (el) {
+          el.classList.add('loaded');
+        }
+      });
+      observer.observe();
+    }
+  </script>
+  <script>loadScript("/js/lib/lozad.min.js", addLazyload)</script>
+  
+  
+</body>
+
+</html>

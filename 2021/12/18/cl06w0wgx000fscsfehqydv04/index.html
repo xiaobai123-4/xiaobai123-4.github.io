@@ -1,0 +1,582 @@
+<!DOCTYPE html>
+<html>
+<meta  lang="zh-CN" >
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport"
+    content="width=device-width, user-scalable=no, initial-scale=1.0, maximum-scale=1.0, minimum-scale=1.0">
+  <meta http-equiv="X-UA-Compatible" content="ie=edge">
+  <meta name="theme-color" content="#fff" id="theme-color">
+  <link rel="icon" href="https://xiaobai123-4.github.io/image/admin.jpg">
+  <title>学习永不止步</title>
+  <script>
+    // control reverse button
+    var reverseDarkList = {
+      dark: 'light',
+      light: 'dark'
+    };
+    var themeColor = {
+      dark: '#1c1c1e',
+      light: '#fff'
+    }
+    // get the data of css prefers-color-scheme
+    var getCssMediaQuery = function() {
+      return window.matchMedia('(prefers-color-scheme: dark)').matches ? 'dark' : 'light';
+    };
+    // reverse current darkmode setting function
+    var reverseDarkModeSetting = function() {
+      var setting = localStorage.getItem('user-color-scheme');
+      if(reverseDarkList[setting]) {
+        setting = reverseDarkList[setting];
+      } else if(setting === null) {
+        setting = reverseDarkList[getCssMediaQuery()];
+      } else {
+        return;
+      }
+      localStorage.setItem('user-color-scheme', setting);
+      return setting;
+    };
+    // apply current darkmode setting
+    var setDarkmode = function(mode) {
+      var setting = mode || localStorage.getItem('user-color-scheme');
+      if(setting === getCssMediaQuery()) {
+        document.documentElement.removeAttribute('data-user-color-scheme');
+        localStorage.removeItem('user-color-scheme');
+        document.getElementById('theme-color').content = themeColor[setting];
+      } else if(reverseDarkList[setting]) {
+        document.documentElement.setAttribute('data-user-color-scheme', setting);
+        document.getElementById('theme-color').content = themeColor[setting];
+      } else {
+        document.documentElement.removeAttribute('data-user-color-scheme');
+        localStorage.removeItem('user-color-scheme');
+        document.getElementById('theme-color').content = themeColor[getCssMediaQuery()];
+      }
+    };
+    setDarkmode();
+  </script>
+  <script>
+    function loadScript(url, cb) {
+      var script = document.createElement('script');
+      script.src = url;
+      if (cb) script.onload = cb;
+      script.async = true;
+      document.body.appendChild(script);
+    }
+  </script>
+  
+  <link rel="preload" href="//at.alicdn.com/t/font_1946621_vpj3dq9ceqa.css" as="style" >
+  <link rel="preload" href="//at.alicdn.com/t/font_1952792_89b4ac4k4up.css" as="style" >
+  
+  <link rel="preload" href="//cdn.jsdelivr.net/npm/fslightbox@3.1.0/index.min.js" as="script">
+  
+  
+  <link rel="preload" href="/js/lib/lozad.min.js" as="script">
+  
+  
+  
+  
+  
+  
+  
+  
+<link rel="stylesheet" href="/css/main.css">
+
+  
+  
+<link rel="stylesheet" href="//at.alicdn.com/t/font_1946621_vpj3dq9ceqa.css">
+
+  
+  
+<link rel="stylesheet" href="//at.alicdn.com/t/font_1952792_89b4ac4k4up.css">
+
+  
+  
+  
+<meta name="generator" content="Hexo 5.4.0"></head>
+
+
+<body>
+  <div class="wrapper">
+    
+    <nav class="navbar">
+  <div class="navbar-logo">
+    <span class="navbar-logo-main">
+      
+      <img class="navbar-logo-img" src="https://xiaobai123-4.github.io/image/admin.jpg">
+      
+      <span class="navbar-logo-dsc">学习永不止步</span>
+    </span>
+  </div>
+  <div class="navbar-menu">
+    
+    <a href="/" class="navbar-menu-item">首页 </a>
+    
+    <a href="/archives" class="navbar-menu-item">归档 </a>
+    
+    <a href="/tags" class="navbar-menu-item">标签 </a>
+    
+    <a href="/categories" class="navbar-menu-item">分类 </a>
+    
+    <a href="/links" class="navbar-menu-item">友链 </a>
+    
+    <a class="navbar-menu-item darknavbar" id="dark"><i class="iconfont icon-weather"></i></a>
+  </div>
+</nav>
+    
+    <div class="section-wrap">
+      <div class="container">
+        <div class="columns">
+          <main class="main-column">
+<div class="image-wrapper">
+  <img src="https://s4.ax1x.com/2021/12/14/oxowzq.jpg" data-src="https://s4.ax1x.com/2021/12/14/oxowzq.jpg"
+    srcset="data:image/svg+xml,%3Csvg%20xmlns=&#39;http://www.w3.org/2000/svg&#39;%20viewBox=&#39;0%200%20300%20300&#39;%3E%3C/svg%3E"
+    class="image lozad">
+</div>
+
+<article class="card card-content">
+  <header>
+    <h1 class="post-title">
+      javascript基础
+    </h1>
+  </header>
+  <div class="post-meta post-show-meta">
+    <time datetime="2021-12-18T15:07:00.000Z" style="display: flex; align-items: center;">
+      <i class="iconfont icon-calendar" style="margin-right: 2px;"></i>
+      <span>2021-12-18</span>
+    </time>
+    
+    <span class="dot"></span>
+    
+    <a href="/categories/前端/" class="post-meta-link">前端</a>
+    
+    
+    
+    <span class="dot"></span>
+    <span>2.8k 字</span>
+    
+  </div>
+  
+  <div class="post-meta post-show-meta" style="margin-top: -10px;">
+    <div style="display: flex; align-items: center;">
+      <i class="iconfont icon-biaoqian" style="margin-right: 2px; font-size: 1.15rem;"></i>
+      
+      
+        <a href="/tags/javascript/" class="post-meta-link">javascript</a>
+      
+      
+      <span class="dot"></span>
+      
+        <a href="/tags/ES6/" class="post-meta-link">ES6</a>
+      
+    </div>
+  </div>
+  
+  </header>
+  <div id="section" class="post-content">
+    <h2 id="js数据类型"><a href="#js数据类型" class="headerlink" title="js数据类型"></a>js数据类型</h2><h3 id="原始类型"><a href="#原始类型" class="headerlink" title="原始类型"></a>原始类型</h3><pre class="highlight"><span class="line">null 空值</span><br><span class="line">undefind 未定义(类型和值都是他自己)</span><br><span class="line">String 字符串</span><br><span class="line">Number 数值</span><br><span class="line">symbol 符号</span><br><span class="line">boolean 布尔 true/false</span><br></pre>
+
+<h3 id="复杂数据类型"><a href="#复杂数据类型" class="headerlink" title="复杂数据类型"></a>复杂数据类型</h3><pre class="highlight"><span class="line">object</span><br></pre>
+
+<h3 id="判断类型的方法"><a href="#判断类型的方法" class="headerlink" title="判断类型的方法"></a>判断类型的方法</h3><pre class="highlight"><span class="line">typeof // 判断一个值属于哪种基本类型。其中特殊的有null==&gt;object,function==&gt;function</span><br><span class="line">instanceof //用于检测复杂类型,检测构造函数的 prototype 是否出现在被检测对象的原型链上</span><br></pre>
+
+
+<h2 id="js其他常识"><a href="#js其他常识" class="headerlink" title="js其他常识"></a>js其他常识</h2><h3 id="JS原始弹窗类型"><a href="#JS原始弹窗类型" class="headerlink" title="JS原始弹窗类型"></a>JS原始弹窗类型</h3><pre class="highlight"><span class="line">警告窗口     alert(&#x27;产生错误&#x27;)     </span><br><span class="line">确认窗口     confirm(&#x27;确定要提交吗&#x27;)   </span><br><span class="line">信息输入窗口  prompt(&#x27;请输入SVN密码&#x27;)  </span><br></pre>
+
+<h3 id="数值中最大最小值"><a href="#数值中最大最小值" class="headerlink" title="数值中最大最小值"></a>数值中最大最小值</h3><pre class="highlight"><span class="line">var arr = [1, 3, 2]</span><br><span class="line"></span><br><span class="line">1. 第一种</span><br><span class="line">    Math.max(...arr) // 3</span><br><span class="line">    Math.min(...arr) // 1</span><br><span class="line">2. 第二种</span><br><span class="line">    var result = arr.sort(function(a,b)&#123;return a-b&#125;)</span><br><span class="line">    result[result.length-1] // 3</span><br><span class="line">    result[0] // 1</span><br></pre>
+
+<h3 id="常见阻止行为"><a href="#常见阻止行为" class="headerlink" title="常见阻止行为"></a>常见阻止行为</h3><pre class="highlight"><span class="line">//阻止默认行为</span><br><span class="line">event.returnValue = false //IE</span><br><span class="line">event.preventDefault()  //标准</span><br><span class="line"></span><br><span class="line">//阻止事件冒泡</span><br><span class="line">event.cancelBubble = true //IE</span><br><span class="line">event.stopPropagation() //标准</span><br><span class="line"></span><br><span class="line">//获取事件对象target</span><br><span class="line">event.srcElement //IE</span><br><span class="line">event.target //标准</span><br></pre>
+
+<h2 id="Array-from"><a href="#Array-from" class="headerlink" title="Array.from"></a>Array.from</h2><p>​    将一个类数组对象或者可遍历对象转换成一个真正的数组。最基本的要求是有length,按数组下表排列好,没有的地方会填充undefined</p>
+<p>​    举例：</p>
+<pre class="highlight"><span class="line">let obj=&#123;0:1,1:2,2:3,3:4,length:4&#125;</span><br><span class="line">// 将这个类数组转成==》[ &#123;No:1,id:1&#125;,... ]</span><br><span class="line">console.log(</span><br><span class="line">	// 大多数数组的方法都可遍历，以及改变this的奇效  第三个参数用于拓展</span><br><span class="line">    Array.from(obj,(item,key)=&gt;&#123;</span><br><span class="line">        return &#123;No:this.prefix+item,order:key&#125;</span><br><span class="line">    &#125;,&#123;prefix:&quot;No.&quot;&#125;)</span><br><span class="line"></span><br><span class="line">)</span><br></pre>
+
+
+<h2 id="Object-keys-Object-getOwnPropertyNames"><a href="#Object-keys-Object-getOwnPropertyNames" class="headerlink" title="Object.keys / Object.getOwnPropertyNames"></a>Object.keys / Object.getOwnPropertyNames</h2><p>抽取对象的键值</p>
+<p><code>Object.keys</code>抽取可枚举属性</p>
+<p><code>Object.getOwnPropertyNames</code> 忽略属性描述符(descriptor)</p>
+<blockquote>
+<p>属性描述符(descriptor) </p>
+<ul>
+<li><code>configurable</code>: <strong>是否可删除</strong></li>
+<li><code>enumerable</code>: <strong>是否可枚举(遍历)</strong></li>
+<li><code>value</code>: <strong>属性值</strong></li>
+<li><code>writable</code>: <strong>是否可修改</strong></li>
+</ul>
+</blockquote>
+<h2 id="稀疏数组"><a href="#稀疏数组" class="headerlink" title="稀疏数组"></a>稀疏数组</h2><pre class="highlight"><span class="line">const arr=[1,2,3,,4,,,5]</span><br><span class="line">// 查找数组中的元素</span><br><span class="line">arr.find(item=&gt;&#123;console.log(item)&#125;)</span><br><span class="line"></span><br><span class="line">// 找有效的元素</span><br><span class="line">arr.forEach(item=&gt;&#123;console.log(item)&#125;)</span><br></pre>
+
+<h2 id="浅拷贝"><a href="#浅拷贝" class="headerlink" title="浅拷贝"></a>浅拷贝</h2><p>只能拷贝对象的第一层</p>
+<pre class="highlight"><span class="line">// let obj=&#123;</span><br><span class="line">// 	data:&#123;</span><br><span class="line">// 		name:&quot;Tom&quot;</span><br><span class="line">// 	&#125;</span><br><span class="line">// &#125;</span><br><span class="line">// let copy_obj=</span><br><span class="line">// &#123;...obj&#125;</span><br><span class="line">// Object.assign(&#123;&#125;,obj)</span><br><span class="line">// console.log(copy_obj===obj)</span><br><span class="line"></span><br><span class="line">// let arr=[1,2,3,4,5]</span><br><span class="line">// let copy_arr=</span><br><span class="line">// [].concat(arr)</span><br><span class="line">// arr.slice()</span><br><span class="line">// [...arr]</span><br><span class="line">// Array.from(arr)</span><br><span class="line">// console.log(copy_arr===arr)</span><br></pre>
+
+<h4 id="deepclone-深拷贝"><a href="#deepclone-深拷贝" class="headerlink" title="deepclone 深拷贝"></a>deepclone 深拷贝</h4><pre class="highlight"><span class="line">json.parse(<span class="built_in">JSON</span>.stringify(obj))</span><br></pre>
+
+
+
+<h3 id="重写"><a href="#重写" class="headerlink" title="重写"></a>重写</h3><h4 id="ForEach-循环"><a href="#ForEach-循环" class="headerlink" title="ForEach (循环)"></a>ForEach (循环)</h4><pre class="highlight"><span class="line"><span class="keyword">let</span> arr=[</span><br><span class="line">    &#123;<span class="attr">name</span>:<span class="string">&quot;aa&quot;</span>,<span class="attr">age</span>:<span class="number">12</span>&#125;,</span><br><span class="line">    &#123;<span class="attr">name</span>:<span class="string">&quot;bb&quot;</span>,<span class="attr">age</span>:<span class="number">13</span>&#125;,</span><br><span class="line">    &#123;<span class="attr">name</span>:<span class="string">&quot;cc&quot;</span>,<span class="attr">age</span>:<span class="number">14</span>&#125;,</span><br><span class="line">    &#123;<span class="attr">name</span>:<span class="string">&quot;dd&quot;</span>,<span class="attr">age</span>:<span class="number">15</span>&#125;,</span><br><span class="line">    &#123;<span class="attr">name</span>:<span class="string">&quot;ee&quot;</span>,<span class="attr">age</span>:<span class="number">16</span>&#125;,</span><br><span class="line">    &#123;<span class="attr">name</span>:<span class="string">&quot;ff&quot;</span>,<span class="attr">age</span>:<span class="number">17</span>&#125;,</span><br><span class="line">]</span><br><span class="line"></span><br><span class="line"><span class="keyword">let</span> obj=&#123;</span><br><span class="line">    <span class="attr">name</span>:<span class="string">&quot;Jake&quot;</span>,</span><br><span class="line">    <span class="attr">age</span>:<span class="number">10</span></span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line">arr.forEach(<span class="function"><span class="keyword">function</span> (<span class="params">item,key,array</span>)</span>&#123;</span><br><span class="line">    <span class="built_in">console</span>.log(<span class="built_in">this</span>)</span><br><span class="line">    <span class="built_in">console</span>.log(item,key,array)</span><br><span class="line">&#125;,obj)</span><br><span class="line"></span><br><span class="line"></span><br><span class="line"><span class="built_in">Array</span>.prototype.myForEach=<span class="function"><span class="keyword">function</span>(<span class="params">cb</span>)</span>&#123;</span><br><span class="line">    <span class="keyword">var</span> _arr=<span class="built_in">this</span></span><br><span class="line">    <span class="keyword">var</span> _len=_arr.length</span><br><span class="line">    <span class="keyword">var</span> _arg2=<span class="built_in">arguments</span>[<span class="number">1</span>] || <span class="built_in">window</span></span><br><span class="line">    <span class="keyword">for</span>(<span class="keyword">var</span> i=<span class="number">0</span>;i&lt;_len;i++)&#123;</span><br><span class="line">        cb.apply(_arg2,[_arr[i],i,_arr]);</span><br><span class="line">    &#125;</span><br><span class="line">&#125;</span><br><span class="line"><span class="built_in">console</span>.log(<span class="string">&quot;----&quot;</span>)</span><br><span class="line">arr.myForEach(<span class="function"><span class="keyword">function</span> (<span class="params">item,key,array</span>)</span>&#123;</span><br><span class="line">    <span class="built_in">console</span>.log(<span class="built_in">this</span>)</span><br><span class="line">    <span class="built_in">console</span>.log(item,key,array)</span><br><span class="line">&#125;,obj)</span><br></pre>
+
+
+
+<h4 id="Map-映射"><a href="#Map-映射" class="headerlink" title="Map (映射)"></a>Map (映射)</h4><pre class="highlight"><span class="line"><span class="keyword">let</span> arr=[</span><br><span class="line">    &#123;<span class="attr">name</span>:<span class="string">&quot;aa&quot;</span>,<span class="attr">age</span>:<span class="number">12</span>&#125;,</span><br><span class="line">    &#123;<span class="attr">name</span>:<span class="string">&quot;bb&quot;</span>,<span class="attr">age</span>:<span class="number">13</span>&#125;,</span><br><span class="line">    &#123;<span class="attr">name</span>:<span class="string">&quot;cc&quot;</span>,<span class="attr">age</span>:<span class="number">14</span>&#125;,</span><br><span class="line">    &#123;<span class="attr">name</span>:<span class="string">&quot;dd&quot;</span>,<span class="attr">age</span>:<span class="number">15</span>&#125;,</span><br><span class="line">    &#123;<span class="attr">name</span>:<span class="string">&quot;ee&quot;</span>,<span class="attr">age</span>:<span class="number">16</span>&#125;,</span><br><span class="line">    &#123;<span class="attr">name</span>:<span class="string">&quot;ff&quot;</span>,<span class="attr">age</span>:<span class="number">17</span>&#125;,</span><br><span class="line">]</span><br><span class="line"></span><br><span class="line"><span class="keyword">let</span> obj=&#123;</span><br><span class="line">    <span class="attr">name</span>:<span class="string">&quot;Jake&quot;</span>,</span><br><span class="line">    <span class="attr">age</span>:<span class="number">10</span></span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line"><span class="keyword">let</span> newArr1=arr.map(<span class="function"><span class="keyword">function</span> (<span class="params">item,key,array</span>)</span>&#123;</span><br><span class="line">    <span class="comment">// console.log(item,key,array)</span></span><br><span class="line">    <span class="keyword">return</span> item</span><br><span class="line">&#125;,obj)</span><br><span class="line"></span><br><span class="line"></span><br><span class="line"></span><br><span class="line"><span class="built_in">Array</span>.prototype.myMap=<span class="function"><span class="keyword">function</span>(<span class="params">cb</span>)</span>&#123;</span><br><span class="line">    <span class="keyword">var</span> _arr=<span class="built_in">this</span></span><br><span class="line">    <span class="keyword">var</span> _len=_arr.length</span><br><span class="line">    <span class="keyword">var</span> _arg2=<span class="built_in">arguments</span>[<span class="number">1</span>] || <span class="built_in">window</span></span><br><span class="line">    <span class="keyword">let</span> _newArr=[]</span><br><span class="line">    <span class="keyword">var</span> _item;</span><br><span class="line">    <span class="keyword">for</span>(<span class="keyword">var</span> i=<span class="number">0</span>;i&lt;_len;i++)&#123;</span><br><span class="line">        _item=&#123;..._arr[i]&#125;</span><br><span class="line">        cb.apply(_arg2,[arr[i],i,_arr]) &amp;&amp; _newArr.push(cb.apply(_arg2,[_item,i,_arr]));</span><br><span class="line">    &#125;</span><br><span class="line">    <span class="keyword">return</span> _newArr</span><br><span class="line">&#125;</span><br><span class="line"><span class="built_in">console</span>.log(<span class="string">&quot;----&quot;</span>)</span><br><span class="line"><span class="keyword">let</span> newArr2=arr.myMap(<span class="function"><span class="keyword">function</span> (<span class="params">item,key,array</span>)</span>&#123;</span><br><span class="line">    <span class="comment">// console.log(item,key,array)</span></span><br><span class="line">    item.age=<span class="built_in">this</span>.age</span><br><span class="line">    <span class="keyword">return</span> item</span><br><span class="line">&#125;,obj)</span><br><span class="line"><span class="built_in">console</span>.log(newArr2)</span><br></pre>
+
+
+
+<h4 id="filter"><a href="#filter" class="headerlink" title="filter"></a>filter</h4><pre class="highlight"><span class="line"><span class="keyword">let</span> arr=[</span><br><span class="line">    &#123;<span class="attr">name</span>:<span class="string">&quot;aa&quot;</span>,<span class="attr">age</span>:<span class="number">12</span>&#125;,</span><br><span class="line">    &#123;<span class="attr">name</span>:<span class="string">&quot;bb&quot;</span>,<span class="attr">age</span>:<span class="number">13</span>&#125;,</span><br><span class="line">    &#123;<span class="attr">name</span>:<span class="string">&quot;cc&quot;</span>,<span class="attr">age</span>:<span class="number">14</span>&#125;,</span><br><span class="line">    &#123;<span class="attr">name</span>:<span class="string">&quot;dd&quot;</span>,<span class="attr">age</span>:<span class="number">15</span>&#125;,</span><br><span class="line">    &#123;<span class="attr">name</span>:<span class="string">&quot;ee&quot;</span>,<span class="attr">age</span>:<span class="number">16</span>&#125;,</span><br><span class="line">    &#123;<span class="attr">name</span>:<span class="string">&quot;ff&quot;</span>,<span class="attr">age</span>:<span class="number">17</span>&#125;,</span><br><span class="line">]</span><br><span class="line"></span><br><span class="line"><span class="keyword">let</span> obj=&#123;</span><br><span class="line">    <span class="attr">name</span>:<span class="string">&quot;Jake&quot;</span>,</span><br><span class="line">    <span class="attr">age</span>:<span class="number">10</span></span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line"><span class="keyword">let</span> newArr1=arr.filter(<span class="function"><span class="keyword">function</span> (<span class="params">item,key,array</span>)</span>&#123;</span><br><span class="line">    <span class="comment">// console.log(item,key,array)</span></span><br><span class="line">    <span class="keyword">return</span> item.age&gt;<span class="number">15</span></span><br><span class="line">&#125;,obj)</span><br><span class="line"></span><br><span class="line"></span><br><span class="line"></span><br><span class="line"><span class="built_in">Array</span>.prototype.myFilter=<span class="function"><span class="keyword">function</span>(<span class="params">cb</span>)</span>&#123;</span><br><span class="line">    <span class="keyword">var</span> _arr=<span class="built_in">this</span></span><br><span class="line">    <span class="keyword">var</span> _len=_arr.length</span><br><span class="line">    <span class="keyword">var</span> _arg2=<span class="built_in">arguments</span>[<span class="number">1</span>] || <span class="built_in">window</span></span><br><span class="line">    <span class="keyword">let</span> _newArr=[]</span><br><span class="line">    <span class="keyword">var</span> _item;</span><br><span class="line">    <span class="keyword">for</span>(<span class="keyword">var</span> i=<span class="number">0</span>;i&lt;_len;i++)&#123;</span><br><span class="line">        _item=&#123;..._arr[i]&#125;</span><br><span class="line">        cb.apply(_arg2,[_item,i,_arr]) &amp;&amp; _newArr.push(_item);</span><br><span class="line">    &#125;</span><br><span class="line">    <span class="keyword">return</span> _newArr</span><br><span class="line">&#125;</span><br><span class="line"><span class="built_in">console</span>.log(<span class="string">&quot;----&quot;</span>)</span><br><span class="line"><span class="keyword">let</span> newArr2=arr.myFilter(<span class="function"><span class="keyword">function</span> (<span class="params">item,key,array</span>)</span>&#123;</span><br><span class="line">    <span class="comment">// console.log(item,key,array)</span></span><br><span class="line">    <span class="keyword">return</span> item.age&gt;<span class="number">15</span></span><br><span class="line">&#125;,obj)</span><br><span class="line"><span class="built_in">console</span>.log(newArr2) </span><br></pre>
+
+
+
+<h4 id="every"><a href="#every" class="headerlink" title="every"></a>every</h4><pre class="highlight"><span class="line"><span class="keyword">let</span> arr=[</span><br><span class="line">    &#123;<span class="attr">name</span>:<span class="string">&quot;aa&quot;</span>,<span class="attr">age</span>:<span class="number">12</span>&#125;,</span><br><span class="line">    &#123;<span class="attr">name</span>:<span class="string">&quot;bb&quot;</span>,<span class="attr">age</span>:<span class="number">13</span>&#125;,</span><br><span class="line">    &#123;<span class="attr">name</span>:<span class="string">&quot;cc&quot;</span>,<span class="attr">age</span>:<span class="number">14</span>&#125;,</span><br><span class="line">    &#123;<span class="attr">name</span>:<span class="string">&quot;dd&quot;</span>,<span class="attr">age</span>:<span class="number">15</span>&#125;,</span><br><span class="line">    &#123;<span class="attr">name</span>:<span class="string">&quot;ee&quot;</span>,<span class="attr">age</span>:<span class="number">16</span>&#125;,</span><br><span class="line">    &#123;<span class="attr">name</span>:<span class="string">&quot;ff&quot;</span>,<span class="attr">age</span>:<span class="number">17</span>&#125;,</span><br><span class="line">]</span><br><span class="line"></span><br><span class="line"><span class="keyword">let</span> obj=&#123;</span><br><span class="line">    <span class="attr">name</span>:<span class="string">&quot;Jake&quot;</span>,</span><br><span class="line">    <span class="attr">age</span>:<span class="number">10</span></span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line"><span class="keyword">let</span> newArr1=arr.every(<span class="function"><span class="keyword">function</span> (<span class="params">item,key,array</span>)</span>&#123;</span><br><span class="line">    <span class="comment">// console.log(item,key,array)</span></span><br><span class="line">    <span class="keyword">return</span> item.age&gt;<span class="number">12</span></span><br><span class="line">&#125;,obj)</span><br><span class="line"><span class="built_in">console</span>.log(newArr1)</span><br><span class="line"></span><br><span class="line"></span><br><span class="line"></span><br><span class="line"><span class="built_in">Array</span>.prototype.myEvery=<span class="function"><span class="keyword">function</span>(<span class="params">cb</span>)</span>&#123;</span><br><span class="line">    <span class="keyword">var</span> _arr=<span class="built_in">this</span></span><br><span class="line">    <span class="keyword">var</span> _len=_arr.length</span><br><span class="line">    <span class="keyword">var</span> _arg2=<span class="built_in">arguments</span>[<span class="number">1</span>] || <span class="built_in">window</span></span><br><span class="line"></span><br><span class="line">    <span class="keyword">for</span>(<span class="keyword">var</span> i=<span class="number">0</span>;i&lt;_len;i++)&#123;</span><br><span class="line">        <span class="keyword">if</span>(!cb.apply(_arg2,[_arr[i],i,_arr]))&#123;</span><br><span class="line">            <span class="keyword">return</span> <span class="literal">false</span></span><br><span class="line">        &#125;</span><br><span class="line">    &#125;</span><br><span class="line">    <span class="keyword">return</span> <span class="literal">true</span></span><br><span class="line">&#125;</span><br><span class="line"><span class="built_in">console</span>.log(<span class="string">&quot;----&quot;</span>)</span><br><span class="line"><span class="keyword">let</span> newArr2=arr.myEvery(<span class="function"><span class="keyword">function</span> (<span class="params">item,key,array</span>)</span>&#123;</span><br><span class="line">    <span class="comment">// console.log(item,key,array)</span></span><br><span class="line">    <span class="keyword">return</span> item.age&lt;<span class="number">20</span></span><br><span class="line">&#125;,obj)</span><br><span class="line"><span class="built_in">console</span>.log(newArr2)</span><br></pre>
+
+<h4 id="some"><a href="#some" class="headerlink" title="some"></a>some</h4><pre class="highlight"><span class="line"><span class="keyword">let</span> arr=[</span><br><span class="line">    &#123;<span class="attr">name</span>:<span class="string">&quot;aa&quot;</span>,<span class="attr">age</span>:<span class="number">12</span>&#125;,</span><br><span class="line">    &#123;<span class="attr">name</span>:<span class="string">&quot;bb&quot;</span>,<span class="attr">age</span>:<span class="number">13</span>&#125;,</span><br><span class="line">    &#123;<span class="attr">name</span>:<span class="string">&quot;cc&quot;</span>,<span class="attr">age</span>:<span class="number">14</span>&#125;,</span><br><span class="line">    &#123;<span class="attr">name</span>:<span class="string">&quot;dd&quot;</span>,<span class="attr">age</span>:<span class="number">15</span>&#125;,</span><br><span class="line">    &#123;<span class="attr">name</span>:<span class="string">&quot;ee&quot;</span>,<span class="attr">age</span>:<span class="number">16</span>&#125;,</span><br><span class="line">    &#123;<span class="attr">name</span>:<span class="string">&quot;ff&quot;</span>,<span class="attr">age</span>:<span class="number">17</span>&#125;,</span><br><span class="line">]</span><br><span class="line"></span><br><span class="line"><span class="keyword">let</span> obj=&#123;</span><br><span class="line">    <span class="attr">name</span>:<span class="string">&quot;Jake&quot;</span>,</span><br><span class="line">    <span class="attr">age</span>:<span class="number">10</span></span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line"><span class="keyword">let</span> newArr1=arr.some(<span class="function"><span class="keyword">function</span> (<span class="params">item,key,array</span>)</span>&#123;</span><br><span class="line">    <span class="comment">// console.log(item,key,array)</span></span><br><span class="line">    <span class="keyword">return</span> item.age&gt;<span class="number">12</span></span><br><span class="line">&#125;,obj)</span><br><span class="line"><span class="built_in">console</span>.log(newArr1)</span><br><span class="line"></span><br><span class="line"></span><br><span class="line"></span><br><span class="line"><span class="built_in">Array</span>.prototype.mySome=<span class="function"><span class="keyword">function</span>(<span class="params">cb</span>)</span>&#123;</span><br><span class="line">    <span class="keyword">var</span> _arr=<span class="built_in">this</span></span><br><span class="line">    <span class="keyword">var</span> _len=_arr.length</span><br><span class="line">    <span class="keyword">var</span> _arg2=<span class="built_in">arguments</span>[<span class="number">1</span>] || <span class="built_in">window</span></span><br><span class="line"></span><br><span class="line">    <span class="keyword">for</span>(<span class="keyword">var</span> i=<span class="number">0</span>;i&lt;_len;i++)&#123;</span><br><span class="line">        <span class="keyword">if</span>(cb.apply(_arg2,[_arr[i],i,_arr]))&#123;</span><br><span class="line">            <span class="keyword">return</span> <span class="literal">true</span></span><br><span class="line">        &#125;</span><br><span class="line">    &#125;</span><br><span class="line">    <span class="keyword">return</span> <span class="literal">false</span></span><br><span class="line">&#125;</span><br><span class="line"><span class="built_in">console</span>.log(<span class="string">&quot;----&quot;</span>)</span><br><span class="line"><span class="keyword">let</span> newArr2=arr.mySome(<span class="function"><span class="keyword">function</span> (<span class="params">item,key,array</span>)</span>&#123;</span><br><span class="line">    <span class="comment">// console.log(item,key,array)</span></span><br><span class="line">    <span class="keyword">return</span> item.age&lt;<span class="number">20</span></span><br><span class="line">&#125;,obj)</span><br><span class="line"><span class="built_in">console</span>.log(newArr2)</span><br></pre>
+
+<h4 id="reduce-reduceRight"><a href="#reduce-reduceRight" class="headerlink" title="reduce reduceRight"></a>reduce reduceRight</h4><pre class="highlight"><span class="line"><span class="keyword">let</span> arr=[</span><br><span class="line">    &#123;<span class="attr">name</span>:<span class="string">&quot;aa&quot;</span>,<span class="attr">age</span>:<span class="number">12</span>&#125;,</span><br><span class="line">    &#123;<span class="attr">name</span>:<span class="string">&quot;bb&quot;</span>,<span class="attr">age</span>:<span class="number">13</span>&#125;,</span><br><span class="line">    &#123;<span class="attr">name</span>:<span class="string">&quot;cc&quot;</span>,<span class="attr">age</span>:<span class="number">14</span>&#125;,</span><br><span class="line">    &#123;<span class="attr">name</span>:<span class="string">&quot;dd&quot;</span>,<span class="attr">age</span>:<span class="number">15</span>&#125;,</span><br><span class="line">    &#123;<span class="attr">name</span>:<span class="string">&quot;ee&quot;</span>,<span class="attr">age</span>:<span class="number">16</span>&#125;,</span><br><span class="line">    &#123;<span class="attr">name</span>:<span class="string">&quot;ff&quot;</span>,<span class="attr">age</span>:<span class="number">17</span>&#125;,</span><br><span class="line">]</span><br><span class="line"></span><br><span class="line"><span class="keyword">let</span> initArr=[</span><br><span class="line">    &#123;</span><br><span class="line">        <span class="attr">name</span>:<span class="string">&quot;Jake&quot;</span>,</span><br><span class="line">        <span class="attr">age</span>:<span class="number">10</span></span><br><span class="line">    &#125;</span><br><span class="line">]</span><br><span class="line"></span><br><span class="line"><span class="comment">// let newArr1=arr.reduce(function (prev,item,key,array)&#123;</span></span><br><span class="line"><span class="comment">//     // console.log(item,key,array)</span></span><br><span class="line"><span class="comment">//     item.age &lt;=15 &amp;&amp; prev.push(item)</span></span><br><span class="line"><span class="comment">//     return prev</span></span><br><span class="line"><span class="comment">// &#125;,initArr)</span></span><br><span class="line"><span class="comment">// console.log(newArr1)</span></span><br><span class="line"></span><br><span class="line"><span class="built_in">Array</span>.prototype.myReduce=<span class="function"><span class="keyword">function</span>(<span class="params">cb,initValue</span>)</span>&#123;</span><br><span class="line">    <span class="built_in">console</span>.log(cb)</span><br><span class="line">    <span class="keyword">var</span> _arr=<span class="built_in">this</span>;</span><br><span class="line">    <span class="keyword">var</span> _len=_arr.length;</span><br><span class="line">    <span class="keyword">var</span> _arg3=<span class="built_in">arguments</span>[<span class="number">2</span>] || <span class="built_in">window</span>;</span><br><span class="line">    <span class="keyword">var</span> _item;</span><br><span class="line"></span><br><span class="line">    <span class="comment">// reduceRight就是反向遍历  for(let i =_len;i&gt;=0;i--)</span></span><br><span class="line">    <span class="keyword">for</span>(<span class="keyword">let</span> i =<span class="number">0</span>;i&lt;_len;i++)&#123;</span><br><span class="line">        _item=&#123;..._arr[i]&#125;</span><br><span class="line">        initValue=cb.apply(_arg3,[initValue,_item,i,_arr])</span><br><span class="line">    &#125;</span><br><span class="line">    <span class="keyword">return</span> initValue</span><br><span class="line"></span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line"><span class="keyword">let</span> arr3=arr.myReduce(<span class="function"><span class="keyword">function</span> (<span class="params">prev,item,key,array</span>)</span>&#123;</span><br><span class="line">    <span class="comment">// console.log(item,key,array)</span></span><br><span class="line">    item.age &lt;=<span class="number">15</span> &amp;&amp; prev.push(item)</span><br><span class="line">    <span class="keyword">return</span> prev</span><br><span class="line">&#125;,initArr,initArr)</span><br><span class="line"></span><br><span class="line"><span class="built_in">console</span>.log(arr3)</span><br></pre>
+
+<h3 id="图片懒加载"><a href="#图片懒加载" class="headerlink" title="图片懒加载"></a>图片懒加载</h3><pre class="highlight"><span class="line"><span class="comment">// 找到所有img</span></span><br><span class="line"><span class="keyword">let</span> images = <span class="built_in">document</span>.querySelectorAll(<span class="string">&#x27;img&#x27;</span>)</span><br><span class="line"><span class="comment">// 是否进入到可视区域</span></span><br><span class="line"><span class="keyword">const</span> callback = <span class="function"><span class="params">entries</span> =&gt;</span> &#123;</span><br><span class="line">    <span class="built_in">console</span>.log(entries, <span class="string">&quot;触发&quot;</span>)</span><br><span class="line">    entries.forEach(<span class="function"><span class="params">option</span> =&gt;</span> &#123;</span><br><span class="line">        <span class="keyword">if</span> (option.isIntersecting) &#123;</span><br><span class="line">            <span class="keyword">const</span> image = option.target;</span><br><span class="line">            <span class="keyword">const</span> data_src = image.getAttribute(<span class="string">&#x27;data-src&#x27;</span>);</span><br><span class="line">            image.setAttribute(<span class="string">&#x27;src&#x27;</span>, data_src)</span><br><span class="line">            observer.unobserve(image);</span><br><span class="line">        &#125;</span><br><span class="line">    &#125;)</span><br><span class="line">&#125;</span><br><span class="line"><span class="keyword">const</span> observer = <span class="keyword">new</span> IntersectionObserver(callback)</span><br><span class="line"><span class="comment">// 考虑兼容性</span></span><br><span class="line"><span class="keyword">if</span> (observer) &#123;</span><br><span class="line">    images.forEach(<span class="function"><span class="params">v</span> =&gt;</span> &#123;</span><br><span class="line">        observer.observe(v)</span><br><span class="line">    &#125;)</span><br><span class="line">&#125; <span class="keyword">else</span> &#123;</span><br><span class="line">    <span class="comment">// 事件监听</span></span><br><span class="line">    <span class="built_in">window</span>.addEventListener(<span class="string">&#x27;scroll&#x27;</span>, <span class="function">(<span class="params">e</span>) =&gt;</span> &#123;</span><br><span class="line">        images.forEach(<span class="function"><span class="params">image</span> =&gt;</span> &#123;</span><br><span class="line">            <span class="keyword">const</span> imageTop = image.getBoundingClientRect().top;</span><br><span class="line">            <span class="keyword">if</span> (imageTop &lt; <span class="built_in">window</span>.innerHeight) &#123;</span><br><span class="line">                <span class="keyword">const</span> data_src = image.getAttribute(<span class="string">&#x27;data-src&#x27;</span>);</span><br><span class="line">                image.setAttribute(<span class="string">&#x27;src&#x27;</span>, data_src)</span><br><span class="line">            &#125;</span><br><span class="line">        &#125;)</span><br><span class="line">    &#125;)</span><br><span class="line">&#125;</span><br></pre>
+
+
+<h3 id="微任务和宏任务"><a href="#微任务和宏任务" class="headerlink" title="微任务和宏任务"></a>微任务和宏任务</h3><blockquote>
+<p>问题引入：实现一个setTimeout 同步的方法</p>
+<pre class="highlight"><span class="line">function sleep(second) &#123;</span><br><span class="line">	return new Promise((resolve, reject) =&gt; &#123;</span><br><span class="line"> 		setTimeout(() =&gt; &#123; resolve(&#x27;&#x27;)&#125;, second * 1000)</span><br><span class="line">	&#125;)</span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line">(async () =&gt; &#123;</span><br><span class="line">   console.log(new Date().toLocaleString())</span><br><span class="line">   await sleep(2)</span><br><span class="line">   console.log(new Date().toLocaleString())</span><br><span class="line">&#125;)()</span><br></pre>
+</blockquote>
+<p>js执行：微任务+宏任务</p>
+<p>javascript是单线程处理函数，一个<strong>任务</strong>就是指计划由标准机制来执行的任何 JavaScript，如程序的初始化、事件触发的回调等。 除了使用事件，你还可以使用 <a target="_blank" rel="noopener" href="https://developer.mozilla.org/zh-CN/docs/Web/API/setTimeout"><code>setTimeout()</code></a> 或者 <a target="_blank" rel="noopener" href="https://developer.mozilla.org/zh-CN/docs/Web/API/setInterval"><code>setInterval()</code></a> 来添加任务<strong>。</strong></p>
+<p>任务队列和微任务队列的区别很简单，但却很重要：</p>
+<ul>
+<li>当执行来自任务队列中的任务时，在每一次新的事件循环开始迭代的时候运行时都会执行队列中的每个任务。在每次迭代开始之后加入到队列中的任务需要<strong>在下一次迭代开始之后才会被执行</strong>.</li>
+<li>每次当一个任务退出且执行上下文为空的时候，微任务队列中的每一个微任务会依次被执行。不同的是它会等到微任务队列为空才会停止执行——即使中途有微任务加入。换句话说，微任务可以添加新的微任务到队列中，并在下一个任务开始执行之前且当前事件循环结束之前执行完所有的微任务。</li>
+</ul>
+<h3 id="防抖-同一个操作防止重复操作"><a href="#防抖-同一个操作防止重复操作" class="headerlink" title="防抖 同一个操作防止重复操作"></a>防抖 同一个操作防止重复操作</h3><pre class="highlight"><span class="line"><span class="function"><span class="keyword">function</span> <span class="title">throttle</span>(<span class="params">fun, delay</span>) </span>&#123;</span><br><span class="line">        <span class="keyword">let</span> timer;</span><br><span class="line">        <span class="keyword">let</span> pre = <span class="number">0</span></span><br><span class="line">        <span class="keyword">return</span> <span class="function"><span class="keyword">function</span> (<span class="params"></span>) </span>&#123;</span><br><span class="line">            <span class="keyword">let</span> arg = <span class="built_in">arguments</span>;</span><br><span class="line">            <span class="keyword">let</span> that = <span class="built_in">this</span></span><br><span class="line">            </span><br><span class="line">			<span class="comment">// 第一种 setTimeout</span></span><br><span class="line">            <span class="keyword">if</span> (timer) &#123;</span><br><span class="line">                <span class="keyword">return</span>;</span><br><span class="line">            &#125; <span class="keyword">else</span> &#123;</span><br><span class="line">                timer = <span class="built_in">setTimeout</span>(<span class="function"><span class="keyword">function</span>(<span class="params"></span>)</span>&#123;</span><br><span class="line">                    fun.apply(that, arg);</span><br><span class="line">                    timer = <span class="literal">null</span></span><br><span class="line">                &#125;, delay)</span><br><span class="line">            &#125;</span><br><span class="line">            </span><br><span class="line">			<span class="comment">// 第二种 时间差</span></span><br><span class="line">            <span class="comment">// let now=new Date()</span></span><br><span class="line">            <span class="comment">// console.log(now - pre,delay)</span></span><br><span class="line">            <span class="comment">// console.log(&quot;-------&quot;)</span></span><br><span class="line">            <span class="comment">// if(now - pre &gt; delay)&#123;</span></span><br><span class="line">            <span class="comment">//     console.log(&quot;运行&quot;)</span></span><br><span class="line">            <span class="comment">//     fun.apply(that, arg);</span></span><br><span class="line">            <span class="comment">//     pre=now</span></span><br><span class="line">            <span class="comment">// &#125;</span></span><br><span class="line">        &#125;</span><br><span class="line">    &#125;</span><br><span class="line">    </span><br></pre>
+
+<h3 id="节流-防止多次请求"><a href="#节流-防止多次请求" class="headerlink" title="节流 防止多次请求"></a>节流 防止多次请求</h3><pre class="highlight"><span class="line"><span class="function"><span class="keyword">function</span> <span class="title">debounce</span>(<span class="params">fun,delay</span>)</span>&#123;</span><br><span class="line">    <span class="keyword">let</span> timer;</span><br><span class="line">    <span class="keyword">return</span> <span class="function"><span class="keyword">function</span> (<span class="params"></span>) </span>&#123;</span><br><span class="line">        <span class="built_in">clearTimeout</span>(timer)</span><br><span class="line">        timer = <span class="built_in">setTimeout</span>(fun, delay)</span><br><span class="line">    &#125;</span><br><span class="line">&#125;</span><br></pre>
+
+<h3 id="draggable-true拖拽"><a href="#draggable-true拖拽" class="headerlink" title="draggable:true拖拽"></a><code>draggable:true</code>拖拽</h3><h2 id="instanceof-和-typeof"><a href="#instanceof-和-typeof" class="headerlink" title="instanceof 和 typeof"></a>instanceof 和 typeof</h2><pre class="highlight"><span class="line">instanceof 用于检测数据关联性,左边必须是引用类型,右边必须是函数</span><br><span class="line">typeof 用于监测数据类型</span><br></pre>
+
+<h2 id="document-write-和-innerHTML"><a href="#document-write-和-innerHTML" class="headerlink" title="document.write() 和 innerHTML"></a>document.write() 和 innerHTML</h2><pre class="highlight"><span class="line">document.write(&#x27;&#x27;)</span><br><span class="line">document对象里面的方法,会根据脚本元素script的位置显示,如果文档解析完成以后在调用会覆盖原来的内容</span><br><span class="line">innerHTML()</span><br><span class="line">Element对象中的属性,置顶元素内,调用时会覆盖原内容,追加可以利用+=</span><br><span class="line"></span><br></pre>
+
+<h2 id="new-Object"><a href="#new-Object" class="headerlink" title="new Object"></a>new Object</h2><pre class="highlight"><span class="line">let obj=&#123;0:1&#125;</span><br><span class="line">var newObj=new Object(obj)</span><br><span class="line">console.log(newObj)</span><br><span class="line">console.log(newObj===obj) //true 引用类型</span><br><span class="line"></span><br><span class="line">let arr=[1,2,3]</span><br><span class="line">var newArr=new Array(arr)</span><br><span class="line">console.log(newArr==arr) //false</span><br><span class="line"></span><br><span class="line">原始类型都是继承来的,方法来自于他的原型</span><br></pre>
+
+<h2 id="原型链"><a href="#原型链" class="headerlink" title="原型链"></a>原型链</h2><pre class="highlight"><span class="line">// 逐层向上找</span><br><span class="line">// /**</span><br><span class="line">//  * prototype : 原型 显式原型</span><br><span class="line">//  * __proto__ : 原型链(链接点) 内置对象 隐式原型</span><br><span class="line">//  * 从属关系 </span><br><span class="line">//  * prototype -&gt; 函数的一个属性</span><br><span class="line">//  * __proto__ -&gt; 对象Object的一个属性</span><br><span class="line">//  * 对象的__proto__保存着该对象的构造函数的prototype</span><br><span class="line">//  * 最顶层 Object.prototype.__proto__</span><br><span class="line">//  * </span><br><span class="line">//  */</span><br><span class="line"></span><br><span class="line">let obj=new Object</span><br><span class="line">obj.name=&quot;test&quot;</span><br><span class="line"></span><br><span class="line">console.log(obj)</span><br><span class="line">console.log(Object.prototype.__proto__)</span><br><span class="line">// 我们自定义引用类型创建的原型是继承基础数据类型Object创建的</span><br><span class="line">// 自定义引用类型都会有一个隐式原型__proto__,</span><br><span class="line">console.log(&quot;obj的隐式原型&quot;,obj.__proto__)</span><br><span class="line">// 隐式原型等于Object的显示原型</span><br><span class="line">console.log(&quot;Object的显示原型&quot;,Object.prototype)</span><br><span class="line">console.log(obj.__proto__ === Object.prototype)</span><br><span class="line"></span><br><span class="line">//我们可以看见隐式原型上有constructor和__proto__,其实是Object的构造方法和显式原型</span><br><span class="line">console.log(obj.__proto__.constructor === Object.prototype.constructor)</span><br><span class="line">console.log(obj.__proto__.__proto__ === Object.prototype.__proto__)</span><br><span class="line">// Object.prototype.__proto__是最顶层且为null,null表示空对象的引用</span><br></pre>
+
+
+<h2 id="class"><a href="#class" class="headerlink" title="class"></a>class</h2><pre class="highlight"><span class="line"><span class="class"><span class="keyword">class</span> <span class="title">Father</span> </span>&#123;</span><br><span class="line">    <span class="function"><span class="title">constructor</span>(<span class="params">name,age</span>)</span>&#123;</span><br><span class="line">        <span class="built_in">this</span>.name=name,</span><br><span class="line">        <span class="built_in">this</span>.age=age</span><br><span class="line">    &#125;</span><br><span class="line">    <span class="comment">//定义静态方法</span></span><br><span class="line">    <span class="keyword">static</span> <span class="function"><span class="title">welcome</span>(<span class="params"></span>)</span>&#123;</span><br><span class="line">        <span class="built_in">document</span>.write(<span class="string">&#x27;&lt;/br&gt; 自我介绍&#x27;</span>)</span><br><span class="line">    &#125;</span><br><span class="line">    <span class="function"><span class="title">show</span>(<span class="params"></span>)</span>&#123;</span><br><span class="line">        <span class="built_in">document</span>.write(<span class="string">&quot;姓名:&quot;</span>,<span class="built_in">this</span>.name)</span><br><span class="line">    &#125;</span><br><span class="line">    <span class="comment">// 属性 访问时不要加()</span></span><br><span class="line">    <span class="keyword">set</span> <span class="title">other</span>(<span class="params">value</span>)&#123;</span><br><span class="line">        <span class="built_in">this</span>.value=value</span><br><span class="line">    &#125;</span><br><span class="line">    <span class="keyword">get</span> <span class="title">other</span>()&#123;</span><br><span class="line">        <span class="keyword">return</span> <span class="built_in">this</span>.name+=<span class="built_in">this</span>.value</span><br><span class="line">    &#125;</span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line"><span class="keyword">const</span> father=<span class="keyword">new</span> Father(<span class="string">&#x27;xm&#x27;</span>,<span class="string">&#x27;24&#x27;</span>);</span><br><span class="line"></span><br><span class="line"><span class="class"><span class="keyword">class</span> <span class="title">Son</span> <span class="keyword">extends</span> <span class="title">Father</span> </span>&#123;</span><br><span class="line">    <span class="comment">// 子类必须要写super</span></span><br><span class="line">    <span class="function"><span class="title">constructor</span>(<span class="params">name,age,father</span>)</span>&#123;</span><br><span class="line">        <span class="built_in">super</span>(name,age);</span><br><span class="line">        <span class="built_in">this</span>.father=father</span><br><span class="line">    &#125;;</span><br><span class="line">    <span class="function"><span class="title">show</span>(<span class="params"></span>)</span>&#123;</span><br><span class="line">        <span class="built_in">document</span>.write(<span class="string">&quot;姓名:&quot;</span>,<span class="built_in">this</span>.name,<span class="string">&quot;爹:&quot;</span>,<span class="built_in">this</span>.father)</span><br><span class="line">    &#125;</span><br><span class="line">&#125;</span><br><span class="line">Father.welcome()</span><br><span class="line">father.show()</span><br><span class="line">Son.welcome()</span><br><span class="line"><span class="keyword">const</span> son =<span class="keyword">new</span> Son(<span class="string">&#x27;xxm&#x27;</span>,<span class="string">&#x27;1&#x27;</span>,<span class="string">&#x27;xm&#x27;</span>)</span><br><span class="line">son.show()</span><br><span class="line">father.other=<span class="string">&quot;我是爹&quot;</span></span><br><span class="line">son.other=<span class="string">&quot;我是儿子&quot;</span></span><br><span class="line"><span class="built_in">console</span>.log(son.other)</span><br><span class="line"><span class="built_in">console</span>.log(father.other)</span><br></pre>
+
+<h3 id="数组扁平化"><a href="#数组扁平化" class="headerlink" title="数组扁平化"></a>数组扁平化</h3><pre class="highlight"><span class="line">function test(data) &#123;</span><br><span class="line">    let arr1 = []</span><br><span class="line">    for (let i = 0; i &lt; data.length; i++) &#123;</span><br><span class="line">        if (data[i].children &amp;&amp; data[i].children.length &gt; 0) &#123;</span><br><span class="line">            let child_arr=test(data[i].children)</span><br><span class="line">            arr1.push(...child_arr)</span><br><span class="line">        &#125; else &#123;</span><br><span class="line">            arr1.push(data[i].name)</span><br><span class="line">        &#125;</span><br><span class="line">    &#125;</span><br><span class="line">    if (arr1) &#123;</span><br><span class="line">        return arr1</span><br><span class="line">    &#125;</span><br><span class="line">&#125;</span><br><span class="line">let arr=[...test(data)]</span><br><span class="line">console.log(arr)</span><br></pre>
+
+
+
+
+
+
+  </div>
+  <div>
+  
+  <div class="post-note note-warning copyright" style="margin-top: 42px">
+    <p><span style="font-weight: bold;">作者：</span><a target="_blank" rel="nofollow noopener noreferrer" href="https://xiaobai123-4.github.io/about">小白&amp;马</a></p>
+    <p><span style="font-weight: bold;">文章链接：</span><a target="_blank" rel="nofollow noopener noreferrer" href="https://xiaobai123-4.github.io/2021/12/18/cl06w0wgx000fscsfehqydv04/">https://xiaobai123-4.github.io/2021/12/18/cl06w0wgx000fscsfehqydv04/</a></p>
+    <p><span style="font-weight: bold;">版权声明：</span>本博客所有文章除特别声明外，均采用<a target="_blank" rel="noopener" href="https://creativecommons.org/licenses/by-nc-sa/4.0/deed.zh">CC BY-NC-SA 4.0 协议</a>。转载请注明出处！</p>
+  </div>
+  
+  </div>
+</article>
+<div class="nav">
+  
+  <div class="nav-item-prev">
+    <a href="/2021/12/20/cl06w0wh1000oscsf7fdz5oq2/" class="nav-link">
+      <i class="iconfont icon-left nav-prev-icon"></i>
+      <div>
+        <div class="nav-label">上一篇</div>
+        
+        <div class="nav-title">uni-app </div>
+        
+      </div>
+    </a>
+  </div>
+  
+  
+  <div class="nav-item-next">
+    <a href="/2021/12/18/cl06w0wgy000hscsf2jq10t45/" class="nav-link">
+      <div>
+        <div class="nav-label">下一篇</div>
+        
+        <div class="nav-title">pm2开机自启服务 </div>
+        
+      </div>
+      <i class="iconfont icon-right nav-next-icon"></i>
+    </a>
+  </div>
+  
+</div>
+
+<div class="card card-content toc-card" id="mobiletoc">
+  <div class="toc-header"><i class="iconfont icon-menu" style="padding-right: 2px;"></i>目录</div>
+<ol class="toc"><li class="toc-item toc-level-2"><a class="toc-link" href="#js%E6%95%B0%E6%8D%AE%E7%B1%BB%E5%9E%8B"><span class="toc-text">js数据类型</span></a><ol class="toc-child"><li class="toc-item toc-level-3"><a class="toc-link" href="#%E5%8E%9F%E5%A7%8B%E7%B1%BB%E5%9E%8B"><span class="toc-text">原始类型</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#%E5%A4%8D%E6%9D%82%E6%95%B0%E6%8D%AE%E7%B1%BB%E5%9E%8B"><span class="toc-text">复杂数据类型</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#%E5%88%A4%E6%96%AD%E7%B1%BB%E5%9E%8B%E7%9A%84%E6%96%B9%E6%B3%95"><span class="toc-text">判断类型的方法</span></a></li></ol></li><li class="toc-item toc-level-2"><a class="toc-link" href="#js%E5%85%B6%E4%BB%96%E5%B8%B8%E8%AF%86"><span class="toc-text">js其他常识</span></a><ol class="toc-child"><li class="toc-item toc-level-3"><a class="toc-link" href="#JS%E5%8E%9F%E5%A7%8B%E5%BC%B9%E7%AA%97%E7%B1%BB%E5%9E%8B"><span class="toc-text">JS原始弹窗类型</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#%E6%95%B0%E5%80%BC%E4%B8%AD%E6%9C%80%E5%A4%A7%E6%9C%80%E5%B0%8F%E5%80%BC"><span class="toc-text">数值中最大最小值</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#%E5%B8%B8%E8%A7%81%E9%98%BB%E6%AD%A2%E8%A1%8C%E4%B8%BA"><span class="toc-text">常见阻止行为</span></a></li></ol></li><li class="toc-item toc-level-2"><a class="toc-link" href="#Array-from"><span class="toc-text">Array.from</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#Object-keys-Object-getOwnPropertyNames"><span class="toc-text">Object.keys &#x2F; Object.getOwnPropertyNames</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#%E7%A8%80%E7%96%8F%E6%95%B0%E7%BB%84"><span class="toc-text">稀疏数组</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#%E6%B5%85%E6%8B%B7%E8%B4%9D"><span class="toc-text">浅拷贝</span></a><ol class="toc-child"><li class="toc-item toc-level-4"><a class="toc-link" href="#deepclone-%E6%B7%B1%E6%8B%B7%E8%B4%9D"><span class="toc-text">deepclone 深拷贝</span></a></li></ol></li><li class="toc-item toc-level-3"><a class="toc-link" href="#%E9%87%8D%E5%86%99"><span class="toc-text">重写</span></a><ol class="toc-child"><li class="toc-item toc-level-4"><a class="toc-link" href="#ForEach-%E5%BE%AA%E7%8E%AF"><span class="toc-text">ForEach (循环)</span></a></li><li class="toc-item toc-level-4"><a class="toc-link" href="#Map-%E6%98%A0%E5%B0%84"><span class="toc-text">Map (映射)</span></a></li><li class="toc-item toc-level-4"><a class="toc-link" href="#filter"><span class="toc-text">filter</span></a></li><li class="toc-item toc-level-4"><a class="toc-link" href="#every"><span class="toc-text">every</span></a></li><li class="toc-item toc-level-4"><a class="toc-link" href="#some"><span class="toc-text">some</span></a></li><li class="toc-item toc-level-4"><a class="toc-link" href="#reduce-reduceRight"><span class="toc-text">reduce reduceRight</span></a></li></ol></li><li class="toc-item toc-level-3"><a class="toc-link" href="#%E5%9B%BE%E7%89%87%E6%87%92%E5%8A%A0%E8%BD%BD"><span class="toc-text">图片懒加载</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#%E5%BE%AE%E4%BB%BB%E5%8A%A1%E5%92%8C%E5%AE%8F%E4%BB%BB%E5%8A%A1"><span class="toc-text">微任务和宏任务</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#%E9%98%B2%E6%8A%96-%E5%90%8C%E4%B8%80%E4%B8%AA%E6%93%8D%E4%BD%9C%E9%98%B2%E6%AD%A2%E9%87%8D%E5%A4%8D%E6%93%8D%E4%BD%9C"><span class="toc-text">防抖 同一个操作防止重复操作</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#%E8%8A%82%E6%B5%81-%E9%98%B2%E6%AD%A2%E5%A4%9A%E6%AC%A1%E8%AF%B7%E6%B1%82"><span class="toc-text">节流 防止多次请求</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#draggable-true%E6%8B%96%E6%8B%BD"><span class="toc-text">draggable:true拖拽</span></a></li></ol></li><li class="toc-item toc-level-2"><a class="toc-link" href="#instanceof-%E5%92%8C-typeof"><span class="toc-text">instanceof 和 typeof</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#document-write-%E5%92%8C-innerHTML"><span class="toc-text">document.write() 和 innerHTML</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#new-Object"><span class="toc-text">new Object</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#%E5%8E%9F%E5%9E%8B%E9%93%BE"><span class="toc-text">原型链</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#class"><span class="toc-text">class</span></a><ol class="toc-child"><li class="toc-item toc-level-3"><a class="toc-link" href="#%E6%95%B0%E7%BB%84%E6%89%81%E5%B9%B3%E5%8C%96"><span class="toc-text">数组扁平化</span></a></li></ol></li></ol>
+</div></main>
+          <aside class="left-column">
+            
+            <div class="card card-author">
+              
+<img src="https://xiaobai123-4.github.io/image/admin.jpg" class="author-img">
+
+<p class="author-name">小白&马</p>
+<p class="author-description">Fight !!</p>
+<div class="author-message">
+  <a class="author-posts-count" href="/archives">
+    <span>14</span>
+    <span>文章</span>
+  </a>
+  <a class="author-categories-count" href="/categories">
+    <span>6</span>
+    <span>分类</span>
+  </a>
+  <a class="author-tags-count" href="/tags">
+    <span>15</span>
+    <span>标签</span>
+  </a>
+</div>
+
+            </div>
+            
+            <div class="sticky-tablet">
+  
+  
+  <article class="display-when-two-columns spacer">
+    <div class="card card-content toc-card">
+      <div class="toc-header"><i class="iconfont icon-menu" style="padding-right: 2px;"></i>目录</div>
+<ol class="toc"><li class="toc-item toc-level-2"><a class="toc-link" href="#js%E6%95%B0%E6%8D%AE%E7%B1%BB%E5%9E%8B"><span class="toc-text">js数据类型</span></a><ol class="toc-child"><li class="toc-item toc-level-3"><a class="toc-link" href="#%E5%8E%9F%E5%A7%8B%E7%B1%BB%E5%9E%8B"><span class="toc-text">原始类型</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#%E5%A4%8D%E6%9D%82%E6%95%B0%E6%8D%AE%E7%B1%BB%E5%9E%8B"><span class="toc-text">复杂数据类型</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#%E5%88%A4%E6%96%AD%E7%B1%BB%E5%9E%8B%E7%9A%84%E6%96%B9%E6%B3%95"><span class="toc-text">判断类型的方法</span></a></li></ol></li><li class="toc-item toc-level-2"><a class="toc-link" href="#js%E5%85%B6%E4%BB%96%E5%B8%B8%E8%AF%86"><span class="toc-text">js其他常识</span></a><ol class="toc-child"><li class="toc-item toc-level-3"><a class="toc-link" href="#JS%E5%8E%9F%E5%A7%8B%E5%BC%B9%E7%AA%97%E7%B1%BB%E5%9E%8B"><span class="toc-text">JS原始弹窗类型</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#%E6%95%B0%E5%80%BC%E4%B8%AD%E6%9C%80%E5%A4%A7%E6%9C%80%E5%B0%8F%E5%80%BC"><span class="toc-text">数值中最大最小值</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#%E5%B8%B8%E8%A7%81%E9%98%BB%E6%AD%A2%E8%A1%8C%E4%B8%BA"><span class="toc-text">常见阻止行为</span></a></li></ol></li><li class="toc-item toc-level-2"><a class="toc-link" href="#Array-from"><span class="toc-text">Array.from</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#Object-keys-Object-getOwnPropertyNames"><span class="toc-text">Object.keys &#x2F; Object.getOwnPropertyNames</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#%E7%A8%80%E7%96%8F%E6%95%B0%E7%BB%84"><span class="toc-text">稀疏数组</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#%E6%B5%85%E6%8B%B7%E8%B4%9D"><span class="toc-text">浅拷贝</span></a><ol class="toc-child"><li class="toc-item toc-level-4"><a class="toc-link" href="#deepclone-%E6%B7%B1%E6%8B%B7%E8%B4%9D"><span class="toc-text">deepclone 深拷贝</span></a></li></ol></li><li class="toc-item toc-level-3"><a class="toc-link" href="#%E9%87%8D%E5%86%99"><span class="toc-text">重写</span></a><ol class="toc-child"><li class="toc-item toc-level-4"><a class="toc-link" href="#ForEach-%E5%BE%AA%E7%8E%AF"><span class="toc-text">ForEach (循环)</span></a></li><li class="toc-item toc-level-4"><a class="toc-link" href="#Map-%E6%98%A0%E5%B0%84"><span class="toc-text">Map (映射)</span></a></li><li class="toc-item toc-level-4"><a class="toc-link" href="#filter"><span class="toc-text">filter</span></a></li><li class="toc-item toc-level-4"><a class="toc-link" href="#every"><span class="toc-text">every</span></a></li><li class="toc-item toc-level-4"><a class="toc-link" href="#some"><span class="toc-text">some</span></a></li><li class="toc-item toc-level-4"><a class="toc-link" href="#reduce-reduceRight"><span class="toc-text">reduce reduceRight</span></a></li></ol></li><li class="toc-item toc-level-3"><a class="toc-link" href="#%E5%9B%BE%E7%89%87%E6%87%92%E5%8A%A0%E8%BD%BD"><span class="toc-text">图片懒加载</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#%E5%BE%AE%E4%BB%BB%E5%8A%A1%E5%92%8C%E5%AE%8F%E4%BB%BB%E5%8A%A1"><span class="toc-text">微任务和宏任务</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#%E9%98%B2%E6%8A%96-%E5%90%8C%E4%B8%80%E4%B8%AA%E6%93%8D%E4%BD%9C%E9%98%B2%E6%AD%A2%E9%87%8D%E5%A4%8D%E6%93%8D%E4%BD%9C"><span class="toc-text">防抖 同一个操作防止重复操作</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#%E8%8A%82%E6%B5%81-%E9%98%B2%E6%AD%A2%E5%A4%9A%E6%AC%A1%E8%AF%B7%E6%B1%82"><span class="toc-text">节流 防止多次请求</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#draggable-true%E6%8B%96%E6%8B%BD"><span class="toc-text">draggable:true拖拽</span></a></li></ol></li><li class="toc-item toc-level-2"><a class="toc-link" href="#instanceof-%E5%92%8C-typeof"><span class="toc-text">instanceof 和 typeof</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#document-write-%E5%92%8C-innerHTML"><span class="toc-text">document.write() 和 innerHTML</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#new-Object"><span class="toc-text">new Object</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#%E5%8E%9F%E5%9E%8B%E9%93%BE"><span class="toc-text">原型链</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#class"><span class="toc-text">class</span></a><ol class="toc-child"><li class="toc-item toc-level-3"><a class="toc-link" href="#%E6%95%B0%E7%BB%84%E6%89%81%E5%B9%B3%E5%8C%96"><span class="toc-text">数组扁平化</span></a></li></ol></li></ol>
+    </div>
+  </article>
+  
+  
+  <article class="card card-content">
+    <div class="categories-card">
+  <div class="categories-header"><i class="iconfont icon-fenlei" style="padding-right: 2px;"></i>分类</div>
+  <div class="categories-list">
+    
+      <a href="/categories/nodejs">
+        <div class="categories-list-item">
+          nodejs
+          <span class="categories-list-item-badge">2</span>
+        </div>
+      </a>
+    
+      <a href="/categories/前端">
+        <div class="categories-list-item">
+          前端
+          <span class="categories-list-item-badge">8</span>
+        </div>
+      </a>
+    
+      <a href="/categories/Markdown">
+        <div class="categories-list-item">
+          Markdown
+          <span class="categories-list-item-badge">1</span>
+        </div>
+      </a>
+    
+      <a href="/categories/hexo">
+        <div class="categories-list-item">
+          hexo
+          <span class="categories-list-item-badge">1</span>
+        </div>
+      </a>
+    
+      <a href="/categories/微信小程序">
+        <div class="categories-list-item">
+          微信小程序
+          <span class="categories-list-item-badge">1</span>
+        </div>
+      </a>
+    
+      <a href="/categories/CSS">
+        <div class="categories-list-item">
+          CSS
+          <span class="categories-list-item-badge">1</span>
+        </div>
+      </a>
+    
+  </div>
+</div>
+  </article>
+  
+  <article class="card card-content">
+    <div class="tags-card">
+  <div class="tags-header"><i class="iconfont icon-biaoqian" style="padding-right: 2px;"></i>热门标签</div>
+  <div class="tags-list">
+    
+    <a href="\tags\javascript" title="javascript"><div class="tags-list-item">javascript</div></a>
+    
+    <a href="\tags\html" title="html"><div class="tags-list-item">html</div></a>
+    
+    <a href="\tags\常见问题" title="常见问题"><div class="tags-list-item">常见问题</div></a>
+    
+    <a href="\tags\css" title="css"><div class="tags-list-item">css</div></a>
+    
+    <a href="\tags\微信小程序" title="微信小程序"><div class="tags-list-item">微信小程序</div></a>
+    
+    <a href="\tags\nodejs" title="nodejs"><div class="tags-list-item">nodejs</div></a>
+    
+    <a href="\tags\ES6" title="ES6"><div class="tags-list-item">ES6</div></a>
+    
+    <a href="\tags\博客" title="博客"><div class="tags-list-item">博客</div></a>
+    
+    <a href="\tags\next" title="next"><div class="tags-list-item">next</div></a>
+    
+    <a href="\tags\hexo" title="hexo"><div class="tags-list-item">hexo</div></a>
+    
+    <a href="\tags\笔记" title="笔记"><div class="tags-list-item">笔记</div></a>
+    
+    <a href="\tags\markdown" title="markdown"><div class="tags-list-item">markdown</div></a>
+    
+    <a href="\tags\koa" title="koa"><div class="tags-list-item">koa</div></a>
+    
+    <a href="\tags\mockjs" title="mockjs"><div class="tags-list-item">mockjs</div></a>
+    
+    <a href="\tags\Koa" title="Koa"><div class="tags-list-item">Koa</div></a>
+    
+  </div>
+</div>
+  </article>
+  
+  
+</div>
+          </aside>
+          <aside class="right-column">
+            <div class="sticky-widescreen">
+  
+  
+  <article class="card card-content toc-card">
+    <div class="toc-header"><i class="iconfont icon-menu" style="padding-right: 2px;"></i>目录</div>
+<ol class="toc"><li class="toc-item toc-level-2"><a class="toc-link" href="#js%E6%95%B0%E6%8D%AE%E7%B1%BB%E5%9E%8B"><span class="toc-text">js数据类型</span></a><ol class="toc-child"><li class="toc-item toc-level-3"><a class="toc-link" href="#%E5%8E%9F%E5%A7%8B%E7%B1%BB%E5%9E%8B"><span class="toc-text">原始类型</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#%E5%A4%8D%E6%9D%82%E6%95%B0%E6%8D%AE%E7%B1%BB%E5%9E%8B"><span class="toc-text">复杂数据类型</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#%E5%88%A4%E6%96%AD%E7%B1%BB%E5%9E%8B%E7%9A%84%E6%96%B9%E6%B3%95"><span class="toc-text">判断类型的方法</span></a></li></ol></li><li class="toc-item toc-level-2"><a class="toc-link" href="#js%E5%85%B6%E4%BB%96%E5%B8%B8%E8%AF%86"><span class="toc-text">js其他常识</span></a><ol class="toc-child"><li class="toc-item toc-level-3"><a class="toc-link" href="#JS%E5%8E%9F%E5%A7%8B%E5%BC%B9%E7%AA%97%E7%B1%BB%E5%9E%8B"><span class="toc-text">JS原始弹窗类型</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#%E6%95%B0%E5%80%BC%E4%B8%AD%E6%9C%80%E5%A4%A7%E6%9C%80%E5%B0%8F%E5%80%BC"><span class="toc-text">数值中最大最小值</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#%E5%B8%B8%E8%A7%81%E9%98%BB%E6%AD%A2%E8%A1%8C%E4%B8%BA"><span class="toc-text">常见阻止行为</span></a></li></ol></li><li class="toc-item toc-level-2"><a class="toc-link" href="#Array-from"><span class="toc-text">Array.from</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#Object-keys-Object-getOwnPropertyNames"><span class="toc-text">Object.keys &#x2F; Object.getOwnPropertyNames</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#%E7%A8%80%E7%96%8F%E6%95%B0%E7%BB%84"><span class="toc-text">稀疏数组</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#%E6%B5%85%E6%8B%B7%E8%B4%9D"><span class="toc-text">浅拷贝</span></a><ol class="toc-child"><li class="toc-item toc-level-4"><a class="toc-link" href="#deepclone-%E6%B7%B1%E6%8B%B7%E8%B4%9D"><span class="toc-text">deepclone 深拷贝</span></a></li></ol></li><li class="toc-item toc-level-3"><a class="toc-link" href="#%E9%87%8D%E5%86%99"><span class="toc-text">重写</span></a><ol class="toc-child"><li class="toc-item toc-level-4"><a class="toc-link" href="#ForEach-%E5%BE%AA%E7%8E%AF"><span class="toc-text">ForEach (循环)</span></a></li><li class="toc-item toc-level-4"><a class="toc-link" href="#Map-%E6%98%A0%E5%B0%84"><span class="toc-text">Map (映射)</span></a></li><li class="toc-item toc-level-4"><a class="toc-link" href="#filter"><span class="toc-text">filter</span></a></li><li class="toc-item toc-level-4"><a class="toc-link" href="#every"><span class="toc-text">every</span></a></li><li class="toc-item toc-level-4"><a class="toc-link" href="#some"><span class="toc-text">some</span></a></li><li class="toc-item toc-level-4"><a class="toc-link" href="#reduce-reduceRight"><span class="toc-text">reduce reduceRight</span></a></li></ol></li><li class="toc-item toc-level-3"><a class="toc-link" href="#%E5%9B%BE%E7%89%87%E6%87%92%E5%8A%A0%E8%BD%BD"><span class="toc-text">图片懒加载</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#%E5%BE%AE%E4%BB%BB%E5%8A%A1%E5%92%8C%E5%AE%8F%E4%BB%BB%E5%8A%A1"><span class="toc-text">微任务和宏任务</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#%E9%98%B2%E6%8A%96-%E5%90%8C%E4%B8%80%E4%B8%AA%E6%93%8D%E4%BD%9C%E9%98%B2%E6%AD%A2%E9%87%8D%E5%A4%8D%E6%93%8D%E4%BD%9C"><span class="toc-text">防抖 同一个操作防止重复操作</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#%E8%8A%82%E6%B5%81-%E9%98%B2%E6%AD%A2%E5%A4%9A%E6%AC%A1%E8%AF%B7%E6%B1%82"><span class="toc-text">节流 防止多次请求</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#draggable-true%E6%8B%96%E6%8B%BD"><span class="toc-text">draggable:true拖拽</span></a></li></ol></li><li class="toc-item toc-level-2"><a class="toc-link" href="#instanceof-%E5%92%8C-typeof"><span class="toc-text">instanceof 和 typeof</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#document-write-%E5%92%8C-innerHTML"><span class="toc-text">document.write() 和 innerHTML</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#new-Object"><span class="toc-text">new Object</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#%E5%8E%9F%E5%9E%8B%E9%93%BE"><span class="toc-text">原型链</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#class"><span class="toc-text">class</span></a><ol class="toc-child"><li class="toc-item toc-level-3"><a class="toc-link" href="#%E6%95%B0%E7%BB%84%E6%89%81%E5%B9%B3%E5%8C%96"><span class="toc-text">数组扁平化</span></a></li></ol></li></ol>
+  </article>
+  
+  
+  <article class="card card-content">
+    <div class="recent-posts-card">
+  <div class="recent-posts-header"><i class="iconfont icon-wenzhang_huaban" style="padding-right: 2px;"></i>最近文章</div>
+  <div class="recent-posts-list">
+    
+      <div class="recent-posts-item">
+        <div class="recent-posts-item-title">2022-02-12</div>
+        <a href="/2022/02/12/cl06w0wh2000vscsf6rp00ggj/"><div class="recent-posts-item-content">前端面试题</div></a>
+      </div>
+    
+      <div class="recent-posts-item">
+        <div class="recent-posts-item-title">2022-02-10</div>
+        <a href="/2022/02/10/cl06w0wgs0005scsf5itqf2th/"><div class="recent-posts-item-content">Vue</div></a>
+      </div>
+    
+      <div class="recent-posts-item">
+        <div class="recent-posts-item-title">2021-12-28</div>
+        <a href="/2021/12/28/cl06w0wgz000lscsf5pt8gj9g/"><div class="recent-posts-item-content">前端面试题</div></a>
+      </div>
+    
+      <div class="recent-posts-item">
+        <div class="recent-posts-item-title">2021-12-23</div>
+        <a href="/2021/12/23/cl06w0wh1000sscsfhq9kh6j8/"><div class="recent-posts-item-content">Demo_01</div></a>
+      </div>
+    
+  </div>
+</div>
+  </article>
+  
+  
+</div>
+          </aside>
+        </div>
+      </div>
+    </div>
+  </div>
+  
+  <footer class="footer">
+  <div class="footer-container">
+    <div>
+      <div class="footer-dsc">
+        <span>Copyright ©
+          
+          2020 -
+          
+          2022
+        </span>
+        <a href="/" class="footer-link">学习永不止步 </a>
+      </div>
+    </div>
+
+    
+    <div class="footer-dsc">
+      
+      
+      Powered by
+      <a href="https://hexo.io/" class="footer-link" target="_blank" rel="nofollow noopener noreferrer">&nbsp;Hexo </a>
+      
+      
+      <span>&nbsp;|&nbsp;</span>
+      
+      
+      
+      Theme -
+      <a href="https://github.com/theme-kaze" class="footer-link" target="_blank"
+        rel="nofollow noopener noreferrer">&nbsp;Kaze</a>
+      
+    </div>
+    
+    
+    
+    
+</footer>
+  <a role="button" id="scrollbutton" class="basebutton" >
+  <i class="iconfont icon-arrowleft button-icon"></i>
+</a>
+<a role="button" id="menubutton" class="basebutton">
+  <i class="iconfont icon-menu button-icon"></i>
+</a>
+<a role="button" id="popbutton" class="basebutton">
+  <i class="iconfont icon-expand button-icon"></i>
+</a>
+<a role="button" id="darkbutton" class="basebutton darkwidget">
+  <i class="iconfont icon-weather button-icon"></i>
+</a>
+
+  
+  
+  
+  <script>
+  var addImgLayout = function () {
+    var img = document.querySelectorAll('.post-content img');
+    var i;
+    for (i = 0; i < img.length; i++) {
+      var wrapper = document.createElement('a');
+      wrapper.setAttribute('data-fslightbox', 'gallery');
+      wrapper.setAttribute('href', img[i].getAttribute('data-src'));
+      wrapper.setAttribute('style', 'width: 100%; display: flex; justify-content: center;');
+      img[i].parentElement.insertBefore(wrapper, img[i]);
+      wrapper.appendChild(img[i]);
+    }
+    refreshFsLightbox();
+  }
+</script>
+<script>loadScript("//cdn.jsdelivr.net/npm/fslightbox@3.1.0/index.min.js", addImgLayout)</script>
+  
+  
+  
+<script src="/js/main.js"></script>
+
+  
+  
+  <script>
+    var addLazyload = function () {
+      var observer = lozad('.lozad', {
+        load: function (el) {
+          el.srcset = el.getAttribute('data-src');
+        },
+        loaded: function (el) {
+          el.classList.add('loaded');
+        }
+      });
+      observer.observe();
+    }
+  </script>
+  <script>loadScript("/js/lib/lozad.min.js", addLazyload)</script>
+  
+  
+</body>
+
+</html>
