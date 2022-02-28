@@ -126,78 +126,90 @@
     <div class="section-wrap">
       <div class="container">
         <div class="columns">
-          <main class="main-column"><div class="card card-content">
-  <div class="tags-page-title" style="margin-bottom: 0.6rem;">标签</div>
-  <div>
-    共计&nbsp;15&nbsp;个标签
+          <main class="main-column">
+<article class="card card-content">
+  <header>
+    <h1 class="post-title">
+      innerHTML
+    </h1>
+  </header>
+  <div class="post-meta post-show-meta">
+    <time datetime="2021-12-14T16:47:38.000Z" style="display: flex; align-items: center;">
+      <i class="iconfont icon-calendar" style="margin-right: 2px;"></i>
+      <span>2021-12-15</span>
+    </time>
+    
+    <span class="dot"></span>
+    
+    <a href="/categories/前端/" class="post-meta-link">前端</a>
+    
+    
+    
   </div>
-</div>
-<div class="card card-content">
-  <div class="tags-card">
-    <div class="tags-list">
+  
+  <div class="post-meta post-show-meta" style="margin-top: -10px;">
+    <div style="display: flex; align-items: center;">
+      <i class="iconfont icon-biaoqian" style="margin-right: 2px; font-size: 1.15rem;"></i>
       
-      <a href="\tags\javascript" title="javascript">
-        <div class="tags-list-item">javascript</div>
-      </a>
       
-      <a href="\tags\html" title="html">
-        <div class="tags-list-item">html</div>
-      </a>
-      
-      <a href="\tags\常见问题" title="常见问题">
-        <div class="tags-list-item">常见问题</div>
-      </a>
-      
-      <a href="\tags\css" title="css">
-        <div class="tags-list-item">css</div>
-      </a>
-      
-      <a href="\tags\微信小程序" title="微信小程序">
-        <div class="tags-list-item">微信小程序</div>
-      </a>
-      
-      <a href="\tags\nodejs" title="nodejs">
-        <div class="tags-list-item">nodejs</div>
-      </a>
-      
-      <a href="\tags\ES6" title="ES6">
-        <div class="tags-list-item">ES6</div>
-      </a>
-      
-      <a href="\tags\博客" title="博客">
-        <div class="tags-list-item">博客</div>
-      </a>
-      
-      <a href="\tags\next" title="next">
-        <div class="tags-list-item">next</div>
-      </a>
-      
-      <a href="\tags\hexo" title="hexo">
-        <div class="tags-list-item">hexo</div>
-      </a>
-      
-      <a href="\tags\koa" title="koa">
-        <div class="tags-list-item">koa</div>
-      </a>
-      
-      <a href="\tags\mockjs" title="mockjs">
-        <div class="tags-list-item">mockjs</div>
-      </a>
-      
-      <a href="\tags\笔记" title="笔记">
-        <div class="tags-list-item">笔记</div>
-      </a>
-      
-      <a href="\tags\markdown" title="markdown">
-        <div class="tags-list-item">markdown</div>
-      </a>
-      
-      <a href="\tags\Koa" title="Koa">
-        <div class="tags-list-item">Koa</div>
-      </a>
+        <a href="/tags/html/" class="post-meta-link">html</a>
       
     </div>
   </div>
+  
+  </header>
+  <div id="section" class="post-content">
+    <h3 id="区别："><a href="#区别：" class="headerlink" title="区别："></a>区别：</h3><ol>
+<li>innerHTML:在控件中加html代码 ,就是设置一个元素里面的HTML,标签对文本信息有效。</li>
+<li>innerTEXT:打印标签之间的纯文本信息，显示标签，标签无效，低版本的火狐浏览器不支持。</li>
+<li>value:显示双引号中的全部内容，显示标签，标签无效。</li>
+</ol>
+<span id="more"></span>
+
+<h2 id="innerHTML"><a href="#innerHTML" class="headerlink" title="innerHTML"></a>innerHTML</h2><pre class="highlight"><span class="line">&lt;!DOCTYPE html&gt;</span><br><span class="line">&lt;html lang=&quot;en&quot;&gt;</span><br><span class="line"></span><br><span class="line">&lt;head&gt;</span><br><span class="line">  &lt;meta charset=&quot;UTF-8&quot;&gt;</span><br><span class="line">  &lt;meta name=&quot;viewport&quot; content=&quot;width=device-width, initial-scale=1.0&quot;&gt;</span><br><span class="line">  &lt;title&gt;Document&lt;/title&gt;</span><br><span class="line">  &lt;script&gt;</span><br><span class="line">    function show() &#123;</span><br><span class="line">      var users = [&#123;</span><br><span class="line">          uid: 1,</span><br><span class="line">          uname: &quot;dingding&quot;,</span><br><span class="line">          age: 18</span><br><span class="line">        &#125;,</span><br><span class="line">        &#123;</span><br><span class="line">          uid: 2,</span><br><span class="line">          uname: &quot;fangfang&quot;,</span><br><span class="line">          age: 18</span><br><span class="line">        &#125;,</span><br><span class="line">        &#123;</span><br><span class="line">          uid: 3,</span><br><span class="line">          uname: &quot;wangwang&quot;,</span><br><span class="line">          age: 18</span><br><span class="line">        &#125;</span><br><span class="line">      ]</span><br><span class="line">      //获取div对象</span><br><span class="line">      var obj = document.getElementById(&quot;d1&quot;);</span><br><span class="line">      strHTML=`</span><br><span class="line">      &lt;table border=1&gt;</span><br><span class="line">        &lt;tr&gt;</span><br><span class="line">          &lt;th&gt;编号&lt;/th&gt;</span><br><span class="line">          &lt;th&gt;用户名&lt;/th&gt;</span><br><span class="line">          &lt;th&gt;年龄&lt;/th&gt;</span><br><span class="line">        &lt;/tr&gt;`;</span><br><span class="line">        for(var i=0;i&lt;users.length;i++)&#123;</span><br><span class="line">        strHTML+=`</span><br><span class="line">        &lt;tr&gt;</span><br><span class="line">          &lt;td&gt;`+`$&#123;users[i].uid&#125;`+`&lt;/td&gt;</span><br><span class="line">          &lt;td&gt;`+`$&#123;users[i].uname&#125;`+`&lt;/td&gt;</span><br><span class="line">          &lt;td&gt;`+`$&#123;users[i].age&#125;`+`&lt;/td&gt;</span><br><span class="line">        &lt;/tr&gt;`</span><br><span class="line">        &#125;</span><br><span class="line">        strHTML+=`&lt;/table&gt;`</span><br><span class="line">      obj.innerHTML = strHTML;</span><br><span class="line">    &#125;</span><br><span class="line">  &lt;/script&gt;</span><br><span class="line">&lt;/head&gt;</span><br><span class="line"></span><br><span class="line">&lt;body&gt;</span><br><span class="line">  &lt;div id=&quot;d1&quot;&gt;&lt;/div&gt;</span><br><span class="line">  &lt;button onclick=&quot;show()&quot;&gt;显示&lt;/button&gt;</span><br><span class="line">&lt;/body&gt;</span><br><span class="line">&lt;/html&gt;</span><br></pre>
+  </div>
+  <div>
+  
+  <div class="post-note note-warning copyright" style="margin-top: 42px">
+    <p><span style="font-weight: bold;">作者：</span><a target="_blank" rel="nofollow noopener noreferrer" href="https://xiaobai123-4.github.io/about">小白&amp;马</a></p>
+    <p><span style="font-weight: bold;">文章链接：</span><a target="_blank" rel="nofollow noopener noreferrer" href="https://xiaobai123-4.github.io/2021/12/15/cl06y88kh000byosfallofrxp/">https://xiaobai123-4.github.io/2021/12/15/cl06y88kh000byosfallofrxp/</a></p>
+    <p><span style="font-weight: bold;">版权声明：</span>本博客所有文章除特别声明外，均采用<a target="_blank" rel="noopener" href="https://creativecommons.org/licenses/by-nc-sa/4.0/deed.zh">CC BY-NC-SA 4.0 协议</a>。转载请注明出处！</p>
+  </div>
+  
+  </div>
+</article>
+<div class="nav">
+  
+  <div class="nav-item-prev">
+    <a href="/2021/12/15/cl06y88k80000yosffcic73h1/" class="nav-link">
+      <i class="iconfont icon-left nav-prev-icon"></i>
+      <div>
+        <div class="nav-label">上一篇</div>
+        
+        <div class="nav-title">Koa记录1 </div>
+        
+      </div>
+    </a>
+  </div>
+  
+  
+  <div class="nav-item-next">
+    <a href="/2021/12/14/cl06y88ke0004yosfgj198wyk/" class="nav-link">
+      <div>
+        <div class="nav-label">下一篇</div>
+        
+        <div class="nav-title">Mockjs使用 </div>
+        
+      </div>
+      <i class="iconfont icon-right nav-next-icon"></i>
+    </a>
+  </div>
+  
+</div>
+
+<div class="card card-content toc-card" id="mobiletoc">
+  <div class="toc-header"><i class="iconfont icon-menu" style="padding-right: 2px;"></i>目录</div>
+<ol class="toc"><li class="toc-item toc-level-3"><a class="toc-link" href="#%E5%8C%BA%E5%88%AB%EF%BC%9A"><span class="toc-text">区别：</span></a></li></ol></li><li class="toc-item toc-level-2"><a class="toc-link" href="#innerHTML"><span class="toc-text">innerHTML</span></a>
 </div></main>
           <aside class="left-column">
             
@@ -226,6 +238,13 @@
             
             <div class="sticky-tablet">
   
+  
+  <article class="display-when-two-columns spacer">
+    <div class="card card-content toc-card">
+      <div class="toc-header"><i class="iconfont icon-menu" style="padding-right: 2px;"></i>目录</div>
+<ol class="toc"><li class="toc-item toc-level-3"><a class="toc-link" href="#%E5%8C%BA%E5%88%AB%EF%BC%9A"><span class="toc-text">区别：</span></a></li></ol></li><li class="toc-item toc-level-2"><a class="toc-link" href="#innerHTML"><span class="toc-text">innerHTML</span></a>
+    </div>
+  </article>
   
   
   <article class="card card-content">
@@ -319,93 +338,16 @@
   </article>
   
   
-  <article class="card card-content widescreen-archive">
-    <div class="archive-card">
-  <div class="archive-card-header"><i class="iconfont icon-wodebaobiao" style="padding-right: 2px;"></i>归档</div>
-  <div class="archive-card-list">
-    
-    
-    
-      
-        
-        
-        
-      
-    
-      
-        
-      
-    
-      
-        
-          <a href="/archives/2022" class="archive-card-list-item">
-              2022
-              <span class="archive-card-list-item-badge">2</span>
-          </a>
-        
-        
-        
-      
-    
-      
-        
-      
-    
-      
-        
-      
-    
-      
-        
-      
-    
-      
-        
-      
-    
-      
-        
-      
-    
-      
-        
-      
-    
-      
-        
-      
-    
-      
-        
-      
-    
-      
-        
-      
-    
-      
-        
-      
-    
-      
-        
-      
-    
-    
-      <a href="/archives/2021" class="archive-card-list-item">
-          2021
-          <span class="archive-card-list-item-badge">12</span>
-      </a>
-    
-  </div>
-</div>
-  </article>
-  
 </div>
           </aside>
           <aside class="right-column">
             <div class="sticky-widescreen">
   
+  
+  <article class="card card-content toc-card">
+    <div class="toc-header"><i class="iconfont icon-menu" style="padding-right: 2px;"></i>目录</div>
+<ol class="toc"><li class="toc-item toc-level-3"><a class="toc-link" href="#%E5%8C%BA%E5%88%AB%EF%BC%9A"><span class="toc-text">区别：</span></a></li></ol></li><li class="toc-item toc-level-2"><a class="toc-link" href="#innerHTML"><span class="toc-text">innerHTML</span></a>
+  </article>
   
   
   <article class="card card-content">
@@ -437,88 +379,6 @@
 </div>
   </article>
   
-  
-  <article class="card card-content">
-    <div class="archive-card">
-  <div class="archive-card-header"><i class="iconfont icon-wodebaobiao" style="padding-right: 2px;"></i>归档</div>
-  <div class="archive-card-list">
-    
-    
-    
-      
-        
-        
-        
-      
-    
-      
-        
-      
-    
-      
-        
-          <a href="/archives/2022" class="archive-card-list-item">
-              2022
-              <span class="archive-card-list-item-badge">2</span>
-          </a>
-        
-        
-        
-      
-    
-      
-        
-      
-    
-      
-        
-      
-    
-      
-        
-      
-    
-      
-        
-      
-    
-      
-        
-      
-    
-      
-        
-      
-    
-      
-        
-      
-    
-      
-        
-      
-    
-      
-        
-      
-    
-      
-        
-      
-    
-      
-        
-      
-    
-    
-      <a href="/archives/2021" class="archive-card-list-item">
-          2021
-          <span class="archive-card-list-item-badge">12</span>
-      </a>
-    
-  </div>
-</div>
-  </article>
   
 </div>
           </aside>

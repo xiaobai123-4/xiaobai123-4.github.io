@@ -1442,4 +1442,7 @@ mjx-container svg:focus {
   overflow: hidden;
   white-space: nowrap;
   text-overflow: ellipsis;
+/* autoprefixer:off */
+  -webkit-box-orient: vertical;
 }
+/* autoprefixer:off */
